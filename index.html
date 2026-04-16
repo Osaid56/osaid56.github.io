@@ -1,179 +1,461 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Osaid Shahid | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <style>
-        :root {
-            --bg-color: #050505;
-            --accent-cyan: #00f2ff;
-            --accent-purple: #bc13fe;
-            --text-gray: #a0a0a0;
-        }
+import React, { useState, useEffect } from 'react';
+import { 
+  Linkedin, 
+  Instagram, 
+  Mail, 
+  Phone, 
+  MapPin, 
+  ExternalLink, 
+  ChevronRight, 
+  Cloud, 
+  Shield, 
+  Settings, 
+  Globe,
+  Award,
+  Terminal,
+  Cpu,
+  Activity,
+  Zap,
+  Lock
+} from 'lucide-react';
 
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: white;
-            font-family: 'JetBrains Mono', monospace;
-            overflow-x: hidden;
-        }
+const App = () => {
+  const [activeTab, setActiveTab] = useState('experience');
+  const [scrolled, setScrolled] = useState(false);
+  const [time, setTime] = useState(new Date().toLocaleTimeString());
 
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const timer = setInterval(() => setTime(new Date().toLocaleTimeString()), 1000);
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearInterval(timer);
+    };
+  }, []);
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 50px 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 100vh;
-        }
+  const profile = {
+    name: "OSAID SHAHID",
+    title: "CLOUD INFRASTRUCTURE ARCHITECT // SYSTEM_OPERATOR",
+    location: "MAU, INDIA",
+    phone: "+91 8448527162",
+    email: "osaidtheshaid@gmail.com",
+    linkedin: "https://www.linkedin.com/in/osaid-shahid-442599223/",
+    instagram: "https://www.instagram.com/osaid_shahid",
+    status: "SYSTEM_READY",
+    accessLevel: "LEVEL_4_ADMIN",
+    summary: "High-tier Cloud specialist optimized for Azure ecosystem deployment and DACH-market technical operations. Expert in identity protocols via Microsoft Entra and mobile architecture via Intune."
+  };
 
-        .tagline {
-            color: #39FF14; /* Neon Green like the site */
-            font-size: 14px;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
+  const skills = [
+    { name: "AZURE ADMIN (AZ-104)", category: "CLOUD", level: 95 },
+    { name: "MS INTUNE (MD-102)", category: "CLOUD", level: 90 },
+    { name: "AZURE FUND. (AZ-900)", category: "CLOUD", level: 100 },
+    { name: "ENTRA / AZURE AD", category: "IDENTITY", level: 92 },
+    { name: "ACTIVE DIRECTORY", category: "IDENTITY", level: 88 },
+    { name: "DHCP / DNS SEC", category: "NET", level: 85 },
+    { name: "LINUX KERNEL", category: "OS", level: 80 },
+    { name: "WIN SERVER", category: "OS", level: 90 },
+    { name: "GERMAN (C1)", category: "LANG", level: 95 }
+  ];
 
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
-            margin: 0;
-            line-height: 1.1;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
-        }
+  const experience = [
+    {
+      company: "ACCENTURE",
+      role: "APP/CLOUD ANALYST",
+      period: "2024 - PRESENT",
+      points: [
+        "DEPLOYED ENTERPRISE INFRASTRUCTURE WITHIN SECURE CORPORATE NETWORKS.",
+        "ARCHITECTED DHCP CLUSTERS FOR CRITICAL IP ALLOCATION.",
+        "MANAGED MICROSOFT ENTRA IDENTITY GATEWAYS FOR GLOBAL PERMISSIONS.",
+        "GERMAN-LANGUAGE INFRASTRUCTURE OPS FOR DACH REGION."
+      ]
+    },
+    {
+      company: "ITC INFOTECH",
+      role: "SR. SYSTEMS ADMIN",
+      period: "2024 - 2024",
+      points: [
+        "ADMINISTERED HYBRID AD ENVIRONMENTS AND O365 TENANTS.",
+        "ORCHESTRATED DEVICE LIFECYCLE MANAGEMENT VIA INTUNE.",
+        "RESOLVED COMPLEX KERNEL AND OS LEVEL INFRASTRUCTURE ISSUES.",
+        "SYSTEM MIGRATIONS UTILIZING BOMGAR AND AZURE ADMIN CENTER."
+      ]
+    },
+    {
+      company: "WIPRO LIMITED",
+      role: "SR. TECH ASSOCIATE",
+      period: "2021 - 2023",
+      points: [
+        "TECHNICAL AUDITS FOR GOOGLE ACCESSIBILITY PLATFORMS.",
+        "IMPLEMENTED WCAG COMPLIANCE ARCHITECTURE.",
+        "ANDROID PLATFORM DEBUGGING FOR GERMAN MARKETS."
+      ]
+    }
+  ];
 
-        .highlight {
-            color: var(--accent-cyan);
-        }
+  const certifications = [
+    { title: "AZ-104: AZURE ADMIN", issuer: "MICROSOFT" },
+    { title: "MD-102: INTUNE ADMIN", issuer: "MICROSOFT" },
+    { title: "AZ-900: FUNDAMENTALS", issuer: "MICROSOFT" },
+    { title: "GOOGLE IT PROFESSIONAL", issuer: "GOOGLE" }
+  ];
 
-        .sub-header {
-            color: var(--accent-purple);
-            margin: 20px 0;
-            font-size: 1.2rem;
-        }
+  return (
+    <div className="min-h-screen bg-[#050505] text-[#00f3ff] font-mono selection:bg-[#ff003c] selection:text-white overflow-x-hidden">
+      {/* Scanline Overlay */}
+      <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%]"></div>
+      
+      {/* Glitch Background Static */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.02] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
 
-        .description {
-            max-width: 600px;
-            color: var(--text-gray);
-            line-height: 1.6;
-            font-size: 1rem;
-        }
+      {/* Top HUD */}
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-black/90 border-b-2 border-[#00f3ff]/30 py-2' : 'bg-transparent py-4'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 border-2 border-[#00f3ff] flex items-center justify-center relative group">
+              <Terminal size={20} />
+              <div className="absolute inset-0 bg-[#00f3ff] opacity-20 group-hover:opacity-40 transition-opacity"></div>
+            </div>
+            <div>
+              <div className="text-xl font-black tracking-[0.2em] glitch-text" data-text={profile.name}>
+                {profile.name}
+              </div>
+              <div className="text-[10px] text-[#ff003c] tracking-widest font-bold">STATUS: {profile.status}</div>
+            </div>
+          </div>
+          <div className="hidden md:flex gap-1 items-center">
+            {['experience', 'skills', 'education'].map(item => (
+              <button 
+                key={item}
+                onClick={() => setActiveTab(item)}
+                className={`px-4 py-1 text-[10px] font-bold uppercase tracking-tighter border-x border-[#00f3ff]/20 hover:bg-[#00f3ff] hover:text-black transition-all ${activeTab === item ? 'bg-[#00f3ff] text-black shadow-[0_0_15px_#00f3ff]' : 'text-[#00f3ff]'}`}
+              >
+                [{item}]
+              </button>
+            ))}
+            <div className="ml-6 px-3 py-1 bg-[#ff003c]/10 border border-[#ff003c]/30 text-[#ff003c] text-[10px] font-bold">
+              {time}
+            </div>
+          </div>
+        </div>
+      </nav>
 
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
-        }
+      {/* Hero Section */}
+      <section className="relative pt-40 pb-20 px-6">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-7 space-y-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#00f3ff]/10 border-l-4 border-[#00f3ff] text-[#00f3ff] text-[10px] font-bold uppercase">
+              <Activity size={12} className="animate-pulse" /> Security Protocol: {profile.accessLevel}
+            </div>
+            
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-none italic">
+              ENGINEERING <br />
+              <span className="text-transparent stroke-text">VIRTUAL</span> <br />
+              <span className="text-[#ff003c] drop-shadow-[0_0_10px_#ff003c]">FRONTIERS.</span>
+            </h1>
 
-        .stat-item h2 {
-            font-size: 2.5rem;
-            margin: 0;
-            color: var(--accent-cyan);
-        }
+            <p className="text-sm md:text-base text-[#00f3ff]/70 max-w-xl leading-relaxed border-l-2 border-[#00f3ff]/30 pl-6 font-medium">
+              &gt; {profile.summary}
+            </p>
 
-        .stat-item p {
-            font-size: 12px;
-            color: var(--text-gray);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+            <div className="flex flex-wrap gap-4 pt-6">
+              <a href={`mailto:${profile.email}`} className="group relative px-8 py-3 bg-[#00f3ff] text-black font-black uppercase tracking-tighter overflow-hidden">
+                <span className="relative z-10 flex items-center gap-2">CONNECT_OPERATOR <Mail size={18} /></span>
+                <div className="absolute top-0 -left-full w-full h-full bg-[#ff003c] group-hover:left-0 transition-all duration-300"></div>
+              </a>
+              <div className="flex gap-2">
+                <a href={profile.linkedin} target="_blank" className="p-3 border-2 border-[#00f3ff] hover:bg-[#00f3ff] hover:text-black transition-all shadow-[5px_5px_0_#ff003c]">
+                  <Linkedin size={20} />
+                </a>
+                <a href={profile.instagram} target="_blank" className="p-3 border-2 border-[#00f3ff] hover:bg-[#00f3ff] hover:text-black transition-all shadow-[5px_5px_0_#ff003c]">
+                  <Instagram size={20} />
+                </a>
+              </div>
+            </div>
+          </div>
 
-        /* Neon Button */
-        .btn {
-            display: inline-block;
-            padding: 15px 40px;
-            border: 1px solid var(--accent-cyan);
-            color: var(--accent-cyan);
-            text-decoration: none;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 2px;
-            position: relative;
-            overflow: hidden;
-            transition: 0.3s;
-            clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
-        }
+          <div className="lg:col-span-5 relative">
+            <div className="absolute -inset-4 bg-[#00f3ff]/5 blur-3xl rounded-full animate-pulse"></div>
+            <div className="relative border-4 border-[#00f3ff] p-2 bg-black shadow-[20px_20px_0_#ff003c44]">
+              <div className="border border-[#00f3ff]/30 p-8 space-y-6">
+                <div className="flex justify-between items-center border-b border-[#00f3ff]/30 pb-4">
+                  <span className="text-[10px] font-bold">CORE_ARCH_STATS</span>
+                  <div className="flex gap-1">
+                    <div className="w-2 h-2 bg-[#00f3ff]"></div>
+                    <div className="w-2 h-2 bg-[#ff003c]"></div>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  {[
+                    { label: 'CLOUD_DEPLOY', val: '98%', icon: <Cloud size={14}/> },
+                    { label: 'NET_SEC', val: '92%', icon: <Shield size={14}/> },
+                    { label: 'SYS_INT', val: '95%', icon: <Settings size={14}/> },
+                    { label: 'GERMAN_COM', val: 'C1', icon: <Globe size={14}/> }
+                  ].map((stat, i) => (
+                    <div key={i} className="flex justify-between items-center group">
+                      <div className="flex items-center gap-2 text-[10px] font-bold text-[#00f3ff]/50 group-hover:text-[#00f3ff]">
+                        {stat.icon} {stat.label}
+                      </div>
+                      <div className="text-xs font-black">{stat.val}</div>
+                    </div>
+                  ))}
+                </div>
+                <div className="pt-4">
+                  <div className="text-[8px] font-bold mb-2 opacity-50">HEARTBEAT_MONITOR</div>
+                  <div className="h-8 flex items-end gap-[2px]">
+                    {[...Array(20)].map((_, i) => (
+                      <div 
+                        key={i} 
+                        className="w-1 bg-[#00f3ff]" 
+                        style={{ 
+                          height: `${Math.random() * 100}%`,
+                          opacity: Math.random() > 0.5 ? 1 : 0.3
+                        }}
+                      ></div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        .btn:hover {
-            background: var(--accent-cyan);
-            color: black;
-            box-shadow: 0 0 20px var(--accent-cyan);
-        }
-
-    </style>
-</head>
-<body>
-
-    <div id="particles-js"></div>
-
-    <div class="container">
-        <div class="tagline">// MARBLE INDUSTRY SPECIALIST</div>
-        <h1>OSAID<br><span class="highlight">SHAHID</span></h1>
+      {/* Main Grid HUD */}
+      <main className="max-w-7xl mx-auto px-6 pb-24 grid lg:grid-cols-12 gap-8">
         
-        <div class="sub-header">[ Global Export · Premium Marble · Natural Stone ]</div>
-        
-        <p class="description">
-            Providing high-quality marble solutions with a focus on durability and luxury. 
-            We specialize in all types of natural stones, powered by years of industry expertise.
-        </p>
+        {/* Left Sidebar - Skill Terminal */}
+        <div className="lg:col-span-4 space-y-6">
+          <div className="p-6 border-2 border-[#00f3ff]/30 bg-black relative">
+            <div className="absolute -top-3 left-4 px-2 bg-black text-[#00f3ff] text-[10px] font-black tracking-widest border border-[#00f3ff]/30">
+              [SKILL_MATRIX]
+            </div>
+            <div className="space-y-6">
+              {['CLOUD', 'IDENTITY', 'NET', 'LANG'].map(cat => (
+                <div key={cat} className="space-y-3">
+                  <div className="text-[10px] font-black text-[#ff003c] flex items-center gap-2">
+                    <Zap size={10} /> {cat}
+                  </div>
+                  {skills.filter(s => s.category === cat).map(skill => (
+                    <div key={skill.name} className="space-y-1">
+                      <div className="flex justify-between text-[10px] font-bold uppercase">
+                        <span>{skill.name}</span>
+                        <span>{skill.level}%</span>
+                      </div>
+                      <div className="h-1 bg-[#00f3ff]/10 w-full overflow-hidden">
+                        <div 
+                          className="h-full bg-[#00f3ff] shadow-[0_0_10px_#00f3ff]" 
+                          style={{ width: `${skill.level}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
 
-        <div class="stats-grid">
-            <div class="stat-item">
-                <h2 id="exp">10</h2>
-                <p>Years Exp.</p>
+          <div className="p-6 border-2 border-[#ff003c]/30 bg-black relative">
+             <div className="absolute -top-3 left-4 px-2 bg-black text-[#ff003c] text-[10px] font-black tracking-widest border border-[#ff003c]/30">
+              [CERTIFICATIONS]
             </div>
-            <div class="stat-item">
-                <h2 id="types">50</h2>
-                <p>Stone Types</p>
+            <div className="grid grid-cols-1 gap-2">
+              {certifications.map((cert, idx) => (
+                <div key={idx} className="flex items-center gap-3 p-2 border border-[#00f3ff]/10 hover:border-[#00f3ff]/50 group transition-all cursor-crosshair">
+                  <div className="p-2 bg-[#00f3ff]/10 text-[#00f3ff]">
+                    <Award size={14} />
+                  </div>
+                  <div className="text-[10px] font-bold">
+                    <div className="group-hover:text-white">{cert.title}</div>
+                    <div className="opacity-40">{cert.issuer}</div>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div class="stat-item">
-                <h2 id="clients">500</h2>
-                <p>Happy Clients</p>
-            </div>
-            <div class="stat-item">
-                <h2 id="countries">5</h2>
-                <p>Countries Served</p>
-            </div>
+          </div>
         </div>
 
-        <a href="#" class="btn">View Collection</a>
-    </div>
+        {/* Right Area - Logs / Education */}
+        <div className="lg:col-span-8 space-y-8">
+          <div className="flex gap-2">
+            <button 
+              onClick={() => setActiveTab('experience')}
+              className={`flex-1 py-3 border-2 text-xs font-black tracking-widest transition-all ${activeTab === 'experience' ? 'bg-[#00f3ff] text-black border-[#00f3ff]' : 'border-[#00f3ff]/20 text-[#00f3ff]/40 hover:border-[#00f3ff]/50'}`}
+            >
+              MISSION_LOGS
+            </button>
+            <button 
+              onClick={() => setActiveTab('education')}
+              className={`flex-1 py-3 border-2 text-xs font-black tracking-widest transition-all ${activeTab === 'education' ? 'bg-[#ff003c] text-black border-[#ff003c]' : 'border-[#ff003c]/20 text-[#ff003c]/40 hover:border-[#ff003c]/50'}`}
+            >
+              DATA_ARCHIVE
+            </button>
+          </div>
 
-    <script>
-        /* Particles Config - This creates the "dot" background from the site */
-        particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#00f2ff" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.5, "random": false },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#00f2ff", "opacity": 0.2, "width": 1 },
-                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true }
-            },
-            "retina_detect": true
-        });
-    </script>
-</body>
-</html>
+          {activeTab === 'experience' ? (
+            <div className="space-y-6">
+              {experience.map((job, idx) => (
+                <div key={idx} className="group relative border-l-4 border-[#00f3ff] bg-[#00f3ff]/5 p-8 overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#00f3ff]/5 -mr-16 -mt-16 rotate-45 group-hover:bg-[#00f3ff]/10 transition-colors"></div>
+                  <div className="flex flex-col md:flex-row md:justify-between mb-6">
+                    <div>
+                      <h3 className="text-2xl font-black text-white italic group-hover:text-[#00f3ff] transition-colors tracking-tighter">{job.role}</h3>
+                      <div className="flex items-center gap-2 text-[#ff003c] text-[10px] font-bold mt-1">
+                        <Terminal size={12} /> {job.company}
+                      </div>
+                    </div>
+                    <div className="text-[10px] font-black text-[#00f3ff]/40 mt-2 md:mt-0 font-mono self-end md:self-auto">
+                      {job.period}
+                    </div>
+                  </div>
+                  <ul className="space-y-4">
+                    {job.points.map((point, pIdx) => (
+                      <li key={pIdx} className="flex items-start gap-4 text-xs font-medium text-[#00f3ff]/80 leading-relaxed uppercase">
+                        <span className="text-[#ff003c] mt-1 shrink-0 font-bold">0{pIdx + 1}</span>
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid gap-4">
+              {[
+                { type: "DEGREE", title: "BA (HONS) ENGLISH", school: "UNIVERSITY OF DELHI", date: "2020" },
+                { type: "CERT", title: "GERMAN LANGUAGE (C1)", school: "OSMANIA UNIVERSITY", date: "2023" },
+                { type: "CERT", title: "GERMAN LANGUAGE (B2)", school: "OSMANIA UNIVERSITY", date: "2021" },
+                { type: "CERT", title: "GERMAN LANGUAGE (A2)", school: "OSMANIA UNIVERSITY", date: "2021" }
+              ].map((edu, idx) => (
+                <div key={idx} className="p-6 border-2 border-[#00f3ff]/10 bg-black/40 flex justify-between items-center group hover:border-[#ff003c] transition-all">
+                  <div className="space-y-1">
+                    <span className="text-[8px] font-black px-2 py-0.5 bg-[#ff003c]/20 text-[#ff003c]">{edu.type}</span>
+                    <h3 className="text-lg font-black text-white">{edu.title}</h3>
+                    <p className="text-[#00f3ff] text-[10px] font-bold">{edu.school}</p>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-xl font-black text-[#00f3ff]/20 italic">{edu.date}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </main>
+
+      {/* Footer / Terminal Feed */}
+      <footer className="bg-black border-t-4 border-[#ff003c] pt-20 pb-10 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12 relative z-10">
+          <div className="md:col-span-2 space-y-6">
+            <div className="text-3xl font-black tracking-tighter text-white italic">
+              OSAID<span className="text-[#ff003c]">.SHAHID</span>
+            </div>
+            <div className="flex items-center gap-4 text-[10px] font-bold text-[#00f3ff]/60">
+              <span className="flex items-center gap-2"><Lock size={12} /> ENCRYPTED_CONNECTION</span>
+              <span className="flex items-center gap-2"><Activity size={12} /> CORE_TEMP: STABLE</span>
+            </div>
+            <p className="text-[10px] text-[#00f3ff]/40 uppercase leading-loose max-w-sm">
+              Architecture of high-availability cloud systems. Specializing in Microsoft Azure stack, enterprise networking, and international DACH operations.
+            </p>
+          </div>
+          
+          <div className="space-y-4">
+            <h4 className="text-[10px] font-black uppercase text-[#ff003c] tracking-[0.3em]">Direct_Access</h4>
+            <div className="space-y-2">
+              <a href={`mailto:${profile.email}`} className="flex items-center gap-3 text-[#00f3ff] hover:text-white text-[10px] font-bold transition-colors">
+                <Mail size={12} /> {profile.email}
+              </a>
+              <a href={`tel:${profile.phone}`} className="flex items-center gap-3 text-[#00f3ff] hover:text-white text-[10px] font-bold transition-colors">
+                <Phone size={12} /> {profile.phone}
+              </a>
+              <div className="flex items-center gap-3 text-[#00f3ff] text-[10px] font-bold">
+                <MapPin size={12} /> Mau, Uttar Pradesh
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <h4 className="text-[10px] font-black uppercase text-[#ff003c] tracking-[0.3em]">Social_Net</h4>
+            <div className="flex gap-4">
+               <a href={profile.linkedin} target="_blank" className="p-3 border border-[#00f3ff]/30 hover:bg-[#00f3ff] hover:text-black transition-all">
+                <Linkedin size={16} />
+               </a>
+               <a href={profile.instagram} target="_blank" className="p-3 border border-[#00f3ff]/30 hover:bg-[#ff003c] hover:text-black transition-all border-[#ff003c]/30">
+                <Instagram size={16} />
+               </a>
+            </div>
+          </div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-6 mt-20 pt-10 border-t border-[#00f3ff]/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[#00f3ff]/20 text-[8px] font-black tracking-widest">
+          <span>&copy; 2024 SYSTEM_ARCHIVE // OSAID SHAHID</span>
+          <span>LOCATION_REF: MAU_SECTOR_275101</span>
+          <span className="animate-pulse">DECRYPTING INFRASTRUCTURE...</span>
+        </div>
+      </footer>
+
+      {/* Global Styles */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+        
+        body { font-family: 'Space Mono', monospace; }
+        
+        .stroke-text {
+          -webkit-text-stroke: 1px #00f3ff;
+          opacity: 0.5;
+        }
+
+        .glitch-text {
+          position: relative;
+        }
+        
+        .glitch-text::before,
+        .glitch-text::after {
+          content: attr(data-text);
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: #050505;
+        }
+
+        .glitch-text::before {
+          left: 2px;
+          text-shadow: -2px 0 #ff003c;
+          clip: rect(44px, 450px, 56px, 0);
+          animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch-text::after {
+          left: -2px;
+          text-shadow: -2px 0 #00f3ff;
+          clip: rect(44px, 450px, 56px, 0);
+          animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+          0% { clip: rect(31px, 9999px, 94px, 0); }
+          5% { clip: rect(70px, 9999px, 71px, 0); }
+          10% { clip: rect(29px, 9999px, 83px, 0); }
+          20% { clip: rect(100px, 9999px, 5px, 0); }
+          100% { clip: rect(10px, 9999px, 100px, 0); }
+        }
+
+        @keyframes glitch-anim2 {
+          0% { clip: rect(65px, 9999px, 100px, 0); }
+          50% { clip: rect(10px, 9999px, 50px, 0); }
+          100% { clip: rect(30px, 9999px, 80px, 0); }
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #00f3ff; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff003c; }
+      `}</style>
+    </div>
+  );
+};
+
+export default App;
