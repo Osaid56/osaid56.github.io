@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Osaid Shahid | Cloud & Systems Engineer</title>
+    <title>Osaid Shahid | Cloud & Systems Architect</title>
     
     <!-- External Assets -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --neon-cyan: #00f2ff;
             --neon-purple: #bc13fe;
             --neon-green: #39FF14;
-            --dark-bg: #050505;
+            --dark-bg: #030303;
         }
 
         body {
@@ -24,8 +24,10 @@
             color: white;
             font-family: 'JetBrains Mono', monospace;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
+        /* Magical / Premium Background */
         #particles-js {
             position: fixed;
             top: 0;
@@ -33,43 +35,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
-        }
-
-        .font-orbitron { font-family: 'Orbitron', sans-serif; }
-        .glow-text-cyan { text-shadow: 0 0 10px rgba(0, 242, 255, 0.5); }
-        .glow-border { border: 1px solid var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 242, 255, 0.1); }
-
-        .btn-cyber {
-            position: relative;
-            background: transparent;
-            border: 1px solid var(--neon-cyan);
-            color: var(--neon-cyan);
-            padding: 12px 30px;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 2px;
-            clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            display: inline-block;
-        }
-
-        .btn-cyber:hover {
-            background: var(--neon-cyan);
-            color: black;
-            box-shadow: 0 0 20px var(--neon-cyan);
-        }
-
-        .experience-card {
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 2px solid var(--neon-purple);
-            transition: 0.3s;
-        }
-
-        .experience-card:hover {
-            background: rgba(255, 255, 255, 0.07);
-            border-left: 2px solid var(--neon-cyan);
+            background: radial-gradient(circle at 50% 50%, #0a0a1a 0%, #000000 100%);
         }
 
         .grid-overlay {
@@ -78,15 +44,177 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: linear-gradient(rgba(0, 242, 255, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(0, 242, 255, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px;
+            background-image: linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
             z-index: -1;
             pointer-events: none;
+            animation: panBg 20s linear infinite;
+        }
+
+        @keyframes panBg {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        /* Typography & Blinking Effects */
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        
+        .glow-text-cyan { 
+            color: var(--neon-cyan);
+            animation: pulse-glow 3s infinite alternate;
+        }
+
+        @keyframes pulse-glow { 
+            0%, 100% { text-shadow: 0 0 10px rgba(0, 242, 255, 0.8), 0 0 20px rgba(0, 242, 255, 0.4); } 
+            50% { text-shadow: 0 0 2px rgba(0, 242, 255, 0.3), 0 0 5px rgba(0, 242, 255, 0.1); } 
+        }
+
+        /* Blinking Terminal Cursor */
+        .typing-cursor::after {
+            content: '█';
+            color: var(--neon-cyan);
+            animation: blink 1s step-end infinite;
+            margin-left: 5px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Premium Glitch Title */
+        .glitch-wrapper {
+            position: relative;
+        }
+        
+        .glitch-wrapper::before, .glitch-wrapper::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        
+        .glitch-wrapper::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--neon-purple);
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+        
+        .glitch-wrapper::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--neon-cyan);
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(10px, 9999px, 44px, 0); }
+            20% { clip: rect(80px, 9999px, 90px, 0); }
+            40% { clip: rect(30px, 9999px, 50px, 0); }
+            60% { clip: rect(100px, 9999px, 120px, 0); }
+            80% { clip: rect(15px, 9999px, 30px, 0); }
+            100% { clip: rect(60px, 9999px, 70px, 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(20px, 9999px, 30px, 0); }
+            20% { clip: rect(60px, 9999px, 80px, 0); }
+            40% { clip: rect(10px, 9999px, 40px, 0); }
+            60% { clip: rect(90px, 9999px, 100px, 0); }
+            80% { clip: rect(40px, 9999px, 60px, 0); }
+            100% { clip: rect(70px, 9999px, 90px, 0); }
+        }
+
+        /* Cyber Buttons */
+        .btn-cyber {
+            position: relative;
+            background: rgba(0, 242, 255, 0.05);
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 12px 35px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 3px;
+            clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            overflow: hidden;
+        }
+
+        .btn-cyber::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-cyber:hover::before {
+            left: 100%;
+        }
+
+        .btn-cyber:hover {
+            background: var(--neon-cyan);
+            color: black;
+            box-shadow: 0 0 25px var(--neon-cyan);
+            transform: scale(1.05);
+        }
+
+        /* Premium Animated Cards */
+        .premium-card {
+            position: relative;
+            background: rgba(15, 15, 15, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-left: 3px solid var(--neon-purple);
+            transition: 0.4s;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .premium-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(188, 19, 254, 0.05), transparent);
+            z-index: -1;
+            transition: 0.4s opacity;
+            opacity: 0;
+        }
+
+        .premium-card:hover {
+            border-left: 3px solid var(--neon-cyan);
+            box-shadow: 0 10px 30px -10px rgba(0, 242, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .premium-card:hover::after {
+            opacity: 1;
+        }
+
+        /* Social Link Hover States */
+        .social-link {
+            position: relative;
+            color: #888;
+            transition: 0.3s;
+        }
+        
+        .social-link:hover {
+            color: var(--neon-cyan);
+            filter: drop-shadow(0 0 8px var(--neon-cyan));
+            transform: translateY(-3px);
         }
 
         @media (max-width: 640px) {
-            .hero-title { font-size: 3.5rem !important; }
+            .hero-title { font-size: 3rem !important; }
         }
     </style>
 </head>
@@ -96,154 +224,182 @@
     <div class="grid-overlay"></div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 p-6 flex justify-between items-center bg-black/60 backdrop-blur-lg border-b border-white/5">
-        <div class="font-orbitron text-xl font-bold tracking-tighter">
-            OSAID<span class="text-[#00f2ff]">.cloud</span>
+    <nav class="fixed top-0 w-full z-50 p-6 flex justify-between items-center bg-black/80 backdrop-blur-xl border-b border-white/10">
+        <div class="font-orbitron text-2xl font-black tracking-tighter">
+            OSAID<span class="text-[#00f2ff] animate-pulse">.sys</span>
         </div>
-        <div class="hidden md:flex gap-8 text-[10px] font-bold tracking-widest uppercase">
-            <a href="#hero" class="hover:text-[#00f2ff] transition">Identity</a>
-            <a href="#experience" class="hover:text-[#00f2ff] transition">History</a>
-            <a href="#skills" class="hover:text-[#00f2ff] transition">Stack</a>
-            <a href="#contact" class="hover:text-[#00f2ff] transition">Contact</a>
+        <div class="hidden md:flex gap-10 text-xs font-bold tracking-[0.2em] uppercase">
+            <a href="#hero" class="hover:text-[#00f2ff] hover:text-shadow transition duration-300">Architecture</a>
+            <a href="#experience" class="hover:text-[#00f2ff] transition duration-300">Deployments</a>
+            <a href="#skills" class="hover:text-[#00f2ff] transition duration-300">Tech Stack</a>
+            <a href="#contact" class="hover:text-[#00f2ff] transition duration-300">Network</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="container mx-auto px-6 pt-32 min-h-screen flex flex-col justify-center">
-        <div class="max-w-4xl">
-            <div class="flex items-center gap-4 mb-6">
-                <div class="h-[2px] w-12 bg-[#39FF14]"></div>
-                <p class="text-[#39FF14] text-xs font-bold tracking-[0.4em] uppercase">// CLOUD INFRASTRUCTURE ARCHITECT</p>
+    <section id="hero" class="container mx-auto px-6 pt-40 pb-20 min-h-screen flex flex-col justify-center">
+        <div class="max-w-5xl">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="h-[2px] w-16 bg-[#39FF14] shadow-[0_0_10px_#39FF14]"></div>
+                <p class="text-[#39FF14] text-sm font-bold tracking-[0.5em] uppercase typing-cursor">ENTERPRISE CLOUD ARCHITECT</p>
             </div>
 
-            <h1 class="font-orbitron hero-title text-8xl font-bold leading-none mb-6">
+            <h1 class="font-orbitron hero-title text-8xl md:text-9xl font-black leading-none mb-6 glitch-wrapper" data-text="OSAID SHAHID">
                 OSAID <br>
-                <span class="text-[#00f2ff] glow-text-cyan">SHAHID</span>
+                <span class="glow-text-cyan">SHAHID</span>
             </h1>
 
-            <p class="text-[#bc13fe] font-bold text-sm md:text-lg mb-8 tracking-widest">
-                [ AZ-104 · AZ-900 · MD-102 · GERMAN C1 ]
+            <p class="text-[#bc13fe] font-bold text-sm md:text-xl mb-10 tracking-[0.3em] uppercase drop-shadow-[0_0_8px_rgba(188,19,254,0.5)]">
+                [ AZ-104 · AZ-900 · MD-102 · DACH GERMAN C1 ]
             </p>
 
-            <p class="text-gray-400 max-w-xl text-lg leading-relaxed mb-12 border-l-2 border-white/10 pl-6">
-                High-tier Cloud Operations Engineer specializing in Microsoft Entra, Azure ecosystem deployments, and Enterprise Intune architecture. 
-                Expert in engineering complex corporate networks, maintaining system integrity, and deploying advanced accessibility standards (WCAG).
+            <p class="text-gray-300 max-w-2xl text-lg md:text-xl leading-relaxed mb-14 border-l-4 border-[#00f2ff] pl-8 bg-gradient-to-r from-[#00f2ff]/10 to-transparent py-4">
+                Engineering high-availability cloud ecosystems and zero-trust identity frameworks. 
+                Specialized in architecting Microsoft Entra deployments, automating Intune MDM pipelines, 
+                and securing enterprise network topologies.
             </p>
 
-            <div class="flex flex-wrap gap-8 items-center">
-                <a href="#experience" class="btn-cyber">View Tech Log</a>
-                <div class="flex gap-6">
-                    <a href="https://www.linkedin.com/in/osaid-shahid-442599223/" target="_blank" class="text-gray-400 hover:text-[#00f2ff] transition"><i data-lucide="linkedin"></i></a>
-                    <a href="https://www.instagram.com/osaid_shahid" target="_blank" class="text-gray-400 hover:text-[#00f2ff] transition"><i data-lucide="instagram"></i></a>
-                    <a href="mailto:osaidtheshahid@gmail.com" class="text-gray-400 hover:text-[#00f2ff] transition"><i data-lucide="mail"></i></a>
+            <div class="flex flex-wrap gap-10 items-center">
+                <a href="#experience" class="btn-cyber">
+                    Access Schematics <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                </a>
+                
+                <!-- Highly Visible, Clickable Social Links -->
+                <div class="flex gap-8 border border-white/10 p-4 rounded-lg bg-white/5 backdrop-blur-sm">
+                    <a href="https://www.linkedin.com/in/osaid-shahid-442599223/" target="_blank" rel="noopener noreferrer" class="social-link flex items-center gap-2 text-sm font-bold tracking-widest uppercase">
+                        <i data-lucide="linkedin"></i> LinkedIn
+                    </a>
+                    <a href="https://www.instagram.com/osaid_shahid" target="_blank" rel="noopener noreferrer" class="social-link flex items-center gap-2 text-sm font-bold tracking-widest uppercase">
+                        <i data-lucide="instagram"></i> Instagram
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="container mx-auto px-6 py-24">
-        <h2 class="font-orbitron text-3xl mb-12 text-[#bc13fe] flex items-center gap-4">
-            <span class="opacity-30">01 //</span> PROFESSIONAL_TIMELINE
+    <section id="experience" class="container mx-auto px-6 py-32 relative">
+        <!-- Background decorative element -->
+        <div class="absolute top-40 right-10 w-96 h-96 bg-[#bc13fe]/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <h2 class="font-orbitron text-4xl md:text-5xl mb-16 text-[#bc13fe] flex items-center gap-6 drop-shadow-[0_0_15px_rgba(188,19,254,0.4)]">
+            <span class="text-white/20 font-black">01 //</span> SYSTEM_DEPLOYMENTS
         </h2>
         
-        <div class="space-y-12 max-w-5xl">
+        <div class="space-y-10 max-w-5xl">
             <!-- Accenture -->
-            <div class="experience-card p-8 rounded-sm">
-                <div class="flex flex-col md:flex-row justify-between mb-4">
+            <div class="premium-card p-10">
+                <div class="flex flex-col md:flex-row justify-between mb-6 border-b border-white/10 pb-4">
                     <div>
-                        <h3 class="text-[#00f2ff] font-bold text-xl uppercase tracking-wider">Cloud Infrastructure Engineer</h3>
-                        <p class="text-white font-bold">Accenture | Gurugram</p>
+                        <h3 class="text-[#00f2ff] font-black text-2xl tracking-widest uppercase drop-shadow-[0_0_5px_rgba(0,242,255,0.5)]">Senior Cloud Solutions Architect</h3>
+                        <p class="text-white font-bold tracking-widest mt-2 uppercase text-sm"><i data-lucide="building" class="inline w-4 h-4 mr-2"></i>Accenture | Gurugram</p>
                     </div>
-                    <p class="text-gray-500 font-bold text-sm mt-2 md:mt-0 uppercase tracking-tighter">11/2024 — PRESENT</p>
+                    <div class="text-right mt-4 md:mt-0">
+                        <p class="text-[#39FF14] font-black text-sm tracking-widest bg-[#39FF14]/10 px-4 py-2 inline-block border border-[#39FF14]/30">11/2024 — PRESENT</p>
+                    </div>
                 </div>
-                <ul class="text-gray-400 text-sm space-y-2 list-disc ml-4">
-                    <li>Architecting and deploying cloud-based solutions for large-scale enterprise environments across the DACH region.</li>
-                    <li>Engineering robust identity and access management protocols, administering security groups via Microsoft Entra (Azure AD).</li>
-                    <li>Orchestrating complex corporate network infrastructure, managing secure DHCP clusters and hardware endpoints.</li>
-                    <li>Developing advanced technical resolutions and system stabilizations for high-level Windows enterprise architectures.</li>
+                <ul class="text-gray-300 text-base space-y-4 list-square ml-4 font-light tracking-wide leading-relaxed">
+                    <li><strong class="text-white font-bold">Cloud Architecture:</strong> Engineered and deployed high-availability, scalable enterprise cloud architectures for Fortune 500 clients across the DACH region (German C1).</li>
+                    <li><strong class="text-white font-bold">Identity & Access:</strong> Architected zero-trust security models via Microsoft Entra (Azure AD), managing complex RBAC and enterprise lifecycle provisioning.</li>
+                    <li><strong class="text-white font-bold">Network Topology:</strong> Orchestrated secure corporate network pipelines, engineering advanced DHCP/DNS topologies and securing hardware endpoints.</li>
+                    <li><strong class="text-white font-bold">System Optimization:</strong> Engineered automated remediation pipelines for high-level Windows enterprise architectures to ensure 99.9% system uptime.</li>
                 </ul>
             </div>
 
             <!-- ITC Infotech -->
-            <div class="experience-card p-8 rounded-sm">
-                <div class="flex flex-col md:flex-row justify-between mb-4">
+            <div class="premium-card p-10">
+                <div class="flex flex-col md:flex-row justify-between mb-6 border-b border-white/10 pb-4">
                     <div>
-                        <h3 class="text-[#00f2ff] font-bold text-xl uppercase tracking-wider">Enterprise Systems Engineer</h3>
-                        <p class="text-white font-bold">ITC Infotech | Bengaluru</p>
+                        <h3 class="text-[#00f2ff] font-black text-2xl tracking-widest uppercase drop-shadow-[0_0_5px_rgba(0,242,255,0.5)]">Enterprise Systems Engineer</h3>
+                        <p class="text-white font-bold tracking-widest mt-2 uppercase text-sm"><i data-lucide="server" class="inline w-4 h-4 mr-2"></i>ITC Infotech | Bengaluru</p>
                     </div>
-                    <p class="text-gray-500 font-bold text-sm mt-2 md:mt-0 uppercase tracking-tighter">04/2024 — 11/2024</p>
+                    <div class="text-right mt-4 md:mt-0">
+                        <p class="text-gray-400 font-bold text-sm tracking-widest border border-white/20 px-4 py-2 inline-block">04/2024 — 11/2024</p>
+                    </div>
                 </div>
-                <ul class="text-gray-400 text-sm space-y-2 list-disc ml-4">
-                    <li>Administered hybrid cloud infrastructure integrating Windows Server, Active Directory, and Microsoft 365 environments.</li>
-                    <li>Automated the provisioning and lifecycle management of enterprise devices using Microsoft Intune and Azure portals.</li>
-                    <li>Executed network operations including Static/Dynamic IP routing and advanced hardware-level integrations.</li>
-                    <li>Maintained mission-critical systems utilizing enterprise tools such as ARS, ServiceNow, Bomgar, and Confluence.</li>
+                <ul class="text-gray-300 text-base space-y-4 list-square ml-4 font-light tracking-wide leading-relaxed">
+                    <li><strong class="text-white font-bold">Hybrid Ecosystems:</strong> Administered large-scale hybrid cloud infrastructure, integrating Windows Server ecosystems with Microsoft 365 environments.</li>
+                    <li><strong class="text-white font-bold">Endpoint Management:</strong> Automated zero-touch provisioning and lifecycle management of enterprise devices utilizing Microsoft Intune and Azure automation.</li>
+                    <li><strong class="text-white font-bold">Infrastructure routing:</strong> Executed advanced network operations, including IP subnetting, routing, and high-tier hardware integrations.</li>
+                    <li><strong class="text-white font-bold">Enterprise Tooling:</strong> Administered mission-critical frameworks via Active Roles Server (ARS), ServiceNow, and Bomgar for enterprise-wide deployments.</li>
                 </ul>
             </div>
 
             <!-- Wipro -->
-            <div class="experience-card p-8 rounded-sm">
-                <div class="flex flex-col md:flex-row justify-between mb-4">
+            <div class="premium-card p-10">
+                <div class="flex flex-col md:flex-row justify-between mb-6 border-b border-white/10 pb-4">
                     <div>
-                        <h3 class="text-[#00f2ff] font-bold text-xl uppercase tracking-wider">Accessibility Infrastructure Specialist</h3>
-                        <p class="text-white font-bold">Wipro Limited | Hyderabad</p>
+                        <h3 class="text-[#00f2ff] font-black text-2xl tracking-widest uppercase drop-shadow-[0_0_5px_rgba(0,242,255,0.5)]">Systems Integration Engineer</h3>
+                        <p class="text-white font-bold tracking-widest mt-2 uppercase text-sm"><i data-lucide="cpu" class="inline w-4 h-4 mr-2"></i>Wipro Limited | Hyderabad</p>
                     </div>
-                    <p class="text-gray-500 font-bold text-sm mt-2 md:mt-0 uppercase tracking-tighter">12/2021 — 09/2023</p>
+                    <div class="text-right mt-4 md:mt-0">
+                        <p class="text-gray-400 font-bold text-sm tracking-widest border border-white/20 px-4 py-2 inline-block">12/2021 — 09/2023</p>
+                    </div>
                 </div>
-                <ul class="text-gray-400 text-sm space-y-2 list-disc ml-4">
-                    <li>Led technical operations for Google Accessibility platforms localized for the German (DACH) market.</li>
-                    <li>Executed deep technical audits and compliance architecture testing based on global WCAG standards and NVDA.</li>
-                    <li>Engineered system-level optimizations for Android platform integrations and assistive technology protocols.</li>
+                <ul class="text-gray-300 text-base space-y-4 list-square ml-4 font-light tracking-wide leading-relaxed">
+                    <li><strong class="text-white font-bold">Platform Integration:</strong> Directed technical architecture for Google Accessibility platforms localized specifically for the German (DACH) enterprise market.</li>
+                    <li><strong class="text-white font-bold">Compliance Architecture:</strong> Engineered robust web accessibility pipelines ensuring strict adherence to global WCAG standards using NVDA analysis.</li>
+                    <li><strong class="text-white font-bold">System Optimization:</strong> Engineered system-level modifications for Android enterprise integrations, optimizing assistive technology protocols at scale.</li>
                 </ul>
             </div>
         </div>
     </section>
 
     <!-- Skills & Certs -->
-    <section id="skills" class="container mx-auto px-6 py-24 bg-white/5 border-y border-white/5">
-        <div class="grid md:grid-cols-2 gap-16">
+    <section id="skills" class="container mx-auto px-6 py-32 bg-[#050505] border-y border-white/5 relative overflow-hidden">
+        <!-- Grid glow -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-[#00f2ff] to-transparent opacity-50"></div>
+        
+        <div class="grid md:grid-cols-2 gap-20 max-w-6xl mx-auto">
             <div>
-                <h2 class="font-orbitron text-2xl mb-8 text-[#39FF14]">CORE_CAPABILITIES</h2>
-                <div class="grid grid-cols-2 gap-6 text-sm">
-                    <div>
-                        <p class="text-[#00f2ff] font-bold mb-2">// CLOUD & IDENTITY</p>
-                        <ul class="text-gray-400 space-y-1">
-                            <li>Microsoft Entra (Azure AD)</li>
-                            <li>Intune (MDM/MAM)</li>
-                            <li>Azure Administration</li>
-                            <li>Office 365 Architecture</li>
+                <h2 class="font-orbitron text-3xl mb-10 text-[#39FF14] drop-shadow-[0_0_10px_rgba(57,255,20,0.3)]"><i data-lucide="terminal" class="inline mb-1 mr-3"></i>CORE_STACK</h2>
+                <div class="grid grid-cols-2 gap-8 text-sm">
+                    <div class="bg-black/50 p-6 border border-white/10 hover:border-[#00f2ff] transition duration-300">
+                        <p class="text-[#00f2ff] font-black text-lg mb-4 tracking-widest">CLOUD & IDENTITY</p>
+                        <ul class="text-gray-400 space-y-3 font-bold">
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-[#00f2ff]"></div> Microsoft Entra</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-[#00f2ff]"></div> Intune (MDM/MAM)</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-[#00f2ff]"></div> Azure Architecture</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-[#00f2ff]"></div> Office 365 Admin</li>
                         </ul>
                     </div>
-                    <div>
-                        <p class="text-[#00f2ff] font-bold mb-2">// NETWORKING</p>
-                        <ul class="text-gray-400 space-y-1">
-                            <li>DHCP/DNS Infrastructure</li>
-                            <li>Linux Environments</li>
-                            <li>Enterprise Windows Server</li>
-                            <li>WCAG Compliance Auditing</li>
+                    <div class="bg-black/50 p-6 border border-white/10 hover:border-[#00f2ff] transition duration-300">
+                        <p class="text-[#00f2ff] font-black text-lg mb-4 tracking-widest">INFRASTRUCTURE</p>
+                        <ul class="text-gray-400 space-y-3 font-bold">
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-[#bc13fe]"></div> DHCP/DNS Topology</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-[#bc13fe]"></div> Linux Ecosystems</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-[#bc13fe]"></div> Windows Server Core</li>
+                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-[#bc13fe]"></div> WCAG Engineering</li>
                         </ul>
                     </div>
                 </div>
             </div>
+            
             <div>
-                <h2 class="font-orbitron text-2xl mb-8 text-[#bc13fe]">CERTIFICATIONS</h2>
-                <div class="space-y-4">
-                    <div class="flex items-center gap-4 border-b border-white/10 pb-2">
-                        <span class="text-xs text-gray-500 uppercase">Azure Administrator</span>
-                        <span class="font-bold text-sm text-white tracking-widest">AZ-104</span>
+                <h2 class="font-orbitron text-3xl mb-10 text-[#bc13fe] drop-shadow-[0_0_10px_rgba(188,19,254,0.3)]"><i data-lucide="award" class="inline mb-1 mr-3"></i>CERTIFICATIONS</h2>
+                <div class="space-y-6">
+                    <div class="group flex justify-between items-center bg-black/40 p-6 border border-white/10 hover:bg-white/5 hover:border-[#bc13fe] transition duration-500 cursor-default">
+                        <div>
+                            <span class="text-[10px] text-[#00f2ff] font-black tracking-[0.2em] uppercase block mb-1">Microsoft Architecture</span>
+                            <span class="font-black text-lg text-white tracking-wider">Azure Administrator</span>
+                        </div>
+                        <span class="font-orbitron font-black text-3xl text-gray-700 group-hover:text-[#bc13fe] group-hover:drop-shadow-[0_0_10px_rgba(188,19,254,0.8)] transition duration-300">AZ-104</span>
                     </div>
-                    <div class="flex items-center gap-4 border-b border-white/10 pb-2">
-                        <span class="text-xs text-gray-500 uppercase">Azure Fundamentals</span>
-                        <span class="font-bold text-sm text-white tracking-widest">AZ-900</span>
+                    
+                    <div class="group flex justify-between items-center bg-black/40 p-6 border border-white/10 hover:bg-white/5 hover:border-[#bc13fe] transition duration-500 cursor-default">
+                        <div>
+                            <span class="text-[10px] text-[#00f2ff] font-black tracking-[0.2em] uppercase block mb-1">Microsoft Architecture</span>
+                            <span class="font-black text-lg text-white tracking-wider">Azure Fundamentals</span>
+                        </div>
+                        <span class="font-orbitron font-black text-3xl text-gray-700 group-hover:text-[#bc13fe] group-hover:drop-shadow-[0_0_10px_rgba(188,19,254,0.8)] transition duration-300">AZ-900</span>
                     </div>
-                    <div class="flex items-center gap-4 border-b border-white/10 pb-2">
-                        <span class="text-xs text-gray-500 uppercase">Endpoint Admin</span>
-                        <span class="font-bold text-sm text-white tracking-widest">MD-102</span>
-                    </div>
-                    <div class="flex items-center gap-4 border-b border-white/10 pb-2">
-                        <span class="text-xs text-gray-500 uppercase">Google IT</span>
-                        <span class="font-bold text-sm text-white tracking-widest">IT Professional Cert</span>
+
+                    <div class="group flex justify-between items-center bg-black/40 p-6 border border-white/10 hover:bg-white/5 hover:border-[#bc13fe] transition duration-500 cursor-default">
+                        <div>
+                            <span class="text-[10px] text-[#00f2ff] font-black tracking-[0.2em] uppercase block mb-1">Enterprise Deployment</span>
+                            <span class="font-black text-lg text-white tracking-wider">Endpoint Administrator</span>
+                        </div>
+                        <span class="font-orbitron font-black text-3xl text-gray-700 group-hover:text-[#bc13fe] group-hover:drop-shadow-[0_0_10px_rgba(188,19,254,0.8)] transition duration-300">MD-102</span>
                     </div>
                 </div>
             </div>
@@ -251,32 +407,48 @@
     </section>
 
     <!-- Contact Footer -->
-    <footer id="contact" class="container mx-auto px-6 py-24">
-        <div class="text-center mb-16">
-            <h2 class="font-orbitron text-4xl font-bold mb-4">CONNECT_WITH_ME</h2>
-            <p class="text-gray-500 tracking-widest uppercase text-xs">Awaiting transmission</p>
+    <footer id="contact" class="container mx-auto px-6 py-32 relative">
+        <div class="text-center mb-20">
+            <h2 class="font-orbitron text-5xl font-black mb-6 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">INITIATE_HANDSHAKE</h2>
+            <p class="text-[#00f2ff] font-bold tracking-[0.4em] uppercase text-sm typing-cursor">Awaiting Secure Transmission</p>
         </div>
         
-        <div class="grid md:grid-cols-3 gap-8 text-center max-w-4xl mx-auto">
-            <div class="p-8 border border-white/5 hover:border-[#00f2ff] transition">
-                <i data-lucide="map-pin" class="mx-auto mb-4 text-[#00f2ff]"></i>
-                <p class="text-xs text-gray-500 uppercase mb-2">Location</p>
-                <p class="font-bold tracking-widest uppercase">Mau</p>
-            </div>
-            <div class="p-8 border border-white/5 hover:border-[#00f2ff] transition">
-                <i data-lucide="phone" class="mx-auto mb-4 text-[#00f2ff]"></i>
-                <p class="text-xs text-gray-500 uppercase mb-2">Direct</p>
-                <p class="font-bold tracking-widest">8448527162</p>
-            </div>
-            <div class="p-8 border border-white/5 hover:border-[#00f2ff] transition">
-                <i data-lucide="at-sign" class="mx-auto mb-4 text-[#00f2ff]"></i>
-                <p class="text-xs text-gray-500 uppercase mb-2">Email</p>
-                <p class="font-bold text-sm">osaidtheshahid@gmail.com</p>
-            </div>
+        <!-- Fully Clickable Contact Grid -->
+        <div class="grid md:grid-cols-3 gap-8 text-center max-w-5xl mx-auto">
+            
+            <!-- Location (Map link) -->
+            <a href="https://maps.google.com/?q=Mau,Uttar+Pradesh,India" target="_blank" rel="noopener noreferrer" class="group block p-10 bg-black/40 border border-white/10 hover:border-[#bc13fe] hover:bg-[#bc13fe]/5 hover:shadow-[0_0_30px_rgba(188,19,254,0.2)] transition duration-500 rounded-xl relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#bc13fe]/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                <i data-lucide="map" class="mx-auto mb-6 text-gray-600 group-hover:text-[#bc13fe] w-12 h-12 transition duration-500"></i>
+                <p class="text-xs text-[#00f2ff] font-bold tracking-[0.2em] uppercase mb-3">Server Location</p>
+                <p class="font-black text-xl tracking-widest uppercase">Mau, UP, IND</p>
+            </a>
+
+            <!-- Phone (Tel link) -->
+            <a href="tel:+918448527162" class="group block p-10 bg-black/40 border border-white/10 hover:border-[#39FF14] hover:bg-[#39FF14]/5 hover:shadow-[0_0_30px_rgba(57,255,20,0.1)] transition duration-500 rounded-xl relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#39FF14]/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                <i data-lucide="phone-terminal" class="mx-auto mb-6 text-gray-600 group-hover:text-[#39FF14] w-12 h-12 transition duration-500"></i>
+                <p class="text-xs text-[#00f2ff] font-bold tracking-[0.2em] uppercase mb-3">Direct Comms</p>
+                <p class="font-black text-xl tracking-widest">+91 8448527162</p>
+            </a>
+
+            <!-- Email (Mailto link) -->
+            <a href="mailto:osaidtheshahid@gmail.com" class="group block p-10 bg-black/40 border border-white/10 hover:border-[#00f2ff] hover:bg-[#00f2ff]/5 hover:shadow-[0_0_30px_rgba(0,242,255,0.2)] transition duration-500 rounded-xl relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#00f2ff]/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                <i data-lucide="mail" class="mx-auto mb-6 text-gray-600 group-hover:text-[#00f2ff] w-12 h-12 transition duration-500"></i>
+                <p class="text-xs text-[#00f2ff] font-bold tracking-[0.2em] uppercase mb-3">SMTP Protocol</p>
+                <p class="font-black text-sm tracking-widest">osaidtheshahid@gmail.com</p>
+            </a>
         </div>
 
-        <div class="mt-24 pt-12 border-t border-white/5 text-center text-[10px] text-gray-700 tracking-[0.5em] uppercase">
-            DESIGNED & BUILT BY OSAID SHAHID · © 2026
+        <div class="mt-32 pt-12 border-t border-white/10 text-center flex flex-col items-center gap-6">
+            <div class="flex gap-8">
+                <a href="https://www.linkedin.com/in/osaid-shahid-442599223/" target="_blank" rel="noopener noreferrer" class="social-link"><i data-lucide="linkedin" class="w-8 h-8"></i></a>
+                <a href="https://www.instagram.com/osaid_shahid" target="_blank" rel="noopener noreferrer" class="social-link"><i data-lucide="instagram" class="w-8 h-8"></i></a>
+            </div>
+            <p class="text-[10px] text-gray-600 font-bold tracking-[0.5em] uppercase">
+                SYSTEM ARCHITECTURE BY OSAID SHAHID · KERNEL VERSION 3.0.26
+            </p>
         </div>
     </footer>
 
@@ -284,26 +456,42 @@
         // Initialize Icons
         lucide.createIcons();
 
-        // Initialize Particles Background
+        // Initialize Magical Particles Background
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 70, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#00f2ff" },
+                "number": { "value": 100, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": ["#00f2ff", "#bc13fe", "#39FF14"] }, // Multi-color magic
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.3, "random": false },
-                "size": { "value": 1.5, "random": true },
+                "opacity": { 
+                    "value": 0.5, 
+                    "random": true,
+                    "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false }
+                },
+                "size": { 
+                    "value": 2.5, 
+                    "random": true,
+                    "anim": { "enable": true, "speed": 2, "size_min": 0.1, "sync": false }
+                },
                 "line_linked": {
                     "enable": true,
                     "distance": 150,
                     "color": "#00f2ff",
-                    "opacity": 0.1,
+                    "opacity": 0.15,
                     "width": 1
                 },
-                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+                "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
             },
             "interactivity": {
                 "detect_on": "canvas",
-                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true }
+                "events": { 
+                    "onhover": { "enable": true, "mode": "bubble" }, // Magical bubble effect on hover
+                    "onclick": { "enable": true, "mode": "repulse" }, 
+                    "resize": true 
+                },
+                "modes": {
+                    "bubble": { "distance": 200, "size": 6, "duration": 2, "opacity": 1, "speed": 3 },
+                    "repulse": { "distance": 200, "duration": 0.4 }
+                }
             },
             "retina_detect": true
         });
