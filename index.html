@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Viewport tag updated to ensure strict mobile fitting -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Osaid Shahid | Cloud & Systems Architect</title>
     
     <!-- External Assets -->
@@ -14,433 +13,360 @@
 
     <style>
         :root {
-            --neon-cyan: #00f2ff;
-            --neon-purple: #bc13fe;
-            --neon-green: #39FF14;
-            --dark-bg: #030305;
+            --bg-color: #050505;
+            --accent-cyan: #00f2ff;
+            --accent-purple: #bc13fe;
+            --text-gray: #a0a0a0;
         }
 
-        /* STRICT MOBILE OVERFLOW FIX */
-        html, body {
-            background-color: var(--dark-bg);
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            background-color: var(--bg-color);
             color: white;
             font-family: 'JetBrains Mono', monospace;
-            scroll-behavior: smooth;
-            max-width: 100vw;
             overflow-x: hidden;
             width: 100%;
+            scroll-behavior: smooth;
         }
 
-        /* Galaxy Background Style */
+        /* Particle Background */
         #particles-js {
             position: fixed;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            /* Deep Space Nebula Gradient */
-            background: radial-gradient(circle at 50% 50%, #1a0b2e 0%, #080812 60%, #000000 100%);
         }
 
-        .grid-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: linear-gradient(rgba(0, 242, 255, 0.015) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(0, 242, 255, 0.015) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
-            pointer-events: none;
-            animation: panBg 30s linear infinite;
-        }
-
-        @keyframes panBg {
-            0% { background-position: 0 0; }
-            100% { background-position: 50px 50px; }
-        }
-
-        /* Typography & Blinking Effects */
+        /* Typography */
         .font-orbitron { font-family: 'Orbitron', sans-serif; }
         
-        .glow-text-cyan { 
-            color: var(--neon-cyan);
-            animation: pulse-glow 3s infinite alternate;
+        .heading-glow {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.4);
         }
 
-        @keyframes pulse-glow { 
-            0%, 100% { text-shadow: 0 0 10px rgba(0, 242, 255, 0.8), 0 0 20px rgba(0, 242, 255, 0.4); } 
-            50% { text-shadow: 0 0 2px rgba(0, 242, 255, 0.3), 0 0 5px rgba(0, 242, 255, 0.1); } 
-        }
-
-        /* Blinking Terminal Cursor */
-        .typing-cursor::after {
-            content: '█';
-            color: var(--neon-cyan);
-            animation: blink 1s step-end infinite;
-            margin-left: 5px;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        /* Mobile-Safe Text Glitch */
-        .glitch-safe {
-            animation: text-glitch-anim 4s infinite linear alternate-reverse;
-            display: inline-block;
-        }
-
-        @keyframes text-glitch-anim {
-            0% { text-shadow: 2px 2px var(--neon-cyan), -2px -2px var(--neon-purple); transform: skewX(0deg); }
-            5% { text-shadow: -2px 2px var(--neon-cyan), 2px -2px var(--neon-purple); transform: skewX(1deg); }
-            10% { text-shadow: 2px -2px var(--neon-cyan), -2px 2px var(--neon-purple); transform: skewX(-1deg); }
-            15% { text-shadow: 0 0 10px var(--neon-cyan); transform: skewX(0deg); }
-            100% { text-shadow: 0 0 10px var(--neon-cyan); transform: skewX(0deg); }
-        }
-
-        /* Cyber Buttons */
+        /* Exact Button from Reference */
         .btn-cyber {
-            position: relative;
-            background: rgba(0, 242, 255, 0.05);
-            border: 1px solid var(--neon-cyan);
-            color: var(--neon-cyan);
-            padding: 12px 35px;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 3px;
-            clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            overflow: hidden;
-        }
-
-        .btn-cyber::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.4), transparent);
-            transition: 0.5s;
-        }
-
-        .btn-cyber:hover::before {
-            left: 100%;
+            padding: 14px 32px;
+            background: rgba(0, 242, 255, 0.05);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
+            transition: 0.3s ease;
+            font-size: 0.875rem;
         }
 
         .btn-cyber:hover {
-            background: var(--neon-cyan);
+            background: var(--accent-cyan);
             color: black;
-            box-shadow: 0 0 25px var(--neon-cyan);
-            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.6);
         }
 
-        /* Premium Animated Cards */
-        .premium-card {
-            position: relative;
-            background: rgba(15, 15, 15, 0.6);
-            backdrop-filter: blur(10px);
+        /* Cards and Borders */
+        .tech-card {
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-left: 3px solid var(--neon-purple);
-            transition: 0.4s;
-            overflow: hidden;
-            z-index: 1;
+            transition: 0.3s ease;
         }
 
-        .premium-card::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(45deg, transparent, rgba(188, 19, 254, 0.05), transparent);
-            z-index: -1;
-            transition: 0.4s opacity;
-            opacity: 0;
+        .tech-card:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(0, 242, 255, 0.02);
         }
 
-        .premium-card:hover {
-            border-left: 3px solid var(--neon-cyan);
-            box-shadow: 0 10px 30px -10px rgba(0, 242, 255, 0.2);
-            transform: translateY(-5px);
+        .timeline-border {
+            border-left: 2px solid var(--accent-purple);
         }
 
-        .premium-card:hover::after {
-            opacity: 1;
+        .timeline-border:hover {
+            border-left-color: var(--accent-cyan);
         }
 
-        /* Social Link Hover States */
-        .social-link {
-            position: relative;
-            color: #888;
-            transition: 0.3s;
+        /* Mobile specific overrides to prevent overflow */
+        @media (max-width: 640px) {
+            h1 { word-wrap: break-word; }
+            .container { padding-left: 1rem; padding-right: 1rem; }
         }
-        
-        .social-link:hover {
-            color: var(--neon-cyan);
-            filter: drop-shadow(0 0 8px var(--neon-cyan));
-            transform: translateY(-3px);
-        }
-        
-        /* Utility for long emails on mobile */
-        .break-all { word-break: break-all; }
     </style>
 </head>
-<body>
+<body class="antialiased">
 
-    <!-- Moving Galaxy Background -->
+    <!-- Moving Background (Exact Style from azhad56) -->
     <div id="particles-js"></div>
-    <div class="grid-overlay"></div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 p-4 md:p-6 flex justify-between items-center bg-black/80 backdrop-blur-xl border-b border-white/10">
-        <div class="font-orbitron text-xl md:text-2xl font-black tracking-tighter">
-            OSAID<span class="text-[#00f2ff] animate-pulse">.sys</span>
+    <nav class="fixed top-0 w-full z-50 px-6 py-5 flex justify-between items-center bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="font-orbitron text-xl md:text-2xl font-bold tracking-widest">
+            OSAID<span class="text-[#00f2ff]">.dev</span>
         </div>
         
         <!-- Desktop Menu -->
-        <div class="hidden md:flex gap-10 text-xs font-bold tracking-[0.2em] uppercase">
-            <a href="#hero" class="hover:text-[#00f2ff] transition duration-300">Architecture</a>
-            <a href="#experience" class="hover:text-[#00f2ff] transition duration-300">Deployments</a>
-            <a href="#skills" class="hover:text-[#00f2ff] transition duration-300">Tech Stack</a>
-            <a href="#contact" class="hover:text-[#00f2ff] transition duration-300">Network</a>
+        <div class="hidden md:flex gap-8 text-xs font-bold tracking-[0.2em] uppercase text-gray-300">
+            <a href="#about" class="hover:text-[#00f2ff] transition">Identity</a>
+            <a href="#experience" class="hover:text-[#00f2ff] transition">Deployments</a>
+            <a href="#skills" class="hover:text-[#00f2ff] transition">Stack</a>
+            <a href="#contact" class="hover:text-[#00f2ff] transition">Contact</a>
         </div>
 
         <!-- Mobile Menu Button -->
-        <button id="mobile-menu-btn" class="md:hidden text-[#00f2ff] hover:text-white transition">
-            <i data-lucide="menu" class="w-8 h-8"></i>
+        <button id="mobile-menu-btn" class="md:hidden text-[#00f2ff]">
+            <i data-lucide="menu" class="w-7 h-7"></i>
         </button>
     </nav>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-3xl z-40 hidden flex-col justify-center items-center gap-8 text-xl md:text-2xl font-orbitron font-bold tracking-[0.2em] uppercase transition-all duration-300">
-        <button id="mobile-menu-close" class="absolute top-6 right-6 text-[#bc13fe] hover:text-[#00f2ff] transition">
-            <i data-lucide="x" class="w-10 h-10"></i>
+    <div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-40 hidden flex-col justify-center items-center gap-8 text-lg font-orbitron font-bold tracking-[0.2em] uppercase transition-all">
+        <button id="mobile-menu-close" class="absolute top-6 right-6 text-[#bc13fe]">
+            <i data-lucide="x" class="w-8 h-8"></i>
         </button>
-        <a href="#hero" class="mobile-link hover:text-[#00f2ff] hover:scale-110 transition duration-300">Architecture</a>
-        <a href="#experience" class="mobile-link hover:text-[#00f2ff] hover:scale-110 transition duration-300">Deployments</a>
-        <a href="#skills" class="mobile-link hover:text-[#00f2ff] hover:scale-110 transition duration-300">Tech Stack</a>
-        <a href="#contact" class="mobile-link hover:text-[#00f2ff] hover:scale-110 transition duration-300">Network</a>
+        <a href="#about" class="mobile-link text-gray-300 hover:text-[#00f2ff]">Identity</a>
+        <a href="#experience" class="mobile-link text-gray-300 hover:text-[#00f2ff]">Deployments</a>
+        <a href="#skills" class="mobile-link text-gray-300 hover:text-[#00f2ff]">Tech Stack</a>
+        <a href="#contact" class="mobile-link text-gray-300 hover:text-[#00f2ff]">Contact</a>
     </div>
 
     <!-- Hero Section -->
-    <section id="hero" class="container mx-auto px-5 pt-32 pb-16 md:pt-40 md:pb-20 min-h-screen flex flex-col justify-center w-full">
-        <div class="max-w-5xl">
-            <div class="flex items-center gap-3 mb-6 md:mb-8">
-                <div class="h-[2px] w-8 md:w-16 bg-[#39FF14] shadow-[0_0_10px_#39FF14]"></div>
-                <p class="text-[#39FF14] text-[10px] sm:text-xs md:text-sm font-bold tracking-[0.2em] md:tracking-[0.5em] uppercase typing-cursor">ENTERPRISE CLOUD ARCHITECT</p>
+    <section id="about" class="container mx-auto px-4 pt-32 pb-16 md:pt-48 md:pb-24 min-h-screen flex flex-col justify-center">
+        <div class="max-w-4xl w-full">
+            
+            <div class="flex items-center gap-4 mb-6">
+                <div class="h-[2px] w-12 bg-[#39FF14]"></div>
+                <p class="text-[#39FF14] text-xs md:text-sm font-bold tracking-[0.2em] md:tracking-[0.4em] uppercase">
+                    // Cloud Infrastructure Architect
+                </p>
             </div>
 
-            <!-- Fixed mobile glitch overflow by replacing with glitch-safe text shadow -->
-            <h1 class="font-orbitron text-5xl sm:text-7xl md:text-9xl font-black leading-tight md:leading-none mb-6">
-                <span class="glitch-safe">OSAID</span> <br>
-                <span class="glow-text-cyan glitch-safe">SHAHID</span>
+            <h1 class="font-orbitron text-5xl sm:text-6xl md:text-8xl font-black leading-tight mb-6">
+                Osaid <br>
+                <span class="heading-glow">Shahid</span>
             </h1>
 
-            <p class="text-[#bc13fe] font-bold text-[10px] sm:text-sm md:text-xl mb-8 md:mb-10 tracking-[0.1em] md:tracking-[0.3em] uppercase drop-shadow-[0_0_8px_rgba(188,19,254,0.5)]">
+            <p class="text-[#bc13fe] font-bold text-xs sm:text-sm md:text-lg mb-8 tracking-[0.1em] md:tracking-[0.2em] uppercase">
                 [ AZ-104 · AZ-900 · MD-102 · DACH GERMAN C1 ]
             </p>
 
-            <p class="text-gray-300 max-w-2xl text-sm sm:text-base md:text-xl leading-relaxed mb-10 md:mb-14 border-l-4 border-[#00f2ff] pl-4 md:pl-8 bg-gradient-to-r from-[#00f2ff]/10 to-transparent py-3 md:py-4">
-                Engineering high-availability cloud ecosystems and zero-trust identity frameworks. 
-                Specialized in architecting Microsoft Entra deployments, automating Intune MDM pipelines, 
-                and securing enterprise network topologies.
+            <p class="text-gray-400 max-w-2xl text-sm md:text-lg leading-relaxed mb-12">
+                High-tier Cloud Operations Engineer specializing in Microsoft Entra, Azure ecosystem deployments, and Enterprise Intune architecture. Expert in engineering complex corporate networks and maintaining enterprise system integrity.
             </p>
 
-            <div class="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-10 items-stretch sm:items-center w-full">
-                <a href="#experience" class="btn-cyber w-full sm:w-auto text-center">
-                    Access Schematics <i data-lucide="chevron-right" class="w-5 h-5"></i>
-                </a>
-                
-                <!-- Highly Visible, Clickable Social Links -->
-                <div class="flex gap-6 md:gap-8 border border-white/10 p-4 rounded-lg bg-white/5 backdrop-blur-sm w-full sm:w-auto justify-center">
-                    <a href="https://www.linkedin.com/in/osaid-shahid-442599223/" target="_blank" rel="noopener noreferrer" class="social-link flex items-center gap-2 text-xs md:text-sm font-bold tracking-widest uppercase">
-                        <i data-lucide="linkedin"></i> LinkedIn
-                    </a>
-                    <a href="https://www.instagram.com/osaid_shahid" target="_blank" rel="noopener noreferrer" class="social-link flex items-center gap-2 text-xs md:text-sm font-bold tracking-widest uppercase">
-                        <i data-lucide="instagram"></i> Instagram
-                    </a>
+            <!-- Exact Stats Grid from Reference -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-12 border-l border-white/10 pl-4 md:pl-8">
+                <div>
+                    <h2 class="font-orbitron text-3xl md:text-5xl text-[#00f2ff] font-bold mb-1">4.0</h2>
+                    <p class="text-[10px] md:text-xs text-gray-500 tracking-widest uppercase">Years Exp.</p>
                 </div>
+                <div>
+                    <h2 class="font-orbitron text-3xl md:text-5xl text-[#00f2ff] font-bold mb-1">3</h2>
+                    <p class="text-[10px] md:text-xs text-gray-500 tracking-widest uppercase">Certifications</p>
+                </div>
+                <div>
+                    <h2 class="font-orbitron text-3xl md:text-5xl text-[#00f2ff] font-bold mb-1">2+</h2>
+                    <p class="text-[10px] md:text-xs text-gray-500 tracking-widest uppercase">Enterprises</p>
+                </div>
+                <div>
+                    <h2 class="font-orbitron text-3xl md:text-5xl text-[#00f2ff] font-bold mb-1">15</h2>
+                    <p class="text-[10px] md:text-xs text-gray-500 tracking-widest uppercase">Tech Stack+</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+                <a href="#experience" class="btn-cyber w-full sm:w-auto">View Deployments</a>
+                <a href="#contact" class="text-gray-400 hover:text-[#00f2ff] text-sm tracking-widest uppercase font-bold transition flex items-center gap-2">
+                    Get In Touch <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="container mx-auto px-5 py-20 md:py-32 relative w-full">
-        <div class="absolute top-40 right-10 w-64 h-64 md:w-96 md:h-96 bg-[#bc13fe]/10 rounded-full blur-[100px] pointer-events-none"></div>
-
-        <h2 class="font-orbitron text-2xl md:text-5xl mb-12 md:mb-16 text-[#bc13fe] flex items-center gap-3 md:gap-6 drop-shadow-[0_0_15px_rgba(188,19,254,0.4)] break-words">
-            <span class="text-white/20 font-black">01 //</span> SYSTEM_DEPLOYMENTS
-        </h2>
+    <!-- Experience Section (Clean Timeline) -->
+    <section id="experience" class="container mx-auto px-4 py-20 md:py-32 border-t border-white/5">
+        <div class="mb-16">
+            <h2 class="font-orbitron text-2xl md:text-4xl text-white font-bold flex items-center gap-4">
+                <span class="text-gray-600 font-normal">01 //</span> Deployments
+            </h2>
+        </div>
         
-        <div class="space-y-8 md:space-y-10 max-w-5xl relative z-10 w-full">
+        <div class="space-y-8 max-w-4xl">
             <!-- Accenture -->
-            <div class="premium-card p-5 md:p-10 w-full">
-                <div class="flex flex-col md:flex-row justify-between mb-6 border-b border-white/10 pb-4 gap-4">
+            <div class="tech-card p-6 md:p-8 timeline-border rounded-sm">
+                <div class="flex flex-col md:flex-row justify-between mb-4 gap-2">
                     <div>
-                        <h3 class="text-[#00f2ff] font-black text-lg md:text-2xl tracking-widest uppercase drop-shadow-[0_0_5px_rgba(0,242,255,0.5)] leading-tight">Senior Cloud Solutions Architect</h3>
-                        <p class="text-white font-bold tracking-widest mt-2 uppercase text-[10px] md:text-sm"><i data-lucide="building" class="inline w-3 h-3 md:w-4 md:h-4 mr-2"></i>Accenture | Gurugram</p>
+                        <h3 class="text-[#00f2ff] font-bold text-lg md:text-xl tracking-widest uppercase">Cloud Infrastructure Engineer</h3>
+                        <p class="text-gray-300 font-bold text-xs md:text-sm mt-1 uppercase">Accenture | Gurugram</p>
                     </div>
-                    <div class="text-left md:text-right mt-2 md:mt-0">
-                        <p class="text-[#39FF14] font-black text-[10px] md:text-sm tracking-widest bg-[#39FF14]/10 px-3 py-2 inline-block border border-[#39FF14]/30">11/2024 — PRESENT</p>
+                    <div class="text-left md:text-right">
+                        <p class="text-gray-500 font-bold text-xs tracking-widest uppercase">11/2024 — PRESENT</p>
                     </div>
                 </div>
-                <ul class="text-gray-300 text-xs md:text-base space-y-3 md:space-y-4 list-square ml-4 font-light tracking-wide leading-relaxed">
-                    <li><strong class="text-white font-bold">Cloud Architecture:</strong> Engineered and deployed high-availability, scalable enterprise cloud architectures for Fortune 500 clients across the DACH region (German C1).</li>
-                    <li><strong class="text-white font-bold">Identity & Access:</strong> Architected zero-trust security models via Microsoft Entra (Azure AD), managing complex RBAC and enterprise lifecycle provisioning.</li>
-                    <li><strong class="text-white font-bold">Network Topology:</strong> Orchestrated secure corporate network pipelines, engineering advanced DHCP/DNS topologies and securing hardware endpoints.</li>
-                    <li><strong class="text-white font-bold">System Optimization:</strong> Engineered automated remediation pipelines for high-level Windows enterprise architectures to ensure 99.9% system uptime.</li>
+                <ul class="text-gray-400 text-sm space-y-3 list-disc ml-4 leading-relaxed">
+                    <li>Architected zero-trust security models via Microsoft Entra (Azure AD), managing complex RBAC and enterprise lifecycle provisioning.</li>
+                    <li>Engineered and deployed high-availability, scalable enterprise cloud architectures for Fortune 500 clients across the DACH region (German C1).</li>
+                    <li>Orchestrated secure corporate network pipelines, engineering advanced DHCP/DNS topologies and securing hardware endpoints.</li>
+                    <li>Engineered automated remediation pipelines for high-level Windows enterprise architectures to ensure 99.9% system uptime.</li>
                 </ul>
             </div>
 
             <!-- ITC Infotech -->
-            <div class="premium-card p-5 md:p-10 w-full">
-                <div class="flex flex-col md:flex-row justify-between mb-6 border-b border-white/10 pb-4 gap-4">
+            <div class="tech-card p-6 md:p-8 timeline-border rounded-sm">
+                <div class="flex flex-col md:flex-row justify-between mb-4 gap-2">
                     <div>
-                        <h3 class="text-[#00f2ff] font-black text-lg md:text-2xl tracking-widest uppercase drop-shadow-[0_0_5px_rgba(0,242,255,0.5)] leading-tight">Enterprise Systems Engineer</h3>
-                        <p class="text-white font-bold tracking-widest mt-2 uppercase text-[10px] md:text-sm"><i data-lucide="server" class="inline w-3 h-3 md:w-4 md:h-4 mr-2"></i>ITC Infotech | Bengaluru</p>
+                        <h3 class="text-[#00f2ff] font-bold text-lg md:text-xl tracking-widest uppercase">Enterprise Systems Engineer</h3>
+                        <p class="text-gray-300 font-bold text-xs md:text-sm mt-1 uppercase">ITC Infotech | Bengaluru</p>
                     </div>
-                    <div class="text-left md:text-right mt-2 md:mt-0">
-                        <p class="text-gray-400 font-bold text-[10px] md:text-sm tracking-widest border border-white/20 px-3 py-2 inline-block">04/2024 — 11/2024</p>
+                    <div class="text-left md:text-right">
+                        <p class="text-gray-500 font-bold text-xs tracking-widest uppercase">04/2024 — 11/2024</p>
                     </div>
                 </div>
-                <ul class="text-gray-300 text-xs md:text-base space-y-3 md:space-y-4 list-square ml-4 font-light tracking-wide leading-relaxed">
-                    <li><strong class="text-white font-bold">Hybrid Ecosystems:</strong> Administered large-scale hybrid cloud infrastructure, integrating Windows Server ecosystems with Microsoft 365 environments.</li>
-                    <li><strong class="text-white font-bold">Endpoint Management:</strong> Automated zero-touch provisioning and lifecycle management of enterprise devices utilizing Microsoft Intune and Azure automation.</li>
-                    <li><strong class="text-white font-bold">Infrastructure routing:</strong> Executed advanced network operations, including IP subnetting, routing, and high-tier hardware integrations.</li>
-                    <li><strong class="text-white font-bold">Enterprise Tooling:</strong> Administered mission-critical frameworks via Active Roles Server (ARS), ServiceNow, and Bomgar for enterprise-wide deployments.</li>
+                <ul class="text-gray-400 text-sm space-y-3 list-disc ml-4 leading-relaxed">
+                    <li>Administered large-scale hybrid cloud infrastructure, integrating Windows Server ecosystems with Microsoft 365 environments.</li>
+                    <li>Automated zero-touch provisioning and lifecycle management of enterprise devices utilizing Microsoft Intune and Azure automation.</li>
+                    <li>Executed advanced network operations, including IP subnetting, routing, and high-tier hardware integrations.</li>
+                    <li>Administered mission-critical frameworks via Active Roles Server (ARS), ServiceNow, and Bomgar for enterprise-wide deployments.</li>
                 </ul>
             </div>
 
             <!-- Wipro -->
-            <div class="premium-card p-5 md:p-10 w-full">
-                <div class="flex flex-col md:flex-row justify-between mb-6 border-b border-white/10 pb-4 gap-4">
+            <div class="tech-card p-6 md:p-8 timeline-border rounded-sm">
+                <div class="flex flex-col md:flex-row justify-between mb-4 gap-2">
                     <div>
-                        <h3 class="text-[#00f2ff] font-black text-lg md:text-2xl tracking-widest uppercase drop-shadow-[0_0_5px_rgba(0,242,255,0.5)] leading-tight">Systems Integration Engineer</h3>
-                        <p class="text-white font-bold tracking-widest mt-2 uppercase text-[10px] md:text-sm"><i data-lucide="cpu" class="inline w-3 h-3 md:w-4 md:h-4 mr-2"></i>Wipro Limited | Hyderabad</p>
+                        <h3 class="text-[#00f2ff] font-bold text-lg md:text-xl tracking-widest uppercase">Systems Integration Engineer</h3>
+                        <p class="text-gray-300 font-bold text-xs md:text-sm mt-1 uppercase">Wipro Limited | Hyderabad</p>
                     </div>
-                    <div class="text-left md:text-right mt-2 md:mt-0">
-                        <p class="text-gray-400 font-bold text-[10px] md:text-sm tracking-widest border border-white/20 px-3 py-2 inline-block">12/2021 — 09/2023</p>
+                    <div class="text-left md:text-right">
+                        <p class="text-gray-500 font-bold text-xs tracking-widest uppercase">12/2021 — 09/2023</p>
                     </div>
                 </div>
-                <ul class="text-gray-300 text-xs md:text-base space-y-3 md:space-y-4 list-square ml-4 font-light tracking-wide leading-relaxed">
-                    <li><strong class="text-white font-bold">Platform Integration:</strong> Directed technical architecture for Google Accessibility platforms localized specifically for the German (DACH) enterprise market.</li>
-                    <li><strong class="text-white font-bold">Compliance Architecture:</strong> Engineered robust web accessibility pipelines ensuring strict adherence to global WCAG standards using NVDA analysis.</li>
-                    <li><strong class="text-white font-bold">System Optimization:</strong> Engineered system-level modifications for Android enterprise integrations, optimizing assistive technology protocols at scale.</li>
+                <ul class="text-gray-400 text-sm space-y-3 list-disc ml-4 leading-relaxed">
+                    <li>Directed technical architecture for Google Accessibility platforms localized specifically for the German (DACH) enterprise market.</li>
+                    <li>Engineered robust web accessibility pipelines ensuring strict adherence to global WCAG standards using NVDA analysis.</li>
+                    <li>Engineered system-level modifications for Android enterprise integrations, optimizing assistive technology protocols at scale.</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- Skills & Certs -->
-    <section id="skills" class="container mx-auto px-5 py-20 md:py-32 bg-[#050505] border-y border-white/5 relative overflow-hidden w-full">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-[#00f2ff] to-transparent opacity-50"></div>
+    <!-- Skills & Certifications -->
+    <section id="skills" class="container mx-auto px-4 py-20 md:py-32 border-t border-white/5">
+        <div class="mb-16">
+            <h2 class="font-orbitron text-2xl md:text-4xl text-white font-bold flex items-center gap-4">
+                <span class="text-gray-600 font-normal">02 //</span> Capabilities
+            </h2>
+        </div>
         
-        <div class="grid lg:grid-cols-2 gap-12 md:gap-20 max-w-6xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-12 md:gap-20 max-w-5xl">
+            <!-- Skills -->
             <div>
-                <h2 class="font-orbitron text-2xl md:text-3xl mb-8 md:mb-10 text-[#39FF14] drop-shadow-[0_0_10px_rgba(57,255,20,0.3)]"><i data-lucide="terminal" class="inline w-5 h-5 md:w-6 md:h-6 mb-1 mr-2 md:mr-3"></i>CORE_STACK</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8 text-xs md:text-sm w-full">
-                    <div class="bg-black/50 p-5 md:p-6 border border-white/10 hover:border-[#00f2ff] transition duration-300">
-                        <p class="text-[#00f2ff] font-black text-sm md:text-lg mb-4 tracking-widest">CLOUD & IDENTITY</p>
-                        <ul class="text-gray-400 space-y-3 font-bold">
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-[#00f2ff]"></div> Microsoft Entra</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-[#00f2ff]"></div> Intune (MDM/MAM)</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-[#00f2ff]"></div> Azure Architecture</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-[#00f2ff]"></div> Office 365 Admin</li>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 text-sm">
+                    <div class="tech-card p-6">
+                        <p class="text-[#00f2ff] font-bold text-lg mb-4 tracking-widest uppercase">Cloud & Identity</p>
+                        <ul class="text-gray-400 space-y-2">
+                            <li>Microsoft Entra (Azure AD)</li>
+                            <li>Intune (MDM/MAM)</li>
+                            <li>Azure Architecture</li>
+                            <li>Office 365 Admin</li>
                         </ul>
                     </div>
-                    <div class="bg-black/50 p-5 md:p-6 border border-white/10 hover:border-[#00f2ff] transition duration-300">
-                        <p class="text-[#00f2ff] font-black text-sm md:text-lg mb-4 tracking-widest">INFRASTRUCTURE</p>
-                        <ul class="text-gray-400 space-y-3 font-bold">
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-[#bc13fe]"></div> DHCP/DNS Topology</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-[#bc13fe]"></div> Linux Ecosystems</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-[#bc13fe]"></div> Windows Server Core</li>
-                            <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-[#bc13fe]"></div> WCAG Engineering</li>
+                    <div class="tech-card p-6">
+                        <p class="text-[#00f2ff] font-bold text-lg mb-4 tracking-widest uppercase">Infrastructure</p>
+                        <ul class="text-gray-400 space-y-2">
+                            <li>DHCP/DNS Topology</li>
+                            <li>Linux Ecosystems</li>
+                            <li>Windows Server Core</li>
+                            <li>WCAG Engineering</li>
                         </ul>
                     </div>
                 </div>
             </div>
             
+            <!-- Certs -->
             <div>
-                <h2 class="font-orbitron text-2xl md:text-3xl mb-8 md:mb-10 text-[#bc13fe] drop-shadow-[0_0_10px_rgba(188,19,254,0.3)]"><i data-lucide="award" class="inline w-5 h-5 md:w-6 md:h-6 mb-1 mr-2 md:mr-3"></i>CERTIFICATIONS</h2>
-                <div class="space-y-4 md:space-y-6 w-full">
-                    <div class="group flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2 md:gap-4 bg-black/40 p-5 md:p-6 border border-white/10 hover:bg-white/5 hover:border-[#bc13fe] transition duration-500 cursor-default">
+                <div class="space-y-4 w-full">
+                    <div class="tech-card p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                         <div>
-                            <span class="text-[8px] md:text-[10px] text-[#00f2ff] font-black tracking-[0.2em] uppercase block mb-1">Microsoft Architecture</span>
-                            <span class="font-black text-sm md:text-lg text-white tracking-wider">Azure Administrator</span>
+                            <span class="text-[10px] text-gray-500 tracking-widest uppercase block mb-1">Microsoft Architecture</span>
+                            <span class="font-bold text-white tracking-wider">Azure Administrator</span>
                         </div>
-                        <span class="font-orbitron font-black text-xl md:text-3xl text-gray-700 group-hover:text-[#bc13fe] group-hover:drop-shadow-[0_0_10px_rgba(188,19,254,0.8)] transition duration-300 mt-2 sm:mt-0">AZ-104</span>
+                        <span class="font-orbitron font-bold text-xl text-[#bc13fe]">AZ-104</span>
                     </div>
                     
-                    <div class="group flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2 md:gap-4 bg-black/40 p-5 md:p-6 border border-white/10 hover:bg-white/5 hover:border-[#bc13fe] transition duration-500 cursor-default">
+                    <div class="tech-card p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                         <div>
-                            <span class="text-[8px] md:text-[10px] text-[#00f2ff] font-black tracking-[0.2em] uppercase block mb-1">Microsoft Architecture</span>
-                            <span class="font-black text-sm md:text-lg text-white tracking-wider">Azure Fundamentals</span>
+                            <span class="text-[10px] text-gray-500 tracking-widest uppercase block mb-1">Microsoft Architecture</span>
+                            <span class="font-bold text-white tracking-wider">Azure Fundamentals</span>
                         </div>
-                        <span class="font-orbitron font-black text-xl md:text-3xl text-gray-700 group-hover:text-[#bc13fe] group-hover:drop-shadow-[0_0_10px_rgba(188,19,254,0.8)] transition duration-300 mt-2 sm:mt-0">AZ-900</span>
+                        <span class="font-orbitron font-bold text-xl text-[#bc13fe]">AZ-900</span>
                     </div>
 
-                    <div class="group flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2 md:gap-4 bg-black/40 p-5 md:p-6 border border-white/10 hover:bg-white/5 hover:border-[#bc13fe] transition duration-500 cursor-default">
+                    <div class="tech-card p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                         <div>
-                            <span class="text-[8px] md:text-[10px] text-[#00f2ff] font-black tracking-[0.2em] uppercase block mb-1">Enterprise Deployment</span>
-                            <span class="font-black text-sm md:text-lg text-white tracking-wider">Endpoint Administrator</span>
+                            <span class="text-[10px] text-gray-500 tracking-widest uppercase block mb-1">Enterprise Deployment</span>
+                            <span class="font-bold text-white tracking-wider">Endpoint Administrator</span>
                         </div>
-                        <span class="font-orbitron font-black text-xl md:text-3xl text-gray-700 group-hover:text-[#bc13fe] group-hover:drop-shadow-[0_0_10px_rgba(188,19,254,0.8)] transition duration-300 mt-2 sm:mt-0">MD-102</span>
+                        <span class="font-orbitron font-bold text-xl text-[#bc13fe]">MD-102</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Footer -->
-    <footer id="contact" class="container mx-auto px-5 py-20 md:py-32 relative w-full">
-        <div class="text-center mb-12 md:mb-20">
-            <h2 class="font-orbitron text-2xl md:text-5xl font-black mb-4 md:mb-6 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">INITIATE_HANDSHAKE</h2>
-            <p class="text-[#00f2ff] font-bold tracking-[0.2em] md:tracking-[0.4em] uppercase text-[10px] md:text-sm typing-cursor">Awaiting Secure Transmission</p>
+    <!-- Contact Section -->
+    <section id="contact" class="container mx-auto px-4 py-20 md:py-32 border-t border-white/5">
+        <div class="mb-16">
+            <h2 class="font-orbitron text-2xl md:text-4xl text-white font-bold flex items-center gap-4">
+                <span class="text-gray-600 font-normal">03 //</span> Network
+            </h2>
         </div>
         
-        <!-- Fully Clickable Contact Grid -->
-        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-8 text-center max-w-5xl mx-auto w-full">
-            
-            <!-- Location (Map link) -->
-            <a href="https://maps.google.com/?q=Mau,Uttar+Pradesh,India" target="_blank" rel="noopener noreferrer" class="group block p-6 md:p-10 bg-black/40 border border-white/10 hover:border-[#bc13fe] hover:bg-[#bc13fe]/5 hover:shadow-[0_0_30px_rgba(188,19,254,0.2)] transition duration-500 rounded-xl relative overflow-hidden w-full">
-                <div class="absolute inset-0 bg-gradient-to-t from-[#bc13fe]/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
-                <i data-lucide="map" class="mx-auto mb-4 md:mb-6 text-gray-600 group-hover:text-[#bc13fe] w-8 h-8 md:w-12 md:h-12 transition duration-500"></i>
-                <p class="text-[9px] md:text-xs text-[#00f2ff] font-bold tracking-[0.2em] uppercase mb-2 md:mb-3">Server Location</p>
-                <p class="font-black text-sm md:text-xl tracking-widest uppercase">Mau, UP, IND</p>
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 text-center max-w-4xl">
+            <!-- Location -->
+            <a href="https://maps.google.com/?q=Mau,Uttar+Pradesh,India" target="_blank" rel="noopener noreferrer" class="tech-card block p-8 rounded-sm group">
+                <i data-lucide="map-pin" class="mx-auto mb-4 text-[#00f2ff] group-hover:scale-110 transition"></i>
+                <p class="text-xs text-gray-500 tracking-widest uppercase mb-2">Location</p>
+                <p class="font-bold text-sm tracking-widest uppercase text-white">Mau, UP, IND</p>
             </a>
 
-            <!-- Phone (Tel link) -->
-            <a href="tel:+918448527162" class="group block p-6 md:p-10 bg-black/40 border border-white/10 hover:border-[#39FF14] hover:bg-[#39FF14]/5 hover:shadow-[0_0_30px_rgba(57,255,20,0.1)] transition duration-500 rounded-xl relative overflow-hidden w-full">
-                <div class="absolute inset-0 bg-gradient-to-t from-[#39FF14]/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
-                <i data-lucide="phone-terminal" class="mx-auto mb-4 md:mb-6 text-gray-600 group-hover:text-[#39FF14] w-8 h-8 md:w-12 md:h-12 transition duration-500"></i>
-                <p class="text-[9px] md:text-xs text-[#00f2ff] font-bold tracking-[0.2em] uppercase mb-2 md:mb-3">Direct Comms</p>
-                <p class="font-black text-sm md:text-xl tracking-widest">+91 8448527162</p>
+            <!-- Phone -->
+            <a href="tel:+918448527162" class="tech-card block p-8 rounded-sm group">
+                <i data-lucide="phone" class="mx-auto mb-4 text-[#00f2ff] group-hover:scale-110 transition"></i>
+                <p class="text-xs text-gray-500 tracking-widest uppercase mb-2">Direct Comms</p>
+                <p class="font-bold text-sm tracking-widest text-white">+91 8448527162</p>
             </a>
 
-            <!-- Email (Mailto link) -->
-            <a href="mailto:osaidtheshahid@gmail.com" class="group block p-6 md:p-10 bg-black/40 border border-white/10 hover:border-[#00f2ff] hover:bg-[#00f2ff]/5 hover:shadow-[0_0_30px_rgba(0,242,255,0.2)] transition duration-500 rounded-xl relative overflow-hidden sm:col-span-2 md:col-span-1 w-full">
-                <div class="absolute inset-0 bg-gradient-to-t from-[#00f2ff]/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
-                <i data-lucide="mail" class="mx-auto mb-4 md:mb-6 text-gray-600 group-hover:text-[#00f2ff] w-8 h-8 md:w-12 md:h-12 transition duration-500"></i>
-                <p class="text-[9px] md:text-xs text-[#00f2ff] font-bold tracking-[0.2em] uppercase mb-2 md:mb-3">SMTP Protocol</p>
-                <p class="font-black text-[11px] md:text-sm tracking-widest break-all">osaidtheshahid<br class="md:hidden">@gmail.com</p>
+            <!-- Email -->
+            <a href="mailto:osaidtheshahid@gmail.com" class="tech-card block p-8 rounded-sm group sm:col-span-2 md:col-span-1">
+                <i data-lucide="mail" class="mx-auto mb-4 text-[#00f2ff] group-hover:scale-110 transition"></i>
+                <p class="text-xs text-gray-500 tracking-widest uppercase mb-2">Protocol</p>
+                <p class="font-bold text-[11px] tracking-widest text-white break-all">osaidtheshahid@gmail.com</p>
             </a>
         </div>
+    </section>
 
-        <div class="mt-20 md:mt-32 pt-8 md:pt-12 border-t border-white/10 text-center flex flex-col items-center gap-6">
-            <div class="flex gap-8">
-                <a href="https://www.linkedin.com/in/osaid-shahid-442599223/" target="_blank" rel="noopener noreferrer" class="social-link"><i data-lucide="linkedin" class="w-6 h-6 md:w-8 md:h-8"></i></a>
-                <a href="https://www.instagram.com/osaid_shahid" target="_blank" rel="noopener noreferrer" class="social-link"><i data-lucide="instagram" class="w-6 h-6 md:w-8 md:h-8"></i></a>
-            </div>
-            <p class="text-[8px] md:text-[10px] text-gray-600 font-bold tracking-[0.1em] md:tracking-[0.5em] uppercase px-2 leading-relaxed">
-                SYSTEM ARCHITECTURE BY OSAID SHAHID · KERNEL VERSION 3.0.26
-            </p>
+    <!-- Footer -->
+    <footer class="border-t border-white/5 p-8 text-center flex flex-col items-center gap-6 bg-black/50">
+        <div class="flex gap-8">
+            <a href="https://www.linkedin.com/in/osaid-shahid-442599223/" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-[#00f2ff] transition">
+                <i data-lucide="linkedin" class="w-6 h-6"></i>
+            </a>
+            <a href="https://www.instagram.com/osaid_shahid" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-[#00f2ff] transition">
+                <i data-lucide="instagram" class="w-6 h-6"></i>
+            </a>
         </div>
+        <p class="text-[10px] text-gray-600 font-bold tracking-[0.2em] md:tracking-[0.4em] uppercase">
+            Designed & Built by Osaid Shahid · © 2026
+        </p>
     </footer>
 
     <script>
@@ -456,56 +382,42 @@
         function toggleMenu() {
             mobileMenu.classList.toggle('hidden');
             mobileMenu.classList.toggle('flex');
-            document.body.classList.toggle('overflow-hidden'); // Prevents scrolling while menu is open
+            document.body.classList.toggle('overflow-hidden'); 
         }
 
         mobileMenuBtn.addEventListener('click', toggleMenu);
         mobileMenuClose.addEventListener('click', toggleMenu);
         
-        // Close menu when clicking a link
         mobileLinks.forEach(link => {
             link.addEventListener('click', toggleMenu);
         });
 
-        // Galaxy Stars Background Initialization
+        // Exact Particle Configuration from Reference Site
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 250, "density": { "enable": true, "value_area": 1000 } },
-                "color": { "value": ["#ffffff", "#d4fbff", "#e0c4ff", "#00f2ff"] }, 
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": ["#00f2ff", "#bc13fe"] },
                 "shape": { "type": "circle" },
-                "opacity": { 
-                    "value": 0.9, 
-                    "random": true,
-                    "anim": { "enable": true, "speed": 1.5, "opacity_min": 0.1, "sync": false }
-                },
-                "size": { 
-                    "value": 2.5, 
-                    "random": true,
-                    "anim": { "enable": true, "speed": 2, "size_min": 0.1, "sync": false }
-                },
+                "opacity": { "value": 0.3, "random": false },
+                "size": { "value": 3, "random": true },
                 "line_linked": {
-                    "enable": false // Removes lines for pure stars/galaxy effect
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#00f2ff",
+                    "opacity": 0.1,
+                    "width": 1
                 },
-                "move": { 
-                    "enable": true, 
-                    "speed": 0.3, // Moving very slowly
-                    "direction": "top-right", // Drifting direction
-                    "random": true, 
-                    "straight": false, 
-                    "out_mode": "out", 
-                    "bounce": false 
-                }
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
             },
             "interactivity": {
                 "detect_on": "canvas",
                 "events": { 
-                    "onhover": { "enable": true, "mode": "bubble" },
-                    "onclick": { "enable": true, "mode": "repulse" }, 
+                    "onhover": { "enable": true, "mode": "grab" }, 
+                    "onclick": { "enable": true, "mode": "push" }, 
                     "resize": true 
                 },
                 "modes": {
-                    "bubble": { "distance": 150, "size": 4, "duration": 2, "opacity": 1, "speed": 3 },
-                    "repulse": { "distance": 150, "duration": 0.4 }
+                    "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } }
                 }
             },
             "retina_detect": true
