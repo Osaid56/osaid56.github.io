@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Osaid Shahid - App/Cloud Technical Support & German Language Expert">
-    <meta name="theme-color" content="#fcfcfc">
+    <meta name="description" content="Osaid Shahid - App/Cloud Technical Support & Systems Administrator">
+    <meta name="theme-color" content="#030305">
     <title>Osaid Shahid | Premium Technical Professional</title>
     
     <!-- Tailwind CSS for utility scaffolding -->
@@ -20,50 +20,43 @@
            01. ENTERPRISE DESIGN SYSTEM & CSS VARIABLES
            ========================================================================== */
         :root {
-            /* Perplexity/Comet Inspired Light Premium Palette */
-            --bg-base: #fcfcfc;
-            --bg-surface: #ffffff;
-            --bg-surface-glass: rgba(255, 255, 255, 0.75);
-            --bg-surface-glass-hover: rgba(255, 255, 255, 0.9);
+            /* Premium Dark Cosmos Palette */
+            --bg-base: #030305;
+            --bg-surface: rgba(15, 15, 20, 0.4);
+            --bg-surface-solid: #0d0d12;
+            --bg-surface-glass: rgba(10, 10, 15, 0.6);
             
             /* Text Colors */
-            --text-primary: #0a0a0a;
-            --text-secondary: #52525b;
-            --text-tertiary: #a1a1aa;
-            --text-inverse: #ffffff;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-tertiary: #71717a;
+            --text-inverse: #000000;
             
-            /* Accents & Brand Colors (Comet/CRED Vibe) */
-            --accent-primary: #000000;
+            /* Accents & Brand Colors (CRED/Comet Vibe) */
+            --accent-primary: #ffffff;
             --accent-indigo: #4f46e5;
             --accent-emerald: #10b981;
             --accent-cyan: #00e1ff;
             --accent-purple: #bc13fe;
             --accent-neon-green: #39FF14;
-            --brand-linkedin: #0077b5; 
-            --brand-gmail: #ea4335;
-            --brand-phone: #34a853;
             
             /* Borders & Shadows */
-            --border-light: rgba(0, 0, 0, 0.08);
-            --border-medium: rgba(0, 0, 0, 0.15);
-            --border-heavy: rgba(0, 0, 0, 0.25);
+            --border-light: rgba(255, 255, 255, 0.08);
+            --border-medium: rgba(255, 255, 255, 0.15);
+            --border-glow: rgba(0, 225, 255, 0.3);
             
-            --shadow-xs: 0 2px 10px rgba(0, 0, 0, 0.02);
-            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.04);
-            --shadow-md: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 20px 60px -15px rgba(0, 0, 0, 0.12);
-            --shadow-xl: 0 30px 80px -20px rgba(0, 0, 0, 0.15);
+            --shadow-xs: 0 2px 10px rgba(0, 0, 0, 0.2);
+            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 10px 40px -10px rgba(0, 0, 0, 0.6);
+            --shadow-lg: 0 20px 60px -15px rgba(0, 0, 0, 0.8);
             
             /* Advanced Easing Curves for Cinematic Motion */
             --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
             --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
-            --ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
             --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
             
             /* Layout & Spacing */
             --nav-height: 80px;
-            --container-max: 1400px;
             --card-radius: 24px;
             --button-radius: 100px;
         }
@@ -78,45 +71,30 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        ::selection {
-            background-color: var(--accent-primary);
-            color: var(--text-inverse);
-        }
+        ::selection { background-color: var(--accent-cyan); color: var(--text-inverse); }
 
         html {
             font-size: 16px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
-            scroll-behavior: auto; /* Handled by custom JS smooth scroll */
         }
 
         body {
             background-color: var(--bg-base);
             color: var(--text-primary);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             width: 100%;
             position: relative;
             line-height: 1.6;
         }
 
-        h1, h2, h3, h4, h5, h6, .font-display {
-            font-family: 'Outfit', sans-serif;
-            margin-bottom: 0.5em;
-            color: var(--text-primary);
-        }
-
-        .font-mono-custom {
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        p { margin-bottom: 1rem; }
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
+        h1, h2, h3, h4, h5, h6, .font-display { font-family: 'Outfit', sans-serif; }
+        .font-mono-custom { font-family: 'JetBrains Mono', monospace; }
 
         /* ==========================================================================
-           03. CUSTOM PHYSICS-BASED CURSOR (PERPLEXITY COMET STYLE)
+           03. CUSTOM PHYSICS-BASED CURSOR (REFINED FOR PREMIUM FEEL)
            ========================================================================== */
         @media (pointer: fine) {
             body, a, button, input, textarea, select { cursor: none !important; }
@@ -134,65 +112,135 @@
 
         /* The inner dot */
         .cursor-dot {
-            width: 6px;
-            height: 6px;
-            background-color: var(--accent-primary);
-            transition: opacity 0.3s ease;
+            width: 6px; height: 6px;
+            background-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
+            transition: opacity 0.2s ease;
         }
 
         /* The Outer Outline
-           Requested: Blurry to transparent. Not moving a lot on hover. 
+           Requested: Blurry by default, becomes transparent on hover, doesn't move a lot (tighter spring).
         */
         .cursor-outline {
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            background-color: rgba(255, 255, 255, 0.3);
+            width: 32px; height: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            transition: width 0.4s var(--ease-out-expo), 
-                        height 0.4s var(--ease-out-expo), 
-                        background-color 0.4s ease,
-                        border-color 0.4s ease,
-                        backdrop-filter 0.4s ease;
+            transition: width 0.3s var(--ease-out-expo), 
+                        height 0.3s var(--ease-out-expo), 
+                        background-color 0.3s ease,
+                        border-color 0.3s ease,
+                        backdrop-filter 0.3s ease;
         }
 
         /* Hover State: Transparent, sharp border, slightly larger */
         body.hovering .cursor-outline {
-            width: 52px;
-            height: 52px;
+            width: 48px; height: 48px;
             background-color: transparent;
             backdrop-filter: blur(0px);
             -webkit-backdrop-filter: blur(0px);
-            border-color: rgba(0, 0, 0, 0.25);
+            border-color: rgba(255, 255, 255, 0.8);
             border-width: 1.5px;
         }
 
         /* Hide dot on hover for minimalist feel */
-        body.hovering .cursor-dot {
-            opacity: 0;
-        }
+        body.hovering .cursor-dot { opacity: 0; }
 
         body.clicking .cursor-outline {
-            width: 38px;
-            height: 38px;
-            background-color: rgba(0, 0, 0, 0.05);
-            border-color: rgba(0, 0, 0, 0.4);
+            width: 28px; height: 28px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-cyan);
         }
 
         /* ==========================================================================
-           04. ADVANCED BACKGROUNDS & CANVAS RENDERING
+           04. PERPLEXITY COMET COSMOS ENGINE (PLANETS & STARS)
            ========================================================================== */
-        .bg-mesh {
+        #cosmos-container {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3;
-            background-image: 
-                radial-gradient(circle at 20% 40%, rgba(0, 242, 255, 0.03) 0%, transparent 40%), 
-                radial-gradient(circle at 80% 60%, rgba(188, 19, 254, 0.03) 0%, transparent 40%), 
-                radial-gradient(circle at 50% 10%, rgba(57, 255, 20, 0.02) 0%, transparent 40%);
-            filter: blur(40px);
-            animation: breathe-mesh 25s ease-in-out infinite alternate;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -3;
+            overflow: hidden;
+            background: radial-gradient(ellipse at bottom, #0d0d1a 0%, #030305 100%);
+        }
+
+        /* SVG Noise Filter for Planets */
+        .planet-noise {
+            position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+            mix-blend-mode: overlay;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Planet Wrappers for Revolution (Orbit) */
+        .planet-orbit {
+            position: absolute;
+            top: 50%; left: 50%;
             will-change: transform;
+        }
+
+        /* Base Planet Sphere */
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+            /* Core 3D shading */
+            box-shadow: inset -30px -30px 60px rgba(0,0,0,0.9), 
+                        inset 10px 10px 40px rgba(255,255,255,0.3),
+                        0 0 100px rgba(0,0,0,0.5);
+        }
+
+        /* Planet 1: Massive Copper/Cyan (Bottom Left) */
+        .p1 {
+            width: 800px; height: 800px;
+            background: radial-gradient(circle at 30% 30%, #24a19c, #ff0844 80%);
+            left: -30vw; top: 30vh;
+        }
+        
+        /* Planet 2: Medium Golden/Blue (Top Right) */
+        .p2 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle at 40% 20%, #f6d365, #203a43 90%);
+            left: 40vw; top: -20vh;
+        }
+
+        /* Planet 3: Small Obsidian/Purple (Center Right) */
+        .p3 {
+            width: 250px; height: 250px;
+            background: radial-gradient(circle at 20% 30%, #bc13fe, #000000 70%);
+            left: 20vw; top: 20vh;
+            box-shadow: inset -15px -15px 30px rgba(0,0,0,0.9), inset 5px 5px 20px rgba(255,255,255,0.4);
+        }
+
+        /* Planet 4: Giant Dark Green/Cyan (Bottom Right) */
+        .p4 {
+            width: 650px; height: 650px;
+            background: radial-gradient(circle at 60% 40%, #00f2fe, #093028 80%);
+            left: 35vw; top: 50vh;
+        }
+
+        /* Planet 5: Tiny Bright Star/Moon (Top Left) */
+        .p5 {
+            width: 100px; height: 100px;
+            background: radial-gradient(circle at 30% 30%, #ffffff, #f6d365 50%, #000000 100%);
+            left: -40vw; top: -30vh;
+        }
+
+        /* Starfield Layers */
+        #stars-1, #stars-2, #stars-3 {
+            position: absolute; top: 0; left: 0; width: 1px; height: 1px;
+            background: transparent;
+            will-change: transform;
+        }
+        /* Stars are generated via JS box-shadows for extreme performance */
+
+        /* Global Cosmic Dust Overlay */
+        .cosmic-dust {
+            position: fixed; inset: 0; z-index: -1;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.15; mix-blend-mode: screen; pointer-events: none;
         }
 
         #physics-canvas {
@@ -202,44 +250,25 @@
             opacity: 0.7;
         }
 
-        @keyframes breathe-mesh {
-            0% { transform: scale(1) translate(0, 0); }
-            50% { transform: scale(1.05) translate(2%, 2%); }
-            100% { transform: scale(1.1) translate(-2%, -2%); }
-        }
-
-        /* High-end tactile noise overlay */
-        .bg-noise {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
-            opacity: 0.35;
-            pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            mix-blend-mode: multiply;
-        }
-
         /* ==========================================================================
-           05. FLAG IN THE WIND ANIMATION (HERO TEXT)
+           05. FLAG IN THE WIND ANIMATION (SVG + CSS 3D)
            ========================================================================== */
         .flag-wind-effect {
             display: inline-block;
             animation: flag-wave-3d 10s ease-in-out infinite;
-            transform-origin: center center;
-            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.03));
+            transform-origin: center left;
             will-change: transform, filter;
             position: relative;
         }
 
-        .flag-wind-filter {
-            filter: url(#wind-displacement);
-        }
+        .flag-wind-filter { filter: url(#wind-displacement); }
 
         @keyframes flag-wave-3d {
-            0% { transform: perspective(1200px) rotateY(1deg) rotateX(1deg) skewY(0deg) translateY(0); filter: drop-shadow(0 15px 25px rgba(0,0,0,0.04)); }
-            25% { transform: perspective(1200px) rotateY(-1deg) rotateX(-1deg) skewY(0.5deg) translateY(-2px); filter: drop-shadow(-5px 20px 30px rgba(0,0,0,0.02)); }
-            50% { transform: perspective(1200px) rotateY(1deg) rotateX(0.5deg) skewY(-0.5deg) translateY(0); filter: drop-shadow(0 10px 20px rgba(0,0,0,0.05)); }
-            75% { transform: perspective(1200px) rotateY(-0.5deg) rotateX(-1deg) skewY(0.5deg) translateY(2px); filter: drop-shadow(5px 15px 25px rgba(0,0,0,0.03)); }
-            100% { transform: perspective(1200px) rotateY(1deg) rotateX(1deg) skewY(0deg) translateY(0); filter: drop-shadow(0 15px 25px rgba(0,0,0,0.04)); }
+            0% { transform: perspective(1000px) rotateY(2deg) rotateX(1deg) skewY(0deg) translateY(0); }
+            25% { transform: perspective(1000px) rotateY(-1deg) rotateX(-1deg) skewY(0.5deg) translateY(-2px); }
+            50% { transform: perspective(1000px) rotateY(1deg) rotateX(0.5deg) skewY(-0.5deg) translateY(0); }
+            75% { transform: perspective(1000px) rotateY(-2deg) rotateX(-1deg) skewY(1deg) translateY(2px); }
+            100% { transform: perspective(1000px) rotateY(2deg) rotateX(1deg) skewY(0deg) translateY(0); }
         }
 
         /* ==========================================================================
@@ -251,171 +280,119 @@
             transform: translate(-50%, -50%) scale(0);
             pointer-events: none;
             z-index: 999999;
-            /* Tri-color premium burst */
             background: radial-gradient(circle, 
-                rgba(0, 242, 255, 0.9) 0%, 
-                rgba(188, 19, 254, 0.7) 30%, 
-                rgba(57, 255, 20, 0.3) 60%, 
+                rgba(0, 225, 255, 0.95) 0%, 
+                rgba(188, 19, 254, 0.8) 30%, 
+                rgba(57, 255, 20, 0.4) 60%, 
                 rgba(0, 0, 0, 0) 100%);
-            box-shadow: 0 0 50px rgba(0, 242, 255, 0.5), inset 0 0 30px rgba(255,255,255,0.6);
-            backdrop-filter: blur(8px);
-            mix-blend-mode: hard-light;
-            animation: cred-burst 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            box-shadow: 0 0 60px rgba(0, 225, 255, 0.6), inset 0 0 40px rgba(255,255,255,0.8);
+            backdrop-filter: blur(12px);
+            mix-blend-mode: screen;
+            animation: cred-burst 1.2s var(--ease-out-expo) forwards;
             will-change: transform, opacity, width, height;
         }
 
         @keyframes cred-burst {
             0% { width: 0px; height: 0px; opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            40% { opacity: 0.9; backdrop-filter: blur(12px); }
-            100% { width: 450px; height: 450px; opacity: 0; transform: translate(-50%, -50%) scale(1.8); backdrop-filter: blur(0px); }
+            40% { opacity: 0.9; backdrop-filter: blur(20px); }
+            100% { width: 500px; height: 500px; opacity: 0; transform: translate(-50%, -50%) scale(2); backdrop-filter: blur(0px); }
         }
 
         /* ==========================================================================
            07. PERPLEXITY COMET SPOTLIGHT CARDS
            ========================================================================== */
-        /*
-           This is the ultimate premium feature. A dynamic border glow tracks the
-           mouse around the perimeter of the cards.
-        */
-        .comet-cards-wrapper {
-            position: relative;
-        }
+        .comet-cards-wrapper { position: relative; }
 
         .comet-card {
             position: relative;
             background-color: var(--bg-surface);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border-radius: var(--card-radius);
             padding: 2.5rem;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-md);
             z-index: 1;
             transform-style: preserve-3d;
             transition: transform 0.6s var(--ease-out-expo), box-shadow 0.6s var(--ease-out-expo);
             height: 100%;
-            display: flex;
-            flex-direction: column;
+            display: flex; flex-direction: column;
+            border: 1px solid var(--border-light);
         }
 
-        /* The invisible border track */
-        .comet-card::before {
+        /* Spotlight tracking border */
+        .comet-cards-wrapper::before {
             content: '';
             position: absolute;
-            inset: -1px;
-            border-radius: calc(var(--card-radius) + 1px);
-            background: rgba(0, 0, 0, 0.06); /* Default faint border */
-            z-index: -2;
-            transition: background 0.3s ease;
-        }
-
-        /* The inner surface */
-        .comet-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--bg-surface);
-            border-radius: var(--card-radius);
+            inset: -2px;
+            border-radius: calc(var(--card-radius) + 2px);
+            background: radial-gradient(
+                600px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px), 
+                var(--accent-cyan),
+                transparent 40%
+            );
             z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
+
+        .comet-cards-wrapper:hover::before { opacity: 1; }
 
         .comet-card:hover {
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* Spotlight tracking injected via JS wrapper */
-        .comet-cards-wrapper:hover .comet-card::before {
-            background: radial-gradient(
-                800px circle at var(--mouse-x) var(--mouse-y), 
-                rgba(0, 0, 0, 0.4),
-                rgba(0, 0, 0, 0.05) 40%
-            );
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-xl), 0 0 30px rgba(0, 225, 255, 0.1);
         }
 
         /* ==========================================================================
            08. PREMIUM COMPONENTS (BUTTONS, TAGS)
            ========================================================================== */
         .magnetic-btn-wrapper {
-            position: relative;
-            display: inline-block;
-            padding: 20px; /* Safe area for magnetic pull */
-            margin: -20px;
+            position: relative; display: inline-block; padding: 20px; margin: -20px;
         }
 
         .btn-premium {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            position: relative; display: inline-flex; align-items: center; justify-content: center;
             padding: 1.25rem 2.75rem;
-            background-color: var(--accent-primary);
-            color: var(--bg-surface);
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: 1.5px;
-            border-radius: var(--button-radius);
-            text-decoration: none;
+            background-color: var(--accent-primary); color: var(--text-inverse);
+            font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 1.5px;
+            border-radius: var(--button-radius); text-decoration: none;
             overflow: hidden;
             transition: color 0.4s ease, box-shadow 0.4s ease;
-            z-index: 1;
-            border: none;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            z-index: 1; border: none;
+            box-shadow: 0 10px 30px rgba(255,255,255,0.1);
             will-change: transform;
         }
 
         .btn-premium::before {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 0%;
-            background-color: var(--accent-indigo);
-            transition: all 0.4s var(--ease-out-expo);
-            z-index: -1;
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 0%;
+            background-color: var(--accent-cyan);
+            transition: all 0.4s var(--ease-out-expo); z-index: -1;
         }
 
-        .btn-premium:hover {
-            box-shadow: 0 15px 35px rgba(79, 70, 229, 0.3);
-        }
-
-        .btn-premium:hover::before {
-            height: 100%;
-        }
+        .btn-premium:hover { box-shadow: 0 15px 40px rgba(0, 225, 255, 0.3); color: black; }
+        .btn-premium:hover::before { height: 100%; }
 
         .section-tag {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.6rem 1.5rem;
-            background-color: rgba(0,0,0,0.03);
-            border: 1px solid var(--border-light);
-            border-radius: var(--button-radius);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            color: var(--text-primary);
-            text-transform: uppercase;
-            margin-bottom: 2.5rem;
-            backdrop-filter: blur(10px);
-            transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s ease;
+            display: inline-flex; align-items: center; padding: 0.6rem 1.5rem;
+            background-color: rgba(255,255,255,0.05); border: 1px solid var(--border-light);
+            border-radius: var(--button-radius); font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-primary);
+            text-transform: uppercase; margin-bottom: 2.5rem;
+            backdrop-filter: blur(10px); transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s ease;
         }
 
         .section-tag:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            border-color: var(--border-medium);
+            transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,225,255,0.1); border-color: var(--border-medium);
         }
 
         .section-tag::before {
-            content: '';
-            display: block;
-            width: 6px; height: 6px;
-            background-color: var(--accent-primary);
-            border-radius: 50%;
-            margin-right: 12px;
-            animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            content: ''; display: block; width: 8px; height: 8px;
+            background-color: var(--accent-cyan); border-radius: 50%; margin-right: 12px;
+            box-shadow: 0 0 10px var(--accent-cyan);
+            animation: pulse-dot 2s infinite alternate;
         }
 
         @keyframes pulse-dot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.8); box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0.5; transform: scale(0.8); }
         }
 
         /* ==========================================================================
@@ -423,137 +400,81 @@
            ========================================================================== */
         .glass-nav {
             background-color: var(--bg-surface-glass);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
+            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
             border-bottom: 1px solid var(--border-light);
-            transition: transform 0.5s var(--ease-out-expo), 
-                        background-color 0.5s ease, 
-                        padding 0.5s var(--ease-out-expo),
-                        box-shadow 0.5s ease;
+            transition: transform 0.5s var(--ease-out-expo), background-color 0.5s ease, padding 0.5s var(--ease-out-expo);
         }
 
         .nav-link {
-            position: relative;
-            color: var(--text-secondary);
-            font-family: 'Outfit', sans-serif;
-            font-weight: 600;
-            font-size: 0.875rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: color 0.3s ease;
-            padding: 0.5rem 0;
+            position: relative; color: var(--text-secondary);
+            font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.875rem;
+            letter-spacing: 1px; text-transform: uppercase; transition: color 0.3s ease; padding: 0.5rem 0;
         }
 
         .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; width: 0; height: 2px;
-            background-color: var(--accent-primary);
-            transition: width 0.4s var(--ease-out-expo);
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+            background-color: var(--accent-cyan); transition: width 0.4s var(--ease-out-expo);
         }
 
         .nav-link:hover { color: var(--text-primary); }
-        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover::after { width: 100%; box-shadow: 0 0 10px var(--accent-cyan); }
 
         /* ==========================================================================
            10. TIMELINES (EXPERIENCE & EXACT EDUCATION)
            ========================================================================== */
-        .timeline-container {
-            position: relative;
-            padding-top: 1rem; padding-bottom: 1rem;
-        }
+        .timeline-container { position: relative; padding-top: 1rem; padding-bottom: 1rem; }
 
         .timeline-container::before {
-            content: '';
-            position: absolute;
-            top: 0; bottom: 0; left: 28px; width: 2px;
-            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 10%, rgba(0,0,0,0.1) 90%, transparent 100%);
-            border-radius: 2px;
+            content: ''; position: absolute; top: 0; bottom: 0; left: 28px; width: 2px;
+            background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.1) 10%, rgba(255,255,255,0.1) 90%, transparent 100%);
         }
 
-        .timeline-node {
-            position: relative;
-            padding-left: 6rem;
-            margin-bottom: 5rem;
-        }
-
+        .timeline-node { position: relative; padding-left: 6rem; margin-bottom: 5rem; }
         .timeline-node:last-child { margin-bottom: 0; }
 
         .timeline-dot {
-            position: absolute;
-            left: 20px; top: 2.5rem;
-            width: 18px; height: 18px;
-            background-color: var(--bg-surface);
-            border: 3px solid var(--text-primary);
-            border-radius: 50%;
-            transition: all 0.6s var(--ease-elastic);
-            z-index: 2;
-            box-shadow: 0 0 0 4px rgba(255,255,255,0.9);
+            position: absolute; left: 20px; top: 2.5rem; width: 18px; height: 18px;
+            background-color: var(--bg-base); border: 3px solid var(--text-secondary);
+            border-radius: 50%; transition: all 0.6s var(--ease-elastic); z-index: 2;
         }
 
         .timeline-node:hover .timeline-dot {
-            background-color: var(--text-primary);
-            transform: scale(1.5);
-            box-shadow: 0 0 0 6px rgba(0,0,0,0.05);
+            background-color: var(--accent-cyan); border-color: var(--accent-cyan);
+            transform: scale(1.5); box-shadow: 0 0 20px var(--accent-cyan);
         }
 
         /* Specialized Vertical Split Timeline for Education */
-        .edu-timeline-container::before {
-            left: 50%;
-            transform: translateX(-50%);
-        }
+        .edu-timeline-container::before { left: 50%; transform: translateX(-50%); }
 
         .edu-timeline-node {
-            width: 100%;
-            display: flex;
-            justify-content: flex-start;
-            margin-bottom: 3.5rem;
-            position: relative;
+            width: 100%; display: flex; justify-content: flex-start; margin-bottom: 3.5rem; position: relative;
         }
 
-        .edu-timeline-node:nth-child(even) {
-            justify-content: flex-end;
-        }
-
-        .edu-timeline-content {
-            width: 45%;
-            position: relative;
-        }
+        .edu-timeline-node:nth-child(even) { justify-content: flex-end; }
+        .edu-timeline-content { width: 45%; position: relative; }
 
         .edu-timeline-dot {
-            position: absolute;
-            left: 50%; top: 50%;
-            transform: translate(-50%, -50%);
-            width: 20px; height: 20px;
-            background-color: var(--bg-surface);
-            border: 4px solid var(--text-primary);
-            border-radius: 50%;
-            z-index: 3;
+            position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+            width: 20px; height: 20px; background-color: var(--bg-base);
+            border: 4px solid var(--text-secondary); border-radius: 50%; z-index: 3;
             transition: all 0.6s var(--ease-elastic);
-            box-shadow: 0 0 0 6px var(--bg-base);
         }
 
         .edu-timeline-node:hover .edu-timeline-dot {
-            background-color: var(--accent-indigo);
-            border-color: var(--accent-indigo);
-            transform: translate(-50%, -50%) scale(1.5);
-            box-shadow: 0 0 0 6px var(--bg-base), 0 0 20px rgba(79, 70, 229, 0.3);
+            border-color: var(--accent-purple); background-color: var(--accent-purple);
+            transform: translate(-50%, -50%) scale(1.5); box-shadow: 0 0 20px var(--accent-purple);
         }
 
         /* ==========================================================================
            11. SCROLL REVEAL ANIMATIONS
            ========================================================================== */
         .reveal {
-            opacity: 0;
-            transform: translateY(60px);
+            opacity: 0; transform: translateY(60px);
             transition: opacity 1.2s var(--ease-out-expo), transform 1.2s var(--ease-out-expo);
             will-change: transform, opacity;
         }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         .reveal-delay-1 { transition-delay: 0.1s; }
         .reveal-delay-2 { transition-delay: 0.2s; }
@@ -564,62 +485,37 @@
            12. CONTACT SECTION & SOCIAL CARDS (CUSTOM PREMIUM SVGS)
            ========================================================================== */
         .social-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; height: 100%; text-decoration: none;
         }
 
         .social-icon-wrapper {
-            width: 100px;
-            height: 100px;
-            border-radius: 28px;
-            background-color: var(--bg-surface);
-            border: 1px solid var(--border-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 2rem;
-            transition: all 0.7s var(--ease-elastic);
-            box-shadow: var(--shadow-sm);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .social-icon-wrapper::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.02), transparent);
-            opacity: 0;
-            transition: opacity 0.4s ease;
+            width: 100px; height: 100px; border-radius: 28px;
+            background-color: rgba(255,255,255,0.03); border: 1px solid var(--border-light);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 2rem; transition: all 0.7s var(--ease-elastic);
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.02); position: relative; overflow: hidden;
         }
 
         .social-card:hover .social-icon-wrapper {
-            transform: translateY(-16px) scale(1.05);
-            background-color: #ffffff;
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-16px) scale(1.05); background-color: rgba(255,255,255,0.1);
         }
 
-        .social-card:hover .social-icon-wrapper::before { opacity: 1; }
-
         /* LinkedIn Specific */
-        .social-card.linkedin:hover .social-icon-wrapper { border-color: rgba(0, 119, 181, 0.4); box-shadow: 0 20px 40px rgba(0, 119, 181, 0.15); }
-        .social-card.linkedin:hover .social-icon-svg { fill: #0077b5; transform: scale(1.15); }
+        .social-card.linkedin:hover .social-icon-wrapper { border-color: rgba(0, 119, 181, 0.6); box-shadow: 0 20px 40px rgba(0, 119, 181, 0.3); }
+        .social-card.linkedin:hover .social-icon-svg { fill: #0077b5; transform: scale(1.15); filter: drop-shadow(0 0 10px rgba(0,119,181,0.5)); }
 
         /* Gmail Specific */
-        .social-card.gmail:hover .social-icon-wrapper { border-color: rgba(234, 67, 53, 0.4); box-shadow: 0 20px 40px rgba(234, 67, 53, 0.15); }
-        .social-card.gmail:hover .gmail-red { stroke: #ea4335; transform: scale(1.15); }
-        .social-card.gmail:hover .gmail-blue { stroke: #4285f4; transform: scale(1.15); }
+        .social-card.gmail:hover .social-icon-wrapper { border-color: rgba(234, 67, 53, 0.6); box-shadow: 0 20px 40px rgba(234, 67, 53, 0.3); }
+        .social-card.gmail:hover .gmail-red { stroke: #ea4335; transform: scale(1.15); filter: drop-shadow(0 0 10px rgba(234,67,53,0.5)); }
+        .social-card.gmail:hover .gmail-blue { stroke: #4285f4; transform: scale(1.15); filter: drop-shadow(0 0 10px rgba(66,133,244,0.5)); }
         
         /* Phone Specific */
-        .social-card.phone:hover .social-icon-wrapper { border-color: rgba(52, 168, 83, 0.4); box-shadow: 0 20px 40px rgba(52, 168, 83, 0.15); }
-        .social-card.phone:hover .phone-outline { stroke: #34a853; transform: scale(1.15) rotate(-10deg); }
+        .social-card.phone:hover .social-icon-wrapper { border-color: rgba(52, 168, 83, 0.6); box-shadow: 0 20px 40px rgba(52, 168, 83, 0.3); }
+        .social-card.phone:hover .phone-outline { stroke: #34a853; transform: scale(1.15) rotate(-10deg); filter: drop-shadow(0 0 10px rgba(52,168,83,0.5)); }
 
         .social-icon-svg, .gmail-red, .gmail-blue, .phone-outline {
-            transition: all 0.6s var(--ease-elastic);
-            transform-origin: center;
+            transition: all 0.6s var(--ease-elastic); transform-origin: center;
         }
         .social-icon-svg { width: 40px; height: 40px; fill: var(--text-secondary); }
 
@@ -627,110 +523,84 @@
            13. AI CHAT WIDGET (ENQUIRE WITH AI)
            ========================================================================== */
         #ai-chat-toggle {
-            position: fixed;
-            bottom: 2rem; right: 2rem;
-            z-index: 100;
-            padding: 1.25rem 2rem;
-            background-color: var(--accent-primary);
-            color: var(--bg-surface);
-            border-radius: 100px;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: var(--shadow-lg);
-            transition: all 0.5s var(--ease-elastic);
-            border: 1px solid rgba(255,255,255,0.1);
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 100;
+            padding: 1.25rem 2rem; background-color: var(--accent-primary); color: var(--text-inverse);
+            border-radius: 100px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem;
+            letter-spacing: 0.5px; display: flex; align-items: center; gap: 12px;
+            box-shadow: 0 10px 30px rgba(255,255,255,0.1); transition: all 0.5s var(--ease-elastic);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         #ai-chat-toggle:hover {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-            background-color: #1a1a1a;
+            transform: translateY(-8px) scale(1.05); box-shadow: 0 20px 50px rgba(0,225,255,0.3);
+            border-color: var(--accent-cyan); color: var(--accent-cyan);
         }
 
         #ai-chat-toggle svg { animation: float-icon 3s ease-in-out infinite; }
-
-        @keyframes float-icon {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
-        }
+        @keyframes float-icon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); filter: drop-shadow(0 5px 5px rgba(0,225,255,0.5)); } }
 
         #ai-chat-window {
-            position: fixed;
-            bottom: 7rem; right: 2rem;
-            width: 420px; max-width: calc(100vw - 4rem);
-            height: 600px; max-height: calc(100vh - 9rem);
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
-            border: 1px solid var(--border-light);
-            border-radius: 32px;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.15);
-            z-index: 99;
-            display: flex; flex-direction: column;
-            overflow: hidden;
-            opacity: 0; pointer-events: none;
-            transform: translateY(40px) scale(0.9);
-            transform-origin: bottom right;
-            transition: all 0.6s var(--ease-out-expo);
+            position: fixed; bottom: 7rem; right: 2rem;
+            width: 420px; max-width: calc(100vw - 4rem); height: 600px; max-height: calc(100vh - 9rem);
+            background: rgba(15, 15, 20, 0.85); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+            border: 1px solid var(--border-medium); border-radius: 32px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5), inset 0 0 30px rgba(255,255,255,0.05);
+            z-index: 99; display: flex; flex-direction: column; overflow: hidden;
+            opacity: 0; pointer-events: none; transform: translateY(40px) scale(0.9);
+            transform-origin: bottom right; transition: all 0.6s var(--ease-out-expo);
         }
 
-        #ai-chat-window.active {
-            opacity: 1; pointer-events: auto;
-            transform: translateY(0) scale(1);
-        }
+        #ai-chat-window.active { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
 
         .chat-header {
-            padding: 1.75rem;
-            border-bottom: 1px solid var(--border-light);
+            padding: 1.75rem; border-bottom: 1px solid var(--border-light);
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(250, 250, 250, 0.9);
+            background: rgba(0, 0, 0, 0.4);
         }
 
         .chat-messages {
-            flex: 1; padding: 1.75rem;
-            overflow-y: auto; display: flex; flex-direction: column; gap: 1.25rem;
-            scroll-behavior: smooth;
+            flex: 1; padding: 1.75rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1.25rem; scroll-behavior: smooth;
         }
 
         .chat-message {
-            max-width: 85%; padding: 1.1rem 1.4rem;
-            border-radius: 20px; font-size: 0.95rem; line-height: 1.6;
-            animation: messageSlide 0.5s var(--ease-out-expo) forwards;
-            opacity: 0; transform: translateY(15px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            max-width: 85%; padding: 1.1rem 1.4rem; border-radius: 20px; font-size: 0.95rem; line-height: 1.6;
+            animation: messageSlide 0.5s var(--ease-out-expo) forwards; opacity: 0; transform: translateY(15px);
         }
 
         @keyframes messageSlide { to { opacity: 1; transform: translateY(0); } }
 
-        .message-ai { background-color: #f4f5f7; border: 1px solid var(--border-light); color: var(--text-primary); align-self: flex-start; border-bottom-left-radius: 6px; }
-        .message-user { background-color: var(--accent-primary); color: var(--bg-surface); align-self: flex-end; border-bottom-right-radius: 6px; }
+        .message-ai { background-color: rgba(255,255,255,0.05); border: 1px solid var(--border-light); color: var(--text-primary); align-self: flex-start; border-bottom-left-radius: 6px; }
+        .message-user { background-color: var(--accent-cyan); color: #000; align-self: flex-end; border-bottom-right-radius: 6px; font-weight: 500; }
 
         .chat-input-area {
             padding: 1.5rem; border-top: 1px solid var(--border-light);
-            background: rgba(255, 255, 255, 0.9); display: flex; gap: 1rem;
+            background: rgba(0, 0, 0, 0.4); display: flex; gap: 1rem;
         }
 
         .chat-input {
-            flex: 1; padding: 1rem 1.5rem;
-            border: 1px solid var(--border-medium); border-radius: 100px;
-            background: var(--bg-surface); font-family: 'Inter', sans-serif; font-size: 0.95rem;
+            flex: 1; padding: 1rem 1.5rem; border: 1px solid var(--border-medium); border-radius: 100px;
+            background: rgba(0,0,0,0.5); color: white; font-family: 'Inter', sans-serif; font-size: 0.95rem;
             outline: none; transition: all 0.3s ease;
         }
 
-        .chat-input:focus { border-color: var(--accent-indigo); box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1); }
+        .chat-input:focus { border-color: var(--accent-cyan); box-shadow: 0 0 0 4px rgba(0, 225, 255, 0.1); }
 
         .chat-send-btn {
             width: 52px; height: 52px; border-radius: 50%;
-            background-color: var(--accent-primary); color: white; border: none;
+            background-color: var(--accent-cyan); color: #000; border: none;
             display: flex; align-items: center; justify-content: center;
-            transition: transform 0.3s var(--ease-elastic), background-color 0.2s ease;
+            transition: transform 0.3s var(--ease-elastic), box-shadow 0.2s ease;
         }
 
-        .chat-send-btn:hover { transform: scale(1.15); background-color: var(--text-secondary); }
+        .chat-send-btn:hover { transform: scale(1.15); box-shadow: 0 0 20px var(--accent-cyan); }
+
+        .typing-dots { display: flex; gap: 6px; padding: 0.5rem; }
+        .typing-dots span {
+            width: 8px; height: 8px; background-color: var(--accent-cyan); border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
 
         /* ==========================================================================
            14. RESPONSIVE MEDIA QUERIES
@@ -742,6 +612,8 @@
             .edu-timeline-content { width: 100%; }
             .edu-timeline-dot { left: 16px; top: 1.5rem; transform: none; }
             .edu-timeline-node:hover .edu-timeline-dot { transform: scale(1.4); }
+            .p1 { width: 400px; height: 400px; }
+            .p4 { width: 300px; height: 300px; }
         }
 
         @media (max-width: 768px) {
@@ -767,23 +639,35 @@
 <body>
 
     <!-- ==========================================================================
-         SVG FILTERS & DEFINITIONS (FLAG WIND EFFECT)
+         SVG FILTERS & DEFINITIONS
          ========================================================================== -->
+    <!-- Flag Wind Effect Filter -->
     <svg style="width:0; height:0; position:absolute;" aria-hidden="true">
         <defs>
             <filter id="wind-displacement" x="-20%" y="-20%" width="140%" height="140%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.015 0.025" numOctaves="2" result="noise">
-                    <animate attributeName="baseFrequency" values="0.015 0.025; 0.02 0.03; 0.015 0.025" dur="8s" repeatCount="indefinite"/>
+                <feTurbulence type="fractalNoise" baseFrequency="0.01 0.02" numOctaves="2" result="noise">
+                    <animate attributeName="baseFrequency" values="0.01 0.02; 0.015 0.03; 0.01 0.02" dur="10s" repeatCount="indefinite"/>
                 </feTurbulence>
-                <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G"/>
             </filter>
         </defs>
     </svg>
 
-    <!-- Premium Backgrounds -->
-    <div class="bg-mesh"></div>
+    <!-- Premium Backgrounds (Cosmos) -->
+    <div id="cosmos-container">
+        <!-- Planets -->
+        <div class="planet-orbit" data-speed="0.2" data-rot="0.05"><div class="planet p1"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" data-speed="-0.1" data-rot="-0.08"><div class="planet p2"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" data-speed="0.15" data-rot="0.12"><div class="planet p3"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" data-speed="-0.2" data-rot="-0.04"><div class="planet p4"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" data-speed="0.3" data-rot="0.2"><div class="planet p5"><div class="planet-noise"></div></div></div>
+        <!-- Starfield generated via JS -->
+        <div id="stars-1"></div><div id="stars-2"></div><div id="stars-3"></div>
+        <div class="cosmic-dust"></div>
+    </div>
+    
+    <!-- Physics Canvas for Mesh Connections -->
     <canvas id="physics-canvas"></canvas>
-    <div class="bg-noise"></div>
 
     <!-- Custom Cursor Elements -->
     <div class="cursor-dot" id="cursor-dot"></div>
@@ -797,7 +681,7 @@
             
             <!-- Full Name Logo -->
             <div class="font-display text-3xl font-black tracking-tight text-primary cursor-pointer hover-trigger">
-                Osaid<span class="text-gray-400"> Shahid</span>
+                Osaid<span class="text-accent-cyan" style="color:var(--accent-cyan)"> Shahid</span>
             </div>
             
             <!-- Desktop Links -->
@@ -811,20 +695,20 @@
 
             <!-- Mobile Hamburger -->
             <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 focus:outline-none z-50 relative hover-trigger" aria-label="Toggle Menu">
-                <span class="block w-6 h-[2px] bg-black transition-transform duration-400 origin-center" id="bar1"></span>
-                <span class="block w-6 h-[2px] bg-black transition-opacity duration-400" id="bar2"></span>
-                <span class="block w-6 h-[2px] bg-black transition-transform duration-400 origin-center" id="bar3"></span>
+                <span class="block w-6 h-[2px] bg-white transition-transform duration-400 origin-center" id="bar1"></span>
+                <span class="block w-6 h-[2px] bg-white transition-opacity duration-400" id="bar2"></span>
+                <span class="block w-6 h-[2px] bg-white transition-transform duration-400 origin-center" id="bar3"></span>
             </button>
         </div>
     </nav>
 
     <!-- Fullscreen Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 bg-white z-40 flex flex-col justify-center items-center gap-10 opacity-0 pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]">
-        <a href="#about" class="font-display text-5xl font-bold text-black mobile-link hover-trigger">Identity</a>
-        <a href="#experience" class="font-display text-5xl font-bold text-black mobile-link hover-trigger">Experience</a>
-        <a href="#education" class="font-display text-5xl font-bold text-black mobile-link hover-trigger">Education</a>
-        <a href="#expertise" class="font-display text-5xl font-bold text-black mobile-link hover-trigger">Skills</a>
-        <a href="#contact" class="font-display text-5xl font-bold text-black mobile-link hover-trigger">Contact</a>
+    <div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-3xl z-40 flex flex-col justify-center items-center gap-10 opacity-0 pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]">
+        <a href="#about" class="font-display text-5xl font-bold text-white mobile-link hover-trigger">Identity</a>
+        <a href="#experience" class="font-display text-5xl font-bold text-white mobile-link hover-trigger">Experience</a>
+        <a href="#education" class="font-display text-5xl font-bold text-white mobile-link hover-trigger">Education</a>
+        <a href="#expertise" class="font-display text-5xl font-bold text-white mobile-link hover-trigger">Skills</a>
+        <a href="#contact" class="font-display text-5xl font-bold text-white mobile-link hover-trigger">Contact</a>
     </div>
 
     <!-- ==========================================================================
@@ -846,25 +730,25 @@
                 <div class="flag-wind-effect flag-wind-filter reveal reveal-delay-1 p-2">
                     <h1 class="font-display hero-title text-6xl sm:text-7xl md:text-[6.5rem] lg:text-[7.5rem] font-black leading-[0.95] tracking-tighter text-primary mb-8">
                         Delivering <br>
-                        <span class="text-gray-400">Outstanding Service.</span>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600">Outstanding Service.</span>
                     </h1>
                 </div>
 
                 <div class="flex flex-col md:flex-row gap-6 md:gap-12 items-start md:items-center mb-16 reveal reveal-delay-2">
-                    <p class="font-mono-custom text-xs md:text-sm text-gray-600 uppercase tracking-widest font-bold bg-white border border-gray-200 shadow-sm px-5 py-3 rounded-full hover-trigger transition-transform hover:-translate-y-1">
+                    <p class="font-mono-custom text-xs md:text-sm text-gray-300 uppercase tracking-widest font-bold bg-white/10 border border-white/20 shadow-sm px-5 py-3 rounded-full hover-trigger transition-transform hover:-translate-y-1 backdrop-blur-md">
                         German C1
                     </p>
-                    <p class="font-mono-custom text-xs md:text-sm text-gray-600 uppercase tracking-widest font-bold bg-white border border-gray-200 shadow-sm px-5 py-3 rounded-full hover-trigger transition-transform hover:-translate-y-1">
+                    <p class="font-mono-custom text-xs md:text-sm text-gray-300 uppercase tracking-widest font-bold bg-white/10 border border-white/20 shadow-sm px-5 py-3 rounded-full hover-trigger transition-transform hover:-translate-y-1 backdrop-blur-md">
                         Cloud Technical Support
                     </p>
-                    <p class="font-mono-custom text-xs md:text-sm text-gray-600 uppercase tracking-widest font-bold bg-white border border-gray-200 shadow-sm px-5 py-3 rounded-full hover-trigger transition-transform hover:-translate-y-1">
+                    <p class="font-mono-custom text-xs md:text-sm text-gray-300 uppercase tracking-widest font-bold bg-white/10 border border-white/20 shadow-sm px-5 py-3 rounded-full hover-trigger transition-transform hover:-translate-y-1 backdrop-blur-md">
                         Systems Admin
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start reveal reveal-delay-3">
                     <div class="md:col-span-7">
-                        <p class="text-xl md:text-2xl text-secondary leading-relaxed font-light">
+                        <p class="text-xl md:text-2xl text-gray-400 leading-relaxed font-light">
                             Dynamic and results-oriented professional with a proven track record as an App/cloud technical support-german language expert. Passionate about delivering outstanding service and contributing to an inclusive work environment.
                         </p>
                     </div>
@@ -880,21 +764,21 @@
 
                 <!-- Bento Grid Stats -->
                 <div class="comet-cards-wrapper grid grid-cols-2 md:grid-cols-4 gap-6 mt-28 reveal reveal-delay-4">
-                    <div class="comet-card !p-8 flex flex-col justify-center items-center text-center hover-trigger">
+                    <div class="comet-card !p-8 flex flex-col justify-center items-center text-center hover-trigger bg-white/5 border-white/10">
                         <h2 class="font-display text-5xl md:text-6xl font-black text-primary mb-3">4.0</h2>
-                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-500 uppercase tracking-widest font-bold">Years Exp.</p>
+                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">Years Exp.</p>
                     </div>
-                    <div class="comet-card !p-8 flex flex-col justify-center items-center text-center hover-trigger">
+                    <div class="comet-card !p-8 flex flex-col justify-center items-center text-center hover-trigger bg-white/5 border-white/10">
                         <h2 class="font-display text-5xl md:text-6xl font-black text-primary mb-3">3+</h2>
-                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-500 uppercase tracking-widest font-bold">Enterprises</p>
+                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">Enterprises</p>
                     </div>
-                    <div class="comet-card !p-8 flex flex-col justify-center items-center text-center hover-trigger">
+                    <div class="comet-card !p-8 flex flex-col justify-center items-center text-center hover-trigger bg-white/5 border-white/10">
                         <h2 class="font-display text-5xl md:text-6xl font-black text-primary mb-3">C1</h2>
-                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-500 uppercase tracking-widest font-bold">German Level</p>
+                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">German Level</p>
                     </div>
-                    <div class="comet-card !p-8 flex flex-col justify-center items-center text-center hover-trigger">
+                    <div class="comet-card !p-8 flex flex-col justify-center items-center text-center hover-trigger bg-white/5 border-white/10">
                         <h2 class="font-display text-5xl md:text-6xl font-black text-primary mb-3">5</h2>
-                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-500 uppercase tracking-widest font-bold">Certifications</p>
+                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">Certifications</p>
                     </div>
                 </div>
 
@@ -902,9 +786,9 @@
         </section>
 
         <!-- ==========================================================================
-             EXPERIENCE SECTION
+             EXPERIENCE SECTION (CV EXACT)
              ========================================================================== -->
-        <section id="experience" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-black/5">
+        <section id="experience" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-white/10">
             
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 reveal">
                 <div>
@@ -921,43 +805,43 @@
                 <div class="timeline-node reveal">
                     <div class="timeline-dot"></div>
                     <div class="comet-cards-wrapper">
-                        <div class="comet-card hover-trigger p-8 md:p-12">
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-gray-100 pb-6">
+                        <div class="comet-card hover-trigger p-8 md:p-12 bg-white/5 border-white/10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/10 pb-6">
                                 <div>
                                     <h3 class="font-display text-3xl font-black text-primary tracking-tight">App/cloud Technical Support Analyst</h3>
-                                    <p class="font-mono-custom text-sm text-indigo-600 mt-2 tracking-widest uppercase font-bold">Accenture &middot; Gurugram, Haryana</p>
+                                    <p class="font-mono-custom text-sm text-accent-cyan mt-2 tracking-widest uppercase font-bold">Accenture &middot; Gurugram, Haryana</p>
                                 </div>
-                                <span class="inline-block px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap shadow-sm">
+                                <span class="inline-block px-5 py-2.5 bg-white/10 border border-white/20 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap shadow-sm">
                                     11/2024 — Present
                                 </span>
                             </div>
-                            <ul class="space-y-5 text-secondary leading-relaxed font-light text-base md:text-lg">
+                            <ul class="space-y-5 text-gray-300 leading-relaxed font-light text-base md:text-lg">
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-indigo-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span class="font-semibold text-primary">Delivered end-to-end technical solutions to end-users from Germany, Austria, and Switzerland.</span>
+                                    <svg class="w-6 h-6 mr-4 text-accent-cyan mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span class="font-semibold text-white">Delivered end-to-end technical solutions to end-users from Germany, Austria, and Switzerland.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Added and configured new devices within the corporate network.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Managed DHCP servers for network related issues.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Troubleshot printer issues, including connectivity, installation, and driver errors.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Managed user accounts, permissions, and security groups using Azure Active Directory.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Worked on all kind of Windows related Issues.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Delivered end-to-end technical support to end users, ensuring minimal disruption to daily operations.</span>
                                 </li>
                             </ul>
@@ -969,43 +853,43 @@
                 <div class="timeline-node reveal">
                     <div class="timeline-dot"></div>
                     <div class="comet-cards-wrapper">
-                        <div class="comet-card hover-trigger p-8 md:p-12">
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-gray-100 pb-6">
+                        <div class="comet-card hover-trigger p-8 md:p-12 bg-white/5 border-white/10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/10 pb-6">
                                 <div>
                                     <h3 class="font-display text-3xl font-black text-primary tracking-tight">Senior Systems Administrator</h3>
-                                    <p class="font-mono-custom text-sm text-indigo-600 mt-2 tracking-wide uppercase font-bold">ITC Infotech &middot; Bengaluru, Karnataka</p>
+                                    <p class="font-mono-custom text-sm text-accent-cyan mt-2 tracking-wide uppercase font-bold">ITC Infotech &middot; Bengaluru, Karnataka</p>
                                 </div>
-                                <span class="inline-block px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap shadow-sm">
+                                <span class="inline-block px-5 py-2.5 bg-white/10 border border-white/20 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap shadow-sm">
                                     04/2024 — 11/2024
                                 </span>
                             </div>
-                            <ul class="space-y-5 text-secondary leading-relaxed font-light text-base md:text-lg">
+                            <ul class="space-y-5 text-gray-300 leading-relaxed font-light text-base md:text-lg">
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Administer Windows, Office, Active Directory, and network infrastructure. Manage DHCP and resolve network issues.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Working as L1-L1.5 support and communicating with German-speaking users to resolve inquiries and issues.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Added and configured new devices in the company network. Assigned static and dynamic IP addresses to devices.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Troubleshot printer issues (installation, connectivity, driver problems).</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Managed user access and permissions through Azure AD.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Resolved all types of Windows issues.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Using tools like Azure, Microsoft Admin center, ARS, AD, Intune, Bomgar, Servicenow, Confluence.</span>
                                 </li>
                             </ul>
@@ -1017,39 +901,39 @@
                 <div class="timeline-node reveal">
                     <div class="timeline-dot"></div>
                     <div class="comet-cards-wrapper">
-                        <div class="comet-card hover-trigger p-8 md:p-12">
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-gray-100 pb-6">
+                        <div class="comet-card hover-trigger p-8 md:p-12 bg-white/5 border-white/10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/10 pb-6">
                                 <div>
                                     <h3 class="font-display text-3xl font-black text-primary tracking-tight">Senior associate/German language technical support</h3>
-                                    <p class="font-mono-custom text-sm text-indigo-600 mt-2 tracking-wide uppercase font-bold">Wipro Limited &middot; Hyderabad</p>
+                                    <p class="font-mono-custom text-sm text-accent-cyan mt-2 tracking-wide uppercase font-bold">Wipro Limited &middot; Hyderabad</p>
                                 </div>
-                                <span class="inline-block px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap shadow-sm">
+                                <span class="inline-block px-5 py-2.5 bg-white/10 border border-white/20 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap shadow-sm">
                                     12/2021 — 09/2023
                                 </span>
                             </div>
-                            <ul class="space-y-5 text-secondary leading-relaxed font-light text-base md:text-lg">
+                            <ul class="space-y-5 text-gray-300 leading-relaxed font-light text-base md:text-lg">
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Worked for Wipro Technologies as Google T1 accessibility technical support (German).</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Proactively identified solution to common user issues.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Provided technical support to user's on Accessibility technologies.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Job profile involes speaking, chatting and writing. Resolving users issues via call chat or email.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Dealing with Google platforms that have Android support in it.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-300 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Adhered to quality and service standards to support operational goals.</span>
                                 </li>
                             </ul>
@@ -1063,7 +947,7 @@
         <!-- ==========================================================================
              EDUCATION TIMELINE SECTION (CV EXACT)
              ========================================================================== -->
-        <section id="education" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-black/5 relative">
+        <section id="education" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-white/10 relative">
             <div class="reveal mb-24 text-center">
                 <div class="section-tag mx-auto hover-trigger">Academic Foundation</div>
                 <h2 class="font-display text-5xl md:text-[5rem] font-black tracking-tight text-primary mt-4">
@@ -1072,16 +956,16 @@
             </div>
 
             <!-- Custom Vertical Split Timeline -->
-            <div class="edu-timeline-container relative max-w-5xl mx-auto before:absolute before:top-0 before:bottom-0 before:w-[2px] before:bg-gradient-to-b before:from-transparent before:via-gray-200 before:to-transparent">
+            <div class="edu-timeline-container relative max-w-5xl mx-auto before:absolute before:top-0 before:bottom-0 before:w-[2px] before:bg-gradient-to-b before:from-transparent before:via-white/20 before:to-transparent">
                 
                 <!-- Advanced Diploma -->
                 <div class="edu-timeline-node reveal">
                     <div class="edu-timeline-dot"></div>
                     <div class="edu-timeline-content comet-cards-wrapper hover-trigger">
-                        <div class="comet-card p-8 md:p-10">
-                            <span class="inline-block px-4 py-2 bg-indigo-50 text-indigo-600 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-indigo-100">07/2023</span>
+                        <div class="comet-card p-8 md:p-10 bg-white/5 border-white/10">
+                            <span class="inline-block px-4 py-2 bg-purple-500/10 text-purple-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-purple-500/20 shadow-[0_0_15px_rgba(188,19,254,0.3)]">07/2023</span>
                             <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Advanced Diploma: German Language (C1)</h3>
-                            <p class="text-secondary font-medium">Osmania University</p>
+                            <p class="text-gray-400 font-medium">Osmania University</p>
                         </div>
                     </div>
                 </div>
@@ -1090,10 +974,10 @@
                 <div class="edu-timeline-node reveal">
                     <div class="edu-timeline-dot"></div>
                     <div class="edu-timeline-content comet-cards-wrapper hover-trigger">
-                        <div class="comet-card p-8 md:p-10">
-                            <span class="inline-block px-4 py-2 bg-indigo-50 text-indigo-600 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-indigo-100">11/2021</span>
+                        <div class="comet-card p-8 md:p-10 bg-white/5 border-white/10">
+                            <span class="inline-block px-4 py-2 bg-purple-500/10 text-purple-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-purple-500/20 shadow-[0_0_15px_rgba(188,19,254,0.3)]">11/2021</span>
                             <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Senior Diploma: German Language (B2)</h3>
-                            <p class="text-secondary font-medium">Osmania University</p>
+                            <p class="text-gray-400 font-medium">Osmania University</p>
                         </div>
                     </div>
                 </div>
@@ -1102,10 +986,10 @@
                 <div class="edu-timeline-node reveal">
                     <div class="edu-timeline-dot"></div>
                     <div class="edu-timeline-content comet-cards-wrapper hover-trigger">
-                        <div class="comet-card p-8 md:p-10">
-                            <span class="inline-block px-4 py-2 bg-indigo-50 text-indigo-600 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-indigo-100">04/2021</span>
+                        <div class="comet-card p-8 md:p-10 bg-white/5 border-white/10">
+                            <span class="inline-block px-4 py-2 bg-purple-500/10 text-purple-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-purple-500/20 shadow-[0_0_15px_rgba(188,19,254,0.3)]">04/2021</span>
                             <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Junior Diploma: German Language (A2)</h3>
-                            <p class="text-secondary font-medium">Osmania University</p>
+                            <p class="text-gray-400 font-medium">Osmania University</p>
                         </div>
                     </div>
                 </div>
@@ -1114,10 +998,10 @@
                 <div class="edu-timeline-node reveal">
                     <div class="edu-timeline-dot"></div>
                     <div class="edu-timeline-content comet-cards-wrapper hover-trigger">
-                        <div class="comet-card p-8 md:p-10">
-                            <span class="inline-block px-4 py-2 bg-emerald-50 text-emerald-600 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-emerald-100">05/2020</span>
+                        <div class="comet-card p-8 md:p-10 bg-white/5 border-white/10">
+                            <span class="inline-block px-4 py-2 bg-cyan-500/10 text-cyan-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-cyan-500/20 shadow-[0_0_15px_rgba(0,242,255,0.3)]">05/2020</span>
                             <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Bachelor of Arts (Hons): English</h3>
-                            <p class="text-secondary font-medium">University of Delhi</p>
+                            <p class="text-gray-400 font-medium">University of Delhi</p>
                         </div>
                     </div>
                 </div>
@@ -1126,10 +1010,10 @@
                 <div class="edu-timeline-node reveal">
                     <div class="edu-timeline-dot"></div>
                     <div class="edu-timeline-content comet-cards-wrapper hover-trigger">
-                        <div class="comet-card p-8 md:p-10">
-                            <span class="inline-block px-4 py-2 bg-orange-50 text-orange-600 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-orange-100">05/2016</span>
+                        <div class="comet-card p-8 md:p-10 bg-white/5 border-white/10">
+                            <span class="inline-block px-4 py-2 bg-emerald-500/10 text-emerald-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.3)]">05/2016</span>
                             <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Intermediate</h3>
-                            <p class="text-secondary font-medium leading-snug">Board of High School & Intermediate Education</p>
+                            <p class="text-gray-400 font-medium leading-snug">Board of High School & Intermediate Education</p>
                         </div>
                     </div>
                 </div>
@@ -1140,7 +1024,7 @@
         <!-- ==========================================================================
              EXPERTISE & SKILLS SECTION
              ========================================================================== -->
-        <section id="expertise" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-black/5">
+        <section id="expertise" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-white/10">
             
             <div class="reveal mb-24">
                 <div class="section-tag hover-trigger">Core Competencies</div>
@@ -1154,29 +1038,29 @@
                 
                 <!-- System Administration Card -->
                 <div class="comet-cards-wrapper reveal reveal-delay-1 lg:col-span-2">
-                    <div class="comet-card hover-trigger p-10 md:p-12">
-                        <h3 class="font-display text-3xl font-black text-primary mb-8 border-b border-gray-100 pb-6">System Administration</h3>
+                    <div class="comet-card hover-trigger p-10 md:p-12 bg-white/5 border-white/10">
+                        <h3 class="font-display text-3xl font-black text-primary mb-8 border-b border-white/10 pb-6">System Administration</h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div class="flex items-center p-5 border border-gray-100 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow">
-                                <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mr-5">
+                            <div class="flex items-center p-5 border border-white/10 rounded-2xl bg-white/5 shadow-sm hover:bg-white/10 transition-colors">
+                                <div class="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center mr-5">
                                     <span class="font-black font-display text-lg">MS</span>
                                 </div>
                                 <span class="font-semibold text-primary text-lg">Microsoft Entra & AD</span>
                             </div>
-                            <div class="flex items-center p-5 border border-gray-100 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow">
-                                <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mr-5">
+                            <div class="flex items-center p-5 border border-white/10 rounded-2xl bg-white/5 shadow-sm hover:bg-white/10 transition-colors">
+                                <div class="w-12 h-12 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center mr-5">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                                 </div>
                                 <span class="font-semibold text-primary text-lg">Intune & Office</span>
                             </div>
-                            <div class="flex items-center p-5 border border-gray-100 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow">
-                                <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mr-5">
+                            <div class="flex items-center p-5 border border-white/10 rounded-2xl bg-white/5 shadow-sm hover:bg-white/10 transition-colors">
+                                <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mr-5">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                                 </div>
                                 <span class="font-semibold text-primary text-lg">Windows Ecosystems</span>
                             </div>
-                            <div class="flex items-center p-5 border border-gray-100 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow">
-                                <div class="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center mr-5">
+                            <div class="flex items-center p-5 border border-white/10 rounded-2xl bg-white/5 shadow-sm hover:bg-white/10 transition-colors">
+                                <div class="w-12 h-12 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center mr-5">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
                                 </div>
                                 <span class="font-semibold text-primary text-lg">Active Roles Server (ARS)</span>
@@ -1187,24 +1071,24 @@
 
                 <!-- IT & Networking Card -->
                 <div class="comet-cards-wrapper reveal reveal-delay-2">
-                    <div class="comet-card hover-trigger p-10 md:p-12">
-                        <h3 class="font-display text-3xl font-black text-primary mb-8 border-b border-gray-100 pb-6">Technical Skills</h3>
-                        <ul class="space-y-5 text-secondary font-medium text-lg">
-                            <li class="flex items-center justify-between border-b border-gray-50 pb-3">
+                    <div class="comet-card hover-trigger p-10 md:p-12 bg-white/5 border-white/10">
+                        <h3 class="font-display text-3xl font-black text-primary mb-8 border-b border-white/10 pb-6">Technical Skills</h3>
+                        <ul class="space-y-5 text-gray-300 font-medium text-lg">
+                            <li class="flex items-center justify-between border-b border-white/5 pb-3">
                                 <span>IT Fundamentals</span>
-                                <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             </li>
-                            <li class="flex items-center justify-between border-b border-gray-50 pb-3">
+                            <li class="flex items-center justify-between border-b border-white/5 pb-3">
                                 <span>Networking Basics</span>
-                                <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             </li>
-                            <li class="flex items-center justify-between border-b border-gray-50 pb-3">
+                            <li class="flex items-center justify-between border-b border-white/5 pb-3">
                                 <span>Linux Administration</span>
-                                <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             </li>
                             <li class="flex items-center justify-between">
                                 <span>WCAG, NVDA, BeMyEyes</span>
-                                <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             </li>
                         </ul>
                     </div>
@@ -1212,56 +1096,56 @@
 
                 <!-- Certifications List (EXACTLY FROM CV) -->
                 <div class="comet-cards-wrapper reveal reveal-delay-3 lg:col-span-3">
-                    <div class="comet-card hover-trigger p-10 md:p-12">
-                        <h3 class="font-display text-3xl font-black text-primary mb-8 border-b border-gray-100 pb-6">Certifications</h3>
+                    <div class="comet-card hover-trigger p-10 md:p-12 bg-white/5 border-white/10">
+                        <h3 class="font-display text-3xl font-black text-primary mb-8 border-b border-white/10 pb-6">Certifications</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             
-                            <div class="flex items-center justify-between p-6 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex items-center justify-between p-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
                                 <div class="flex items-center gap-5">
-                                    <div class="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center flex-shrink-0 text-blue-600 font-black font-display text-xl">MS</div>
+                                    <div class="w-14 h-14 rounded-2xl bg-blue-500/20 flex items-center justify-center flex-shrink-0 text-blue-400 font-black font-display text-xl">MS</div>
                                     <div>
                                         <p class="font-bold text-primary text-lg">Azure Fundamentals (AZ-900)</p>
-                                        <p class="text-xs text-gray-500 font-mono-custom mt-1 tracking-widest uppercase">Microsoft</p>
+                                        <p class="text-xs text-gray-400 font-mono-custom mt-1 tracking-widest uppercase">Microsoft</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="flex items-center justify-between p-6 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex items-center justify-between p-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
                                 <div class="flex items-center gap-5">
-                                    <div class="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center flex-shrink-0 text-red-600 font-black font-display text-xl">G</div>
+                                    <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center flex-shrink-0 text-red-400 font-black font-display text-xl">G</div>
                                     <div>
                                         <p class="font-bold text-primary text-lg">Technical Support Fundamentals</p>
-                                        <p class="text-xs text-gray-500 font-mono-custom mt-1 tracking-widest uppercase">Google</p>
+                                        <p class="text-xs text-gray-400 font-mono-custom mt-1 tracking-widest uppercase">Google</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="flex items-center justify-between p-6 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex items-center justify-between p-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
                                 <div class="flex items-center gap-5">
-                                    <div class="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center flex-shrink-0 text-red-600 font-black font-display text-xl">G</div>
+                                    <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center flex-shrink-0 text-red-400 font-black font-display text-xl">G</div>
                                     <div>
                                         <p class="font-bold text-primary text-lg leading-tight">The Bits and Bytes of Computer Networking</p>
-                                        <p class="text-xs text-gray-500 font-mono-custom mt-1 tracking-widest uppercase">Google</p>
+                                        <p class="text-xs text-gray-400 font-mono-custom mt-1 tracking-widest uppercase">Google</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="flex items-center justify-between p-6 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex items-center justify-between p-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
                                 <div class="flex items-center gap-5">
-                                    <div class="w-14 h-14 rounded-2xl bg-purple-50 flex items-center justify-center flex-shrink-0 text-purple-600 font-black font-display text-xl">A</div>
+                                    <div class="w-14 h-14 rounded-2xl bg-purple-500/20 flex items-center justify-center flex-shrink-0 text-purple-400 font-black font-display text-xl">A</div>
                                     <div>
                                         <p class="font-bold text-primary text-lg leading-tight">Testing for Web Accessibility With Accessibility Insights</p>
-                                        <p class="text-xs text-gray-500 font-mono-custom mt-1 tracking-widest uppercase">Accessibility</p>
+                                        <p class="text-xs text-gray-400 font-mono-custom mt-1 tracking-widest uppercase">Accessibility</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="flex items-center justify-between p-6 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow md:col-span-2">
+                            <div class="flex items-center justify-between p-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors md:col-span-2">
                                 <div class="flex items-center gap-5">
-                                    <div class="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center flex-shrink-0 text-red-600 font-black font-display text-xl">G</div>
+                                    <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center flex-shrink-0 text-red-400 font-black font-display text-xl">G</div>
                                     <div>
                                         <p class="font-bold text-primary text-lg">Google IT Professional Certification</p>
-                                        <p class="text-xs text-gray-500 font-mono-custom mt-1 tracking-widest uppercase">Google</p>
+                                        <p class="text-xs text-gray-400 font-mono-custom mt-1 tracking-widest uppercase">Google</p>
                                     </div>
                                 </div>
                             </div>
@@ -1276,14 +1160,14 @@
         <!-- ==========================================================================
              CONTACT SECTION (CRED STYLE PREMIUM CARDS W/ CUSTOM ICONS)
              ========================================================================== -->
-        <section id="contact" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-black/5">
+        <section id="contact" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-white/10">
             
             <div class="text-center max-w-2xl mx-auto mb-24 reveal">
                 <div class="section-tag mx-auto hover-trigger">Initiate Handshake</div>
                 <h2 class="font-display text-5xl md:text-[5rem] font-black tracking-tight text-primary mt-4 mb-6">
                     Let's Connect.
                 </h2>
-                <p class="text-xl text-secondary font-light">
+                <p class="text-xl text-gray-400 font-light">
                     Available for technical support, systems administration, and high-level operations consulting.
                 </p>
             </div>
@@ -1293,49 +1177,49 @@
                 
                 <!-- LinkedIn Premium Card -->
                 <div class="comet-cards-wrapper hover-trigger">
-                    <a href="https://www.linkedin.com/in/osaid-shahid-442599223/" target="_blank" rel="noopener noreferrer" class="comet-card social-card linkedin p-10 block">
-                        <div class="social-icon-wrapper mx-auto">
+                    <a href="https://www.linkedin.com/in/osaid-shahid-442599223/" target="_blank" rel="noopener noreferrer" class="comet-card social-card linkedin p-10 block bg-white/5 border-white/10">
+                        <div class="social-icon-wrapper mx-auto bg-white/5 border-white/10">
                             <!-- Official LinkedIn SVG Path -->
                             <svg class="social-icon-svg w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                             </svg>
                         </div>
                         <h3 class="font-display text-3xl font-black mb-3">LinkedIn</h3>
-                        <p class="text-secondary text-base font-light mb-8 text-center">Professional Network</p>
-                        <span class="text-xs font-mono-custom text-blue-600 font-bold uppercase tracking-widest bg-blue-50 px-4 py-2 rounded-full border border-blue-100">Connect &rarr;</span>
+                        <p class="text-gray-400 text-base font-light mb-8 text-center">Professional Network</p>
+                        <span class="text-xs font-mono-custom text-blue-400 font-bold uppercase tracking-widest bg-blue-500/10 px-4 py-2 rounded-full border border-blue-500/20">Connect &rarr;</span>
                     </a>
                 </div>
 
                 <!-- Email Premium Card with Custom Gmail SVG -->
                 <div class="comet-cards-wrapper hover-trigger">
-                    <a href="mailto:osaidtheshahid@gmail.com" class="comet-card social-card gmail p-10 block">
-                        <div class="social-icon-wrapper mx-auto">
+                    <a href="mailto:osaidtheshahid@gmail.com" class="comet-card social-card gmail p-10 block bg-white/5 border-white/10">
+                        <div class="social-icon-wrapper mx-auto bg-white/5 border-white/10">
                             <!-- Custom Premium Gmail Logo Vector -->
                             <svg class="w-12 h-12 transition-all duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6Z" fill="#e2e8f0" class="gmail-bg transition-colors duration-300" />
+                                <path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6Z" fill="#333" class="gmail-bg transition-colors duration-300" />
                                 <path d="M22 6L12 13L2 6" stroke="#ea4335" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="gmail-red transition-colors duration-300"/>
                                 <path d="M2 18V6L12 13L22 6V18" stroke="#4285f4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="gmail-blue transition-colors duration-300"/>
                             </svg>
                         </div>
                         <h3 class="font-display text-3xl font-black mb-3">Email</h3>
-                        <p class="text-secondary text-sm font-light mb-8 text-center break-all px-4">osaidtheshahid@gmail.com</p>
-                        <span class="text-xs font-mono-custom text-red-500 font-bold uppercase tracking-widest bg-red-50 px-4 py-2 rounded-full border border-red-100">Send Message &rarr;</span>
+                        <p class="text-gray-400 text-sm font-light mb-8 text-center break-all px-4">osaidtheshahid@gmail.com</p>
+                        <span class="text-xs font-mono-custom text-red-400 font-bold uppercase tracking-widest bg-red-500/10 px-4 py-2 rounded-full border border-red-500/20">Send Message &rarr;</span>
                     </a>
                 </div>
 
                 <!-- Phone Premium Card with Custom Premium Phone SVG -->
                 <div class="comet-cards-wrapper hover-trigger">
-                    <a href="tel:+918448527162" class="comet-card social-card phone p-10 block">
-                        <div class="social-icon-wrapper mx-auto">
+                    <a href="tel:+918448527162" class="comet-card social-card phone p-10 block bg-white/5 border-white/10">
+                        <div class="social-icon-wrapper mx-auto bg-white/5 border-white/10">
                             <!-- Custom Premium Phone Receiver Vector -->
                             <svg class="w-12 h-12 transition-all duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M21.05 16.94L18.43 14.32C17.9 13.79 17.06 13.71 16.48 14.13L14.71 15.42C14.28 15.73 13.7 15.75 13.2 15.5C11.58 14.68 9.32 12.42 8.5 10.8C8.25 10.3 8.27 9.72 8.58 9.29L9.87 7.52C10.29 6.94 10.21 6.1 9.68 5.57L7.06 2.95C6.48 2.37 5.55 2.43 5.06 3.06L4.03 4.38C2.96 5.75 2.59 7.58 3.01 9.28C4.15 13.88 8.04 18.25 12.83 19.98C14.6 20.61 16.51 20.31 17.93 19.26L19.29 18.26C19.92 17.78 19.97 16.85 19.39 16.27C20.34 17.22 21.05 16.94 21.05 16.94Z" fill="#e2e8f0" class="phone-bg transition-colors duration-300"/>
+                                <path d="M21.05 16.94L18.43 14.32C17.9 13.79 17.06 13.71 16.48 14.13L14.71 15.42C14.28 15.73 13.7 15.75 13.2 15.5C11.58 14.68 9.32 12.42 8.5 10.8C8.25 10.3 8.27 9.72 8.58 9.29L9.87 7.52C10.29 6.94 10.21 6.1 9.68 5.57L7.06 2.95C6.48 2.37 5.55 2.43 5.06 3.06L4.03 4.38C2.96 5.75 2.59 7.58 3.01 9.28C4.15 13.88 8.04 18.25 12.83 19.98C14.6 20.61 16.51 20.31 17.93 19.26L19.29 18.26C19.92 17.78 19.97 16.85 19.39 16.27C20.34 17.22 21.05 16.94 21.05 16.94Z" fill="#333" class="phone-bg transition-colors duration-300"/>
                                 <path d="M21.05 16.94L18.43 14.32C17.9 13.79 17.06 13.71 16.48 14.13L14.71 15.42C14.28 15.73 13.7 15.75 13.2 15.5C11.58 14.68 9.32 12.42 8.5 10.8C8.25 10.3 8.27 9.72 8.58 9.29L9.87 7.52C10.29 6.94 10.21 6.1 9.68 5.57L7.06 2.95C6.48 2.37 5.55 2.43 5.06 3.06L4.03 4.38C2.96 5.75 2.59 7.58 3.01 9.28C4.15 13.88 8.04 18.25 12.83 19.98C14.6 20.61 16.51 20.31 17.93 19.26L19.29 18.26C19.92 17.78 19.97 16.85 19.39 16.27" stroke="#34a853" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="phone-outline transition-colors duration-300"/>
                             </svg>
                         </div>
                         <h3 class="font-display text-3xl font-black mb-3">Direct Line</h3>
-                        <p class="text-secondary text-base font-light mb-8 text-center">+91 8448527162</p>
-                        <span class="text-xs font-mono-custom text-green-600 font-bold uppercase tracking-widest bg-green-50 px-4 py-2 rounded-full border border-green-100">Call Now &rarr;</span>
+                        <p class="text-gray-400 text-base font-light mb-8 text-center">+91 8448527162</p>
+                        <span class="text-xs font-mono-custom text-emerald-400 font-bold uppercase tracking-widest bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/20">Call Now &rarr;</span>
                     </a>
                 </div>
 
@@ -1347,11 +1231,11 @@
     <!-- ==========================================================================
          FOOTER
          ========================================================================== -->
-    <footer class="border-t border-black/5 py-16 text-center flex flex-col items-center bg-white relative z-10">
-        <p class="text-xs text-gray-400 font-mono-custom tracking-[0.2em] uppercase mb-4">
+    <footer class="border-t border-white/10 py-16 text-center flex flex-col items-center bg-[#050508] relative z-10">
+        <p class="text-xs text-gray-500 font-mono-custom tracking-[0.2em] uppercase mb-4">
             Based in Maunath Bhanjan, Mau, India 275101
         </p>
-        <p class="text-[10px] text-gray-500 font-mono-custom tracking-widest uppercase font-bold">
+        <p class="text-[10px] text-gray-600 font-mono-custom tracking-widest uppercase font-bold">
             Premium Architecture · Designed & Built by Osaid Shahid · © 2026
         </p>
     </footer>
@@ -1360,17 +1244,17 @@
          AI CHAT WIDGET (ENQUIRE WITH AI)
          ========================================================================== -->
     <button id="ai-chat-toggle" class="hover-trigger">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-        Enquire with AI ✨
+        <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        <span class="text-black">Enquire with AI ✨</span>
     </button>
 
     <div id="ai-chat-window">
         <div class="chat-header">
             <div>
                 <h3 class="font-display font-bold text-primary text-xl">Enquire with AI ✨</h3>
-                <p class="text-xs text-secondary font-mono-custom mt-1">Powered by Gemini Engine</p>
+                <p class="text-xs text-gray-400 font-mono-custom mt-1">Powered by Gemini Engine</p>
             </div>
-            <button id="ai-chat-close" class="text-secondary hover:text-primary transition hover-trigger bg-gray-100 p-2 rounded-full">
+            <button id="ai-chat-close" class="text-gray-400 hover:text-white transition hover-trigger bg-white/10 p-2 rounded-full">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
@@ -1382,7 +1266,7 @@
         <div class="chat-input-area">
             <input type="text" id="chat-input" class="chat-input hover-trigger" placeholder="Ask about his skills..." autocomplete="off">
             <button id="chat-send" class="chat-send-btn hover-trigger">
-                <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                <svg class="w-5 h-5 ml-1 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
             </button>
         </div>
     </div>
@@ -1397,106 +1281,141 @@
                1. BESPOKE WEBGL-STYLE PHYSICS ENGINE (CANVAS 2D)
                ========================================================================== */
             const canvas = document.getElementById('physics-canvas');
-            const ctx = canvas.getContext('2d', { alpha: true });
-            
-            let width, height;
-            let particles = [];
-            
-            // Adjust to viewport size
-            const resizeCanvas = () => {
-                width = window.innerWidth;
-                height = window.innerHeight;
-                canvas.width = width * window.devicePixelRatio;
-                canvas.height = height * window.devicePixelRatio;
-                ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-            };
-            
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-
-            // Premium Particle Class - Simulates fluid data nodes
-            class NodeParticle {
-                constructor() {
-                    this.x = Math.random() * width;
-                    this.y = Math.random() * height;
-                    this.vx = (Math.random() - 0.5) * 0.3; // Ultra slow drift
-                    this.vy = (Math.random() - 0.5) * 0.3;
-                    this.baseRadius = Math.random() * 1.5 + 0.5;
-                    this.radius = this.baseRadius;
-                    this.pulsePhase = Math.random() * Math.PI * 2;
-                }
-
-                update() {
-                    // Smooth boundary wrapping
-                    if (this.x < -50) this.x = width + 50;
-                    if (this.x > width + 50) this.x = -50;
-                    if (this.y < -50) this.y = height + 50;
-                    if (this.y > height + 50) this.y = -50;
-
-                    this.x += this.vx;
-                    this.y += this.vy;
-                    
-                    // Organic breathing pulse logic
-                    this.pulsePhase += 0.015;
-                    this.radius = this.baseRadius + Math.sin(this.pulsePhase) * 0.4;
-                }
-
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(0, 0, 0, ${0.08 + (this.radius * 0.03)})`;
-                    ctx.fill();
-                }
-            }
-
-            // Initialization logic for particles
-            const initParticles = () => {
-                particles = [];
-                const numParticles = Math.floor((width * height) / 12000); // Dynamic responsive density
-                for (let i = 0; i < numParticles; i++) {
-                    particles.push(new NodeParticle());
-                }
-            };
-            
-            initParticles();
-
-            // Animation Loop (60fps synced)
-            const animateCanvas = () => {
-                ctx.clearRect(0, 0, width, height);
+            if (canvas) {
+                const ctx = canvas.getContext('2d', { alpha: true });
                 
-                // Draw Mesh Connections (O(N^2) constrained)
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const distSq = dx * dx + dy * dy;
+                let width, height;
+                let particles = [];
+                
+                // Adjust to viewport size
+                const resizeCanvas = () => {
+                    width = window.innerWidth;
+                    height = window.innerHeight;
+                    canvas.width = width * window.devicePixelRatio;
+                    canvas.height = height * window.devicePixelRatio;
+                    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+                };
+                
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas();
 
-                        // Only draw if close enough (dist < 130) -> distSq < 16900
-                        if (distSq < 16900) {
-                            const dist = Math.sqrt(distSq);
-                            ctx.beginPath();
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.strokeStyle = `rgba(0, 0, 0, ${0.04 * (1 - dist / 130)})`;
-                            ctx.lineWidth = 0.6;
-                            ctx.stroke();
-                        }
+                // Premium Particle Class - Simulates fluid data nodes in deep space
+                class NodeParticle {
+                    constructor() {
+                        this.x = Math.random() * width;
+                        this.y = Math.random() * height;
+                        this.vx = (Math.random() - 0.5) * 0.2; // Ultra slow drift
+                        this.vy = (Math.random() - 0.5) * 0.2;
+                        this.baseRadius = Math.random() * 1.5 + 0.5;
+                        this.radius = this.baseRadius;
+                        this.pulsePhase = Math.random() * Math.PI * 2;
+                    }
+
+                    update() {
+                        // Smooth boundary wrapping
+                        if (this.x < -50) this.x = width + 50;
+                        if (this.x > width + 50) this.x = -50;
+                        if (this.y < -50) this.y = height + 50;
+                        if (this.y > height + 50) this.y = -50;
+
+                        this.x += this.vx;
+                        this.y += this.vy;
+                        
+                        // Organic breathing pulse logic
+                        this.pulsePhase += 0.015;
+                        this.radius = this.baseRadius + Math.sin(this.pulsePhase) * 0.4;
+                    }
+
+                    draw() {
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(255, 255, 255, ${0.05 + (this.radius * 0.02)})`;
+                        ctx.fill();
                     }
                 }
 
-                // Draw Nodes
-                particles.forEach(p => {
-                    p.update();
-                    p.draw();
-                });
+                // Initialization logic for particles
+                const initParticles = () => {
+                    particles = [];
+                    const numParticles = Math.floor((width * height) / 15000); // Dynamic responsive density
+                    for (let i = 0; i < numParticles; i++) {
+                        particles.push(new NodeParticle());
+                    }
+                };
+                
+                initParticles();
 
-                requestAnimationFrame(animateCanvas);
+                // Animation Loop (60fps synced)
+                const animateCanvas = () => {
+                    ctx.clearRect(0, 0, width, height);
+                    
+                    // Draw Mesh Connections (O(N^2) constrained)
+                    for (let i = 0; i < particles.length; i++) {
+                        for (let j = i + 1; j < particles.length; j++) {
+                            const dx = particles[i].x - particles[j].x;
+                            const dy = particles[i].y - particles[j].y;
+                            const distSq = dx * dx + dy * dy;
+
+                            // Only draw if close enough
+                            if (distSq < 16900) {
+                                const dist = Math.sqrt(distSq);
+                                ctx.beginPath();
+                                ctx.moveTo(particles[i].x, particles[i].y);
+                                ctx.lineTo(particles[j].x, particles[j].y);
+                                ctx.strokeStyle = `rgba(255, 255, 255, ${0.03 * (1 - dist / 130)})`;
+                                ctx.lineWidth = 0.5;
+                                ctx.stroke();
+                            }
+                        }
+                    }
+
+                    // Draw Nodes
+                    particles.forEach(p => {
+                        p.update();
+                        p.draw();
+                    });
+
+                    requestAnimationFrame(animateCanvas);
+                };
+                
+                animateCanvas();
+            }
+
+            // Starfield Generation via JS Box-Shadows for pure CSS parallax
+            const generateStars = (n) => {
+                let width = window.innerWidth;
+                let height = window.innerHeight;
+                let value = `${Math.random() * width}px ${Math.random() * height}px #FFF`;
+                for(let i=1; i<n; i++){
+                    value += `, ${Math.random() * width}px ${Math.random() * height}px #FFF`;
+                }
+                return value;
             };
-            
-            animateCanvas();
+
+            const star1 = document.getElementById('stars-1');
+            const star2 = document.getElementById('stars-2');
+            const star3 = document.getElementById('stars-3');
+
+            if (star1) star1.style.boxShadow = generateStars(300);
+            if (star2) star2.style.boxShadow = generateStars(100);
+            if (star3) star3.style.boxShadow = generateStars(50);
+
+            // Cosmos Revolution Effect on Scroll
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                document.querySelectorAll('.planet-orbit').forEach(orbit => {
+                    const speed = parseFloat(orbit.dataset.speed);
+                    const rotSpeed = parseFloat(orbit.dataset.rot);
+                    orbit.style.transform = `translate(-50%, -50%) translateY(${scrollY * speed}px) rotate(${scrollY * rotSpeed}deg)`;
+                });
+                
+                if (star1) star1.style.transform = `translateY(${scrollY * -0.05}px)`;
+                if (star2) star2.style.transform = `translateY(${scrollY * -0.1}px)`;
+                if (star3) star3.style.transform = `translateY(${scrollY * -0.15}px)`;
+            });
 
             /* ==========================================================================
-               2. CUSTOM PHYSICS CURSOR LOGIC WITH SPRING DYNAMICS
+               2. CUSTOM PHYSICS CURSOR LOGIC WITH TIGHTER SPRING DYNAMICS
                ========================================================================== */
             const cursorDot = document.getElementById('cursor-dot');
             const cursorOutline = document.getElementById('cursor-outline');
@@ -1514,14 +1433,14 @@
                 }
             });
 
-            // Smooth spring trailing effect
+            // Smooth tight spring trailing effect
             const animateCursor = () => {
                 let distX = mouseX - outlineX;
                 let distY = mouseY - outlineY;
                 
-                // Decrease the easing fraction to make it tighter to the mouse
-                outlineX += distX * 0.25; 
-                outlineY += distY * 0.25;
+                // Tightened easing fraction for subtle, premium movement
+                outlineX += distX * 0.35; 
+                outlineY += distY * 0.35;
                 
                 if(cursorOutline) {
                     cursorOutline.style.transform = `translate3d(calc(${outlineX}px - 50%), calc(${outlineY}px - 50%), 0)`;
@@ -1570,7 +1489,7 @@
                     const x = e.clientX - rect.left;
                     const y = e.clientY - rect.top;
                     
-                    // Update CSS custom properties for the gradient
+                    // Update CSS custom properties for the gradient tracking
                     wrapper.style.setProperty('--mouse-x', `${x}px`);
                     wrapper.style.setProperty('--mouse-y', `${y}px`);
                 });
@@ -1632,12 +1551,12 @@
                 if(window.scrollY > 50) {
                     navbar.style.paddingTop = '1.25rem';
                     navbar.style.paddingBottom = '1.25rem';
-                    navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
-                    navbar.style.boxShadow = '0 10px 40px -10px rgba(0,0,0,0.08)';
+                    navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.8)';
+                    navbar.style.boxShadow = '0 10px 40px -10px rgba(0,0,0,0.5)';
                 } else {
                     navbar.style.paddingTop = '1.5rem';
                     navbar.style.paddingBottom = '1.5rem';
-                    navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
+                    navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.4)';
                     navbar.style.boxShadow = 'none';
                 }
             });
