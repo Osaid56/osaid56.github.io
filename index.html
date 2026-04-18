@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Osaid Shahid - App/Cloud Technical Support & Systems Administrator">
-    <meta name="theme-color" content="#030305">
+    <meta name="theme-color" content="#000000">
     <title>Osaid Shahid | Premium Technical Professional</title>
     
     <!-- Tailwind CSS for utility scaffolding -->
@@ -21,10 +21,10 @@
            ========================================================================== */
         :root {
             /* Premium Dark Cosmos Palette */
-            --bg-base: #030305;
-            --bg-surface: rgba(12, 12, 16, 0.85); /* Deep dark opaque for text readability */
-            --bg-surface-solid: #0d0d12;
-            --bg-surface-glass: rgba(10, 10, 15, 0.9);
+            --bg-base: #000000;
+            --bg-surface: rgba(5, 5, 5, 0.85); /* Deep dark opaque for text readability */
+            --bg-surface-solid: #000000;
+            --bg-surface-glass: rgba(0, 0, 0, 0.9);
             
             /* Text Colors */
             --text-primary: #ffffff;
@@ -159,7 +159,7 @@
             top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -3;
             overflow: hidden;
-            background: radial-gradient(ellipse at bottom, #0d0d1a 0%, #030305 100%);
+            background: #000000;
         }
 
         /* SVG Noise Filter for Planets */
@@ -190,40 +190,241 @@
                         0 0 100px rgba(0,0,0,0.5);
         }
 
-        /* Planet 1: Massive Copper/Cyan (Bottom Left) */
+        /* Continuous Rotation Animations */
+        @keyframes spin-cw {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        @keyframes spin-ccw {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(-360deg); }
+        }
+
+        /* Planet 1: Copper/Cyan (Hero) */
         .p1 {
-            width: 800px; height: 800px;
+            width: 400px; height: 400px; /* Scaled down */
             background: radial-gradient(circle at 30% 30%, #24a19c, #ff0844 80%);
-            left: -30vw; top: 30vh;
+            left: -20vw; top: 15vh;
+            animation: spin-cw 120s linear infinite;
         }
         
-        /* Planet 2: Medium Golden/Blue (Top Right) */
+        /* Planet 2: Golden/Blue (Between Hero & Exp) */
         .p2 {
-            width: 400px; height: 400px;
+            width: 200px; height: 200px; /* Scaled down */
             background: radial-gradient(circle at 40% 20%, #f6d365, #203a43 90%);
-            left: 40vw; top: -20vh;
+            left: 35vw; top: 10vh;
+            animation: spin-ccw 100s linear infinite;
         }
 
-        /* Planet 3: Small Obsidian/Purple (Center Right) */
+        /* Planet 3: Obsidian/Purple (Experience) */
         .p3 {
-            width: 250px; height: 250px;
+            width: 120px; height: 120px; /* Scaled down */
             background: radial-gradient(circle at 20% 30%, #bc13fe, #000000 70%);
-            left: 20vw; top: 20vh;
+            left: -15vw; top: 50vh;
             box-shadow: inset -15px -15px 30px rgba(0,0,0,0.9), inset 5px 5px 20px rgba(255,255,255,0.4);
+            animation: spin-cw 150s linear infinite;
         }
 
-        /* Planet 4: Giant Dark Green/Cyan (Bottom Right) */
-        .p4 {
-            width: 650px; height: 650px;
-            background: radial-gradient(circle at 60% 40%, #00f2fe, #093028 80%);
-            left: 35vw; top: 50vh;
-        }
-
-        /* Planet 5: Tiny Bright Star/Moon (Top Left) */
+        /* Planet 5: Bright Star/Moon (Expertise/Contact) */
         .p5 {
-            width: 100px; height: 100px;
+            width: 70px; height: 70px; /* Scaled down */
             background: radial-gradient(circle at 30% 30%, #ffffff, #f6d365 50%, #000000 100%);
-            left: -40vw; top: -30vh;
+            left: -25vw; top: 130vh;
+            animation: spin-cw 90s linear infinite;
+        }
+
+        /* Planet 6: Red/Orange (Deep Scroll) */
+        .p6 {
+            width: 160px; height: 160px;
+            background: radial-gradient(circle at 30% 30%, #ff4b1f, #1f1c2c 80%);
+            left: 20vw; top: 200vh;
+            box-shadow: inset -20px -20px 40px rgba(0,0,0,0.9), inset 5px 5px 20px rgba(255,255,255,0.3);
+            animation: spin-ccw 140s linear infinite;
+        }
+
+        /* Planet 7: Ice Blue (Deep Scroll) */
+        .p7 {
+            width: 90px; height: 90px;
+            background: radial-gradient(circle at 40% 40%, #a1c4fd, #000000 80%);
+            left: -10vw; top: 250vh;
+            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.9), inset 5px 5px 15px rgba(255,255,255,0.4);
+            animation: spin-cw 110s linear infinite;
+        }
+
+        /* Planet 8: Deep Magenta/Void (Mid-scroll) */
+        .p8 {
+            width: 250px; height: 250px;
+            background: radial-gradient(circle at 70% 30%, #ff00cc, #330033 80%);
+            left: -10vw; top: 170vh;
+            box-shadow: inset -25px -25px 50px rgba(0,0,0,0.9), inset 10px 10px 30px rgba(255,255,255,0.2);
+            animation: spin-ccw 180s linear infinite;
+        }
+
+        /* Planet 9: Emerald/Teal Gas Giant (Deep-scroll) */
+        .p9 {
+            width: 450px; height: 450px;
+            background: radial-gradient(circle at 20% 50%, #00b09b, #96c93d 50%, #000000 90%);
+            left: 60vw; top: 280vh;
+            box-shadow: inset -40px -40px 80px rgba(0,0,0,0.9), inset 10px 10px 40px rgba(255,255,255,0.2);
+            animation: spin-cw 200s linear infinite;
+        }
+
+        /* Planet 10: Neon Pink/Orange small moon (Top/Mid-scroll) */
+        .p10 {
+            width: 100px; height: 100px;
+            background: radial-gradient(circle at 40% 40%, #ff9966, #ff5e62 70%, #000 100%);
+            left: 85vw; top: 50vh;
+            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.9), inset 5px 5px 15px rgba(255,255,255,0.4);
+            animation: spin-ccw 80s linear infinite;
+        }
+
+        /* Planet 12: Icy Blue Moon */
+        .p12 {
+            width: 80px; height: 80px;
+            background: radial-gradient(circle at 35% 35%, #e0ffff, #4682b4 70%, #000 100%);
+            box-shadow: inset -8px -8px 15px rgba(0,0,0,0.9), inset 4px 4px 10px rgba(255,255,255,0.4);
+            animation: spin-ccw 95s linear infinite;
+        }
+
+        /* Planet 13: Fiery Red/Yellow Giant */
+        .p13 {
+            width: 220px; height: 220px;
+            background: radial-gradient(circle at 30% 40%, #ffd700, #ff4500 60%, #8b0000 90%);
+            box-shadow: inset -20px -20px 40px rgba(0,0,0,0.9), inset 5px 5px 20px rgba(255,255,255,0.3);
+            animation: spin-cw 140s linear infinite;
+        }
+
+        /* Planet 14: Deep Purple Anomaly */
+        .p14 {
+            width: 140px; height: 140px;
+            background: radial-gradient(circle at 40% 30%, #da70d6, #4b0082 70%, #000 100%);
+            box-shadow: inset -15px -15px 30px rgba(0,0,0,0.9), inset 5px 5px 15px rgba(255,255,255,0.3);
+            animation: spin-ccw 125s linear infinite;
+        }
+
+        /* Planet 15: Pale Green/Grey Rocky */
+        .p15 {
+            width: 110px; height: 110px;
+            background: radial-gradient(circle at 30% 30%, #8fbc8f, #2f4f4f 80%);
+            box-shadow: inset -12px -12px 25px rgba(0,0,0,0.9), inset 4px 4px 12px rgba(255,255,255,0.2);
+            animation: spin-cw 105s linear infinite;
+        }
+
+        /* Planet 16: Dark Ocean Giant */
+        .p16 {
+            width: 350px; height: 350px;
+            background: radial-gradient(circle at 25% 25%, #00ced1, #00008b 60%, #000 90%);
+            box-shadow: inset -30px -30px 60px rgba(0,0,0,0.9), inset 8px 8px 30px rgba(255,255,255,0.2);
+            animation: spin-ccw 190s linear infinite;
+        }
+
+        /* ==========================================================================
+           04.1 BEAUTIFUL SATURN REPLACEMENT (HIGH FIDELITY RINGS)
+           ========================================================================== */
+        .beautiful-saturn-wrapper {
+            position: absolute;
+            width: 600px; height: 600px;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .bs-core {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px; height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #d1bc94, #c99200 40%, #8c681b 70%, #0d0802 95%);
+            box-shadow:
+                inset -30px -30px 45px rgba(0,0,0,0.95),
+                inset 10px 10px 30px rgba(255,255,255,0.15),
+                0 0 40px rgba(248, 181, 0, 0.1);
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        /* Core atmosphere bands */
+        .bs-core::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: repeating-linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0.05) 0%,
+                rgba(255, 255, 255, 0.05) 4%,
+                transparent 4%,
+                transparent 12%,
+                rgba(0, 0, 0, 0.15) 12%,
+                rgba(0, 0, 0, 0.15) 16%
+            );
+            mix-blend-mode: overlay;
+            transform: rotate(-15deg) scale(1.2);
+        }
+
+        .bs-core-shadow {
+            position: absolute;
+            width: 120%; height: 8px;
+            top: 52%; left: -10%;
+            background: rgba(0, 0, 0, 0.6);
+            transform: rotate(-18deg);
+            filter: blur(3px);
+            z-index: 6;
+        }
+
+        .bs-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 540px; height: 540px;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle,
+                transparent 35%,
+                rgba(180, 160, 120, 0.8) 35.2%,
+                rgba(180, 160, 120, 0.8) 38%,
+                rgba(200, 180, 140, 0.9) 38.2%,
+                rgba(200, 180, 140, 0.9) 43%,
+                rgba(140, 120, 90, 0.7) 43.2%,
+                rgba(140, 120, 90, 0.7) 46%,
+                transparent 46.2%, /* Cassini Division */
+                transparent 48%,
+                rgba(170, 150, 110, 0.85) 48.2%,
+                rgba(170, 150, 110, 0.85) 53%,
+                rgba(120, 130, 150, 0.5) 53.2%,
+                rgba(120, 130, 150, 0.5) 57%,
+                transparent 57.2%
+            );
+            transform: translate(-50%, -50%) rotateX(76deg) rotateY(-18deg);
+        }
+
+        .bs-ring-back {
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+            z-index: 2;
+        }
+
+        .bs-ring-front {
+            clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+            z-index: 10;
+        }
+
+        .bs-shadow-caster {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 540px; height: 540px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                transparent 80deg,
+                rgba(0,0,0,0.8) 100deg,
+                rgba(0,0,0,0.8) 140deg,
+                transparent 160deg,
+                transparent 360deg
+            );
+            z-index: 3;
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+            transform: translate(-50%, -50%) rotateX(76deg) rotateY(-18deg);
+            filter: blur(8px);
         }
 
         /* Starfield Layers */
@@ -231,13 +432,6 @@
             position: absolute; top: 0; left: 0; width: 1px; height: 1px;
             background: transparent;
             will-change: transform;
-        }
-
-        /* Global Cosmic Dust Overlay */
-        .cosmic-dust {
-            position: fixed; inset: 0; z-index: -1;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-            opacity: 0.15; mix-blend-mode: screen; pointer-events: none;
         }
 
         #physics-canvas {
@@ -488,7 +682,7 @@
         .social-icon-svg, .gmail-red, .gmail-blue, .phone-outline {
             transition: all 0.6s var(--ease-elastic); transform-origin: center;
         }
-        .social-icon-svg { width: 40px; height: 40px; fill: var(--text-primary); } /* Changed to primary for better contrast */
+        .social-icon-svg { width: 40px; height: 40px; fill: var(--text-primary); }
 
         /* ==========================================================================
            12. AI CHAT WIDGET (ENQUIRE WITH AI)
@@ -583,8 +777,6 @@
             .edu-timeline-content { width: 100%; }
             .edu-timeline-dot { left: 16px; top: 1.5rem; transform: none; }
             .edu-timeline-node:hover .edu-timeline-dot { transform: scale(1.4); }
-            .p1 { width: 400px; height: 400px; }
-            .p4 { width: 300px; height: 300px; }
         }
 
         @media (max-width: 768px) {
@@ -626,15 +818,46 @@
 
     <!-- Premium Backgrounds (Cosmos) -->
     <div id="cosmos-container">
-        <!-- Planets -->
-        <div class="planet-orbit" data-speed="0.2" data-rot="0.05"><div class="planet p1"><div class="planet-noise"></div></div></div>
-        <div class="planet-orbit" data-speed="-0.1" data-rot="-0.08"><div class="planet p2"><div class="planet-noise"></div></div></div>
-        <div class="planet-orbit" data-speed="0.15" data-rot="0.12"><div class="planet p3"><div class="planet-noise"></div></div></div>
-        <div class="planet-orbit" data-speed="-0.2" data-rot="-0.04"><div class="planet p4"><div class="planet-noise"></div></div></div>
-        <div class="planet-orbit" data-speed="0.3" data-rot="0.2"><div class="planet p5"><div class="planet-noise"></div></div></div>
+        
+        <!-- Distributed Orbiting Planets (Spaced all the way to 600vh for continuous scroll) -->
+        <div class="planet-orbit" style="top: 20vh; left: 10vw;" data-speed="-0.2" data-rot="0.08"><div class="planet p1"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 40vh; left: 25vw;" data-speed="-0.1" data-rot="-0.1"><div class="planet p12"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 80vh; left: 85vw;" data-speed="-0.3" data-rot="0.15"><div class="planet p10"><div class="planet-noise"></div></div></div>
+        
+        <div class="planet-orbit" style="top: 120vh; left: 80vw;" data-speed="-0.2" data-rot="-0.08"><div class="planet p2"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 160vh; left: 15vw;" data-speed="-0.4" data-rot="0.12"><div class="planet p13"><div class="planet-noise"></div></div></div>
+        
+        <div class="planet-orbit" style="top: 200vh; left: 85vw;" data-speed="-0.3" data-rot="0.09"><div class="planet p3"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 240vh; left: 50vw;" data-speed="-0.2" data-rot="0.11"><div class="planet p7"><div class="planet-noise"></div></div></div>
+        
+        <!-- These planets will now show up during and after the Education Section -->
+        <div class="planet-orbit" style="top: 320vh; left: 80vw;" data-speed="-0.3" data-rot="0.13"><div class="planet p14"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 360vh; left: -5vw;" data-speed="-0.5" data-rot="-0.09"><div class="planet p8"><div class="planet-noise"></div></div></div>
+        
+        <div class="planet-orbit" style="top: 400vh; left: 20vw;" data-speed="-0.3" data-rot="0.14"><div class="planet p5"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 440vh; left: 70vw;" data-speed="-0.4" data-rot="-0.11"><div class="planet p15"><div class="planet-noise"></div></div></div>
+        
+        <!-- Beautiful High-Fidelity Saturn (Deep Scroll - Expertise / Contact area) -->
+        <div class="planet-orbit" style="top: 480vh; left: 15vw;" data-speed="-0.5" data-rot="0.05">
+            <div class="beautiful-saturn-wrapper">
+                <div class="bs-ring bs-ring-back"></div>
+                <div class="bs-shadow-caster"></div>
+                <div class="bs-core">
+                    <div class="planet-noise"></div>
+                    <div class="bs-core-shadow"></div>
+                </div>
+                <div class="bs-ring bs-ring-front"></div>
+            </div>
+        </div>
+
+        <div class="planet-orbit" style="top: 520vh; left: 85vw;" data-speed="-0.4" data-rot="-0.12"><div class="planet p6"><div class="planet-noise"></div></div></div>
+        
+        <!-- Dark Ocean & Emerald Gas Giant right at the very bottom -->
+        <div class="planet-orbit" style="top: 560vh; left: 80vw;" data-speed="-0.6" data-rot="0.08"><div class="planet p16"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 600vh; left: 60vw;" data-speed="-0.6" data-rot="0.09"><div class="planet p9"><div class="planet-noise"></div></div></div>
+
         <!-- Starfield generated via JS -->
         <div id="stars-1"></div><div id="stars-2"></div><div id="stars-3"></div>
-        <div class="cosmic-dust"></div>
     </div>
     
     <!-- Physics Canvas for Mesh Connections -->
@@ -1209,7 +1432,7 @@
     <!-- ==========================================================================
          FOOTER
          ========================================================================== -->
-    <footer class="border-t border-white/10 py-16 text-center flex flex-col items-center bg-[#050508] relative z-10">
+    <footer class="border-t border-white/10 py-16 text-center flex flex-col items-center bg-black relative z-10">
         <p class="text-xs text-gray-500 font-mono-custom tracking-[0.2em] uppercase mb-4">
             Based in Maunath Bhanjan, Mau, India 275101
         </p>
@@ -1436,11 +1659,6 @@
             // Click state bindings
             window.addEventListener('mousedown', () => document.body.classList.add('clicking'));
             window.addEventListener('mouseup', () => document.body.classList.remove('clicking'));
-
-            /* ==========================================================================
-               3. SUPER PREMIUM CLICK BURST (CRED STYLE)
-               ========================================================================== */
-            // BURST REMOVED AS PER USER REQUEST.
 
             /* ==========================================================================
                4. PERPLEXITY COMET SPOTLIGHT BORDER EFFECT
