@@ -27,9 +27,9 @@
             --bg-surface-glass: rgba(0, 0, 0, 0.9);
             
             /* Text Colors */
-            --text-primary: #ffffff;
-            --text-secondary: #e4e4e7; /* Brighter for better contrast */
-            --text-tertiary: #a1a1aa;
+            --text-primary: #fafafa; /* Softer white for premium feel */
+            --text-secondary: #a1a1aa; /* Zinc 400 for balanced contrast */
+            --text-tertiary: #71717a;
             --text-inverse: #000000;
             
             /* Accents & Brand Colors (CRED/Comet Vibe) */
@@ -442,34 +442,13 @@
         }
 
         /* ==========================================================================
-           05. FLAG IN THE WIND ANIMATION (SVG + CSS 3D)
-           ========================================================================== */
-        .flag-wind-effect {
-            display: inline-block;
-            animation: flag-wave-3d 10s ease-in-out infinite;
-            transform-origin: center left;
-            will-change: transform, filter;
-            position: relative;
-        }
-
-        .flag-wind-filter { filter: url(#wind-displacement); }
-
-        @keyframes flag-wave-3d {
-            0% { transform: perspective(1000px) rotateY(2deg) rotateX(1deg) skewY(0deg) translateY(0); }
-            25% { transform: perspective(1000px) rotateY(-1deg) rotateX(-1deg) skewY(0.5deg) translateY(-2px); }
-            50% { transform: perspective(1000px) rotateY(1deg) rotateX(0.5deg) skewY(-0.5deg) translateY(0); }
-            75% { transform: perspective(1000px) rotateY(-2deg) rotateX(-1deg) skewY(1deg) translateY(2px); }
-            100% { transform: perspective(1000px) rotateY(2deg) rotateX(1deg) skewY(0deg) translateY(0); }
-        }
-
-        /* ==========================================================================
-           06. PERPLEXITY COMET SPOTLIGHT CARDS & DEEP BLUR (READABILITY FIXED)
+           06. PERPLEXITY COMET SPOTLIGHT CARDS & DEEP BLUR
            ========================================================================== */
         .comet-cards-wrapper { position: relative; }
 
         .comet-card {
             position: relative;
-            background-color: var(--bg-surface); /* Deep dark background */
+            background-color: var(--bg-surface);
             backdrop-filter: blur(40px); 
             -webkit-backdrop-filter: blur(40px);
             border-radius: var(--card-radius);
@@ -483,7 +462,6 @@
             border: 1px solid var(--border-light);
         }
 
-        /* Spotlight tracking border */
         .comet-cards-wrapper::before {
             content: '';
             position: absolute;
@@ -509,9 +487,7 @@
         /* ==========================================================================
            07. PREMIUM COMPONENTS (BUTTONS, TAGS)
            ========================================================================== */
-        .magnetic-btn-wrapper {
-            position: relative; display: inline-block; padding: 20px; margin: -20px;
-        }
+        .magnetic-btn-wrapper { position: relative; display: inline-block; padding: 20px; margin: -20px; }
 
         .btn-premium {
             position: relative; display: inline-flex; align-items: center; justify-content: center;
@@ -555,10 +531,7 @@
             animation: pulse-dot 2s infinite alternate;
         }
 
-        @keyframes pulse-dot {
-            0% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0.5; transform: scale(0.8); }
-        }
+        @keyframes pulse-dot { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0.5; transform: scale(0.8); } }
 
         /* ==========================================================================
            08. GLASSMORPHISM NAVIGATION
@@ -608,13 +581,9 @@
             transform: scale(1.5); box-shadow: 0 0 20px var(--accent-cyan);
         }
 
-        /* Specialized Vertical Split Timeline for Education */
         .edu-timeline-container::before { left: 50%; transform: translateX(-50%); }
 
-        .edu-timeline-node {
-            width: 100%; display: flex; justify-content: flex-start; margin-bottom: 3.5rem; position: relative;
-        }
-
+        .edu-timeline-node { width: 100%; display: flex; justify-content: flex-start; margin-bottom: 3.5rem; position: relative; }
         .edu-timeline-node:nth-child(even) { justify-content: flex-end; }
         .edu-timeline-content { width: 45%; position: relative; }
 
@@ -640,20 +609,15 @@
         }
 
         .reveal.active { opacity: 1; transform: translateY(0); }
-
         .reveal-delay-1 { transition-delay: 0.1s; }
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
         .reveal-delay-4 { transition-delay: 0.4s; }
 
         /* ==========================================================================
-           11. CONTACT SECTION & SOCIAL CARDS (CUSTOM PREMIUM SVGS)
+           11. CONTACT SECTION & SOCIAL CARDS
            ========================================================================== */
-        .social-card {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-align: center; height: 100%; text-decoration: none;
-        }
-
+        .social-card { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; text-decoration: none; }
         .social-icon-wrapper {
             width: 100px; height: 100px; border-radius: 28px;
             background-color: rgba(255,255,255,0.05); border: 1px solid var(--border-light);
@@ -662,30 +626,19 @@
             box-shadow: inset 0 0 20px rgba(255,255,255,0.02); position: relative; overflow: hidden;
         }
 
-        .social-card:hover .social-icon-wrapper {
-            transform: translateY(-16px) scale(1.05); background-color: rgba(255,255,255,0.15);
-        }
-
-        /* LinkedIn Specific */
+        .social-card:hover .social-icon-wrapper { transform: translateY(-16px) scale(1.05); background-color: rgba(255,255,255,0.15); }
         .social-card.linkedin:hover .social-icon-wrapper { border-color: rgba(0, 119, 181, 0.6); box-shadow: 0 20px 40px rgba(0, 119, 181, 0.3); }
         .social-card.linkedin:hover .social-icon-svg { fill: #0077b5; transform: scale(1.15); filter: drop-shadow(0 0 10px rgba(0,119,181,0.5)); }
-
-        /* Gmail Specific */
         .social-card.gmail:hover .social-icon-wrapper { border-color: rgba(234, 67, 53, 0.6); box-shadow: 0 20px 40px rgba(234, 67, 53, 0.3); }
         .social-card.gmail:hover .gmail-red { stroke: #ea4335; transform: scale(1.15); filter: drop-shadow(0 0 10px rgba(234,67,53,0.5)); }
         .social-card.gmail:hover .gmail-blue { stroke: #4285f4; transform: scale(1.15); filter: drop-shadow(0 0 10px rgba(66,133,244,0.5)); }
-        
-        /* Phone Specific */
         .social-card.phone:hover .social-icon-wrapper { border-color: rgba(52, 168, 83, 0.6); box-shadow: 0 20px 40px rgba(52, 168, 83, 0.3); }
         .social-card.phone:hover .phone-outline { stroke: #34a853; transform: scale(1.15) rotate(-10deg); filter: drop-shadow(0 0 10px rgba(52,168,83,0.5)); }
-
-        .social-icon-svg, .gmail-red, .gmail-blue, .phone-outline {
-            transition: all 0.6s var(--ease-elastic); transform-origin: center;
-        }
+        .social-icon-svg, .gmail-red, .gmail-blue, .phone-outline { transition: all 0.6s var(--ease-elastic); transform-origin: center; }
         .social-icon-svg { width: 40px; height: 40px; fill: var(--text-primary); }
 
         /* ==========================================================================
-           12. AI CHAT WIDGET (ENQUIRE WITH AI)
+           12. AI CHAT WIDGET
            ========================================================================== */
         #ai-chat-toggle {
             position: fixed; bottom: 2rem; right: 2rem; z-index: 100;
@@ -716,54 +669,19 @@
         }
 
         #ai-chat-window.active { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
-
-        .chat-header {
-            padding: 1.75rem; border-bottom: 1px solid var(--border-light);
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(0, 0, 0, 0.4);
-        }
-
-        .chat-messages {
-            flex: 1; padding: 1.75rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1.25rem; scroll-behavior: smooth;
-        }
-
-        .chat-message {
-            max-width: 85%; padding: 1.1rem 1.4rem; border-radius: 20px; font-size: 0.95rem; line-height: 1.6;
-            animation: messageSlide 0.5s var(--ease-out-expo) forwards; opacity: 0; transform: translateY(15px);
-        }
-
+        .chat-header { padding: 1.75rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.4); }
+        .chat-messages { flex: 1; padding: 1.75rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1.25rem; scroll-behavior: smooth; }
+        .chat-message { max-width: 85%; padding: 1.1rem 1.4rem; border-radius: 20px; font-size: 0.95rem; line-height: 1.6; animation: messageSlide 0.5s var(--ease-out-expo) forwards; opacity: 0; transform: translateY(15px); }
         @keyframes messageSlide { to { opacity: 1; transform: translateY(0); } }
-
         .message-ai { background-color: rgba(255,255,255,0.08); border: 1px solid var(--border-light); color: var(--text-primary); align-self: flex-start; border-bottom-left-radius: 6px; }
         .message-user { background-color: var(--accent-cyan); color: #000; align-self: flex-end; border-bottom-right-radius: 6px; font-weight: 600; }
-
-        .chat-input-area {
-            padding: 1.5rem; border-top: 1px solid var(--border-light);
-            background: rgba(0, 0, 0, 0.4); display: flex; gap: 1rem;
-        }
-
-        .chat-input {
-            flex: 1; padding: 1rem 1.5rem; border: 1px solid var(--border-medium); border-radius: 100px;
-            background: rgba(0,0,0,0.5); color: white; font-family: 'Inter', sans-serif; font-size: 0.95rem;
-            outline: none; transition: all 0.3s ease;
-        }
-
+        .chat-input-area { padding: 1.5rem; border-top: 1px solid var(--border-light); background: rgba(0, 0, 0, 0.4); display: flex; gap: 1rem; }
+        .chat-input { flex: 1; padding: 1rem 1.5rem; border: 1px solid var(--border-medium); border-radius: 100px; background: rgba(0,0,0,0.5); color: white; font-family: 'Inter', sans-serif; font-size: 0.95rem; outline: none; transition: all 0.3s ease; }
         .chat-input:focus { border-color: var(--accent-cyan); box-shadow: 0 0 0 4px rgba(0, 225, 255, 0.15); }
-
-        .chat-send-btn {
-            width: 52px; height: 52px; border-radius: 50%;
-            background-color: var(--accent-cyan); color: #000; border: none;
-            display: flex; align-items: center; justify-content: center;
-            transition: transform 0.3s var(--ease-elastic), box-shadow 0.2s ease;
-        }
-
+        .chat-send-btn { width: 52px; height: 52px; border-radius: 50%; background-color: var(--accent-cyan); color: #000; border: none; display: flex; align-items: center; justify-content: center; transition: transform 0.3s var(--ease-elastic), box-shadow 0.2s ease; }
         .chat-send-btn:hover { transform: scale(1.15); box-shadow: 0 0 20px var(--accent-cyan); }
-
         .typing-dots { display: flex; gap: 6px; padding: 0.5rem; }
-        .typing-dots span {
-            width: 8px; height: 8px; background-color: var(--accent-cyan); border-radius: 50%;
-            animation: typing 1.4s infinite ease-in-out both;
-        }
+        .typing-dots span { width: 8px; height: 8px; background-color: var(--accent-cyan); border-radius: 50%; animation: typing 1.4s infinite ease-in-out both; }
         .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
         .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
 
@@ -789,55 +707,65 @@
             .cursor-dot, .cursor-outline { display: none; }
             body { cursor: auto; }
             .btn-premium, .hover-trigger, a, button { cursor: pointer; }
-            
-            #ai-chat-window { 
-                bottom: 0; right: 0; width: 100vw; height: 85vh; 
-                max-width: none; max-height: none; 
-                border-radius: 32px 32px 0 0; transform: translateY(100%); 
-            }
+            #ai-chat-window { bottom: 0; right: 0; width: 100vw; height: 85vh; max-width: none; max-height: none; border-radius: 32px 32px 0 0; transform: translateY(100%); }
             #ai-chat-toggle { bottom: 1.5rem; right: 1.5rem; padding: 1rem 1.5rem; font-size: 0.9rem; }
         }
+
+        /* Physics Text Setup */
+        .char-wrapper { display: inline-block; white-space: pre; position: relative; }
+        .char-inner { display: inline-block; will-change: transform; position: relative; z-index: 10; }
+        .char-inner.falling { z-index: 5; pointer-events: none; }
+        .char-inner.carried { z-index: 20; pointer-events: none; filter: drop-shadow(0 0 10px rgba(0,225,255,0.8)); }
+        
+        #fixer-bot {
+            position: absolute;
+            width: 40px; height: 40px;
+            z-index: 60;
+            will-change: transform;
+            pointer-events: none;
+            /* Start hidden above scene */
+            transform: translate(-100px, -100px);
+        }
+
+        /* Bot Tractor Beam */
+        .tractor-beam {
+            position: absolute;
+            left: 50%; top: 50%;
+            width: 2px;
+            background: linear-gradient(to bottom, #00e1ff, transparent);
+            transform-origin: top center;
+            opacity: 0;
+            box-shadow: 0 0 10px #00e1ff;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .bot-glow { animation: pulseGlow 2s infinite alternate; }
+        @keyframes pulseGlow {
+            0% { filter: drop-shadow(0 0 5px rgba(0,225,255,0.5)); }
+            100% { filter: drop-shadow(0 0 15px rgba(0,225,255,1)); }
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- ==========================================================================
-         SVG FILTERS & DEFINITIONS
-         ========================================================================== -->
-    <!-- Flag Wind Effect Filter -->
-    <svg style="width:0; height:0; position:absolute;" aria-hidden="true">
-        <defs>
-            <filter id="wind-displacement" x="-20%" y="-20%" width="140%" height="140%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.01 0.02" numOctaves="2" result="noise">
-                    <animate attributeName="baseFrequency" values="0.01 0.02; 0.015 0.03; 0.01 0.02" dur="10s" repeatCount="indefinite"/>
-                </feTurbulence>
-                <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G"/>
-            </filter>
-        </defs>
-    </svg>
-
     <!-- Premium Backgrounds (Cosmos) -->
     <div id="cosmos-container">
-        
-        <!-- Distributed Orbiting Planets (Spaced all the way to 600vh for continuous scroll) -->
+        <!-- Orbiting Planets -->
         <div class="planet-orbit" style="top: 20vh; left: 10vw;" data-speed="-0.2" data-rot="0.08"><div class="planet p1"><div class="planet-noise"></div></div></div>
         <div class="planet-orbit" style="top: 40vh; left: 25vw;" data-speed="-0.1" data-rot="-0.1"><div class="planet p12"><div class="planet-noise"></div></div></div>
         <div class="planet-orbit" style="top: 80vh; left: 85vw;" data-speed="-0.3" data-rot="0.15"><div class="planet p10"><div class="planet-noise"></div></div></div>
-        
         <div class="planet-orbit" style="top: 120vh; left: 80vw;" data-speed="-0.2" data-rot="-0.08"><div class="planet p2"><div class="planet-noise"></div></div></div>
         <div class="planet-orbit" style="top: 160vh; left: 15vw;" data-speed="-0.4" data-rot="0.12"><div class="planet p13"><div class="planet-noise"></div></div></div>
-        
         <div class="planet-orbit" style="top: 200vh; left: 85vw;" data-speed="-0.3" data-rot="0.09"><div class="planet p3"><div class="planet-noise"></div></div></div>
         <div class="planet-orbit" style="top: 240vh; left: 50vw;" data-speed="-0.2" data-rot="0.11"><div class="planet p7"><div class="planet-noise"></div></div></div>
-        
-        <!-- These planets will now show up during and after the Education Section -->
         <div class="planet-orbit" style="top: 320vh; left: 80vw;" data-speed="-0.3" data-rot="0.13"><div class="planet p14"><div class="planet-noise"></div></div></div>
         <div class="planet-orbit" style="top: 360vh; left: -5vw;" data-speed="-0.5" data-rot="-0.09"><div class="planet p8"><div class="planet-noise"></div></div></div>
-        
         <div class="planet-orbit" style="top: 400vh; left: 20vw;" data-speed="-0.3" data-rot="0.14"><div class="planet p5"><div class="planet-noise"></div></div></div>
         <div class="planet-orbit" style="top: 440vh; left: 70vw;" data-speed="-0.4" data-rot="-0.11"><div class="planet p15"><div class="planet-noise"></div></div></div>
         
-        <!-- Beautiful High-Fidelity Saturn (Deep Scroll - Expertise / Contact area) -->
+        <!-- Beautiful High-Fidelity Saturn -->
         <div class="planet-orbit" style="top: 480vh; left: 15vw;" data-speed="-0.5" data-rot="0.05">
             <div class="beautiful-saturn-wrapper">
                 <div class="bs-ring bs-ring-back"></div>
@@ -851,8 +779,6 @@
         </div>
 
         <div class="planet-orbit" style="top: 520vh; left: 85vw;" data-speed="-0.4" data-rot="-0.12"><div class="planet p6"><div class="planet-noise"></div></div></div>
-        
-        <!-- Dark Ocean & Emerald Gas Giant right at the very bottom -->
         <div class="planet-orbit" style="top: 560vh; left: 80vw;" data-speed="-0.6" data-rot="0.08"><div class="planet p16"><div class="planet-noise"></div></div></div>
         <div class="planet-orbit" style="top: 600vh; left: 60vw;" data-speed="-0.6" data-rot="0.09"><div class="planet p9"><div class="planet-noise"></div></div></div>
 
@@ -860,10 +786,7 @@
         <div id="stars-1"></div><div id="stars-2"></div><div id="stars-3"></div>
     </div>
     
-    <!-- Physics Canvas for Mesh Connections -->
     <canvas id="physics-canvas"></canvas>
-
-    <!-- Custom Cursor Elements -->
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="cursor-outline" id="cursor-outline"></div>
 
@@ -872,13 +795,9 @@
          ========================================================================== -->
     <nav class="fixed top-0 w-full z-50 px-6 py-5 glass-nav" id="navbar">
         <div class="max-w-[1400px] mx-auto flex justify-between items-center">
-            
-            <!-- Full Name Logo -->
             <div class="font-display text-3xl font-black tracking-tight text-primary cursor-pointer hover-trigger">
                 Osaid<span class="text-accent-cyan" style="color:var(--accent-cyan)"> Shahid</span>
             </div>
-            
-            <!-- Desktop Links -->
             <div class="hidden md:flex gap-12">
                 <a href="#about" class="nav-link hover-trigger">Identity</a>
                 <a href="#experience" class="nav-link hover-trigger">Experience</a>
@@ -886,8 +805,6 @@
                 <a href="#expertise" class="nav-link hover-trigger">Skills</a>
                 <a href="#contact" class="nav-link hover-trigger">Contact</a>
             </div>
-
-            <!-- Mobile Hamburger -->
             <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 focus:outline-none z-50 relative hover-trigger" aria-label="Toggle Menu">
                 <span class="block w-6 h-[2px] bg-white transition-transform duration-400 origin-center" id="bar1"></span>
                 <span class="block w-6 h-[2px] bg-white transition-opacity duration-400" id="bar2"></span>
@@ -896,7 +813,6 @@
         </div>
     </nav>
 
-    <!-- Fullscreen Mobile Menu -->
     <div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-3xl z-40 flex flex-col justify-center items-center gap-10 opacity-0 pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]">
         <a href="#about" class="font-display text-5xl font-bold text-white mobile-link hover-trigger">Identity</a>
         <a href="#experience" class="font-display text-5xl font-bold text-white mobile-link hover-trigger">Experience</a>
@@ -911,7 +827,7 @@
     <main class="w-full relative z-10">
 
         <!-- ==========================================================================
-             HERO SECTION
+             HERO SECTION (WITH GEMINI-LEVEL CONTINUOUS FIXER-BOT EFFECT)
              ========================================================================== -->
         <section id="about" class="min-h-screen flex flex-col justify-center px-6 pt-32 pb-20 max-w-[1400px] mx-auto">
             <div class="w-full max-w-5xl relative z-10">
@@ -920,16 +836,38 @@
                     <div class="section-tag hover-trigger">App/Cloud Technical Support Expert</div>
                 </div>
 
-                <!-- Card container (Static bounds) -->
-                <div class="reveal reveal-delay-1 mb-10">
-                    <div class="comet-card p-6 md:p-12 border-white/10 hover-trigger">
-                        <!-- Flag in the wind effect applied ONLY to the text -->
-                        <div class="flag-wind-effect flag-wind-filter">
-                            <h1 class="font-display hero-title text-6xl sm:text-7xl md:text-[6.5rem] lg:text-[7.5rem] font-black leading-[0.95] tracking-tighter text-primary">
-                                Delivering <br>
-                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600">Outstanding Service.</span>
-                            </h1>
+                <!-- Fixer Scene Container -->
+                <div class="reveal reveal-delay-1 mb-10 w-full relative">
+                    <div class="comet-card p-6 md:p-12 border-white/10 hover-trigger relative overflow-hidden" id="fixer-scene-container" style="min-height: 380px;">
+                        
+                        <!-- The Fixer Bot (SVG) -->
+                        <div id="fixer-bot" class="bot-glow">
+                            <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Neon Bot Body -->
+                                <circle cx="50" cy="50" r="18" fill="#18181b" stroke="#00e1ff" stroke-width="3"/>
+                                <!-- Bot Eye -->
+                                <rect x="35" y="45" width="30" height="10" rx="5" fill="#000"/>
+                                <circle cx="45" cy="50" r="3" fill="#bc13fe" class="animate-pulse"/>
+                                <circle cx="55" cy="50" r="3" fill="#bc13fe" class="animate-pulse"/>
+                                <!-- Bot Antennas -->
+                                <path d="M 50,32 L 50,15 M 50,15 L 60,10" stroke="#a1a1aa" stroke-width="3" stroke-linecap="round"/>
+                                <circle cx="60" cy="10" r="4" fill="#00e1ff"/>
+                                <!-- Bot Thruster -->
+                                <path d="M 40,68 L 50,85 L 60,68 Z" fill="#3f3f46"/>
+                                <circle cx="50" cy="88" r="8" fill="#00e1ff" filter="blur(4px)" class="animate-pulse"/>
+                            </svg>
+                            <!-- Tractor Beam -->
+                            <div class="tractor-beam" id="tractor-beam"></div>
                         </div>
+
+                        <!-- Spark particle container for welding/fixing -->
+                        <div id="weld-sparks" class="absolute inset-0 pointer-events-none z-[70] overflow-visible"></div>
+
+                        <!-- The Text Target for Physics Engine -->
+                        <h1 id="physics-text-block" class="font-display hero-title text-5xl sm:text-7xl md:text-[6rem] lg:text-[7rem] font-black leading-[1] tracking-tighter">
+                            <!-- JS will dynamically inject the splitted text here -->
+                        </h1>
+
                     </div>
                 </div>
 
@@ -948,7 +886,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center reveal reveal-delay-3">
                     <div class="md:col-span-7 comet-cards-wrapper">
                         <div class="comet-card p-6 md:p-8 lg:p-10 border-white/10 hover-trigger">
-                            <p class="text-xl md:text-2xl text-gray-300 leading-relaxed font-light">
+                            <p class="text-xl md:text-2xl text-gray-400 leading-relaxed font-light">
                                 Dynamic and results-oriented professional with a proven track record as an App/cloud technical support-german language expert. Passionate about delivering outstanding service and contributing to an inclusive work environment.
                             </p>
                         </div>
@@ -966,19 +904,19 @@
                 <!-- Bento Grid Stats -->
                 <div class="comet-cards-wrapper grid grid-cols-2 md:grid-cols-4 gap-6 mt-28 reveal reveal-delay-4">
                     <div class="comet-card card-tilt !p-8 flex flex-col justify-center items-center text-center hover-trigger border-white/10">
-                        <h2 class="font-display text-5xl md:text-6xl font-black text-primary mb-3">4.0</h2>
+                        <h2 class="font-display text-5xl md:text-6xl font-black text-primary tracking-tighter mb-3">4.0</h2>
                         <p class="font-mono-custom text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">Years Exp.</p>
                     </div>
                     <div class="comet-card card-tilt !p-8 flex flex-col justify-center items-center text-center hover-trigger border-white/10">
-                        <h2 class="font-display text-5xl md:text-6xl font-black text-primary mb-3">3+</h2>
+                        <h2 class="font-display text-5xl md:text-6xl font-black text-primary tracking-tighter mb-3">3+</h2>
                         <p class="font-mono-custom text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">Enterprises</p>
                     </div>
                     <div class="comet-card card-tilt !p-8 flex flex-col justify-center items-center text-center hover-trigger border-white/10">
-                        <h2 class="font-display text-5xl md:text-6xl font-black text-primary mb-3">C1</h2>
+                        <h2 class="font-display text-5xl md:text-6xl font-black text-primary tracking-tighter mb-3">C1</h2>
                         <p class="font-mono-custom text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">German Level</p>
                     </div>
                     <div class="comet-card card-tilt !p-8 flex flex-col justify-center items-center text-center hover-trigger border-white/10">
-                        <h2 class="font-display text-5xl md:text-6xl font-black text-primary mb-3">5</h2>
+                        <h2 class="font-display text-5xl md:text-6xl font-black text-primary tracking-tighter mb-3">5</h2>
                         <p class="font-mono-custom text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">Certifications</p>
                     </div>
                 </div>
@@ -994,7 +932,7 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 reveal">
                 <div>
                     <div class="section-tag hover-trigger">Career Trajectory</div>
-                    <h2 class="font-display text-5xl md:text-[5rem] font-black tracking-tight text-primary leading-none">
+                    <h2 class="font-display text-5xl md:text-[4.5rem] font-black tracking-tighter text-primary leading-tight mt-4">
                         Professional <br> History.
                     </h2>
                 </div>
@@ -1009,40 +947,40 @@
                         <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
                             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/10 pb-6">
                                 <div>
-                                    <h3 class="font-display text-3xl font-black text-primary tracking-tight">App/cloud Technical Support Analyst</h3>
+                                    <h3 class="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">App/cloud Technical Support Analyst</h3>
                                     <p class="font-mono-custom text-sm text-accent-cyan mt-2 tracking-widest uppercase font-bold">Accenture &middot; Gurugram, Haryana</p>
                                 </div>
                                 <span class="inline-block px-5 py-2.5 bg-white/10 border border-white/20 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap shadow-sm">
                                     11/2024 — Present
                                 </span>
                             </div>
-                            <ul class="space-y-5 text-gray-300 leading-relaxed font-light text-base md:text-lg">
+                            <ul class="space-y-5 text-gray-400 leading-relaxed font-light text-base md:text-lg">
                                 <li class="flex items-start">
                                     <svg class="w-6 h-6 mr-4 text-accent-cyan mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span class="font-semibold text-white">Delivered end-to-end technical solutions to end-users from Germany, Austria, and Switzerland.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Added and configured new devices within the corporate network.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Managed DHCP servers for network related issues.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Troubleshot printer issues, including connectivity, installation, and driver errors.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Managed user accounts, permissions, and security groups using Azure Active Directory.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Worked on all kind of Windows related Issues.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Delivered end-to-end technical support to end users, ensuring minimal disruption to daily operations.</span>
                                 </li>
                             </ul>
@@ -1057,40 +995,40 @@
                         <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
                             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/10 pb-6">
                                 <div>
-                                    <h3 class="font-display text-3xl font-black text-primary tracking-tight">Senior Systems Administrator</h3>
+                                    <h3 class="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">Senior Systems Administrator</h3>
                                     <p class="font-mono-custom text-sm text-accent-cyan mt-2 tracking-wide uppercase font-bold">ITC Infotech &middot; Bengaluru, Karnataka</p>
                                 </div>
                                 <span class="inline-block px-5 py-2.5 bg-white/10 border border-white/20 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap shadow-sm">
                                     04/2024 — 11/2024
                                 </span>
                             </div>
-                            <ul class="space-y-5 text-gray-300 leading-relaxed font-light text-base md:text-lg">
+                            <ul class="space-y-5 text-gray-400 leading-relaxed font-light text-base md:text-lg">
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Administer Windows, Office, Active Directory, and network infrastructure. Manage DHCP and resolve network issues.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Working as L1-L1.5 support and communicating with German-speaking users to resolve inquiries and issues.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Added and configured new devices in the company network. Assigned static and dynamic IP addresses to devices.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Troubleshot printer issues (installation, connectivity, driver problems).</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Managed user access and permissions through Azure AD.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Resolved all types of Windows issues.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Using tools like Azure, Microsoft Admin center, ARS, AD, Intune, Bomgar, Servicenow, Confluence.</span>
                                 </li>
                             </ul>
@@ -1105,36 +1043,36 @@
                         <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
                             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/10 pb-6">
                                 <div>
-                                    <h3 class="font-display text-3xl font-black text-primary tracking-tight">Senior associate/German language technical support</h3>
+                                    <h3 class="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">Senior associate/German language technical support</h3>
                                     <p class="font-mono-custom text-sm text-accent-cyan mt-2 tracking-wide uppercase font-bold">Wipro Limited &middot; Hyderabad</p>
                                 </div>
                                 <span class="inline-block px-5 py-2.5 bg-white/10 border border-white/20 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap shadow-sm">
                                     12/2021 — 09/2023
                                 </span>
                             </div>
-                            <ul class="space-y-5 text-gray-300 leading-relaxed font-light text-base md:text-lg">
+                            <ul class="space-y-5 text-gray-400 leading-relaxed font-light text-base md:text-lg">
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Worked for Wipro Technologies as Google T1 accessibility technical support (German).</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Proactively identified solution to common user issues.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Provided technical support to user's on Accessibility technologies.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Job profile involes speaking, chatting and writing. Resolving users issues via call chat or email.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Dealing with Google platforms that have Android support in it.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Adhered to quality and service standards to support operational goals.</span>
                                 </li>
                             </ul>
@@ -1151,7 +1089,7 @@
         <section id="education" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-white/10 relative">
             <div class="reveal mb-24 text-center">
                 <div class="section-tag mx-auto hover-trigger">Academic Foundation</div>
-                <h2 class="font-display text-5xl md:text-[5rem] font-black tracking-tight text-primary mt-4">
+                <h2 class="font-display text-5xl md:text-[4.5rem] font-black tracking-tighter text-primary leading-tight mt-4">
                     Education.
                 </h2>
             </div>
@@ -1166,7 +1104,7 @@
                         <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
                             <span class="inline-block px-4 py-2 bg-purple-500/10 text-purple-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-purple-500/20 shadow-[0_0_15px_rgba(188,19,254,0.3)]">07/2023</span>
                             <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Advanced Diploma: German Language (C1)</h3>
-                            <p class="text-gray-400 font-medium">Osmania University</p>
+                            <p class="text-gray-400 font-light mt-1">Osmania University</p>
                         </div>
                     </div>
                 </div>
@@ -1178,7 +1116,7 @@
                         <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
                             <span class="inline-block px-4 py-2 bg-purple-500/10 text-purple-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-purple-500/20 shadow-[0_0_15px_rgba(188,19,254,0.3)]">11/2021</span>
                             <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Senior Diploma: German Language (B2)</h3>
-                            <p class="text-gray-400 font-medium">Osmania University</p>
+                            <p class="text-gray-400 font-light mt-1">Osmania University</p>
                         </div>
                     </div>
                 </div>
@@ -1190,7 +1128,7 @@
                         <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
                             <span class="inline-block px-4 py-2 bg-purple-500/10 text-purple-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-purple-500/20 shadow-[0_0_15px_rgba(188,19,254,0.3)]">04/2021</span>
                             <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Junior Diploma: German Language (A2)</h3>
-                            <p class="text-gray-400 font-medium">Osmania University</p>
+                            <p class="text-gray-400 font-light mt-1">Osmania University</p>
                         </div>
                     </div>
                 </div>
@@ -1202,7 +1140,7 @@
                         <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
                             <span class="inline-block px-4 py-2 bg-cyan-500/10 text-cyan-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-cyan-500/20 shadow-[0_0_15px_rgba(0,242,255,0.3)]">05/2020</span>
                             <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Bachelor of Arts (Hons): English</h3>
-                            <p class="text-gray-400 font-medium">University of Delhi</p>
+                            <p class="text-gray-400 font-light mt-1">University of Delhi</p>
                         </div>
                     </div>
                 </div>
@@ -1214,7 +1152,7 @@
                         <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
                             <span class="inline-block px-4 py-2 bg-emerald-500/10 text-emerald-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.3)]">05/2016</span>
                             <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Intermediate</h3>
-                            <p class="text-gray-400 font-medium leading-snug">Board of High School & Intermediate Education</p>
+                            <p class="text-gray-400 font-light mt-1 leading-snug">Board of High School & Intermediate Education</p>
                         </div>
                     </div>
                 </div>
@@ -1229,7 +1167,7 @@
             
             <div class="reveal mb-24">
                 <div class="section-tag hover-trigger">Core Competencies</div>
-                <h2 class="font-display text-5xl md:text-[5rem] font-black tracking-tight text-primary mt-4 leading-none">
+                <h2 class="font-display text-5xl md:text-[4.5rem] font-black tracking-tighter text-primary leading-tight mt-4">
                     Expertise & <br> Credentials.
                 </h2>
             </div>
@@ -1240,7 +1178,7 @@
                 <!-- System Administration Card -->
                 <div class="comet-cards-wrapper reveal reveal-delay-1 lg:col-span-2">
                     <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
-                        <h3 class="font-display text-3xl font-black text-primary mb-8 border-b border-white/10 pb-6">System Administration</h3>
+                        <h3 class="font-display text-3xl font-bold text-primary tracking-tight mb-8 border-b border-white/10 pb-6">System Administration</h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div class="flex items-center p-5 border border-white/10 rounded-2xl bg-transparent shadow-sm hover:bg-white/5 transition-colors">
                                 <div class="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center mr-5">
@@ -1273,7 +1211,7 @@
                 <!-- IT & Networking Card -->
                 <div class="comet-cards-wrapper reveal reveal-delay-2">
                     <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
-                        <h3 class="font-display text-3xl font-black text-primary mb-8 border-b border-white/10 pb-6">Technical Skills</h3>
+                        <h3 class="font-display text-3xl font-bold text-primary tracking-tight mb-8 border-b border-white/10 pb-6">Technical Skills</h3>
                         <ul class="space-y-5 text-gray-300 font-medium text-lg">
                             <li class="flex items-center justify-between border-b border-white/5 pb-3">
                                 <span>IT Fundamentals</span>
@@ -1298,7 +1236,7 @@
                 <!-- Certifications List (EXACTLY FROM CV) -->
                 <div class="comet-cards-wrapper reveal reveal-delay-3 lg:col-span-3">
                     <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
-                        <h3 class="font-display text-3xl font-black text-primary mb-8 border-b border-white/10 pb-6">Certifications</h3>
+                        <h3 class="font-display text-3xl font-bold text-primary tracking-tight mb-8 border-b border-white/10 pb-6">Certifications</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             
                             <div class="flex items-center justify-between p-6 rounded-2xl border border-white/10 bg-transparent hover:bg-white/5 transition-colors">
@@ -1365,7 +1303,7 @@
             
             <div class="text-center max-w-2xl mx-auto mb-24 reveal">
                 <div class="section-tag mx-auto hover-trigger">Initiate Handshake</div>
-                <h2 class="font-display text-5xl md:text-[5rem] font-black tracking-tight text-primary mt-4 mb-6">
+                <h2 class="font-display text-5xl md:text-[4.5rem] font-black tracking-tighter text-primary leading-tight mt-4 mb-6">
                     Let's Connect.
                 </h2>
                 <p class="text-xl text-gray-400 font-light">
@@ -1430,6 +1368,17 @@
     </main>
 
     <!-- ==========================================================================
+         END OF UNIVERSE MESSAGE
+         ========================================================================== -->
+    <div class="w-full flex flex-col items-center justify-center pt-12 pb-24 relative z-10 reveal">
+        <div class="w-[1px] h-24 bg-gradient-to-b from-transparent via-white/30 to-transparent mb-8"></div>
+        <p class="font-mono-custom text-[10px] md:text-xs text-gray-500 tracking-[0.4em] uppercase text-center px-4 transition-all duration-700 hover:tracking-[0.5em] hover:text-gray-300">
+            You have reached the end of the <br class="sm:hidden"> 
+            <span class="text-white font-bold drop-shadow-[0_0_12px_rgba(255,255,255,0.6)]">Observable Universe.</span>
+        </p>
+    </div>
+
+    <!-- ==========================================================================
          FOOTER
          ========================================================================== -->
     <footer class="border-t border-white/10 py-16 text-center flex flex-col items-center bg-black relative z-10">
@@ -1488,7 +1437,6 @@
                 let width, height;
                 let particles = [];
                 
-                // Adjust to viewport size
                 const resizeCanvas = () => {
                     width = window.innerWidth;
                     height = window.innerHeight;
@@ -1500,33 +1448,26 @@
                 window.addEventListener('resize', resizeCanvas);
                 resizeCanvas();
 
-                // Premium Particle Class - Simulates fluid data nodes in deep space
                 class NodeParticle {
                     constructor() {
                         this.x = Math.random() * width;
                         this.y = Math.random() * height;
-                        this.vx = (Math.random() - 0.5) * 0.2; // Ultra slow drift
+                        this.vx = (Math.random() - 0.5) * 0.2; 
                         this.vy = (Math.random() - 0.5) * 0.2;
                         this.baseRadius = Math.random() * 1.5 + 0.5;
                         this.radius = this.baseRadius;
                         this.pulsePhase = Math.random() * Math.PI * 2;
                     }
-
                     update() {
-                        // Smooth boundary wrapping
                         if (this.x < -50) this.x = width + 50;
                         if (this.x > width + 50) this.x = -50;
                         if (this.y < -50) this.y = height + 50;
                         if (this.y > height + 50) this.y = -50;
-
                         this.x += this.vx;
                         this.y += this.vy;
-                        
-                        // Organic breathing pulse logic
                         this.pulsePhase += 0.015;
                         this.radius = this.baseRadius + Math.sin(this.pulsePhase) * 0.4;
                     }
-
                     draw() {
                         ctx.beginPath();
                         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
@@ -1535,10 +1476,9 @@
                     }
                 }
 
-                // Initialization logic for particles
                 const initParticles = () => {
                     particles = [];
-                    const numParticles = Math.floor((width * height) / 15000); // Dynamic responsive density
+                    const numParticles = Math.floor((width * height) / 15000); 
                     for (let i = 0; i < numParticles; i++) {
                         particles.push(new NodeParticle());
                     }
@@ -1546,18 +1486,13 @@
                 
                 initParticles();
 
-                // Animation Loop (60fps synced)
                 const animateCanvas = () => {
                     ctx.clearRect(0, 0, width, height);
-                    
-                    // Draw Mesh Connections (O(N^2) constrained)
                     for (let i = 0; i < particles.length; i++) {
                         for (let j = i + 1; j < particles.length; j++) {
                             const dx = particles[i].x - particles[j].x;
                             const dy = particles[i].y - particles[j].y;
                             const distSq = dx * dx + dy * dy;
-
-                            // Only draw if close enough
                             if (distSq < 16900) {
                                 const dist = Math.sqrt(distSq);
                                 ctx.beginPath();
@@ -1569,27 +1504,17 @@
                             }
                         }
                     }
-
-                    // Draw Nodes
-                    particles.forEach(p => {
-                        p.update();
-                        p.draw();
-                    });
-
+                    particles.forEach(p => { p.update(); p.draw(); });
                     requestAnimationFrame(animateCanvas);
                 };
-                
                 animateCanvas();
             }
 
-            // Starfield Generation via JS Box-Shadows for pure CSS parallax
             const generateStars = (n) => {
                 let width = window.innerWidth;
                 let height = window.innerHeight;
                 let value = `${Math.random() * width}px ${Math.random() * height}px #FFF`;
-                for(let i=1; i<n; i++){
-                    value += `, ${Math.random() * width}px ${Math.random() * height}px #FFF`;
-                }
+                for(let i=1; i<n; i++){ value += `, ${Math.random() * width}px ${Math.random() * height}px #FFF`; }
                 return value;
             };
 
@@ -1601,7 +1526,6 @@
             if (star2) star2.style.boxShadow = generateStars(100);
             if (star3) star3.style.boxShadow = generateStars(50);
 
-            // Cosmos Revolution Effect on Scroll
             window.addEventListener('scroll', () => {
                 const scrollY = window.scrollY;
                 document.querySelectorAll('.planet-orbit').forEach(orbit => {
@@ -1609,54 +1533,37 @@
                     const rotSpeed = parseFloat(orbit.dataset.rot);
                     orbit.style.transform = `translate(-50%, -50%) translateY(${scrollY * speed}px) rotate(${scrollY * rotSpeed}deg)`;
                 });
-                
                 if (star1) star1.style.transform = `translateY(${scrollY * -0.05}px)`;
                 if (star2) star2.style.transform = `translateY(${scrollY * -0.1}px)`;
                 if (star3) star3.style.transform = `translateY(${scrollY * -0.15}px)`;
             });
 
             /* ==========================================================================
-               2. CUSTOM PHYSICS CURSOR LOGIC WITH TIGHTER SPRING DYNAMICS
+               2. CUSTOM PHYSICS CURSOR LOGIC
                ========================================================================== */
             const cursorDot = document.getElementById('cursor-dot');
             const cursorOutline = document.getElementById('cursor-outline');
             const hoverTriggers = document.querySelectorAll('.hover-trigger, a, button, input');
-            
             let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
             let outlineX = window.innerWidth / 2, outlineY = window.innerHeight / 2;
 
             window.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                
-                if(cursorDot) {
-                    cursorDot.style.transform = `translate3d(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%), 0)`;
-                }
+                mouseX = e.clientX; mouseY = e.clientY;
+                if(cursorDot) { cursorDot.style.transform = `translate3d(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%), 0)`; }
             });
 
-            // Smooth tight spring trailing effect
             const animateCursor = () => {
-                let distX = mouseX - outlineX;
-                let distY = mouseY - outlineY;
-                
-                // Tightened easing fraction for subtle, premium movement
-                outlineX += distX * 0.35; 
-                outlineY += distY * 0.35;
-                
-                if(cursorOutline) {
-                    cursorOutline.style.transform = `translate3d(calc(${outlineX}px - 50%), calc(${outlineY}px - 50%), 0)`;
-                }
+                let distX = mouseX - outlineX; let distY = mouseY - outlineY;
+                outlineX += distX * 0.35; outlineY += distY * 0.35;
+                if(cursorOutline) { cursorOutline.style.transform = `translate3d(calc(${outlineX}px - 50%), calc(${outlineY}px - 50%), 0)`; }
                 requestAnimationFrame(animateCursor);
             };
             animateCursor();
 
-            // Hover state bindings
             hoverTriggers.forEach(trigger => {
                 trigger.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
                 trigger.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
             });
-
-            // Click state bindings
             window.addEventListener('mousedown', () => document.body.classList.add('clicking'));
             window.addEventListener('mouseup', () => document.body.classList.remove('clicking'));
 
@@ -1664,14 +1571,10 @@
                4. PERPLEXITY COMET SPOTLIGHT BORDER EFFECT
                ========================================================================== */
             const cometWrappers = document.querySelectorAll('.comet-cards-wrapper');
-            
             cometWrappers.forEach(wrapper => {
                 wrapper.addEventListener('mousemove', (e) => {
                     const rect = wrapper.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    
-                    // Update CSS custom properties for the gradient tracking
+                    const x = e.clientX - rect.left; const y = e.clientY - rect.top;
                     wrapper.style.setProperty('--mouse-x', `${x}px`);
                     wrapper.style.setProperty('--mouse-y', `${y}px`);
                 });
@@ -1681,17 +1584,13 @@
                5. SMOOTH SCROLL REVEAL OBSERVERS
                ========================================================================== */
             const revealElements = document.querySelectorAll('.reveal');
-            
             const revealOptions = { threshold: 0.05, rootMargin: "0px 0px -40px 0px" };
-
             const revealOnScroll = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (!entry.isIntersecting) return;
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target); 
+                    entry.target.classList.add('active'); observer.unobserve(entry.target); 
                 });
             }, revealOptions);
-
             revealElements.forEach(el => revealOnScroll.observe(el));
 
             /* ==========================================================================
@@ -1700,46 +1599,32 @@
             const mobileBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileLinks = document.querySelectorAll('.mobile-link');
-            const bar1 = document.getElementById('bar1');
-            const bar2 = document.getElementById('bar2');
-            const bar3 = document.getElementById('bar3');
+            const bar1 = document.getElementById('bar1'); const bar2 = document.getElementById('bar2'); const bar3 = document.getElementById('bar3');
             let isMenuOpen = false;
 
             const toggleMenu = () => {
                 isMenuOpen = !isMenuOpen;
                 if(isMenuOpen) {
-                    mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
-                    mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
+                    mobileMenu.classList.remove('opacity-0', 'pointer-events-none'); mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
                     document.body.style.overflow = 'hidden';
-                    bar1.style.transform = 'translateY(8px) rotate(45deg)';
-                    bar2.style.opacity = '0';
-                    bar3.style.transform = 'translateY(-8px) rotate(-45deg)';
+                    bar1.style.transform = 'translateY(8px) rotate(45deg)'; bar2.style.opacity = '0'; bar3.style.transform = 'translateY(-8px) rotate(-45deg)';
                 } else {
-                    mobileMenu.classList.add('opacity-0', 'pointer-events-none');
-                    mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+                    mobileMenu.classList.add('opacity-0', 'pointer-events-none'); mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
                     document.body.style.overflow = '';
-                    bar1.style.transform = 'none';
-                    bar2.style.opacity = '1';
-                    bar3.style.transform = 'none';
+                    bar1.style.transform = 'none'; bar2.style.opacity = '1'; bar3.style.transform = 'none';
                 }
             };
-
             mobileBtn.addEventListener('click', toggleMenu);
             mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
-            // Navbar Glass Effect on Scroll
             const navbar = document.getElementById('navbar');
             window.addEventListener('scroll', () => {
                 if(window.scrollY > 50) {
-                    navbar.style.paddingTop = '1.25rem';
-                    navbar.style.paddingBottom = '1.25rem';
-                    navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.8)';
-                    navbar.style.boxShadow = '0 10px 40px -10px rgba(0,0,0,0.5)';
+                    navbar.style.paddingTop = '1.25rem'; navbar.style.paddingBottom = '1.25rem';
+                    navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.8)'; navbar.style.boxShadow = '0 10px 40px -10px rgba(0,0,0,0.5)';
                 } else {
-                    navbar.style.paddingTop = '1.5rem';
-                    navbar.style.paddingBottom = '1.5rem';
-                    navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.4)';
-                    navbar.style.boxShadow = 'none';
+                    navbar.style.paddingTop = '1.5rem'; navbar.style.paddingBottom = '1.5rem';
+                    navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.4)'; navbar.style.boxShadow = 'none';
                 }
             });
             window.dispatchEvent(new Event('scroll'));
@@ -1754,27 +1639,14 @@
             const chatSendBtn = document.getElementById('chat-send');
             const chatMessagesContainer = document.getElementById('chat-messages');
 
-            chatToggle.addEventListener('click', () => {
-                chatWindow.classList.add('active');
-                chatInput.focus();
-            });
+            chatToggle.addEventListener('click', () => { chatWindow.classList.add('active'); chatInput.focus(); });
             chatClose.addEventListener('click', () => chatWindow.classList.remove('active'));
 
-            const apiKey = ""; // API Key provided by the runtime environment
+            const apiKey = "";
             const systemPrompt = `You are the personal AI assistant for Osaid Shahid, an App/Cloud Technical Support Expert. 
-Your goal is to answer questions about his professional background accurately and professionally, representing him to recruiters.
-Keep responses concise (1-3 sentences). Be polite and premium in tone.
-Resume Details:
-- 4 years experience. Located in Mau, UP, India.
-- Current Role: App/Cloud Technical Support Analyst at Accenture (11/2024 - Present). Delivered end-to-end technical solutions to end-users from Germany, Austria, and Switzerland. Manages Azure AD, DHCP, Windows endpoints.
-- Previous Roles: Senior Systems Administrator at ITC Infotech (04/2024 - 11/2024), Senior Associate/German language technical support at Wipro (12/2021 - 09/2023).
-- Certifications: Azure Fundamentals (AZ-900), Google IT Professional, Technical Support Fundamentals (Google), The Bits and Bytes of Computer Networking (Google), Testing for Web Accessibility.
-- Education: Advanced Diploma: German Language (C1) - Osmania University, Senior Diploma: German Language (B2) - Osmania University, Junior Diploma: German Language (A2) - Osmania University, Bachelor of Arts (Hons): English - University of Delhi, Intermediate - Board of High School & Intermediate Education.
-- Core Skills: Microsoft Entra, Office, AD, ARS, Windows, Linux, IT/Networking, WCAG Accessibility, NVDA, BeMyEyes.
-- Languages: English (Fluent), German (C1 Advanced Diploma).
-If asked something outside his professional scope, politely pivot back to his technical and language skills.`;
+Your goal is to answer questions about his professional background accurately and professionally.
+Keep responses concise (1-3 sentences). Be polite and premium in tone.`;
 
-            // Advanced exponential backoff logic for stable API calls
             async function fetchWithRetry(url, options, retries = 5) {
                 const delays = [1000, 2000, 4000, 8000, 16000];
                 for (let i = 0; i < retries; i++) {
@@ -1789,68 +1661,306 @@ If asked something outside his professional scope, politely pivot back to his te
                 }
             }
 
-            // Message handler
             async function handleUserMessage() {
                 const userText = chatInput.value.trim();
                 if (!userText) return;
-
-                addMessage(userText, 'user');
-                chatInput.value = '';
-
+                addMessage(userText, 'user'); chatInput.value = '';
                 const typingId = 'typing-' + Date.now();
-                const typingHtml = `<div class="typing-dots"><span></span><span></span><span></span></div>`;
-                addMessage(typingHtml, 'ai', typingId);
+                addMessage(`<div class="typing-dots"><span></span><span></span><span></span></div>`, 'ai', typingId);
 
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-                const payload = {
-                    contents: [{ parts: [{ text: userText }] }],
-                    systemInstruction: { parts: [{ text: systemPrompt }] }
-                };
+                const payload = { contents: [{ parts: [{ text: userText }] }], systemInstruction: { parts: [{ text: systemPrompt }] } };
 
                 try {
-                    const result = await fetchWithRetry(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    
+                    const result = await fetchWithRetry(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                     const aiText = result.candidates?.[0]?.content?.parts?.[0]?.text || "I'm having trouble connecting to my database right now. Please try again later.";
-                    
                     const typingEl = document.getElementById(typingId);
-                    if (typingEl) {
-                        typingEl.innerHTML = aiText;
-                        typingEl.removeAttribute('id');
-                    } else {
-                        addMessage(aiText, 'ai');
-                    }
+                    if (typingEl) { typingEl.innerHTML = aiText; typingEl.removeAttribute('id'); } else { addMessage(aiText, 'ai'); }
                 } catch (error) {
                     const typingEl = document.getElementById(typingId);
-                    if (typingEl) {
-                        typingEl.innerHTML = "Apologies, the secure connection to Osaid's database timed out. Please email him directly!";
-                        typingEl.removeAttribute('id');
-                    }
+                    if (typingEl) { typingEl.innerHTML = "Apologies, the secure connection to Osaid's database timed out. Please email him directly!"; typingEl.removeAttribute('id'); }
                 }
             }
 
-            // DOM Insertion logic
             function addMessage(text, sender, id = null) {
                 const msgDiv = document.createElement('div');
                 msgDiv.className = `chat-message message-${sender}`;
                 if (id) msgDiv.id = id;
                 msgDiv.innerHTML = text;
                 chatMessagesContainer.appendChild(msgDiv);
-                // Smooth scroll to bottom
-                chatMessagesContainer.scrollTo({
-                    top: chatMessagesContainer.scrollHeight,
-                    behavior: 'smooth'
-                });
+                chatMessagesContainer.scrollTo({ top: chatMessagesContainer.scrollHeight, behavior: 'smooth' });
             }
 
             chatSendBtn.addEventListener('click', handleUserMessage);
-            chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') handleUserMessage();
-            });
+            chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
+
+            /* ==========================================================================
+               8. GEMINI LEVEL: INFINITE FALLING LETTERS & REPAIR BOT PHYSICS
+               ========================================================================== */
             
+            // 1. Text Setup & Splitting
+            const textBlock = document.getElementById('physics-text-block');
+            const sceneContainer = document.getElementById('fixer-scene-container');
+            const botEl = document.getElementById('fixer-bot');
+            const tractorBeam = document.getElementById('tractor-beam');
+            const sparkContainer = document.getElementById('weld-sparks');
+
+            const line1Text = "Delivering";
+            const line2Text = "Outstanding Service.";
+            
+            const lettersData = [];
+            let letterIdCounter = 0;
+
+            function createLine(text, classString) {
+                const lineDiv = document.createElement('div');
+                lineDiv.className = 'block mb-2 sm:mb-0 ' + classString;
+                
+                for (let i = 0; i < text.length; i++) {
+                    const char = text[i];
+                    
+                    // Create absolute anchor wrapper
+                    const wrapper = document.createElement('span');
+                    wrapper.className = 'char-wrapper';
+                    wrapper.innerHTML = char === ' ' ? '&nbsp;' : '';
+                    
+                    if (char !== ' ') {
+                        // Create the moving physics element
+                        const inner = document.createElement('span');
+                        inner.className = 'char-inner text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]';
+                        if(classString.includes('text-transparent')) {
+                            // Apply gradient styling specifically for second line
+                            inner.className = 'char-inner text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan via-white to-accent-purple drop-shadow-[0_0_15px_rgba(0,225,255,0.4)]';
+                        }
+                        inner.innerText = char;
+                        
+                        wrapper.appendChild(inner);
+                        
+                        lettersData.push({
+                            id: letterIdCounter++,
+                            wrapper: wrapper,
+                            el: inner,
+                            state: 'normal', // normal, falling, floor, carried
+                            x: 0, y: 0,
+                            vx: 0, vy: 0,
+                            rot: 0, vRot: 0,
+                            origSceneX: 0, origSceneY: 0 // Will be computed
+                        });
+                    }
+                    lineDiv.appendChild(wrapper);
+                }
+                return lineDiv;
+            }
+
+            textBlock.appendChild(createLine(line1Text, ''));
+            textBlock.appendChild(createLine(line2Text, 'text-3xl sm:text-5xl md:text-[3.5rem] lg:text-[4.5rem] font-medium tracking-tight mt-1 sm:mt-2'));
+
+            // 2. Physics & State Setup
+            const GRAVITY = 0.4;
+            const BOUNCE = -0.4;
+            const FRICTION = 0.8;
+            
+            // Bot State Machine
+            const bot = {
+                x: 100, y: -100,
+                targetX: 100, targetY: -100,
+                state: 'patrol', // patol, fetching, returning, welding
+                targetLetter: null,
+                weldTimer: 0,
+                patrolAngle: 0
+            };
+
+            // Calculate exact global bounds relative to the scene
+            function updateOrigins() {
+                const sceneRect = sceneContainer.getBoundingClientRect();
+                lettersData.forEach(l => {
+                    const rect = l.wrapper.getBoundingClientRect();
+                    l.origSceneX = rect.left - sceneRect.left;
+                    l.origSceneY = rect.top - sceneRect.top;
+                });
+            }
+            
+            // Initial call, and on resize
+            setTimeout(updateOrigins, 500); 
+            window.addEventListener('resize', updateOrigins);
+
+            // Welding Spark Generator
+            function emitWeldSparks(x, y) {
+                for(let i=0; i<3; i++) {
+                    const spark = document.createElement('div');
+                    spark.className = 'absolute rounded-full pointer-events-none bg-accent-cyan';
+                    const size = Math.random() * 3 + 2;
+                    spark.style.width = size + 'px'; spark.style.height = size + 'px';
+                    spark.style.left = x + 'px'; spark.style.top = y + 'px';
+                    spark.style.boxShadow = `0 0 ${size*2}px #00e1ff`;
+                    sparkContainer.appendChild(spark);
+
+                    let vx = (Math.random() - 0.5) * 8;
+                    let vy = (Math.random() - 0.5) * 8 - 2;
+                    let op = 1;
+
+                    function anim() {
+                        if (op <= 0) { spark.remove(); return; }
+                        vy += GRAVITY;
+                        const cl = parseFloat(spark.style.left); const ct = parseFloat(spark.style.top);
+                        spark.style.left = (cl + vx) + 'px'; spark.style.top = (ct + vy) + 'px';
+                        op -= 0.05; spark.style.opacity = op;
+                        requestAnimationFrame(anim);
+                    }
+                    requestAnimationFrame(anim);
+                }
+            }
+
+            // 3. Main Infinite Physics Loop
+            let lastDropTime = 0;
+            function gameLoop(timestamp) {
+                const floorY = sceneContainer.offsetHeight - 40; // Virtual floor
+
+                // Check if any letter is currently out of place
+                const activeLetters = lettersData.filter(l => l.state !== 'normal');
+
+                // Randomly drop a letter ONLY IF no other letters are currently active
+                if (activeLetters.length === 0 && timestamp - lastDropTime > (Math.random() * 2000 + 1000)) {
+                    const attached = lettersData.filter(l => l.state === 'normal');
+                    if (attached.length > 0) {
+                        const dropMe = attached[Math.floor(Math.random() * attached.length)];
+                        dropMe.state = 'falling';
+                        dropMe.el.classList.add('falling');
+                        dropMe.vx = (Math.random() - 0.5) * 4;
+                        dropMe.vy = -Math.random() * 4 - 2; // Initial pop up
+                        dropMe.vRot = (Math.random() - 0.5) * 15;
+                        lastDropTime = timestamp;
+                    }
+                }
+
+                // Update Letters
+                lettersData.forEach(l => {
+                    if (l.state === 'falling') {
+                        l.vy += GRAVITY;
+                        l.x += l.vx;
+                        l.y += l.vy;
+                        l.rot += l.vRot;
+
+                        // Floor Collision relative to its own origin
+                        const absoluteY = l.origSceneY + l.y;
+                        if (absoluteY > floorY) {
+                            l.y = floorY - l.origSceneY; // Snap to floor
+                            l.vy *= BOUNCE;
+                            l.vx *= FRICTION;
+                            l.vRot *= 0.8;
+                            
+                            // If settled
+                            if (Math.abs(l.vy) < 1.5 && Math.abs(l.vx) < 0.5) {
+                                l.state = 'floor';
+                                l.vy = 0; l.vx = 0; l.vRot = 0;
+                            }
+                        }
+                        l.el.style.transform = `translate3d(${l.x}px, ${l.y}px, 0) rotate(${l.rot}deg)`;
+                    } 
+                    else if (l.state === 'carried') {
+                        // Attached to tractor beam (bottom center of bot)
+                        const carryAbsX = bot.x + 20; // center of bot
+                        const carryAbsY = bot.y + 40; // bottom of bot
+                        
+                        l.x = carryAbsX - l.origSceneX;
+                        l.y = carryAbsY - l.origSceneY;
+                        
+                        // Slightly straighten out while carrying
+                        l.rot *= 0.9; 
+                        l.el.style.transform = `translate3d(${l.x}px, ${l.y}px, 0) rotate(${l.rot}deg)`;
+                    }
+                });
+
+                // Update Bot State Machine
+                if (bot.state === 'patrol') {
+                    // Look for fallen letters
+                    const fallen = lettersData.filter(l => l.state === 'floor');
+                    if (fallen.length > 0) {
+                        bot.targetLetter = fallen[0];
+                        bot.state = 'fetching';
+                    } else {
+                        // Hover around lazily
+                        bot.patrolAngle += 0.02;
+                        bot.targetX = (sceneContainer.offsetWidth / 2) + Math.cos(bot.patrolAngle) * 150 - 20;
+                        bot.targetY = 40 + Math.sin(bot.patrolAngle * 0.5) * 20;
+                        tractorBeam.style.opacity = '0';
+                    }
+                } 
+                else if (bot.state === 'fetching') {
+                    if (!bot.targetLetter) { bot.state = 'patrol'; return; }
+                    
+                    // Target is slightly above the fallen letter
+                    bot.targetX = bot.targetLetter.origSceneX + bot.targetLetter.x - 20;
+                    bot.targetY = bot.targetLetter.origSceneY + bot.targetLetter.y - 45;
+                    
+                    const dx = bot.targetX - bot.x;
+                    const dy = bot.targetY - bot.y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    
+                    if (dist < 15) { // Grab range
+                        bot.targetLetter.state = 'carried';
+                        bot.targetLetter.el.classList.remove('falling');
+                        bot.targetLetter.el.classList.add('carried');
+                        bot.state = 'returning';
+                        tractorBeam.style.opacity = '1';
+                        tractorBeam.style.height = '15px';
+                    }
+                }
+                else if (bot.state === 'returning') {
+                    // Fly back to letter's original spot
+                    bot.targetX = bot.targetLetter.origSceneX - 20;
+                    bot.targetY = bot.targetLetter.origSceneY - 45;
+
+                    const dx = bot.targetX - bot.x;
+                    const dy = bot.targetY - bot.y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    
+                    if (dist < 10) { // Snap range
+                        bot.state = 'welding';
+                        bot.weldTimer = 30; // ~500ms
+                    }
+                }
+                else if (bot.state === 'welding') {
+                    bot.weldTimer--;
+                    emitWeldSparks(bot.targetLetter.origSceneX, bot.targetLetter.origSceneY);
+                    
+                    // Shake letter slightly while welding
+                    bot.targetLetter.x = (Math.random() - 0.5) * 4;
+                    bot.targetLetter.y = (Math.random() - 0.5) * 4;
+                    bot.targetLetter.el.style.transform = `translate3d(${bot.targetLetter.x}px, ${bot.targetLetter.y}px, 0)`;
+
+                    if (bot.weldTimer <= 0) {
+                        // Attached perfectly
+                        bot.targetLetter.state = 'normal';
+                        bot.targetLetter.x = 0; bot.targetLetter.y = 0; bot.targetLetter.rot = 0;
+                        bot.targetLetter.el.style.transform = `translate3d(0,0,0) rotate(0deg)`;
+                        bot.targetLetter.el.classList.remove('carried');
+                        
+                        bot.targetLetter = null;
+                        bot.state = 'patrol';
+                        tractorBeam.style.opacity = '0';
+                        
+                        // Reset the timer so the next letter doesn't drop instantly
+                        lastDropTime = timestamp;
+                    }
+                }
+
+                // Smooth Bot Movement (Lerp)
+                const speed = bot.state === 'fetching' ? 0.08 : (bot.state === 'returning' ? 0.05 : 0.03);
+                bot.x += (bot.targetX - bot.x) * speed;
+                bot.y += (bot.targetY - bot.y) * speed;
+                
+                // Tilt bot based on horizontal velocity
+                const vx = (bot.targetX - bot.x) * speed;
+                const botTilt = Math.max(-15, Math.min(15, vx * 2));
+                
+                botEl.style.transform = `translate3d(${bot.x}px, ${bot.y}px, 0) rotate(${botTilt}deg)`;
+
+                requestAnimationFrame(gameLoop);
+            }
+
+            // Start loop after short delay to ensure DOM is ready
+            setTimeout(() => { requestAnimationFrame(gameLoop); }, 1000);
+
         });
     </script>
 </body>
