@@ -1,885 +1,1984 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Osaid's App</title>
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- React & ReactDOM -->
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-  
-  <!-- Babel (Compiles JSX in the browser) -->
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Osaid Shahid - App/Cloud Technical Support & Systems Administrator">
+    <meta name="theme-color" content="#000000">
+    <title>Osaid Shahid | Premium Technical Professional</title>
+    
+    <!-- Tailwind CSS for utility scaffolding -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Premium Google Fonts: Outfit for display, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <style>
-    /* Global CSS for hiding scrollbar but allowing scroll */
-    .scrollbar-hide::-webkit-scrollbar { display: none; }
-    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-    .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
-  </style>
-</head>
-<body class="bg-zinc-950 text-zinc-50 font-sans selection:bg-white selection:text-zinc-950">
-  <div id="root"></div>
+    <style>
+        /* ==========================================================================
+           01. ENTERPRISE DESIGN SYSTEM & CSS VARIABLES
+           ========================================================================== */
+        :root {
+            /* Premium Dark Cosmos Palette */
+            --bg-base: #000000;
+            --bg-surface: rgba(5, 5, 5, 0.85); /* Deep dark opaque for text readability */
+            --bg-surface-solid: #000000;
+            --bg-surface-glass: rgba(0, 0, 0, 0.9);
+            
+            /* Text Colors */
+            --text-primary: #fafafa; /* Softer white for premium feel */
+            --text-secondary: #a1a1aa; /* Zinc 400 for balanced contrast */
+            --text-tertiary: #71717a;
+            --text-inverse: #000000;
+            
+            /* Accents & Brand Colors (CRED/Comet Vibe) */
+            --accent-primary: #ffffff;
+            --accent-indigo: #4f46e5;
+            --accent-emerald: #10b981;
+            --accent-cyan: #00e1ff;
+            --accent-purple: #bc13fe;
+            --accent-neon-green: #39FF14;
+            
+            /* Borders & Shadows */
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-medium: rgba(255, 255, 255, 0.2);
+            --border-glow: rgba(0, 225, 255, 0.3);
+            
+            --shadow-xs: 0 2px 10px rgba(0, 0, 0, 0.3);
+            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.6);
+            --shadow-md: 0 10px 40px -10px rgba(0, 0, 0, 0.8);
+            --shadow-lg: 0 20px 60px -15px rgba(0, 0, 0, 0.9);
+            
+            /* Advanced Easing Curves for Cinematic Motion */
+            --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+            --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+            --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            
+            /* Layout & Spacing */
+            --nav-height: 80px;
+            --card-radius: 24px;
+            --button-radius: 100px;
+        }
 
-  <script type="text/babel">
-    const { useState, useEffect, useMemo } = React;
+        /* ==========================================================================
+           02. BASE RESET & TYPOGRAPHY SCALES
+           ========================================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    // --- ICON SYSTEM (Replacing lucide-react for standalone browser usage) ---
-    const Icon = ({ path, size = 24, className = '', fill = "none" }) => (
-      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill={className.includes('fill-') ? "currentColor" : fill} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} dangerouslySetInnerHTML={{ __html: path }}></svg>
-    );
+        ::selection { background-color: var(--accent-cyan); color: var(--text-inverse); }
 
-    const iconPaths = {
-      ShoppingBag: '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',
-      Heart: '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
-      User: '<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
-      Search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
-      MapPin: '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
-      Truck: '<path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5v8h2"/><path d="M14 17h1"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/>',
-      CheckCircle: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/>',
-      ChevronRight: '<path d="m9 18 6-6-6-6"/>',
-      X: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
-      Menu: '<line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>',
-      Star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
-      ShieldCheck: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/>',
-      ArrowLeft: '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
-      Plus: '<path d="M5 12h14"/><path d="M12 5v14"/>',
-      Minus: '<path d="M5 12h14"/>',
-      Package: '<path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>',
-      Clock: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
-      XCircle: '<circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/>',
-      BarChart3: '<path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/>',
-      Settings: '<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>',
-      LogOut: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/>',
-      Phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>'
-    };
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
 
-    const ShoppingBag = (props) => <Icon path={iconPaths.ShoppingBag} {...props} />;
-    const Heart = (props) => <Icon path={iconPaths.Heart} {...props} />;
-    const User = (props) => <Icon path={iconPaths.User} {...props} />;
-    const Search = (props) => <Icon path={iconPaths.Search} {...props} />;
-    const MapPin = (props) => <Icon path={iconPaths.MapPin} {...props} />;
-    const Truck = (props) => <Icon path={iconPaths.Truck} {...props} />;
-    const CheckCircle = (props) => <Icon path={iconPaths.CheckCircle} {...props} />;
-    const ChevronRight = (props) => <Icon path={iconPaths.ChevronRight} {...props} />;
-    const X = (props) => <Icon path={iconPaths.X} {...props} />;
-    const Menu = (props) => <Icon path={iconPaths.Menu} {...props} />;
-    const Star = (props) => <Icon path={iconPaths.Star} {...props} />;
-    const ShieldCheck = (props) => <Icon path={iconPaths.ShieldCheck} {...props} />;
-    const ArrowLeft = (props) => <Icon path={iconPaths.ArrowLeft} {...props} />;
-    const Plus = (props) => <Icon path={iconPaths.Plus} {...props} />;
-    const Minus = (props) => <Icon path={iconPaths.Minus} {...props} />;
-    const Package = (props) => <Icon path={iconPaths.Package} {...props} />;
-    const Clock = (props) => <Icon path={iconPaths.Clock} {...props} />;
-    const XCircle = (props) => <Icon path={iconPaths.XCircle} {...props} />;
-    const BarChart3 = (props) => <Icon path={iconPaths.BarChart3} {...props} />;
-    const Settings = (props) => <Icon path={iconPaths.Settings} {...props} />;
-    const LogOut = (props) => <Icon path={iconPaths.LogOut} {...props} />;
-    const Phone = (props) => <Icon path={iconPaths.Phone} {...props} />;
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+            line-height: 1.7;
+        }
 
-    // --- MOCK DATA ---
-    const MOCK_PRODUCTS = [
-      { id: 1, name: "Midnight Onyx Trench", price: 8999, category: "Outerwear", image: "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?auto=format&fit=crop&q=80&w=800", rating: 4.8, codAvailable: true, sizes: ["S", "M", "L", "XL"], stock: 12 },
-      { id: 2, name: "Obsidian Silk Shirt", price: 4499, category: "Shirts", image: "https://images.unsplash.com/photo-1596755094514-f87e32f8522b?auto=format&fit=crop&q=80&w=800", rating: 4.6, codAvailable: true, sizes: ["M", "L"], stock: 5 },
-      { id: 3, name: "Stellar Minimalist Watch", price: 12499, category: "Accessories", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=800", rating: 4.9, codAvailable: false, sizes: ["OS"], stock: 8 },
-      { id: 4, name: "Carbon Weave Trousers", price: 3999, category: "Bottoms", image: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&q=80&w=800", rating: 4.5, codAvailable: true, sizes: ["30", "32", "34"], stock: 20 },
-      { id: 5, name: "Lunar High-Top Sneakers", price: 6599, category: "Footwear", image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&q=80&w=800", rating: 4.7, codAvailable: true, sizes: ["8", "9", "10", "11"], stock: 15 },
-      { id: 6, name: "Eclipse Leather Wallet", price: 1999, category: "Accessories", image: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&q=80&w=800", rating: 4.4, codAvailable: true, sizes: ["OS"], stock: 50 },
-      { id: 7, name: "Titanium Frame Aviators", price: 5999, category: "Accessories", image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&q=80&w=800", rating: 4.6, codAvailable: true, sizes: ["OS"], stock: 18 },
-      { id: 8, name: "Cashmere Turtleneck", price: 7499, category: "Shirts", image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&q=80&w=800", rating: 4.9, codAvailable: true, sizes: ["S", "M", "L"], stock: 9 },
-      { id: 9, name: "Graphite Denim Jacket", price: 6499, category: "Outerwear", image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&q=80&w=800", rating: 4.5, codAvailable: true, sizes: ["M", "L", "XL"], stock: 25 },
-      { id: 10, name: "Ivory Linen Trousers", price: 4299, category: "Bottoms", image: "https://images.unsplash.com/photo-1584865288642-42078afe6942?auto=format&fit=crop&q=80&w=800", rating: 4.3, codAvailable: true, sizes: ["30", "32", "34", "36"], stock: 14 },
-      { id: 11, name: "Onyx Chelsea Boots", price: 8999, category: "Footwear", image: "https://images.unsplash.com/photo-1611312449408-fcece27cdbb1?auto=format&fit=crop&q=80&w=800", rating: 4.8, codAvailable: false, sizes: ["7", "8", "9", "10"], stock: 6 },
-      { id: 12, name: "Shadow Overcoat", price: 14999, category: "Outerwear", image: "https://images.unsplash.com/photo-1578681994506-b8f463449011?auto=format&fit=crop&q=80&w=800", rating: 4.9, codAvailable: false, sizes: ["M", "L"], stock: 4 },
-      { id: 13, name: "Silicone Tech Backpack", price: 5499, category: "Accessories", image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=800", rating: 4.5, codAvailable: true, sizes: ["OS"], stock: 30 },
-      { id: 14, name: "Brushed Steel Cuff", price: 1499, category: "Accessories", image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=800", rating: 4.2, codAvailable: true, sizes: ["OS"], stock: 45 },
-      { id: 15, name: "Aero Knit Runners", price: 7299, category: "Footwear", image: "https://images.unsplash.com/photo-1550614000-4b95f27956eb?auto=format&fit=crop&q=80&w=800", rating: 4.7, codAvailable: true, sizes: ["8", "9", "10", "11", "12"], stock: 22 },
-      { id: 16, name: "Midnight Pleated Shorts", price: 2999, category: "Bottoms", image: "https://images.unsplash.com/photo-1594938298883-6c1613ebceb7?auto=format&fit=crop&q=80&w=800", rating: 4.4, codAvailable: true, sizes: ["S", "M", "L"], stock: 17 },
-      { id: 17, name: "Crimson Silk Pocket Square", price: 999, category: "Accessories", image: "https://images.unsplash.com/photo-1606503825008-8f5263155ba7?auto=format&fit=crop&q=80&w=800", rating: 4.1, codAvailable: true, sizes: ["OS"], stock: 55 },
-      { id: 18, name: "Slate Grey Hoodie", price: 3499, category: "Outerwear", image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=800", rating: 4.8, codAvailable: true, sizes: ["S", "M", "L", "XL"], stock: 33 },
-      { id: 19, name: "Cobalt Oxford Shirt", price: 2899, category: "Shirts", image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&q=80&w=800", rating: 4.5, codAvailable: true, sizes: ["M", "L", "XL"], stock: 19 },
-      { id: 20, name: "Matte Black Belt", price: 1899, category: "Accessories", image: "https://images.unsplash.com/photo-1624222247344-550fb60583dc?auto=format&fit=crop&q=80&w=800", rating: 4.6, codAvailable: true, sizes: ["32", "34", "36"], stock: 40 },
-      { id: 21, name: "Desert Suede Loafers", price: 6999, category: "Footwear", image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&q=80&w=800", rating: 4.3, codAvailable: true, sizes: ["7", "8", "9"], stock: 11 },
-      { id: 22, name: "Arctic White Puffer", price: 9999, category: "Outerwear", image: "https://images.unsplash.com/photo-1602810316417-68b209e99a80?auto=format&fit=crop&q=80&w=800", rating: 4.7, codAvailable: true, sizes: ["M", "L"], stock: 8 },
-      { id: 23, name: "Charcoal Wool Slacks", price: 4599, category: "Bottoms", image: "https://images.unsplash.com/photo-1588099768531-a727382d603a?auto=format&fit=crop&q=80&w=800", rating: 4.6, codAvailable: true, sizes: ["30", "32", "34", "36"], stock: 15 },
-      { id: 24, name: "Bronze Aviator Watch", price: 15999, category: "Accessories", image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&q=80&w=800", rating: 4.9, codAvailable: false, sizes: ["OS"], stock: 3 },
-      { id: 25, name: "Taupe Essential Tee", price: 1299, category: "Shirts", image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800", rating: 4.4, codAvailable: true, sizes: ["S", "M", "L", "XL"], stock: 60 },
-      { id: 26, name: "Olive Cargo Joggers", price: 3299, category: "Bottoms", image: "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&q=80&w=800", rating: 4.5, codAvailable: true, sizes: ["30", "32", "34"], stock: 28 },
-      { id: 27, name: "Sterling Silver Chain", price: 2499, category: "Accessories", image: "https://images.unsplash.com/photo-1599643478514-4a88484e5ab7?auto=format&fit=crop&q=80&w=800", rating: 4.7, codAvailable: true, sizes: ["OS"], stock: 25 },
-      { id: 28, name: "Rajasthani Kurta", price: 1499, originalPrice: 3999, category: "Ethnic", image: "https://osaid56.github.io/images/Banwery-Schiffli-Kurta-Vol-1-F3-1679650158.jpeg", rating: 4.8, codAvailable: true, sizes: ["S", "M", "L", "XL", "XXL"], stock: 50 },
-      { id: 29, name: "my friend with Katrina", price: 69, category: "Exclusive", image: "https://osaid56.github.io/WhatsApp%20Image%202026-04-21%20at%2004.02.48.jpeg", rating: 5.0, codAvailable: true, sizes: ["OS"], stock: 10 },
-      { id: 30, name: "Osaid in Manali", price: 0, notForSale: true, category: "Exclusive", image: "https://osaid56.github.io/IMG_20251207_125519_095.webp", rating: 5.0, codAvailable: false, sizes: ["OS"], stock: 0 },
-    ];
+        h1, h2, h3, h4, h5, h6, .font-display { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; }
+        .font-mono-custom { font-family: 'JetBrains Mono', monospace; }
 
-    const COD_LIMIT = 10000;
+        /* ==========================================================================
+           03. CUSTOM PHYSICS-BASED CURSOR (REFINED FOR PREMIUM FEEL)
+           ========================================================================== */
+        @media (pointer: fine) {
+            body, a, button, input, textarea, select { cursor: none !important; }
+        }
 
-    // --- REUSABLE UI COMPONENTS (CRED-style) ---
-    const Button = ({ children, variant = 'primary', className = '', ...props }) => {
-      const baseStyle = "w-full py-4 px-6 uppercase tracking-widest text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2";
-      const variants = {
-        primary: "bg-white text-zinc-950 hover:bg-zinc-200 active:scale-[0.98]",
-        secondary: "bg-zinc-900 text-white border border-zinc-800 hover:border-zinc-600 active:scale-[0.98]",
-        danger: "bg-red-950/50 text-red-500 border border-red-900/50 hover:bg-red-900/50",
-        ghost: "bg-transparent text-zinc-400 hover:text-white"
-      };
-      return <button className={`${baseStyle} ${variants[variant]} ${className}`} {...props}>{children}</button>;
-    };
+        .cursor-dot, .cursor-outline {
+            position: fixed;
+            top: 0; left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 99999;
+            pointer-events: none;
+            will-change: transform, width, height, background-color, border-color, backdrop-filter;
+        }
 
-    const Card = ({ children, className = '' }) => (
-      <div className={`bg-zinc-900/50 border border-zinc-800 backdrop-blur-md p-6 ${className}`}>
-        {children}
-      </div>
-    );
+        /* The inner dot */
+        .cursor-dot {
+            width: 6px; height: 6px;
+            background-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
+            transition: opacity 0.2s ease;
+        }
 
-    const Input = ({ label, ...props }) => (
-      <div className="mb-4">
-        {label && <label className="block text-xs uppercase tracking-widest text-zinc-500 mb-2">{label}</label>}
-        <input className="w-full bg-zinc-900 border-b-2 border-zinc-800 text-white p-4 focus:outline-none focus:border-white transition-colors" {...props} />
-      </div>
-    );
+        /* The Outer Outline */
+        .cursor-outline {
+            width: 32px; height: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: width 0.3s var(--ease-out-expo), 
+                        height 0.3s var(--ease-out-expo), 
+                        background-color 0.3s ease,
+                        border-color 0.3s ease,
+                        backdrop-filter 0.3s ease;
+        }
 
-    const Badge = ({ children, active }) => (
-      <span className={`text-xs uppercase tracking-wider px-3 py-1 border ${active ? 'bg-white text-zinc-950 border-white' : 'bg-transparent text-zinc-400 border-zinc-700'}`}>
-        {children}
-      </span>
-    );
+        /* Hover State: Transparent, sharp border, slightly larger */
+        body.hovering .cursor-outline {
+            width: 48px; height: 48px;
+            background-color: transparent;
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+            border-color: rgba(255, 255, 255, 0.8);
+            border-width: 1.5px;
+        }
 
-    // --- MAIN APP COMPONENT ---
-    function App() {
-      const [view, setView] = useState('home'); // home, shop, product, cart, checkout, profile, admin, orderSuccess
-      const [activeProduct, setActiveProduct] = useState(null);
-      const [cart, setCart] = useState([]);
-      const [wishlist, setWishlist] = useState([]);
-      const [user, setUser] = useState({ name: 'Guest', phone: '', isLoggedIn: false });
-      const [orders, setOrders] = useState([
-        { id: 'ORD-8X9P2', date: '2026-04-20', total: 8999, status: 'Shipped', items: [MOCK_PRODUCTS[0]], customer: { name: 'Rahul S.', phone: '9876543210', address: 'Mumbai' } }
-      ]);
-      const [searchQuery, setSearchQuery] = useState('');
+        /* Hide dot on hover for minimalist feel */
+        body.hovering .cursor-dot { opacity: 0; }
 
-      // Cart Handlers
-      const addToCart = (product, size) => {
-        setCart(prev => {
-          const existing = prev.find(item => item.id === product.id && item.selectedSize === size);
-          if (existing) return prev.map(item => item.id === product.id ? { ...item, qty: item.qty + 1 } : item);
-          return [...prev, { ...product, selectedSize: size, qty: 1 }];
-        });
-      };
-      const updateQty = (id, delta) => {
-        setCart(prev => prev.map(item => {
-          if (item.id === id) {
-            const newQty = Math.max(1, item.qty + delta);
-            return { ...item, qty: newQty };
-          }
-          return item;
-        }));
-      };
-      const removeCartItem = (id) => setCart(prev => prev.filter(item => item.id !== id));
-      
-      const toggleWishlist = (id) => {
-        setWishlist(prev => prev.includes(id) ? prev.filter(wId => wId !== id) : [...prev, id]);
-      };
+        body.clicking .cursor-outline {
+            width: 28px; height: 28px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-cyan);
+        }
 
-      const navigate = (newView, product = null) => {
-        if (product) setActiveProduct(product);
-        setView(newView);
-        window.scrollTo(0, 0);
-      };
+        /* ==========================================================================
+           04. PERPLEXITY COMET COSMOS ENGINE (PLANETS & STARS)
+           ========================================================================== */
+        #cosmos-container {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -3;
+            overflow: hidden;
+            background: #000000;
+        }
 
-      // --- SUB-VIEWS (CUSTOMER) ---
+        /* SVG Noise Filter for Planets */
+        .planet-noise {
+            position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+            mix-blend-mode: overlay;
+            border-radius: 50%;
+            pointer-events: none;
+        }
 
-      const HomeView = () => (
-        <div className="pb-24 animate-in fade-in duration-500">
-          {/* Hero Section */}
-          <div className="relative h-[70vh] w-full flex items-end p-6 mb-12">
-            <div className="absolute inset-0 z-0">
-              <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=1200" alt="Hero" className="w-full h-full object-cover opacity-60" />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/50 to-transparent" />
-            </div>
-            <div className="relative z-10 w-full">
-              <h1 className="text-5xl font-black uppercase tracking-tighter mb-2">Osaid's App<br/>Collection</h1>
-              <p className="text-zinc-400 mb-6 tracking-wide">Redefining modern silhouettes.</p>
-              <Button onClick={() => navigate('shop')}>Explore Now</Button>
-            </div>
-          </div>
+        /* Planet Wrappers for Revolution (Orbit) */
+        .planet-orbit {
+            position: absolute;
+            top: 50%; left: 50%;
+            will-change: transform;
+        }
 
-          {/* Trending */}
-          <div className="px-6">
-            <div className="flex justify-between items-end mb-6">
-              <h2 className="text-xl font-bold uppercase tracking-widest">Trending Now</h2>
-              <span className="text-zinc-500 text-sm uppercase tracking-widest cursor-pointer hover:text-white" onClick={() => navigate('shop')}>View All</span>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              {[30, 28, 29, 1].map(id => MOCK_PRODUCTS.find(p => p.id === id)).filter(Boolean).map(product => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </div>
-        </div>
-      );
+        /* Base Planet Sphere */
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+            /* Core 3D shading */
+            box-shadow: inset -30px -30px 60px rgba(0,0,0,0.9), 
+                        inset 10px 10px 40px rgba(255,255,255,0.3),
+                        0 0 100px rgba(0,0,0,0.5);
+        }
 
-      const ShopView = () => {
-        const [selectedCategory, setSelectedCategory] = useState('All');
-        const categories = ['All', 'Outerwear', 'Shirts', 'Bottoms', 'Footwear', 'Accessories', 'Ethnic', 'Exclusive'];
+        /* Continuous Rotation Animations */
+        @keyframes spin-cw {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        @keyframes spin-ccw {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(-360deg); }
+        }
 
-        const filtered = MOCK_PRODUCTS.filter(p => {
-          const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
-          const matchesCategory = selectedCategory === 'All' || p.category === selectedCategory;
-          return matchesSearch && matchesCategory;
-        });
+        /* Planet 1: Copper/Cyan (Hero) */
+        .p1 {
+            width: 400px; height: 400px; /* Scaled down */
+            background: radial-gradient(circle at 30% 30%, #24a19c, #ff0844 80%);
+            left: -20vw; top: 15vh;
+            animation: spin-cw 120s linear infinite;
+        }
         
-        return (
-          <div className="pt-20 pb-24 px-6 animate-in fade-in">
-            <div className="mb-8">
-              <h1 className="text-3xl font-black uppercase tracking-tighter mb-4">Catalog</h1>
-              <div className="relative">
-                <Search className="absolute left-4 top-4 text-zinc-500" size={20} />
-                <input 
-                  type="text" 
-                  placeholder="Search products..." 
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-zinc-900 border border-zinc-800 text-white py-4 pl-12 pr-4 rounded-none focus:border-white focus:outline-none"
-                />
-              </div>
-            </div>
-            
-            {/* Categories / Filters */}
-            <div className="flex overflow-x-auto gap-3 mb-8 pb-2 scrollbar-hide">
-              {categories.map((cat) => (
-                <button key={cat} onClick={() => setSelectedCategory(cat)} className="flex-shrink-0">
-                  <Badge active={selectedCategory === cat}>{cat}</Badge>
-                </button>
-              ))}
-            </div>
+        /* Planet 2: Golden/Blue (Between Hero & Exp) */
+        .p2 {
+            width: 200px; height: 200px; /* Scaled down */
+            background: radial-gradient(circle at 40% 20%, #f6d365, #203a43 90%);
+            left: 35vw; top: 10vh;
+            animation: spin-ccw 100s linear infinite;
+        }
 
-            <div className="grid grid-cols-2 gap-4">
-              {filtered.map(product => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-              {filtered.length === 0 && <p className="col-span-2 text-center text-zinc-500 py-10">No products found.</p>}
-            </div>
-          </div>
-        );
-      };
+        /* Planet 3: Obsidian/Purple (Experience) */
+        .p3 {
+            width: 120px; height: 120px; /* Scaled down */
+            background: radial-gradient(circle at 20% 30%, #bc13fe, #000000 70%);
+            left: -15vw; top: 50vh;
+            box-shadow: inset -15px -15px 30px rgba(0,0,0,0.9), inset 5px 5px 20px rgba(255,255,255,0.4);
+            animation: spin-cw 150s linear infinite;
+        }
 
-      const ProductCard = ({ product }) => (
-        <div className="group cursor-pointer" onClick={() => navigate('product', product)}>
-          <div className="relative aspect-[3/4] bg-zinc-900 mb-3 overflow-hidden">
-            <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-            <button 
-              onClick={(e) => { e.stopPropagation(); toggleWishlist(product.id); }}
-              className="absolute top-3 right-3 p-2 bg-zinc-950/50 backdrop-blur rounded-full text-white"
-            >
-              <Heart size={16} className={wishlist.includes(product.id) ? "fill-white" : ""} />
-            </button>
-            {product.codAvailable && (
-              <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-md p-1.5 text-center">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-white">COD Available</span>
-              </div>
-            )}
-          </div>
-          <h3 className="text-sm font-medium truncate text-zinc-300">{product.name}</h3>
-          {product.notForSale ? (
-            <p className="mt-1 text-red-500 font-bold text-xs uppercase tracking-widest flex items-center gap-1">
-              <XCircle size={12} /> Not for sale
-            </p>
-          ) : (
-            <div className="mt-1 flex items-center gap-2">
-              <p className="text-white font-bold">₹{product.price}</p>
-              {product.originalPrice && (
-                <p className="text-zinc-500 text-xs line-through">₹{product.originalPrice}</p>
-              )}
+        /* Planet 5: Bright Star/Moon (Expertise/Contact) */
+        .p5 {
+            width: 70px; height: 70px; /* Scaled down */
+            background: radial-gradient(circle at 30% 30%, #ffffff, #f6d365 50%, #000000 100%);
+            left: -25vw; top: 130vh;
+            animation: spin-cw 90s linear infinite;
+        }
+
+        /* Planet 6: Red/Orange (Deep Scroll) */
+        .p6 {
+            width: 160px; height: 160px;
+            background: radial-gradient(circle at 30% 30%, #ff4b1f, #1f1c2c 80%);
+            left: 20vw; top: 200vh;
+            box-shadow: inset -20px -20px 40px rgba(0,0,0,0.9), inset 5px 5px 20px rgba(255,255,255,0.3);
+            animation: spin-ccw 140s linear infinite;
+        }
+
+        /* Planet 7: Ice Blue (Deep Scroll) */
+        .p7 {
+            width: 90px; height: 90px;
+            background: radial-gradient(circle at 40% 40%, #a1c4fd, #000000 80%);
+            left: -10vw; top: 250vh;
+            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.9), inset 5px 5px 15px rgba(255,255,255,0.4);
+            animation: spin-cw 110s linear infinite;
+        }
+
+        /* Planet 8: Deep Magenta/Void (Mid-scroll) */
+        .p8 {
+            width: 250px; height: 250px;
+            background: radial-gradient(circle at 70% 30%, #ff00cc, #330033 80%);
+            left: -10vw; top: 170vh;
+            box-shadow: inset -25px -25px 50px rgba(0,0,0,0.9), inset 10px 10px 30px rgba(255,255,255,0.2);
+            animation: spin-ccw 180s linear infinite;
+        }
+
+        /* Planet 9: Emerald/Teal Gas Giant (Deep-scroll) */
+        .p9 {
+            width: 450px; height: 450px;
+            background: radial-gradient(circle at 20% 50%, #00b09b, #96c93d 50%, #000000 90%);
+            left: 60vw; top: 280vh;
+            box-shadow: inset -40px -40px 80px rgba(0,0,0,0.9), inset 10px 10px 40px rgba(255,255,255,0.2);
+            animation: spin-cw 200s linear infinite;
+        }
+
+        /* Planet 10: Neon Pink/Orange small moon (Top/Mid-scroll) */
+        .p10 {
+            width: 100px; height: 100px;
+            background: radial-gradient(circle at 40% 40%, #ff9966, #ff5e62 70%, #000 100%);
+            left: 85vw; top: 50vh;
+            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.9), inset 5px 5px 15px rgba(255,255,255,0.4);
+            animation: spin-ccw 80s linear infinite;
+        }
+
+        /* Planet 12: Icy Blue Moon */
+        .p12 {
+            width: 80px; height: 80px;
+            background: radial-gradient(circle at 35% 35%, #e0ffff, #4682b4 70%, #000 100%);
+            box-shadow: inset -8px -8px 15px rgba(0,0,0,0.9), inset 4px 4px 10px rgba(255,255,255,0.4);
+            animation: spin-ccw 95s linear infinite;
+        }
+
+        /* Planet 13: Fiery Red/Yellow Giant */
+        .p13 {
+            width: 220px; height: 220px;
+            background: radial-gradient(circle at 30% 40%, #ffd700, #ff4500 60%, #8b0000 90%);
+            box-shadow: inset -20px -20px 40px rgba(0,0,0,0.9), inset 5px 5px 20px rgba(255,255,255,0.3);
+            animation: spin-cw 140s linear infinite;
+        }
+
+        /* Planet 14: Deep Purple Anomaly */
+        .p14 {
+            width: 140px; height: 140px;
+            background: radial-gradient(circle at 40% 30%, #da70d6, #4b0082 70%, #000 100%);
+            box-shadow: inset -15px -15px 30px rgba(0,0,0,0.9), inset 5px 5px 15px rgba(255,255,255,0.3);
+            animation: spin-ccw 125s linear infinite;
+        }
+
+        /* Planet 15: Pale Green/Grey Rocky */
+        .p15 {
+            width: 110px; height: 110px;
+            background: radial-gradient(circle at 30% 30%, #8fbc8f, #2f4f4f 80%);
+            box-shadow: inset -12px -12px 25px rgba(0,0,0,0.9), inset 4px 4px 12px rgba(255,255,255,0.2);
+            animation: spin-cw 105s linear infinite;
+        }
+
+        /* Planet 16: Dark Ocean Giant */
+        .p16 {
+            width: 350px; height: 350px;
+            background: radial-gradient(circle at 25% 25%, #00ced1, #00008b 60%, #000 90%);
+            box-shadow: inset -30px -30px 60px rgba(0,0,0,0.9), inset 8px 8px 30px rgba(255,255,255,0.2);
+            animation: spin-ccw 190s linear infinite;
+        }
+
+        /* ==========================================================================
+           04.1 BEAUTIFUL SATURN REPLACEMENT (HIGH FIDELITY RINGS)
+           ========================================================================== */
+        .beautiful-saturn-wrapper {
+            position: absolute;
+            width: 600px; height: 600px;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .bs-core {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px; height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #d1bc94, #c99200 40%, #8c681b 70%, #0d0802 95%);
+            box-shadow:
+                inset -30px -30px 45px rgba(0,0,0,0.95),
+                inset 10px 10px 30px rgba(255,255,255,0.15),
+                0 0 40px rgba(248, 181, 0, 0.1);
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        /* Core atmosphere bands */
+        .bs-core::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: repeating-linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0.05) 0%,
+                rgba(255, 255, 255, 0.05) 4%,
+                transparent 4%,
+                transparent 12%,
+                rgba(0, 0, 0, 0.15) 12%,
+                rgba(0, 0, 0, 0.15) 16%
+            );
+            mix-blend-mode: overlay;
+            transform: rotate(-15deg) scale(1.2);
+        }
+
+        .bs-core-shadow {
+            position: absolute;
+            width: 120%; height: 8px;
+            top: 52%; left: -10%;
+            background: rgba(0, 0, 0, 0.6);
+            transform: rotate(-18deg);
+            filter: blur(3px);
+            z-index: 6;
+        }
+
+        .bs-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 540px; height: 540px;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle,
+                transparent 35%,
+                rgba(180, 160, 120, 0.8) 35.2%,
+                rgba(180, 160, 120, 0.8) 38%,
+                rgba(200, 180, 140, 0.9) 38.2%,
+                rgba(200, 180, 140, 0.9) 43%,
+                rgba(140, 120, 90, 0.7) 43.2%,
+                rgba(140, 120, 90, 0.7) 46%,
+                transparent 46.2%, /* Cassini Division */
+                transparent 48%,
+                rgba(170, 150, 110, 0.85) 48.2%,
+                rgba(170, 150, 110, 0.85) 53%,
+                rgba(120, 130, 150, 0.5) 53.2%,
+                rgba(120, 130, 150, 0.5) 57%,
+                transparent 57.2%
+            );
+            transform: translate(-50%, -50%) rotateX(76deg) rotateY(-18deg);
+        }
+
+        .bs-ring-back {
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+            z-index: 2;
+        }
+
+        .bs-ring-front {
+            clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+            z-index: 10;
+        }
+
+        .bs-shadow-caster {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 540px; height: 540px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                transparent 80deg,
+                rgba(0,0,0,0.8) 100deg,
+                rgba(0,0,0,0.8) 140deg,
+                transparent 160deg,
+                transparent 360deg
+            );
+            z-index: 3;
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+            transform: translate(-50%, -50%) rotateX(76deg) rotateY(-18deg);
+            filter: blur(8px);
+        }
+
+        /* Starfield Layers */
+        #stars-1, #stars-2, #stars-3 {
+            position: absolute; top: 0; left: 0; width: 1px; height: 1px;
+            background: transparent;
+            will-change: transform;
+        }
+
+        #physics-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        /* ==========================================================================
+           06. PERPLEXITY COMET SPOTLIGHT CARDS & DEEP BLUR
+           ========================================================================== */
+        .comet-cards-wrapper { position: relative; }
+
+        .comet-card {
+            position: relative;
+            background-color: var(--bg-surface);
+            backdrop-filter: blur(40px); 
+            -webkit-backdrop-filter: blur(40px);
+            border-radius: var(--card-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+            z-index: 1;
+            transform-style: preserve-3d;
+            transition: transform 0.6s var(--ease-out-expo), box-shadow 0.6s var(--ease-out-expo);
+            height: 100%;
+            display: flex; flex-direction: column;
+            border: 1px solid var(--border-light);
+        }
+
+        .comet-cards-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: calc(var(--card-radius) + 2px);
+            background: radial-gradient(
+                600px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px), 
+                var(--accent-cyan),
+                transparent 40%
+            );
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .comet-cards-wrapper:hover::before { opacity: 1; }
+
+        .comet-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-xl), 0 0 30px rgba(0, 225, 255, 0.1);
+        }
+
+        /* ==========================================================================
+           07. PREMIUM COMPONENTS (BUTTONS, TAGS)
+           ========================================================================== */
+        .magnetic-btn-wrapper { position: relative; display: inline-block; padding: 20px; margin: -20px; }
+
+        .btn-premium {
+            position: relative; display: inline-flex; align-items: center; justify-content: center;
+            padding: 1.25rem 2.75rem;
+            background-color: var(--accent-primary); color: var(--text-inverse);
+            font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 1.5px;
+            border-radius: var(--button-radius); text-decoration: none;
+            overflow: hidden;
+            transition: color 0.4s ease, box-shadow 0.4s ease;
+            z-index: 1; border: none;
+            box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+            will-change: transform;
+        }
+
+        .btn-premium::before {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 0%;
+            background-color: var(--accent-cyan);
+            transition: all 0.4s var(--ease-out-expo); z-index: -1;
+        }
+
+        .btn-premium:hover { box-shadow: 0 15px 40px rgba(0, 225, 255, 0.3); color: black; }
+        .btn-premium:hover::before { height: 100%; }
+
+        .section-tag {
+            display: inline-flex; align-items: center; padding: 0.6rem 1.5rem;
+            background-color: rgba(255,255,255,0.05); border: 1px solid var(--border-light);
+            border-radius: var(--button-radius); font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-primary);
+            text-transform: uppercase; margin-bottom: 2.5rem;
+            backdrop-filter: blur(10px); transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s ease;
+        }
+
+        .section-tag:hover {
+            transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,225,255,0.1); border-color: var(--border-medium);
+        }
+
+        .section-tag::before {
+            content: ''; display: block; width: 8px; height: 8px;
+            background-color: var(--accent-cyan); border-radius: 50%; margin-right: 12px;
+            box-shadow: 0 0 10px var(--accent-cyan);
+            animation: pulse-dot 2s infinite alternate;
+        }
+
+        @keyframes pulse-dot { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0.5; transform: scale(0.8); } }
+
+        /* ==========================================================================
+           08. GLASSMORPHISM NAVIGATION
+           ========================================================================== */
+        .glass-nav {
+            background-color: var(--bg-surface-glass);
+            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border-bottom: 1px solid var(--border-light);
+            transition: transform 0.5s var(--ease-out-expo), background-color 0.5s ease, padding 0.5s var(--ease-out-expo);
+        }
+
+        .nav-link {
+            position: relative; color: var(--text-secondary);
+            font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.875rem;
+            letter-spacing: 1px; text-transform: uppercase; transition: color 0.3s ease; padding: 0.5rem 0;
+        }
+
+        .nav-link::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+            background-color: var(--accent-cyan); transition: width 0.4s var(--ease-out-expo);
+        }
+
+        .nav-link:hover { color: var(--text-primary); }
+        .nav-link:hover::after { width: 100%; box-shadow: 0 0 10px var(--accent-cyan); }
+
+        /* ==========================================================================
+           09. TIMELINES (EXPERIENCE & EXACT EDUCATION)
+           ========================================================================== */
+        .timeline-container { position: relative; padding-top: 1rem; padding-bottom: 1rem; }
+
+        .timeline-container::before {
+            content: ''; position: absolute; top: 0; bottom: 0; left: 28px; width: 2px;
+            background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.15) 10%, rgba(255,255,255,0.15) 90%, transparent 100%);
+        }
+
+        .timeline-node { position: relative; padding-left: 6rem; margin-bottom: 5rem; }
+        .timeline-node:last-child { margin-bottom: 0; }
+
+        .timeline-dot {
+            position: absolute; left: 20px; top: 2.5rem; width: 18px; height: 18px;
+            background-color: var(--bg-base); border: 3px solid var(--text-secondary);
+            border-radius: 50%; transition: all 0.6s var(--ease-elastic); z-index: 2;
+        }
+
+        .timeline-node:hover .timeline-dot {
+            background-color: var(--accent-cyan); border-color: var(--accent-cyan);
+            transform: scale(1.5); box-shadow: 0 0 20px var(--accent-cyan);
+        }
+
+        .edu-timeline-container::before { left: 50%; transform: translateX(-50%); }
+
+        .edu-timeline-node { width: 100%; display: flex; justify-content: flex-start; margin-bottom: 3.5rem; position: relative; }
+        .edu-timeline-node:nth-child(even) { justify-content: flex-end; }
+        .edu-timeline-content { width: 45%; position: relative; }
+
+        .edu-timeline-dot {
+            position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+            width: 20px; height: 20px; background-color: var(--bg-base);
+            border: 4px solid var(--text-secondary); border-radius: 50%; z-index: 3;
+            transition: all 0.6s var(--ease-elastic);
+        }
+
+        .edu-timeline-node:hover .edu-timeline-dot {
+            border-color: var(--accent-purple); background-color: var(--accent-purple);
+            transform: translate(-50%, -50%) scale(1.5); box-shadow: 0 0 20px var(--accent-purple);
+        }
+
+        /* ==========================================================================
+           10. SCROLL REVEAL ANIMATIONS
+           ========================================================================== */
+        .reveal {
+            opacity: 0; transform: translateY(60px);
+            transition: opacity 1.2s var(--ease-out-expo), transform 1.2s var(--ease-out-expo);
+            will-change: transform, opacity;
+        }
+
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ==========================================================================
+           11. CONTACT SECTION & SOCIAL CARDS
+           ========================================================================== */
+        .social-card { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; text-decoration: none; }
+        .social-icon-wrapper {
+            width: 100px; height: 100px; border-radius: 28px;
+            background-color: rgba(255,255,255,0.05); border: 1px solid var(--border-light);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 2rem; transition: all 0.7s var(--ease-elastic);
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.02); position: relative; overflow: hidden;
+        }
+
+        .social-card:hover .social-icon-wrapper { transform: translateY(-16px) scale(1.05); background-color: rgba(255,255,255,0.15); }
+        .social-card.linkedin:hover .social-icon-wrapper { border-color: rgba(0, 119, 181, 0.6); box-shadow: 0 20px 40px rgba(0, 119, 181, 0.3); }
+        .social-card.linkedin:hover .social-icon-svg { fill: #0077b5; transform: scale(1.15); filter: drop-shadow(0 0 10px rgba(0,119,181,0.5)); }
+        .social-card.gmail:hover .social-icon-wrapper { border-color: rgba(234, 67, 53, 0.6); box-shadow: 0 20px 40px rgba(234, 67, 53, 0.3); }
+        .social-card.gmail:hover .gmail-red { stroke: #ea4335; transform: scale(1.15); filter: drop-shadow(0 0 10px rgba(234,67,53,0.5)); }
+        .social-card.gmail:hover .gmail-blue { stroke: #4285f4; transform: scale(1.15); filter: drop-shadow(0 0 10px rgba(66,133,244,0.5)); }
+        .social-card.phone:hover .social-icon-wrapper { border-color: rgba(52, 168, 83, 0.6); box-shadow: 0 20px 40px rgba(52, 168, 83, 0.3); }
+        .social-card.phone:hover .phone-outline { stroke: #34a853; transform: scale(1.15) rotate(-10deg); filter: drop-shadow(0 0 10px rgba(52,168,83,0.5)); }
+        .social-icon-svg, .gmail-red, .gmail-blue, .phone-outline { transition: all 0.6s var(--ease-elastic); transform-origin: center; }
+        .social-icon-svg { width: 40px; height: 40px; fill: var(--text-primary); }
+
+        /* ==========================================================================
+           12. AI CHAT WIDGET
+           ========================================================================== */
+        #ai-chat-toggle {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 100;
+            padding: 1.25rem 2rem; background-color: var(--accent-primary); color: var(--text-inverse);
+            border-radius: 100px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem;
+            letter-spacing: 0.5px; display: flex; align-items: center; gap: 12px;
+            box-shadow: 0 10px 30px rgba(255,255,255,0.1); transition: all 0.5s var(--ease-elastic);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        #ai-chat-toggle:hover {
+            transform: translateY(-8px) scale(1.05); box-shadow: 0 20px 50px rgba(0,225,255,0.3);
+            border-color: var(--accent-cyan); color: var(--accent-cyan); background-color: #111;
+        }
+
+        #ai-chat-toggle svg { animation: float-icon 3s ease-in-out infinite; }
+        @keyframes float-icon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); filter: drop-shadow(0 5px 5px rgba(0,225,255,0.5)); } }
+
+        #ai-chat-window {
+            position: fixed; bottom: 7rem; right: 2rem;
+            width: 420px; max-width: calc(100vw - 4rem); height: 600px; max-height: calc(100vh - 9rem);
+            background: rgba(15, 15, 20, 0.95); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+            border: 1px solid var(--border-medium); border-radius: 32px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8), inset 0 0 30px rgba(255,255,255,0.05);
+            z-index: 99; display: flex; flex-direction: column; overflow: hidden;
+            opacity: 0; pointer-events: none; transform: translateY(40px) scale(0.9);
+            transform-origin: bottom right; transition: all 0.6s var(--ease-out-expo);
+        }
+
+        #ai-chat-window.active { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
+        .chat-header { padding: 1.75rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.4); }
+        .chat-messages { flex: 1; padding: 1.75rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1.25rem; scroll-behavior: smooth; }
+        .chat-message { max-width: 85%; padding: 1.1rem 1.4rem; border-radius: 20px; font-size: 0.95rem; line-height: 1.6; animation: messageSlide 0.5s var(--ease-out-expo) forwards; opacity: 0; transform: translateY(15px); }
+        @keyframes messageSlide { to { opacity: 1; transform: translateY(0); } }
+        .message-ai { background-color: rgba(255,255,255,0.08); border: 1px solid var(--border-light); color: var(--text-primary); align-self: flex-start; border-bottom-left-radius: 6px; }
+        .message-user { background-color: var(--accent-cyan); color: #000; align-self: flex-end; border-bottom-right-radius: 6px; font-weight: 600; }
+        .chat-input-area { padding: 1.5rem; border-top: 1px solid var(--border-light); background: rgba(0, 0, 0, 0.4); display: flex; gap: 1rem; }
+        .chat-input { flex: 1; padding: 1rem 1.5rem; border: 1px solid var(--border-medium); border-radius: 100px; background: rgba(0,0,0,0.5); color: white; font-family: 'Inter', sans-serif; font-size: 0.95rem; outline: none; transition: all 0.3s ease; }
+        .chat-input:focus { border-color: var(--accent-cyan); box-shadow: 0 0 0 4px rgba(0, 225, 255, 0.15); }
+        .chat-send-btn { width: 52px; height: 52px; border-radius: 50%; background-color: var(--accent-cyan); color: #000; border: none; display: flex; align-items: center; justify-content: center; transition: transform 0.3s var(--ease-elastic), box-shadow 0.2s ease; }
+        .chat-send-btn:hover { transform: scale(1.15); box-shadow: 0 0 20px var(--accent-cyan); }
+        .typing-dots { display: flex; gap: 6px; padding: 0.5rem; }
+        .typing-dots span { width: 8px; height: 8px; background-color: var(--accent-cyan); border-radius: 50%; animation: typing 1.4s infinite ease-in-out both; }
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        /* ==========================================================================
+           13. RESPONSIVE MEDIA QUERIES
+           ========================================================================== */
+        @media (max-width: 1024px) {
+            .edu-timeline-container::before { left: 24px; transform: none; }
+            .edu-timeline-node { flex-direction: column; padding-left: 5rem; margin-bottom: 4rem; }
+            .edu-timeline-node:nth-child(even) { justify-content: flex-start; }
+            .edu-timeline-content { width: 100%; }
+            .edu-timeline-dot { left: 16px; top: 1.5rem; transform: none; }
+            .edu-timeline-node:hover .edu-timeline-dot { transform: scale(1.4); }
+        }
+
+        @media (max-width: 768px) {
+            html { font-size: 14px; }
+            .comet-card { padding: 1.5rem; border-radius: 20px; }
+            .timeline-container::before { left: 16px; }
+            .timeline-node { padding-left: 3.5rem; margin-bottom: 3.5rem; }
+            .timeline-dot { left: 8px; width: 18px; height: 18px; top: 1.5rem; }
+            .hero-title { font-size: 3.5rem !important; line-height: 1.1 !important; }
+            .cursor-dot, .cursor-outline { display: none; }
+            body { cursor: auto; }
+            .btn-premium, .hover-trigger, a, button { cursor: pointer; }
+            #ai-chat-window { bottom: 0; right: 0; width: 100vw; height: 85vh; max-width: none; max-height: none; border-radius: 32px 32px 0 0; transform: translateY(100%); }
+            #ai-chat-toggle { bottom: 1.5rem; right: 1.5rem; padding: 1rem 1.5rem; font-size: 0.9rem; }
+        }
+
+        /* Physics Text Setup */
+        .char-wrapper { display: inline-block; white-space: pre; position: relative; }
+        .char-inner { display: inline-block; will-change: transform; position: relative; z-index: 10; }
+        .char-inner.falling { z-index: 5; pointer-events: none; }
+        .char-inner.carried { z-index: 20; pointer-events: none; filter: drop-shadow(0 0 10px rgba(0,225,255,0.8)); }
+        
+        #fixer-bot {
+            position: absolute;
+            width: 40px; height: 40px;
+            z-index: 60;
+            will-change: transform;
+            pointer-events: none;
+            /* Start hidden above scene */
+            transform: translate(-100px, -100px);
+        }
+
+        /* Bot Tractor Beam */
+        .tractor-beam {
+            position: absolute;
+            left: 50%; top: 50%;
+            width: 2px;
+            background: linear-gradient(to bottom, #00e1ff, transparent);
+            transform-origin: top center;
+            opacity: 0;
+            box-shadow: 0 0 10px #00e1ff;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .bot-glow { animation: pulseGlow 2s infinite alternate; }
+        @keyframes pulseGlow {
+            0% { filter: drop-shadow(0 0 5px rgba(0,225,255,0.5)); }
+            100% { filter: drop-shadow(0 0 15px rgba(0,225,255,1)); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Premium Backgrounds (Cosmos) -->
+    <div id="cosmos-container">
+        <!-- Orbiting Planets -->
+        <div class="planet-orbit" style="top: 20vh; left: 10vw;" data-speed="-0.2" data-rot="0.08"><div class="planet p1"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 40vh; left: 25vw;" data-speed="-0.1" data-rot="-0.1"><div class="planet p12"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 80vh; left: 85vw;" data-speed="-0.3" data-rot="0.15"><div class="planet p10"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 120vh; left: 80vw;" data-speed="-0.2" data-rot="-0.08"><div class="planet p2"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 160vh; left: 15vw;" data-speed="-0.4" data-rot="0.12"><div class="planet p13"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 200vh; left: 85vw;" data-speed="-0.3" data-rot="0.09"><div class="planet p3"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 240vh; left: 50vw;" data-speed="-0.2" data-rot="0.11"><div class="planet p7"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 320vh; left: 80vw;" data-speed="-0.3" data-rot="0.13"><div class="planet p14"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 360vh; left: -5vw;" data-speed="-0.5" data-rot="-0.09"><div class="planet p8"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 400vh; left: 20vw;" data-speed="-0.3" data-rot="0.14"><div class="planet p5"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 440vh; left: 70vw;" data-speed="-0.4" data-rot="-0.11"><div class="planet p15"><div class="planet-noise"></div></div></div>
+        
+        <!-- Beautiful High-Fidelity Saturn -->
+        <div class="planet-orbit" style="top: 480vh; left: 15vw;" data-speed="-0.5" data-rot="0.05">
+            <div class="beautiful-saturn-wrapper">
+                <div class="bs-ring bs-ring-back"></div>
+                <div class="bs-shadow-caster"></div>
+                <div class="bs-core">
+                    <div class="planet-noise"></div>
+                    <div class="bs-core-shadow"></div>
+                </div>
+                <div class="bs-ring bs-ring-front"></div>
             </div>
-          )}
         </div>
-      );
 
-      const ProductDetailView = () => {
-        const p = activeProduct;
-        const [selectedSize, setSelectedSize] = useState(p.sizes[0]);
-        const [pincode, setPincode] = useState('');
-        const [pinStatus, setPinStatus] = useState(null); // null, checking, success, fail
+        <div class="planet-orbit" style="top: 520vh; left: 85vw;" data-speed="-0.4" data-rot="-0.12"><div class="planet p6"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 560vh; left: 80vw;" data-speed="-0.6" data-rot="0.08"><div class="planet p16"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 600vh; left: 60vw;" data-speed="-0.6" data-rot="0.09"><div class="planet p9"><div class="planet-noise"></div></div></div>
 
-        const checkPincode = () => {
-          if(pincode.length !== 6) return;
-          setPinStatus('checking');
-          setTimeout(() => {
-            setPinStatus(Math.random() > 0.2 ? 'success' : 'fail');
-          }, 1000);
-        };
+        <!-- Starfield generated via JS -->
+        <div id="stars-1"></div><div id="stars-2"></div><div id="stars-3"></div>
+    </div>
+    
+    <canvas id="physics-canvas"></canvas>
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
 
-        return (
-          <div className="pb-24 animate-in slide-in-from-right-8 duration-300">
-            <div className="relative h-[60vh] w-full bg-zinc-900">
-              <button onClick={() => setView('shop')} className="absolute top-6 left-6 z-10 p-3 bg-zinc-950/50 backdrop-blur-md rounded-full">
-                <ArrowLeft size={20} />
-              </button>
-              <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+    <!-- ==========================================================================
+         NAVIGATION
+         ========================================================================== -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-5 glass-nav" id="navbar">
+        <div class="max-w-[1400px] mx-auto flex justify-between items-center">
+            <div class="font-display text-3xl font-black tracking-tight text-primary cursor-pointer hover-trigger">
+                Osaid<span class="text-accent-cyan" style="color:var(--accent-cyan)"> Shahid</span>
             </div>
-
-            <div className="p-6 -mt-6 relative z-20 bg-zinc-950 border-t border-zinc-800">
-              <div className="flex justify-between items-start mb-2">
-                <h1 className="text-2xl font-black uppercase tracking-wide">{p.name}</h1>
-                <button onClick={() => toggleWishlist(p.id)}>
-                  <Heart size={24} className={wishlist.includes(p.id) ? "fill-white" : "text-zinc-500"} />
-                </button>
-              </div>
-              
-              {p.notForSale ? (
-                <div className="mb-6 flex items-center gap-2 text-red-500">
-                  <XCircle size={20} />
-                  <p className="text-xl font-bold uppercase tracking-widest">Not for sale</p>
-                </div>
-              ) : (
-                <div className="flex items-center gap-3 mb-6">
-                  <p className="text-2xl font-light text-zinc-300">₹{p.price}</p>
-                  {p.originalPrice && (
-                    <p className="text-lg font-light text-zinc-500 line-through">₹{p.originalPrice}</p>
-                  )}
-                </div>
-              )}
-
-              <div className="mb-8">
-                <div className="flex justify-between text-xs uppercase tracking-widest text-zinc-500 mb-3">
-                  <span>Select Size</span>
-                  <span className="underline cursor-pointer">Size Guide</span>
-                </div>
-                <div className="flex gap-3">
-                  {p.sizes.map(size => (
-                    <button 
-                      key={size}
-                      onClick={() => setSelectedSize(size)}
-                      className={`w-12 h-12 flex items-center justify-center border transition-colors ${selectedSize === size ? 'border-white text-white' : 'border-zinc-800 text-zinc-500 hover:border-zinc-600'}`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <Card className="mb-8 p-4">
-                <div className="flex items-center gap-3 mb-4">
-                  <MapPin size={18} className="text-zinc-400" />
-                  <h3 className="text-sm uppercase tracking-widest font-bold">Delivery Options</h3>
-                </div>
-                <div className="flex gap-2">
-                  <input 
-                    type="number" 
-                    placeholder="Enter Pincode" 
-                    value={pincode}
-                    onChange={e => setPincode(e.target.value)}
-                    className="flex-1 bg-zinc-950 border border-zinc-800 p-3 text-sm focus:border-white focus:outline-none"
-                  />
-                  <Button variant="secondary" className="!w-auto !px-4 text-xs" onClick={checkPincode}>Check</Button>
-                </div>
-                {pinStatus === 'success' && <p className="text-green-500 text-xs mt-3 flex items-center gap-1"><CheckCircle size={14}/> Delivery by {new Date(Date.now() + 86400000 * 3).toLocaleDateString()}</p>}
-                {pinStatus === 'fail' && <p className="text-red-500 text-xs mt-3 flex items-center gap-1"><XCircle size={14}/> Not serviceable in this area.</p>}
-              </Card>
-
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center gap-3 text-sm text-zinc-400 border-b border-zinc-900 pb-4">
-                  <Package size={18} /> <span>14 Days Easy Returns</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm text-zinc-400 border-b border-zinc-900 pb-4">
-                  {p.codAvailable ? <ShieldCheck size={18} className="text-green-500"/> : <XCircle size={18} className="text-red-500"/>}
-                  <span>{p.codAvailable ? 'Cash on Delivery Available' : 'COD Not Available for this item'}</span>
-                </div>
-              </div>
-
-              <div className="fixed bottom-0 left-0 right-0 p-4 bg-zinc-950/90 backdrop-blur-lg border-t border-zinc-900 z-50">
-                {p.notForSale ? (
-                  <Button variant="danger" disabled className="opacity-50 cursor-not-allowed">
-                    Unavailable
-                  </Button>
-                ) : (
-                  <Button onClick={() => { addToCart(p, selectedSize); navigate('cart'); }}>
-                    <ShoppingBag size={18} /> Add to Cart
-                  </Button>
-                )}
-              </div>
+            <div class="hidden md:flex gap-12">
+                <a href="#about" class="nav-link hover-trigger">Identity</a>
+                <a href="#experience" class="nav-link hover-trigger">Experience</a>
+                <a href="#education" class="nav-link hover-trigger">Education</a>
+                <a href="#expertise" class="nav-link hover-trigger">Skills</a>
+                <a href="#contact" class="nav-link hover-trigger">Contact</a>
             </div>
-          </div>
-        );
-      };
+            <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 focus:outline-none z-50 relative hover-trigger" aria-label="Toggle Menu">
+                <span class="block w-6 h-[2px] bg-white transition-transform duration-400 origin-center" id="bar1"></span>
+                <span class="block w-6 h-[2px] bg-white transition-opacity duration-400" id="bar2"></span>
+                <span class="block w-6 h-[2px] bg-white transition-transform duration-400 origin-center" id="bar3"></span>
+            </button>
+        </div>
+    </nav>
 
-      const CartView = () => {
-        const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-        const hasNonCodItems = cart.some(item => !item.codAvailable);
-        const exceedsCodLimit = total > COD_LIMIT;
+    <div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-3xl z-40 flex flex-col justify-center items-center gap-10 opacity-0 pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]">
+        <a href="#about" class="font-display text-5xl font-bold text-white mobile-link hover-trigger">Identity</a>
+        <a href="#experience" class="font-display text-5xl font-bold text-white mobile-link hover-trigger">Experience</a>
+        <a href="#education" class="font-display text-5xl font-bold text-white mobile-link hover-trigger">Education</a>
+        <a href="#expertise" class="font-display text-5xl font-bold text-white mobile-link hover-trigger">Skills</a>
+        <a href="#contact" class="font-display text-5xl font-bold text-white mobile-link hover-trigger">Contact</a>
+    </div>
 
-        return (
-          <div className="pt-20 pb-32 px-6 min-h-screen">
-            <h1 className="text-3xl font-black uppercase tracking-tighter mb-8">Shopping Bag</h1>
-            
-            {cart.length === 0 ? (
-              <div className="text-center text-zinc-500 mt-20">
-                <ShoppingBag size={48} className="mx-auto mb-4 opacity-20" />
-                <p className="uppercase tracking-widest text-sm mb-6">Your bag is empty</p>
-                <Button variant="secondary" onClick={() => navigate('shop')}>Continue Shopping</Button>
-              </div>
-            ) : (
-              <>
-                <div className="space-y-6 mb-10">
-                  {cart.map((item, idx) => (
-                    <div key={idx} className="flex gap-4 items-start border-b border-zinc-900 pb-6">
-                      <img src={item.image} alt={item.name} className="w-24 h-32 object-cover bg-zinc-900" />
-                      <div className="flex-1">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h3 className="font-bold text-sm text-zinc-200">{item.name}</h3>
-                            <p className="text-xs text-zinc-500 uppercase tracking-wider mt-1">Size: {item.selectedSize}</p>
-                          </div>
-                          <button onClick={() => removeCartItem(item.id)} className="text-zinc-600 hover:text-white"><X size={16}/></button>
+    <!-- ==========================================================================
+         MAIN CONTENT WRAPPER
+         ========================================================================== -->
+    <main class="w-full relative z-10">
+
+        <!-- ==========================================================================
+             HERO SECTION (WITH GEMINI-LEVEL CONTINUOUS FIXER-BOT EFFECT)
+             ========================================================================== -->
+        <section id="about" class="min-h-screen flex flex-col justify-center px-6 pt-32 pb-20 max-w-[1400px] mx-auto">
+            <div class="w-full max-w-5xl relative z-10">
+                
+                <div class="reveal">
+                    <div class="section-tag hover-trigger">App/Cloud Technical Support Expert</div>
+                </div>
+
+                <!-- Fixer Scene Container -->
+                <div class="reveal reveal-delay-1 mb-10 w-full relative">
+                    <div class="comet-card p-6 md:p-12 border-white/10 hover-trigger relative overflow-hidden" id="fixer-scene-container" style="min-height: 380px;">
+                        
+                        <!-- The Fixer Bot (SVG) -->
+                        <div id="fixer-bot" class="bot-glow">
+                            <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Neon Bot Body -->
+                                <circle cx="50" cy="50" r="18" fill="#18181b" stroke="#00e1ff" stroke-width="3"/>
+                                <!-- Bot Eye -->
+                                <rect x="35" y="45" width="30" height="10" rx="5" fill="#000"/>
+                                <circle cx="45" cy="50" r="3" fill="#bc13fe" class="animate-pulse"/>
+                                <circle cx="55" cy="50" r="3" fill="#bc13fe" class="animate-pulse"/>
+                                <!-- Bot Antennas -->
+                                <path d="M 50,32 L 50,15 M 50,15 L 60,10" stroke="#a1a1aa" stroke-width="3" stroke-linecap="round"/>
+                                <circle cx="60" cy="10" r="4" fill="#00e1ff"/>
+                                <!-- Bot Thruster -->
+                                <path d="M 40,68 L 50,85 L 60,68 Z" fill="#3f3f46"/>
+                                <circle cx="50" cy="88" r="8" fill="#00e1ff" filter="blur(4px)" class="animate-pulse"/>
+                            </svg>
+                            <!-- Tractor Beam -->
+                            <div class="tractor-beam" id="tractor-beam"></div>
                         </div>
-                        <div className="mt-4 flex justify-between items-center">
-                          <div className="flex items-center border border-zinc-800">
-                            <button onClick={() => updateQty(item.id, -1)} className="p-2 text-zinc-400 hover:text-white"><Minus size={14}/></button>
-                            <span className="w-8 text-center text-sm font-bold">{item.qty}</span>
-                            <button onClick={() => updateQty(item.id, 1)} className="p-2 text-zinc-400 hover:text-white"><Plus size={14}/></button>
-                          </div>
-                          <p className="font-bold tracking-wide">₹{item.price * item.qty}</p>
+
+                        <!-- Spark particle container for welding/fixing -->
+                        <div id="weld-sparks" class="absolute inset-0 pointer-events-none z-[70] overflow-visible"></div>
+
+                        <!-- The Text Target for Physics Engine -->
+                        <h1 id="physics-text-block" class="font-display hero-title text-5xl sm:text-7xl md:text-[6rem] lg:text-[7rem] font-black leading-[1] tracking-tighter">
+                            <!-- JS will dynamically inject the splitted text here -->
+                        </h1>
+
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-4 md:gap-6 items-start md:items-center mb-16 reveal reveal-delay-2">
+                    <p class="font-mono-custom text-xs md:text-sm text-gray-300 uppercase tracking-widest font-bold bg-[var(--bg-surface)] backdrop-blur-[40px] border border-white/10 shadow-[var(--shadow-lg)] px-6 py-3.5 rounded-full hover-trigger transition-transform hover:-translate-y-1">
+                        German C1
+                    </p>
+                    <p class="font-mono-custom text-xs md:text-sm text-gray-300 uppercase tracking-widest font-bold bg-[var(--bg-surface)] backdrop-blur-[40px] border border-white/10 shadow-[var(--shadow-lg)] px-6 py-3.5 rounded-full hover-trigger transition-transform hover:-translate-y-1">
+                        Cloud Technical Support
+                    </p>
+                    <p class="font-mono-custom text-xs md:text-sm text-gray-300 uppercase tracking-widest font-bold bg-[var(--bg-surface)] backdrop-blur-[40px] border border-white/10 shadow-[var(--shadow-lg)] px-6 py-3.5 rounded-full hover-trigger transition-transform hover:-translate-y-1">
+                        Systems Admin
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center reveal reveal-delay-3">
+                    <div class="md:col-span-7 comet-cards-wrapper">
+                        <div class="comet-card p-6 md:p-8 lg:p-10 border-white/10 hover-trigger">
+                            <p class="text-xl md:text-2xl text-gray-400 leading-relaxed font-light">
+                                Dynamic and results-oriented professional with a proven track record as an App/cloud technical support-german language expert. Passionate about delivering outstanding service and contributing to an inclusive work environment.
+                            </p>
                         </div>
-                      </div>
                     </div>
-                  ))}
+                    <div class="md:col-span-5 flex justify-start md:justify-end">
+                        <div class="magnetic-btn-wrapper hover-trigger" id="magnetic-btn">
+                            <a href="#experience" class="btn-premium">
+                                Explore Experience 
+                                <svg class="w-6 h-6 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
-                <Card className="mb-24">
-                  <h3 className="uppercase tracking-widest text-xs text-zinc-500 font-bold mb-4">Order Summary</h3>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between text-zinc-400"><span>Subtotal</span><span>₹{total}</span></div>
-                    <div className="flex justify-between text-zinc-400"><span>Shipping</span><span className="text-green-500">Free</span></div>
-                    <div className="flex justify-between font-bold text-white text-lg mt-4 pt-4 border-t border-zinc-800">
-                      <span>Total</span><span>₹{total}</span>
+                <!-- Bento Grid Stats -->
+                <div class="comet-cards-wrapper grid grid-cols-2 md:grid-cols-4 gap-6 mt-28 reveal reveal-delay-4">
+                    <div class="comet-card card-tilt !p-8 flex flex-col justify-center items-center text-center hover-trigger border-white/10">
+                        <h2 class="font-display text-5xl md:text-6xl font-black text-primary tracking-tighter mb-3">4.0</h2>
+                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">Years Exp.</p>
                     </div>
-                  </div>
-
-                  {/* COD Warnings */}
-                  <div className="mt-6 p-4 bg-zinc-950 border border-zinc-800 text-xs text-zinc-400 space-y-2">
-                    <div className="flex items-start gap-2">
-                      <Truck size={14} className="mt-0.5 flex-shrink-0 text-white" />
-                      <p>Payment Mode: <strong className="text-white">Cash on Delivery ONLY</strong> for this prototype.</p>
+                    <div class="comet-card card-tilt !p-8 flex flex-col justify-center items-center text-center hover-trigger border-white/10">
+                        <h2 class="font-display text-5xl md:text-6xl font-black text-primary tracking-tighter mb-3">3+</h2>
+                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">Enterprises</p>
                     </div>
-                    {hasNonCodItems && (
-                      <div className="flex items-start gap-2 text-red-400">
-                        <XCircle size={14} className="mt-0.5 flex-shrink-0" />
-                        <p>Some items do not support COD. Please remove them to proceed.</p>
-                      </div>
-                    )}
-                    {exceedsCodLimit && (
-                      <div className="flex items-start gap-2 text-red-400">
-                        <ShieldCheck size={14} className="mt-0.5 flex-shrink-0" />
-                        <p>COD Limit is ₹{COD_LIMIT}. Your order exceeds this limit.</p>
-                      </div>
-                    )}
-                  </div>
-                </Card>
-
-                <div className="fixed bottom-0 left-0 right-0 p-4 bg-zinc-950/90 backdrop-blur-lg border-t border-zinc-900 z-50">
-                  <Button 
-                    disabled={hasNonCodItems || exceedsCodLimit}
-                    onClick={() => navigate('checkout')}
-                    className={hasNonCodItems || exceedsCodLimit ? 'opacity-50 cursor-not-allowed' : ''}
-                  >
-                    Proceed to Checkout
-                  </Button>
+                    <div class="comet-card card-tilt !p-8 flex flex-col justify-center items-center text-center hover-trigger border-white/10">
+                        <h2 class="font-display text-5xl md:text-6xl font-black text-primary tracking-tighter mb-3">C1</h2>
+                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">German Level</p>
+                    </div>
+                    <div class="comet-card card-tilt !p-8 flex flex-col justify-center items-center text-center hover-trigger border-white/10">
+                        <h2 class="font-display text-5xl md:text-6xl font-black text-primary tracking-tighter mb-3">5</h2>
+                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">Certifications</p>
+                    </div>
                 </div>
-              </>
-            )}
-          </div>
-        );
-      };
 
-      const CheckoutView = () => {
-        const [formData, setFormData] = useState({ name: '', phone: '', address: '', city: '', pincode: '' });
-        const [isPlacing, setIsPlacing] = useState(false);
-        const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
-        const handlePlaceOrder = () => {
-          // Basic validation
-          if(!formData.name || formData.phone.length < 10 || !formData.address) {
-            alert("Please fill all required address details correctly.");
-            return;
-          }
-          setIsPlacing(true);
-          setTimeout(() => {
-            const newOrder = {
-              id: `ORD-${Math.random().toString(36).substr(2, 6).toUpperCase()}`,
-              date: new Date().toISOString().split('T')[0],
-              total,
-              status: 'Pending',
-              items: [...cart],
-              customer: formData
-            };
-            setOrders([newOrder, ...orders]);
-            setCart([]);
-            setIsPlacing(false);
-            navigate('orderSuccess');
-          }, 1500);
-        };
-
-        return (
-          <div className="pt-20 pb-32 px-6">
-            <div className="flex items-center gap-4 mb-8">
-              <button onClick={() => setView('cart')}><ArrowLeft size={24}/></button>
-              <h1 className="text-2xl font-black uppercase tracking-tighter">Checkout</h1>
             </div>
+        </section>
 
-            <Card className="mb-6">
-              <h2 className="uppercase tracking-widest text-xs font-bold text-white mb-6">Delivery Details</h2>
-              <Input label="Full Name" placeholder="John Doe" onChange={e => setFormData({...formData, name: e.target.value})} />
-              <Input label="Phone Number (Required for COD)" type="tel" placeholder="9876543210" onChange={e => setFormData({...formData, phone: e.target.value})} />
-              <Input label="Full Address" placeholder="House/Flat No., Street, Landmark" onChange={e => setFormData({...formData, address: e.target.value})} />
-              <div className="flex gap-4">
-                <div className="flex-1"><Input label="City" placeholder="Mumbai" onChange={e => setFormData({...formData, city: e.target.value})} /></div>
-                <div className="flex-1"><Input label="Pincode" type="number" placeholder="400001" onChange={e => setFormData({...formData, pincode: e.target.value})} /></div>
-              </div>
-            </Card>
-
-            <div className="p-4 bg-zinc-900 border border-zinc-800 flex gap-4 items-start mb-24">
-              <Phone className="text-yellow-500 shrink-0" size={24}/>
-              <div>
-                <h4 className="font-bold text-sm uppercase tracking-wider text-white">COD Verification</h4>
-                <p className="text-xs text-zinc-400 mt-1 leading-relaxed">To ensure successful delivery, our support team may call you on the provided number to confirm this order before dispatch.</p>
-              </div>
-            </div>
-
-            <div className="fixed bottom-0 left-0 right-0 p-4 bg-zinc-950 border-t border-zinc-900 z-50">
-              <div className="flex justify-between items-center mb-4 px-2">
-                <span className="text-zinc-400 text-sm">Amount to Pay (COD)</span>
-                <span className="font-bold text-xl text-white">₹{total}</span>
-              </div>
-              <Button onClick={handlePlaceOrder}>
-                {isPlacing ? 'Confirming...' : 'Place Order (COD)'}
-              </Button>
-            </div>
-          </div>
-        );
-      };
-
-      const OrderSuccessView = () => (
-        <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center animate-in zoom-in duration-500">
-          <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-8 shadow-[0_0_50px_rgba(255,255,255,0.2)]">
-            <CheckCircle size={48} className="text-zinc-950" />
-          </div>
-          <h1 className="text-3xl font-black uppercase tracking-tighter mb-4">Order Confirmed</h1>
-          <p className="text-zinc-400 mb-8 max-w-sm">Your order has been placed successfully. You will pay via Cash on Delivery when the item arrives.</p>
-          
-          <Card className="w-full max-w-md mb-8 !p-4 !bg-transparent border-dashed">
-            <p className="text-xs text-zinc-500 uppercase tracking-widest mb-1">Order ID</p>
-            <p className="font-mono text-lg font-bold text-white">{orders[0]?.id}</p>
-          </Card>
-
-          <Button onClick={() => navigate('profile')} className="max-w-md">Track Order</Button>
-          <Button variant="ghost" onClick={() => navigate('home')} className="mt-4 max-w-md">Return Home</Button>
-        </div>
-      );
-
-      const ProfileView = () => (
-        <div className="pt-20 pb-24 px-6">
-          <h1 className="text-3xl font-black uppercase tracking-tighter mb-8">Account</h1>
-          
-          {!user.isLoggedIn ? (
-            <Card className="text-center py-10 mb-8">
-              <User size={48} className="mx-auto text-zinc-600 mb-4" />
-              <h2 className="text-lg font-bold mb-2">Welcome to Osaid's App</h2>
-              <p className="text-zinc-400 text-sm mb-6">Login to track orders and save wishlist.</p>
-              <Button onClick={() => setUser({ ...user, isLoggedIn: true, name: 'Rahul S.' })}>Login / Signup</Button>
-            </Card>
-          ) : (
-            <div className="flex items-center gap-4 mb-10 pb-6 border-b border-zinc-900">
-              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-zinc-950 font-black text-2xl">
-                {user.name.charAt(0)}
-              </div>
-              <div>
-                <h2 className="text-xl font-bold">{user.name}</h2>
-                <p className="text-zinc-500 text-sm">+91 9876543210</p>
-              </div>
-            </div>
-          )}
-
-          <div className="space-y-4 mb-8">
-            <h3 className="uppercase tracking-widest text-xs text-zinc-500 font-bold mb-4">Your Orders</h3>
-            {orders.length === 0 ? (
-              <p className="text-zinc-500 text-sm">No orders yet.</p>
-            ) : (
-              orders.map(order => (
-                <Card key={order.id} className="!p-4 cursor-pointer" >
-                  <div className="flex justify-between items-start mb-3">
-                    <div>
-                      <p className="text-xs text-zinc-500 font-mono mb-1">{order.id}</p>
-                      <p className="font-bold text-white">₹{order.total} • COD</p>
-                    </div>
-                    <Badge active={order.status === 'Delivered'}>{order.status}</Badge>
-                  </div>
-                  <div className="text-xs text-zinc-400 flex items-center justify-between">
-                    <span>{order.date}</span>
-                    <span className="flex items-center gap-1 text-white underline">Track <ChevronRight size={14}/></span>
-                  </div>
-                </Card>
-              ))
-            )}
-          </div>
-
-          <div className="space-y-2">
-            <h3 className="uppercase tracking-widest text-xs text-zinc-500 font-bold mb-4">Settings & Support</h3>
-            <button className="w-full flex items-center justify-between p-4 bg-zinc-900 border border-zinc-800 hover:border-zinc-600 transition-colors">
-              <span className="flex items-center gap-3"><Settings size={18}/> Address Management</span>
-              <ChevronRight size={16} className="text-zinc-500"/>
-            </button>
-            <button className="w-full flex items-center justify-between p-4 bg-zinc-900 border border-zinc-800 hover:border-zinc-600 transition-colors">
-              <span className="flex items-center gap-3"><Phone size={18}/> Help & Support (WhatsApp)</span>
-              <ChevronRight size={16} className="text-zinc-500"/>
-            </button>
-          </div>
-
-          {/* Admin Toggle For Demo Purposes */}
-          <div className="mt-12 pt-8 border-t border-zinc-900">
-            <Button variant="danger" onClick={() => navigate('admin')} className="!text-xs">
-              <ShieldCheck size={16} /> Enter Admin Dashboard
-            </Button>
-          </div>
-        </div>
-      );
-
-      // --- SUB-VIEWS (ADMIN) ---
-
-      const AdminView = () => {
-        const [adminTab, setAdminTab] = useState('orders');
-
-        const totalOrders = orders.length;
-        const pendingOrders = orders.filter(o => o.status === 'Pending').length;
-        const totalRevenue = orders.filter(o => o.status === 'Delivered').reduce((sum, o) => sum + o.total, 0);
-        const codToCollect = orders.filter(o => o.status !== 'Delivered' && o.status !== 'Cancelled').reduce((sum, o) => sum + o.total, 0);
-
-        const updateOrderStatus = (id, newStatus) => {
-          setOrders(orders.map(o => o.id === id ? { ...o, status: newStatus } : o));
-        };
-
-        return (
-          <div className="min-h-screen bg-zinc-950 flex flex-col md:flex-row animate-in fade-in">
-            {/* Admin Sidebar */}
-            <div className="w-full md:w-64 bg-zinc-900 border-r border-zinc-800 p-6 flex flex-col hidden md:flex">
-              <h1 className="text-2xl font-black uppercase tracking-tighter mb-10 text-white">Osaid's App<span className="text-zinc-500">Admin</span></h1>
-              <nav className="space-y-2 flex-1">
-                {['orders', 'inventory', 'reports'].map(tab => (
-                  <button 
-                    key={tab}
-                    onClick={() => setAdminTab(tab)}
-                    className={`w-full text-left p-3 uppercase tracking-widest text-xs font-bold rounded flex items-center gap-3 transition-colors ${adminTab === tab ? 'bg-white text-zinc-950' : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'}`}
-                  >
-                    {tab === 'orders' && <Package size={16}/>}
-                    {tab === 'inventory' && <Package size={16}/>}
-                    {tab === 'reports' && <BarChart3 size={16}/>}
-                    {tab}
-                  </button>
-                ))}
-              </nav>
-              <button onClick={() => setView('home')} className="flex items-center gap-2 text-zinc-500 hover:text-white text-xs uppercase tracking-widest mt-auto">
-                <LogOut size={16} /> Exit Admin
-              </button>
-            </div>
-
-            {/* Mobile Admin Nav */}
-            <div className="md:hidden flex justify-between p-4 bg-zinc-900 border-b border-zinc-800">
-              <h1 className="font-black uppercase text-lg">Admin</h1>
-              <button onClick={() => setView('home')}><X size={24}/></button>
-            </div>
-            <div className="md:hidden flex overflow-x-auto bg-zinc-900 border-b border-zinc-800 px-4">
-               {['orders', 'inventory', 'reports'].map(tab => (
-                  <button 
-                    key={tab}
-                    onClick={() => setAdminTab(tab)}
-                    className={`py-3 px-4 uppercase tracking-widest text-xs font-bold whitespace-nowrap ${adminTab === tab ? 'text-white border-b-2 border-white' : 'text-zinc-500'}`}
-                  >
-                    {tab}
-                  </button>
-                ))}
-            </div>
-
-            {/* Admin Content */}
-            <div className="flex-1 p-6 md:p-10 overflow-y-auto pb-32">
-              
-              {/* KPI Cards */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-                 <Card className="!p-4">
-                    <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">Total Orders</p>
-                    <p className="text-3xl font-light">{totalOrders}</p>
-                 </Card>
-                 <Card className="!p-4">
-                    <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">Pending</p>
-                    <p className="text-3xl font-light text-yellow-500">{pendingOrders}</p>
-                 </Card>
-                 <Card className="!p-4">
-                    <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">COD To Collect</p>
-                    <p className="text-3xl font-light">₹{codToCollect}</p>
-                 </Card>
-                 <Card className="!p-4">
-                    <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">Total Revenue</p>
-                    <p className="text-3xl font-light text-green-500">₹{totalRevenue}</p>
-                 </Card>
-              </div>
-
-              {adminTab === 'orders' && (
+        <!-- ==========================================================================
+             EXPERIENCE SECTION (CV EXACT)
+             ========================================================================== -->
+        <section id="experience" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-white/10">
+            
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 reveal">
                 <div>
-                  <h2 className="text-xl font-bold uppercase tracking-widest mb-6">Order Management</h2>
-                  <div className="bg-zinc-900/50 border border-zinc-800 overflow-x-auto">
-                    <table className="w-full text-left text-sm">
-                      <thead className="bg-zinc-900 text-xs uppercase tracking-widest text-zinc-500">
-                        <tr>
-                          <th className="p-4 border-b border-zinc-800">Order ID</th>
-                          <th className="p-4 border-b border-zinc-800">Customer</th>
-                          <th className="p-4 border-b border-zinc-800">Amount (COD)</th>
-                          <th className="p-4 border-b border-zinc-800">Status</th>
-                          <th className="p-4 border-b border-zinc-800">Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {orders.map(order => (
-                          <tr key={order.id} className="border-b border-zinc-800/50 hover:bg-zinc-800/20">
-                            <td className="p-4 font-mono text-zinc-300">{order.id}</td>
-                            <td className="p-4">
-                              <p className="font-bold text-white">{order.customer.name}</p>
-                              <p className="text-xs text-zinc-500">{order.customer.phone}</p>
-                            </td>
-                            <td className="p-4 font-bold">₹{order.total}</td>
-                            <td className="p-4">
-                              <span className={`px-2 py-1 text-[10px] uppercase tracking-wider font-bold rounded-sm border ${
-                                order.status === 'Pending' ? 'bg-yellow-950/30 text-yellow-500 border-yellow-900' :
-                                order.status === 'Confirmed' ? 'bg-blue-950/30 text-blue-500 border-blue-900' :
-                                order.status === 'Shipped' ? 'bg-purple-950/30 text-purple-400 border-purple-900' :
-                                order.status === 'Delivered' ? 'bg-green-950/30 text-green-500 border-green-900' :
-                                'bg-zinc-800 text-zinc-400 border-zinc-700'
-                              }`}>
-                                {order.status}
-                              </span>
-                            </td>
-                            <td className="p-4">
-                              <select 
-                                className="bg-zinc-950 border border-zinc-700 text-xs p-2 text-white focus:outline-none"
-                                value={order.status}
-                                onChange={(e) => updateOrderStatus(order.id, e.target.value)}
-                              >
-                                <option value="Pending">Pending</option>
-                                <option value="Confirmed">Confirmed</option>
-                                <option value="Shipped">Shipped</option>
-                                <option value="Delivered">Delivered (COD Collected)</option>
-                                <option value="Cancelled">Cancelled</option>
-                              </select>
-                            </td>
-                          </tr>
-                        ))}
-                        {orders.length === 0 && (
-                          <tr><td colSpan="5" className="p-8 text-center text-zinc-500">No orders found.</td></tr>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
+                    <div class="section-tag hover-trigger">Career Trajectory</div>
+                    <h2 class="font-display text-5xl md:text-[4.5rem] font-black tracking-tighter text-primary leading-tight mt-4">
+                        Professional <br> History.
+                    </h2>
                 </div>
-              )}
+            </div>
 
-              {adminTab === 'inventory' && (
-                 <div>
-                  <h2 className="text-xl font-bold uppercase tracking-widest mb-6">Inventory</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {MOCK_PRODUCTS.map(p => (
-                      <div key={p.id} className="flex gap-4 p-4 border border-zinc-800 bg-zinc-900/30 items-center">
-                        <img src={p.image} className="w-16 h-16 object-cover" />
-                        <div className="flex-1">
-                          <h4 className="text-sm font-bold">{p.name}</h4>
-                          <p className="text-xs text-zinc-500 mt-1">Price: ₹{p.price} | Stock: <span className={p.stock < 10 ? 'text-red-500' : 'text-green-500'}>{p.stock} units</span></p>
+            <div class="timeline-container max-w-5xl mx-auto">
+                
+                <!-- Role 1: Accenture -->
+                <div class="timeline-node reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="comet-cards-wrapper">
+                        <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/10 pb-6">
+                                <div>
+                                    <h3 class="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">App/cloud Technical Support Analyst</h3>
+                                    <p class="font-mono-custom text-sm text-accent-cyan mt-2 tracking-widest uppercase font-bold">Accenture &middot; Gurugram, Haryana</p>
+                                </div>
+                                <span class="inline-block px-5 py-2.5 bg-white/10 border border-white/20 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap shadow-sm">
+                                    11/2024 — Present
+                                </span>
+                            </div>
+                            <ul class="space-y-5 text-gray-400 leading-relaxed font-light text-base md:text-lg">
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-accent-cyan mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span class="font-semibold text-white">Delivered end-to-end technical solutions to end-users from Germany, Austria, and Switzerland.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Added and configured new devices within the corporate network.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Managed DHCP servers for network related issues.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Troubleshot printer issues, including connectivity, installation, and driver errors.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Managed user accounts, permissions, and security groups using Azure Active Directory.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Worked on all kind of Windows related Issues.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Delivered end-to-end technical support to end users, ensuring minimal disruption to daily operations.</span>
+                                </li>
+                            </ul>
                         </div>
-                        <Button variant="secondary" className="!w-auto !py-2 !px-4 !text-xs">Edit</Button>
-                      </div>
-                    ))}
-                  </div>
-                 </div>
-              )}
-              
-              {adminTab === 'reports' && (
-                 <div className="flex flex-col items-center justify-center py-20 text-zinc-500">
-                   <BarChart3 size={64} className="mb-4 opacity-20" />
-                   <p className="uppercase tracking-widest text-sm">Detailed Reports Coming Soon</p>
-                 </div>
-              )}
+                    </div>
+                </div>
+
+                <!-- Role 2: ITC Infotech -->
+                <div class="timeline-node reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="comet-cards-wrapper">
+                        <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/10 pb-6">
+                                <div>
+                                    <h3 class="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">Senior Systems Administrator</h3>
+                                    <p class="font-mono-custom text-sm text-accent-cyan mt-2 tracking-wide uppercase font-bold">ITC Infotech &middot; Bengaluru, Karnataka</p>
+                                </div>
+                                <span class="inline-block px-5 py-2.5 bg-white/10 border border-white/20 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap shadow-sm">
+                                    04/2024 — 11/2024
+                                </span>
+                            </div>
+                            <ul class="space-y-5 text-gray-400 leading-relaxed font-light text-base md:text-lg">
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Administer Windows, Office, Active Directory, and network infrastructure. Manage DHCP and resolve network issues.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Working as L1-L1.5 support and communicating with German-speaking users to resolve inquiries and issues.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Added and configured new devices in the company network. Assigned static and dynamic IP addresses to devices.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Troubleshot printer issues (installation, connectivity, driver problems).</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Managed user access and permissions through Azure AD.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Resolved all types of Windows issues.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Using tools like Azure, Microsoft Admin center, ARS, AD, Intune, Bomgar, Servicenow, Confluence.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Role 3: Wipro -->
+                <div class="timeline-node reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="comet-cards-wrapper">
+                        <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/10 pb-6">
+                                <div>
+                                    <h3 class="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">Senior associate/German language technical support</h3>
+                                    <p class="font-mono-custom text-sm text-accent-cyan mt-2 tracking-wide uppercase font-bold">Wipro Limited &middot; Hyderabad</p>
+                                </div>
+                                <span class="inline-block px-5 py-2.5 bg-white/10 border border-white/20 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap shadow-sm">
+                                    12/2021 — 09/2023
+                                </span>
+                            </div>
+                            <ul class="space-y-5 text-gray-400 leading-relaxed font-light text-base md:text-lg">
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Worked for Wipro Technologies as Google T1 accessibility technical support (German).</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Proactively identified solution to common user issues.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Provided technical support to user's on Accessibility technologies.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Job profile involes speaking, chatting and writing. Resolving users issues via call chat or email.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Dealing with Google platforms that have Android support in it.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>Adhered to quality and service standards to support operational goals.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
             </div>
-          </div>
-        );
-      };
+        </section>
 
-      // --- NAVIGATION BAR (CUSTOMER) ---
-      const BottomNav = () => (
-        <div className="fixed bottom-0 left-0 right-0 h-16 bg-zinc-950/80 backdrop-blur-xl border-t border-zinc-900 flex justify-around items-center z-40 px-2 md:hidden">
-          <button onClick={() => setView('home')} className={`p-2 flex flex-col items-center transition-colors ${view === 'home' ? 'text-white' : 'text-zinc-600'}`}>
-            <Package size={20} className={view === 'home' ? 'fill-white/10' : ''} />
-            <span className="text-[10px] uppercase tracking-wider mt-1 font-bold">Home</span>
-          </button>
-          <button onClick={() => setView('shop')} className={`p-2 flex flex-col items-center transition-colors ${view === 'shop' ? 'text-white' : 'text-zinc-600'}`}>
-            <Search size={20} />
-            <span className="text-[10px] uppercase tracking-wider mt-1 font-bold">Shop</span>
-          </button>
-          <button onClick={() => setView('cart')} className={`p-2 flex flex-col items-center transition-colors relative ${view === 'cart' ? 'text-white' : 'text-zinc-600'}`}>
-            <div className="relative">
-              <ShoppingBag size={20} className={view === 'cart' ? 'fill-white/10' : ''} />
-              {cart.length > 0 && <span className="absolute -top-1 -right-2 bg-white text-zinc-950 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">{cart.length}</span>}
+        <!-- ==========================================================================
+             EDUCATION TIMELINE SECTION (CV EXACT)
+             ========================================================================== -->
+        <section id="education" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-white/10 relative">
+            <div class="reveal mb-24 text-center">
+                <div class="section-tag mx-auto hover-trigger">Academic Foundation</div>
+                <h2 class="font-display text-5xl md:text-[4.5rem] font-black tracking-tighter text-primary leading-tight mt-4">
+                    Education.
+                </h2>
             </div>
-            <span className="text-[10px] uppercase tracking-wider mt-1 font-bold">Bag</span>
-          </button>
-          <button onClick={() => setView('profile')} className={`p-2 flex flex-col items-center transition-colors ${view === 'profile' ? 'text-white' : 'text-zinc-600'}`}>
-            <User size={20} className={view === 'profile' ? 'fill-white/10' : ''} />
-            <span className="text-[10px] uppercase tracking-wider mt-1 font-bold">Profile</span>
-          </button>
-        </div>
-      );
 
-      const TopNav = () => (
-        <div className="fixed top-0 left-0 right-0 h-16 bg-zinc-950/80 backdrop-blur-xl border-b border-zinc-900 flex justify-between items-center z-40 px-6 hidden md:flex">
-          <h1 onClick={() => setView('home')} className="text-xl font-black uppercase tracking-tighter cursor-pointer">Osaid's App</h1>
-          <div className="flex gap-8">
-            <button onClick={() => setView('home')} className={`text-sm uppercase tracking-widest font-bold ${view === 'home' ? 'text-white' : 'text-zinc-500 hover:text-white'}`}>Home</button>
-            <button onClick={() => setView('shop')} className={`text-sm uppercase tracking-widest font-bold ${view === 'shop' ? 'text-white' : 'text-zinc-500 hover:text-white'}`}>Catalog</button>
-          </div>
-          <div className="flex gap-6 items-center">
-            <button onClick={() => setView('shop')} className="text-zinc-400 hover:text-white"><Search size={20}/></button>
-            <button onClick={() => setView('cart')} className="text-zinc-400 hover:text-white relative">
-              <ShoppingBag size={20}/>
-              {cart.length > 0 && <span className="absolute -top-2 -right-2 bg-white text-zinc-950 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">{cart.length}</span>}
+            <!-- Custom Vertical Split Timeline -->
+            <div class="edu-timeline-container relative max-w-5xl mx-auto before:absolute before:top-0 before:bottom-0 before:w-[2px] before:bg-gradient-to-b before:from-transparent before:via-white/20 before:to-transparent">
+                
+                <!-- Advanced Diploma -->
+                <div class="edu-timeline-node reveal">
+                    <div class="edu-timeline-dot"></div>
+                    <div class="edu-timeline-content comet-cards-wrapper">
+                        <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
+                            <span class="inline-block px-4 py-2 bg-purple-500/10 text-purple-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-purple-500/20 shadow-[0_0_15px_rgba(188,19,254,0.3)]">07/2023</span>
+                            <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Advanced Diploma: German Language (C1)</h3>
+                            <p class="text-gray-400 font-light mt-1">Osmania University</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Senior Diploma -->
+                <div class="edu-timeline-node reveal">
+                    <div class="edu-timeline-dot"></div>
+                    <div class="edu-timeline-content comet-cards-wrapper">
+                        <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
+                            <span class="inline-block px-4 py-2 bg-purple-500/10 text-purple-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-purple-500/20 shadow-[0_0_15px_rgba(188,19,254,0.3)]">11/2021</span>
+                            <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Senior Diploma: German Language (B2)</h3>
+                            <p class="text-gray-400 font-light mt-1">Osmania University</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Junior Diploma -->
+                <div class="edu-timeline-node reveal">
+                    <div class="edu-timeline-dot"></div>
+                    <div class="edu-timeline-content comet-cards-wrapper">
+                        <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
+                            <span class="inline-block px-4 py-2 bg-purple-500/10 text-purple-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-purple-500/20 shadow-[0_0_15px_rgba(188,19,254,0.3)]">04/2021</span>
+                            <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Junior Diploma: German Language (A2)</h3>
+                            <p class="text-gray-400 font-light mt-1">Osmania University</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bachelor of Arts -->
+                <div class="edu-timeline-node reveal">
+                    <div class="edu-timeline-dot"></div>
+                    <div class="edu-timeline-content comet-cards-wrapper">
+                        <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
+                            <span class="inline-block px-4 py-2 bg-cyan-500/10 text-cyan-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-cyan-500/20 shadow-[0_0_15px_rgba(0,242,255,0.3)]">05/2020</span>
+                            <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Bachelor of Arts (Hons): English</h3>
+                            <p class="text-gray-400 font-light mt-1">University of Delhi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Intermediate -->
+                <div class="edu-timeline-node reveal">
+                    <div class="edu-timeline-dot"></div>
+                    <div class="edu-timeline-content comet-cards-wrapper">
+                        <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
+                            <span class="inline-block px-4 py-2 bg-emerald-500/10 text-emerald-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.3)]">05/2016</span>
+                            <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Intermediate</h3>
+                            <p class="text-gray-400 font-light mt-1 leading-snug">Board of High School & Intermediate Education</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             EXPERTISE & SKILLS SECTION
+             ========================================================================== -->
+        <section id="expertise" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-white/10">
+            
+            <div class="reveal mb-24">
+                <div class="section-tag hover-trigger">Core Competencies</div>
+                <h2 class="font-display text-5xl md:text-[4.5rem] font-black tracking-tighter text-primary leading-tight mt-4">
+                    Expertise & <br> Credentials.
+                </h2>
+            </div>
+
+            <!-- Bento Grid layout for skills -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+                
+                <!-- System Administration Card -->
+                <div class="comet-cards-wrapper reveal reveal-delay-1 lg:col-span-2">
+                    <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
+                        <h3 class="font-display text-3xl font-bold text-primary tracking-tight mb-8 border-b border-white/10 pb-6">System Administration</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="flex items-center p-5 border border-white/10 rounded-2xl bg-transparent shadow-sm hover:bg-white/5 transition-colors">
+                                <div class="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center mr-5">
+                                    <span class="font-black font-display text-lg">MS</span>
+                                </div>
+                                <span class="font-semibold text-primary text-lg">Microsoft Entra & AD</span>
+                            </div>
+                            <div class="flex items-center p-5 border border-white/10 rounded-2xl bg-transparent shadow-sm hover:bg-white/5 transition-colors">
+                                <div class="w-12 h-12 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center mr-5">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                </div>
+                                <span class="font-semibold text-primary text-lg">Intune & Office</span>
+                            </div>
+                            <div class="flex items-center p-5 border border-white/10 rounded-2xl bg-transparent shadow-sm hover:bg-white/5 transition-colors">
+                                <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mr-5">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                                </div>
+                                <span class="font-semibold text-primary text-lg">Windows Ecosystems</span>
+                            </div>
+                            <div class="flex items-center p-5 border border-white/10 rounded-2xl bg-transparent shadow-sm hover:bg-white/5 transition-colors">
+                                <div class="w-12 h-12 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center mr-5">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                                </div>
+                                <span class="font-semibold text-primary text-lg">Active Roles Server (ARS)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IT & Networking Card -->
+                <div class="comet-cards-wrapper reveal reveal-delay-2">
+                    <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
+                        <h3 class="font-display text-3xl font-bold text-primary tracking-tight mb-8 border-b border-white/10 pb-6">Technical Skills</h3>
+                        <ul class="space-y-5 text-gray-300 font-medium text-lg">
+                            <li class="flex items-center justify-between border-b border-white/5 pb-3">
+                                <span>IT Fundamentals</span>
+                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </li>
+                            <li class="flex items-center justify-between border-b border-white/5 pb-3">
+                                <span>Networking Basics</span>
+                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </li>
+                            <li class="flex items-center justify-between border-b border-white/5 pb-3">
+                                <span>Linux Administration</span>
+                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span>WCAG, NVDA, BeMyEyes</span>
+                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Certifications List (EXACTLY FROM CV) -->
+                <div class="comet-cards-wrapper reveal reveal-delay-3 lg:col-span-3">
+                    <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
+                        <h3 class="font-display text-3xl font-bold text-primary tracking-tight mb-8 border-b border-white/10 pb-6">Certifications</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            
+                            <div class="flex items-center justify-between p-6 rounded-2xl border border-white/10 bg-transparent hover:bg-white/5 transition-colors">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-14 h-14 rounded-2xl bg-blue-500/20 flex items-center justify-center flex-shrink-0 text-blue-400 font-black font-display text-xl">MS</div>
+                                    <div>
+                                        <p class="font-bold text-primary text-lg">Azure Fundamentals (AZ-900)</p>
+                                        <p class="text-xs text-gray-400 font-mono-custom mt-1 tracking-widest uppercase">Microsoft</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-6 rounded-2xl border border-white/10 bg-transparent hover:bg-white/5 transition-colors">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center flex-shrink-0 text-red-400 font-black font-display text-xl">G</div>
+                                    <div>
+                                        <p class="font-bold text-primary text-lg">Technical Support Fundamentals</p>
+                                        <p class="text-xs text-gray-400 font-mono-custom mt-1 tracking-widest uppercase">Google</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-6 rounded-2xl border border-white/10 bg-transparent hover:bg-white/5 transition-colors">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center flex-shrink-0 text-red-400 font-black font-display text-xl">G</div>
+                                    <div>
+                                        <p class="font-bold text-primary text-lg leading-tight">The Bits and Bytes of Computer Networking</p>
+                                        <p class="text-xs text-gray-400 font-mono-custom mt-1 tracking-widest uppercase">Google</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-6 rounded-2xl border border-white/10 bg-transparent hover:bg-white/5 transition-colors">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-14 h-14 rounded-2xl bg-purple-500/20 flex items-center justify-center flex-shrink-0 text-purple-400 font-black font-display text-xl">A</div>
+                                    <div>
+                                        <p class="font-bold text-primary text-lg leading-tight">Testing for Web Accessibility With Accessibility Insights</p>
+                                        <p class="text-xs text-gray-400 font-mono-custom mt-1 tracking-widest uppercase">Accessibility</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-6 rounded-2xl border border-white/10 bg-transparent hover:bg-white/5 transition-colors md:col-span-2">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center flex-shrink-0 text-red-400 font-black font-display text-xl">G</div>
+                                    <div>
+                                        <p class="font-bold text-primary text-lg">Google IT Professional Certification</p>
+                                        <p class="text-xs text-gray-400 font-mono-custom mt-1 tracking-widest uppercase">Google</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             CONTACT SECTION (CRED STYLE PREMIUM CARDS W/ CUSTOM ICONS)
+             ========================================================================== -->
+        <section id="contact" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-white/10">
+            
+            <div class="text-center max-w-2xl mx-auto mb-24 reveal">
+                <div class="section-tag mx-auto hover-trigger">Initiate Handshake</div>
+                <h2 class="font-display text-5xl md:text-[4.5rem] font-black tracking-tighter text-primary leading-tight mt-4 mb-6">
+                    Let's Connect.
+                </h2>
+                <p class="text-xl text-gray-400 font-light">
+                    Available for technical support, systems administration, and high-level operations consulting.
+                </p>
+            </div>
+            
+            <!-- Exact Contact Requirements (3 Clickable Options with Custom Premium SVGs) -->
+            <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mx-auto reveal reveal-delay-2">
+                
+                <!-- LinkedIn Premium Card -->
+                <div class="comet-cards-wrapper hover-trigger">
+                    <a href="https://www.linkedin.com/in/osaid-shahid-442599223/" target="_blank" rel="noopener noreferrer" class="comet-card social-card linkedin p-10 block border-white/10">
+                        <div class="social-icon-wrapper mx-auto bg-white/5 border-white/10">
+                            <!-- Official LinkedIn SVG Path -->
+                            <svg class="social-icon-svg w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-display text-3xl font-black mb-3">LinkedIn</h3>
+                        <p class="text-gray-400 text-base font-light mb-8 text-center">Professional Network</p>
+                        <span class="text-xs font-mono-custom text-blue-400 font-bold uppercase tracking-widest bg-blue-500/10 px-4 py-2 rounded-full border border-blue-500/20">Connect &rarr;</span>
+                    </a>
+                </div>
+
+                <!-- Email Premium Card with Custom Gmail SVG -->
+                <div class="comet-cards-wrapper hover-trigger">
+                    <a href="mailto:osaidtheshahid@gmail.com" class="comet-card social-card gmail p-10 block border-white/10">
+                        <div class="social-icon-wrapper mx-auto bg-white/5 border-white/10">
+                            <!-- Custom Premium Gmail Logo Vector -->
+                            <svg class="w-12 h-12 transition-all duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6Z" fill="#333" class="gmail-bg transition-colors duration-300" />
+                                <path d="M22 6L12 13L2 6" stroke="#ea4335" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="gmail-red transition-colors duration-300"/>
+                                <path d="M2 18V6L12 13L22 6V18" stroke="#4285f4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="gmail-blue transition-colors duration-300"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-display text-3xl font-black mb-3">Email</h3>
+                        <p class="text-gray-400 text-sm font-light mb-8 text-center break-all px-4">osaidtheshahid@gmail.com</p>
+                        <span class="text-xs font-mono-custom text-red-400 font-bold uppercase tracking-widest bg-red-500/10 px-4 py-2 rounded-full border border-red-500/20">Send Message &rarr;</span>
+                    </a>
+                </div>
+
+                <!-- Phone Premium Card with Custom Premium Phone SVG -->
+                <div class="comet-cards-wrapper hover-trigger">
+                    <a href="tel:+918448527162" class="comet-card social-card phone p-10 block border-white/10">
+                        <div class="social-icon-wrapper mx-auto bg-white/5 border-white/10">
+                            <!-- Custom Premium Phone Receiver Vector -->
+                            <svg class="w-12 h-12 transition-all duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21.05 16.94L18.43 14.32C17.9 13.79 17.06 13.71 16.48 14.13L14.71 15.42C14.28 15.73 13.7 15.75 13.2 15.5C11.58 14.68 9.32 12.42 8.5 10.8C8.25 10.3 8.27 9.72 8.58 9.29L9.87 7.52C10.29 6.94 10.21 6.1 9.68 5.57L7.06 2.95C6.48 2.37 5.55 2.43 5.06 3.06L4.03 4.38C2.96 5.75 2.59 7.58 3.01 9.28C4.15 13.88 8.04 18.25 12.83 19.98C14.6 20.61 16.51 20.31 17.93 19.26L19.29 18.26C19.92 17.78 19.97 16.85 19.39 16.27C20.34 17.22 21.05 16.94 21.05 16.94Z" fill="#333" class="phone-bg transition-colors duration-300"/>
+                                <path d="M21.05 16.94L18.43 14.32C17.9 13.79 17.06 13.71 16.48 14.13L14.71 15.42C14.28 15.73 13.7 15.75 13.2 15.5C11.58 14.68 9.32 12.42 8.5 10.8C8.25 10.3 8.27 9.72 8.58 9.29L9.87 7.52C10.29 6.94 10.21 6.1 9.68 5.57L7.06 2.95C6.48 2.37 5.55 2.43 5.06 3.06L4.03 4.38C2.96 5.75 2.59 7.58 3.01 9.28C4.15 13.88 8.04 18.25 12.83 19.98C14.6 20.61 16.51 20.31 17.93 19.26L19.29 18.26C19.92 17.78 19.97 16.85 19.39 16.27" stroke="#34a853" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="phone-outline transition-colors duration-300"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-display text-3xl font-black mb-3">Direct Line</h3>
+                        <p class="text-gray-400 text-base font-light mb-8 text-center">+91 8448527162</p>
+                        <span class="text-xs font-mono-custom text-emerald-400 font-bold uppercase tracking-widest bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/20">Call Now &rarr;</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==========================================================================
+         END OF UNIVERSE MESSAGE
+         ========================================================================== -->
+    <div class="w-full flex flex-col items-center justify-center pt-12 pb-24 relative z-10 reveal">
+        <div class="w-[1px] h-24 bg-gradient-to-b from-transparent via-white/30 to-transparent mb-8"></div>
+        <p class="font-mono-custom text-[10px] md:text-xs text-gray-500 tracking-[0.4em] uppercase text-center px-4 transition-all duration-700 hover:tracking-[0.5em] hover:text-gray-300">
+            You have reached the end of the <br class="sm:hidden"> 
+            <span class="text-white font-bold drop-shadow-[0_0_12px_rgba(255,255,255,0.6)]">Observable Universe.</span>
+        </p>
+    </div>
+
+    <!-- ==========================================================================
+         FOOTER
+         ========================================================================== -->
+    <footer class="border-t border-white/10 py-16 text-center flex flex-col items-center bg-black relative z-10">
+        <p class="text-xs text-gray-500 font-mono-custom tracking-[0.2em] uppercase mb-4">
+            Based in Maunath Bhanjan, Mau, India 275101
+        </p>
+        <p class="text-[10px] text-gray-600 font-mono-custom tracking-widest uppercase font-bold">
+            Premium Architecture · Designed & Built by Osaid Shahid · © 2026
+        </p>
+    </footer>
+
+    <!-- ==========================================================================
+         AI CHAT WIDGET (ENQUIRE WITH AI)
+         ========================================================================== -->
+    <button id="ai-chat-toggle" class="hover-trigger">
+        <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        <span class="text-black">Enquire with AI ✨</span>
+    </button>
+
+    <div id="ai-chat-window">
+        <div class="chat-header">
+            <div>
+                <h3 class="font-display font-bold text-primary text-xl">Enquire with AI ✨</h3>
+                <p class="text-xs text-gray-400 font-mono-custom mt-1">Powered by Gemini Engine</p>
+            </div>
+            <button id="ai-chat-close" class="text-gray-400 hover:text-white transition hover-trigger bg-white/10 p-2 rounded-full">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            <button onClick={() => setView('profile')} className="text-zinc-400 hover:text-white"><User size={20}/></button>
-          </div>
         </div>
-      );
-
-      // --- RENDER LOGIC ---
-      if (view === 'admin') return <AdminView />;
-
-      return (
-        <div className="bg-zinc-950 min-h-screen text-zinc-50 font-sans selection:bg-white selection:text-zinc-950 pb-safe">
-          <TopNav />
-          
-          <main className="max-w-3xl mx-auto w-full md:pt-16">
-            {view === 'home' && <HomeView />}
-            {view === 'shop' && <ShopView />}
-            {view === 'product' && <ProductDetailView />}
-            {view === 'cart' && <CartView />}
-            {view === 'checkout' && <CheckoutView />}
-            {view === 'orderSuccess' && <OrderSuccessView />}
-            {view === 'profile' && <ProfileView />}
-          </main>
-
-          {/* Hide bottom nav on specific views like checkout/success */}
-          {!['checkout', 'orderSuccess', 'product'].includes(view) && <BottomNav />}
+        <div class="chat-messages" id="chat-messages">
+            <div class="chat-message message-ai">
+                Hello! I am Osaid's AI clone. You can ask me anything about his exact resume experience, his AZ-900 certification, or his work as an App/Cloud Technical Support expert. How can I help you?
+            </div>
         </div>
-      );
-    }
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" class="chat-input hover-trigger" placeholder="Ask about his skills..." autocomplete="off">
+            <button id="chat-send" class="chat-send-btn hover-trigger">
+                <svg class="w-5 h-5 ml-1 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+            </button>
+        </div>
+    </div>
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
-  </script>
+    <!-- ==========================================================================
+         JAVASCRIPT LOGIC (Physics Canvas Engine, Custom Cursor, Reveals, Nav, Chat, Comet Spotlight)
+         ========================================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            /* ==========================================================================
+               1. BESPOKE WEBGL-STYLE PHYSICS ENGINE (CANVAS 2D)
+               ========================================================================== */
+            const canvas = document.getElementById('physics-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d', { alpha: true });
+                
+                let width, height;
+                let particles = [];
+                
+                const resizeCanvas = () => {
+                    width = window.innerWidth;
+                    height = window.innerHeight;
+                    canvas.width = width * window.devicePixelRatio;
+                    canvas.height = height * window.devicePixelRatio;
+                    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+                };
+                
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas();
+
+                class NodeParticle {
+                    constructor() {
+                        this.x = Math.random() * width;
+                        this.y = Math.random() * height;
+                        this.vx = (Math.random() - 0.5) * 0.2; 
+                        this.vy = (Math.random() - 0.5) * 0.2;
+                        this.baseRadius = Math.random() * 1.5 + 0.5;
+                        this.radius = this.baseRadius;
+                        this.pulsePhase = Math.random() * Math.PI * 2;
+                    }
+                    update() {
+                        if (this.x < -50) this.x = width + 50;
+                        if (this.x > width + 50) this.x = -50;
+                        if (this.y < -50) this.y = height + 50;
+                        if (this.y > height + 50) this.y = -50;
+                        this.x += this.vx;
+                        this.y += this.vy;
+                        this.pulsePhase += 0.015;
+                        this.radius = this.baseRadius + Math.sin(this.pulsePhase) * 0.4;
+                    }
+                    draw() {
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(255, 255, 255, ${0.05 + (this.radius * 0.02)})`;
+                        ctx.fill();
+                    }
+                }
+
+                const initParticles = () => {
+                    particles = [];
+                    const numParticles = Math.floor((width * height) / 15000); 
+                    for (let i = 0; i < numParticles; i++) {
+                        particles.push(new NodeParticle());
+                    }
+                };
+                
+                initParticles();
+
+                const animateCanvas = () => {
+                    ctx.clearRect(0, 0, width, height);
+                    for (let i = 0; i < particles.length; i++) {
+                        for (let j = i + 1; j < particles.length; j++) {
+                            const dx = particles[i].x - particles[j].x;
+                            const dy = particles[i].y - particles[j].y;
+                            const distSq = dx * dx + dy * dy;
+                            if (distSq < 16900) {
+                                const dist = Math.sqrt(distSq);
+                                ctx.beginPath();
+                                ctx.moveTo(particles[i].x, particles[i].y);
+                                ctx.lineTo(particles[j].x, particles[j].y);
+                                ctx.strokeStyle = `rgba(255, 255, 255, ${0.03 * (1 - dist / 130)})`;
+                                ctx.lineWidth = 0.5;
+                                ctx.stroke();
+                            }
+                        }
+                    }
+                    particles.forEach(p => { p.update(); p.draw(); });
+                    requestAnimationFrame(animateCanvas);
+                };
+                animateCanvas();
+            }
+
+            const generateStars = (n) => {
+                let width = window.innerWidth;
+                let height = window.innerHeight;
+                let value = `${Math.random() * width}px ${Math.random() * height}px #FFF`;
+                for(let i=1; i<n; i++){ value += `, ${Math.random() * width}px ${Math.random() * height}px #FFF`; }
+                return value;
+            };
+
+            const star1 = document.getElementById('stars-1');
+            const star2 = document.getElementById('stars-2');
+            const star3 = document.getElementById('stars-3');
+
+            if (star1) star1.style.boxShadow = generateStars(300);
+            if (star2) star2.style.boxShadow = generateStars(100);
+            if (star3) star3.style.boxShadow = generateStars(50);
+
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                document.querySelectorAll('.planet-orbit').forEach(orbit => {
+                    const speed = parseFloat(orbit.dataset.speed);
+                    const rotSpeed = parseFloat(orbit.dataset.rot);
+                    orbit.style.transform = `translate(-50%, -50%) translateY(${scrollY * speed}px) rotate(${scrollY * rotSpeed}deg)`;
+                });
+                if (star1) star1.style.transform = `translateY(${scrollY * -0.05}px)`;
+                if (star2) star2.style.transform = `translateY(${scrollY * -0.1}px)`;
+                if (star3) star3.style.transform = `translateY(${scrollY * -0.15}px)`;
+            });
+
+            /* ==========================================================================
+               2. CUSTOM PHYSICS CURSOR LOGIC
+               ========================================================================== */
+            const cursorDot = document.getElementById('cursor-dot');
+            const cursorOutline = document.getElementById('cursor-outline');
+            const hoverTriggers = document.querySelectorAll('.hover-trigger, a, button, input');
+            let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+            let outlineX = window.innerWidth / 2, outlineY = window.innerHeight / 2;
+
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX; mouseY = e.clientY;
+                if(cursorDot) { cursorDot.style.transform = `translate3d(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%), 0)`; }
+            });
+
+            const animateCursor = () => {
+                let distX = mouseX - outlineX; let distY = mouseY - outlineY;
+                outlineX += distX * 0.35; outlineY += distY * 0.35;
+                if(cursorOutline) { cursorOutline.style.transform = `translate3d(calc(${outlineX}px - 50%), calc(${outlineY}px - 50%), 0)`; }
+                requestAnimationFrame(animateCursor);
+            };
+            animateCursor();
+
+            hoverTriggers.forEach(trigger => {
+                trigger.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+                trigger.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+            });
+            window.addEventListener('mousedown', () => document.body.classList.add('clicking'));
+            window.addEventListener('mouseup', () => document.body.classList.remove('clicking'));
+
+            /* ==========================================================================
+               4. PERPLEXITY COMET SPOTLIGHT BORDER EFFECT
+               ========================================================================== */
+            const cometWrappers = document.querySelectorAll('.comet-cards-wrapper');
+            cometWrappers.forEach(wrapper => {
+                wrapper.addEventListener('mousemove', (e) => {
+                    const rect = wrapper.getBoundingClientRect();
+                    const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+                    wrapper.style.setProperty('--mouse-x', `${x}px`);
+                    wrapper.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+
+            /* ==========================================================================
+               5. SMOOTH SCROLL REVEAL OBSERVERS
+               ========================================================================== */
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealOptions = { threshold: 0.05, rootMargin: "0px 0px -40px 0px" };
+            const revealOnScroll = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('active'); observer.unobserve(entry.target); 
+                });
+            }, revealOptions);
+            revealElements.forEach(el => revealOnScroll.observe(el));
+
+            /* ==========================================================================
+               6. MOBILE MENU & NAVBAR LOGIC
+               ========================================================================== */
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            const bar1 = document.getElementById('bar1'); const bar2 = document.getElementById('bar2'); const bar3 = document.getElementById('bar3');
+            let isMenuOpen = false;
+
+            const toggleMenu = () => {
+                isMenuOpen = !isMenuOpen;
+                if(isMenuOpen) {
+                    mobileMenu.classList.remove('opacity-0', 'pointer-events-none'); mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
+                    document.body.style.overflow = 'hidden';
+                    bar1.style.transform = 'translateY(8px) rotate(45deg)'; bar2.style.opacity = '0'; bar3.style.transform = 'translateY(-8px) rotate(-45deg)';
+                } else {
+                    mobileMenu.classList.add('opacity-0', 'pointer-events-none'); mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+                    document.body.style.overflow = '';
+                    bar1.style.transform = 'none'; bar2.style.opacity = '1'; bar3.style.transform = 'none';
+                }
+            };
+            mobileBtn.addEventListener('click', toggleMenu);
+            mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if(window.scrollY > 50) {
+                    navbar.style.paddingTop = '1.25rem'; navbar.style.paddingBottom = '1.25rem';
+                    navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.8)'; navbar.style.boxShadow = '0 10px 40px -10px rgba(0,0,0,0.5)';
+                } else {
+                    navbar.style.paddingTop = '1.5rem'; navbar.style.paddingBottom = '1.5rem';
+                    navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.4)'; navbar.style.boxShadow = 'none';
+                }
+            });
+            window.dispatchEvent(new Event('scroll'));
+
+            /* ==========================================================================
+               7. GEMINI AI LOGIC (ENQUIRE WITH AI)
+               ========================================================================== */
+            const chatToggle = document.getElementById('ai-chat-toggle');
+            const chatClose = document.getElementById('ai-chat-close');
+            const chatWindow = document.getElementById('ai-chat-window');
+            const chatInput = document.getElementById('chat-input');
+            const chatSendBtn = document.getElementById('chat-send');
+            const chatMessagesContainer = document.getElementById('chat-messages');
+
+            chatToggle.addEventListener('click', () => { chatWindow.classList.add('active'); chatInput.focus(); });
+            chatClose.addEventListener('click', () => chatWindow.classList.remove('active'));
+
+            const apiKey = "";
+            const systemPrompt = `You are the personal AI assistant for Osaid Shahid, an App/Cloud Technical Support Expert. 
+Your goal is to answer questions about his professional background accurately and professionally.
+Keep responses concise (1-3 sentences). Be polite and premium in tone.`;
+
+            async function fetchWithRetry(url, options, retries = 5) {
+                const delays = [1000, 2000, 4000, 8000, 16000];
+                for (let i = 0; i < retries; i++) {
+                    try {
+                        const response = await fetch(url, options);
+                        if (!response.ok) throw new Error('API request failed');
+                        return await response.json();
+                    } catch (err) {
+                        if (i === retries - 1) throw err;
+                        await new Promise(res => setTimeout(res, delays[i]));
+                    }
+                }
+            }
+
+            async function handleUserMessage() {
+                const userText = chatInput.value.trim();
+                if (!userText) return;
+                addMessage(userText, 'user'); chatInput.value = '';
+                const typingId = 'typing-' + Date.now();
+                addMessage(`<div class="typing-dots"><span></span><span></span><span></span></div>`, 'ai', typingId);
+
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+                const payload = { contents: [{ parts: [{ text: userText }] }], systemInstruction: { parts: [{ text: systemPrompt }] } };
+
+                try {
+                    const result = await fetchWithRetry(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    const aiText = result.candidates?.[0]?.content?.parts?.[0]?.text || "I'm having trouble connecting to my database right now. Please try again later.";
+                    const typingEl = document.getElementById(typingId);
+                    if (typingEl) { typingEl.innerHTML = aiText; typingEl.removeAttribute('id'); } else { addMessage(aiText, 'ai'); }
+                } catch (error) {
+                    const typingEl = document.getElementById(typingId);
+                    if (typingEl) { typingEl.innerHTML = "Apologies, the secure connection to Osaid's database timed out. Please email him directly!"; typingEl.removeAttribute('id'); }
+                }
+            }
+
+            function addMessage(text, sender, id = null) {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `chat-message message-${sender}`;
+                if (id) msgDiv.id = id;
+                msgDiv.innerHTML = text;
+                chatMessagesContainer.appendChild(msgDiv);
+                chatMessagesContainer.scrollTo({ top: chatMessagesContainer.scrollHeight, behavior: 'smooth' });
+            }
+
+            chatSendBtn.addEventListener('click', handleUserMessage);
+            chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
+
+            /* ==========================================================================
+               8. GEMINI LEVEL: INFINITE FALLING LETTERS & REPAIR BOT PHYSICS
+               ========================================================================== */
+            
+            // 1. Text Setup & Splitting
+            const textBlock = document.getElementById('physics-text-block');
+            const sceneContainer = document.getElementById('fixer-scene-container');
+            const botEl = document.getElementById('fixer-bot');
+            const tractorBeam = document.getElementById('tractor-beam');
+            const sparkContainer = document.getElementById('weld-sparks');
+
+            const line1Text = "Delivering";
+            const line2Text = "Outstanding Service.";
+            
+            const lettersData = [];
+            let letterIdCounter = 0;
+
+            function createLine(text, classString) {
+                const lineDiv = document.createElement('div');
+                lineDiv.className = 'block mb-2 sm:mb-0 ' + classString;
+                
+                for (let i = 0; i < text.length; i++) {
+                    const char = text[i];
+                    
+                    // Create absolute anchor wrapper
+                    const wrapper = document.createElement('span');
+                    wrapper.className = 'char-wrapper';
+                    wrapper.innerHTML = char === ' ' ? '&nbsp;' : '';
+                    
+                    if (char !== ' ') {
+                        // Create the moving physics element
+                        const inner = document.createElement('span');
+                        inner.className = 'char-inner text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]';
+                        if(classString.includes('text-transparent')) {
+                            // Apply gradient styling specifically for second line
+                            inner.className = 'char-inner text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan via-white to-accent-purple drop-shadow-[0_0_15px_rgba(0,225,255,0.4)]';
+                        }
+                        inner.innerText = char;
+                        
+                        wrapper.appendChild(inner);
+                        
+                        lettersData.push({
+                            id: letterIdCounter++,
+                            wrapper: wrapper,
+                            el: inner,
+                            state: 'normal', // normal, falling, floor, carried
+                            x: 0, y: 0,
+                            vx: 0, vy: 0,
+                            rot: 0, vRot: 0,
+                            origSceneX: 0, origSceneY: 0 // Will be computed
+                        });
+                    }
+                    lineDiv.appendChild(wrapper);
+                }
+                return lineDiv;
+            }
+
+            textBlock.appendChild(createLine(line1Text, ''));
+            textBlock.appendChild(createLine(line2Text, 'text-3xl sm:text-5xl md:text-[3.5rem] lg:text-[4.5rem] font-medium tracking-tight mt-1 sm:mt-2'));
+
+            // 2. Physics & State Setup
+            const GRAVITY = 0.4;
+            const BOUNCE = -0.4;
+            const FRICTION = 0.8;
+            const WALL_BOUNCE = -0.7; // Added for wall collisions
+            
+            // Bot State Machine
+            const bot = {
+                x: 100, y: -100,
+                targetX: 100, targetY: -100,
+                state: 'patrol', // patol, fetching, returning, welding
+                targetLetter: null,
+                weldTimer: 0,
+                patrolAngle: 0
+            };
+
+            // Calculate exact global bounds relative to the scene
+            function updateOrigins() {
+                const sceneRect = sceneContainer.getBoundingClientRect();
+                lettersData.forEach(l => {
+                    const rect = l.wrapper.getBoundingClientRect();
+                    l.origSceneX = rect.left - sceneRect.left;
+                    l.origSceneY = rect.top - sceneRect.top;
+                });
+            }
+            
+            // Initial call, and on resize
+            setTimeout(updateOrigins, 500); 
+            window.addEventListener('resize', updateOrigins);
+
+            // Welding Spark Generator
+            function emitWeldSparks(x, y) {
+                for(let i=0; i<3; i++) {
+                    const spark = document.createElement('div');
+                    spark.className = 'absolute rounded-full pointer-events-none bg-accent-cyan';
+                    const size = Math.random() * 3 + 2;
+                    spark.style.width = size + 'px'; spark.style.height = size + 'px';
+                    spark.style.left = x + 'px'; spark.style.top = y + 'px';
+                    spark.style.boxShadow = `0 0 ${size*2}px #00e1ff`;
+                    sparkContainer.appendChild(spark);
+
+                    let vx = (Math.random() - 0.5) * 8;
+                    let vy = (Math.random() - 0.5) * 8 - 2;
+                    let op = 1;
+
+                    function anim() {
+                        if (op <= 0) { spark.remove(); return; }
+                        vy += GRAVITY;
+                        const cl = parseFloat(spark.style.left); const ct = parseFloat(spark.style.top);
+                        spark.style.left = (cl + vx) + 'px'; spark.style.top = (ct + vy) + 'px';
+                        op -= 0.05; spark.style.opacity = op;
+                        requestAnimationFrame(anim);
+                    }
+                    requestAnimationFrame(anim);
+                }
+            }
+
+            // 3. Main Infinite Physics Loop
+            let lastDropTime = 0;
+            function gameLoop(timestamp) {
+                const floorY = sceneContainer.offsetHeight - 40; // Virtual floor
+                const rightWall = sceneContainer.offsetWidth - 40; // Right bounds
+                const leftWall = 20; // Left bounds
+
+                // Check if any letter is currently out of place
+                const activeLetters = lettersData.filter(l => l.state !== 'normal');
+
+                // Randomly drop a letter ONLY IF no other letters are currently active
+                if (activeLetters.length === 0 && timestamp - lastDropTime > (Math.random() * 2000 + 1000)) {
+                    const attached = lettersData.filter(l => l.state === 'normal');
+                    if (attached.length > 0) {
+                        const dropMe = attached[Math.floor(Math.random() * attached.length)];
+                        dropMe.state = 'falling';
+                        dropMe.el.classList.add('falling');
+                        dropMe.vx = (Math.random() - 0.5) * 4;
+                        dropMe.vy = -Math.random() * 4 - 2; // Initial pop up
+                        dropMe.vRot = (Math.random() - 0.5) * 15;
+                        lastDropTime = timestamp;
+                    }
+                }
+
+                // Update Letters
+                lettersData.forEach(l => {
+                    if (l.state === 'falling') {
+                        l.vy += GRAVITY;
+                        l.x += l.vx;
+                        l.y += l.vy;
+                        l.rot += l.vRot;
+
+                        // Floor Collision relative to its own origin
+                        const absoluteY = l.origSceneY + l.y;
+                        if (absoluteY > floorY) {
+                            l.y = floorY - l.origSceneY; // Snap to floor
+                            l.vy *= BOUNCE;
+                            l.vx *= FRICTION;
+                            l.vRot *= 0.8;
+                            
+                            // If settled
+                            if (Math.abs(l.vy) < 1.5 && Math.abs(l.vx) < 0.5) {
+                                l.state = 'floor';
+                                l.vy = 0; l.vx = 0; l.vRot = 0;
+                            }
+                        }
+
+                        // Wall Collisions relative to its own origin
+                        const absoluteX = l.origSceneX + l.x;
+                        if (absoluteX < leftWall) {
+                            l.x = leftWall - l.origSceneX; // Snap to left wall
+                            l.vx *= WALL_BOUNCE;
+                            l.vRot *= 0.8;
+                        } else if (absoluteX > rightWall) {
+                            l.x = rightWall - l.origSceneX; // Snap to right wall
+                            l.vx *= WALL_BOUNCE;
+                            l.vRot *= 0.8;
+                        }
+
+                        l.el.style.transform = `translate3d(${l.x}px, ${l.y}px, 0) rotate(${l.rot}deg)`;
+                    } 
+                    else if (l.state === 'carried') {
+                        // Attached to tractor beam (bottom center of bot)
+                        const carryAbsX = bot.x + 20; // center of bot
+                        const carryAbsY = bot.y + 40; // bottom of bot
+                        
+                        l.x = carryAbsX - l.origSceneX;
+                        l.y = carryAbsY - l.origSceneY;
+                        
+                        // Slightly straighten out while carrying
+                        l.rot *= 0.9; 
+                        l.el.style.transform = `translate3d(${l.x}px, ${l.y}px, 0) rotate(${l.rot}deg)`;
+                    }
+                });
+
+                // Update Bot State Machine
+                if (bot.state === 'patrol') {
+                    // Look for fallen letters
+                    const fallen = lettersData.filter(l => l.state === 'floor');
+                    if (fallen.length > 0) {
+                        bot.targetLetter = fallen[0];
+                        bot.state = 'fetching';
+                    } else {
+                        // Hover around lazily
+                        bot.patrolAngle += 0.02;
+                        bot.targetX = (sceneContainer.offsetWidth / 2) + Math.cos(bot.patrolAngle) * 150 - 20;
+                        bot.targetY = 40 + Math.sin(bot.patrolAngle * 0.5) * 20;
+                        tractorBeam.style.opacity = '0';
+                    }
+                } 
+                else if (bot.state === 'fetching') {
+                    if (!bot.targetLetter) { bot.state = 'patrol'; return; }
+                    
+                    // Target is slightly above the fallen letter
+                    bot.targetX = bot.targetLetter.origSceneX + bot.targetLetter.x - 20;
+                    bot.targetY = bot.targetLetter.origSceneY + bot.targetLetter.y - 45;
+                    
+                    const dx = bot.targetX - bot.x;
+                    const dy = bot.targetY - bot.y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    
+                    if (dist < 15) { // Grab range
+                        bot.targetLetter.state = 'carried';
+                        bot.targetLetter.el.classList.remove('falling');
+                        bot.targetLetter.el.classList.add('carried');
+                        bot.state = 'returning';
+                        tractorBeam.style.opacity = '1';
+                        tractorBeam.style.height = '15px';
+                    }
+                }
+                else if (bot.state === 'returning') {
+                    // Fly back to letter's original spot
+                    bot.targetX = bot.targetLetter.origSceneX - 20;
+                    bot.targetY = bot.targetLetter.origSceneY - 45;
+
+                    const dx = bot.targetX - bot.x;
+                    const dy = bot.targetY - bot.y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    
+                    if (dist < 10) { // Snap range
+                        bot.state = 'welding';
+                        bot.weldTimer = 30; // ~500ms
+                    }
+                }
+                else if (bot.state === 'welding') {
+                    bot.weldTimer--;
+                    emitWeldSparks(bot.targetLetter.origSceneX, bot.targetLetter.origSceneY);
+                    
+                    // Shake letter slightly while welding
+                    bot.targetLetter.x = (Math.random() - 0.5) * 4;
+                    bot.targetLetter.y = (Math.random() - 0.5) * 4;
+                    bot.targetLetter.el.style.transform = `translate3d(${bot.targetLetter.x}px, ${bot.targetLetter.y}px, 0)`;
+
+                    if (bot.weldTimer <= 0) {
+                        // Attached perfectly
+                        bot.targetLetter.state = 'normal';
+                        bot.targetLetter.x = 0; bot.targetLetter.y = 0; bot.targetLetter.rot = 0;
+                        bot.targetLetter.el.style.transform = `translate3d(0,0,0) rotate(0deg)`;
+                        bot.targetLetter.el.classList.remove('carried');
+                        
+                        bot.targetLetter = null;
+                        bot.state = 'patrol';
+                        tractorBeam.style.opacity = '0';
+                        
+                        // Reset the timer so the next letter doesn't drop instantly
+                        lastDropTime = timestamp;
+                    }
+                }
+
+                // Smooth Bot Movement (Lerp)
+                const speed = bot.state === 'fetching' ? 0.08 : (bot.state === 'returning' ? 0.05 : 0.03);
+                bot.x += (bot.targetX - bot.x) * speed;
+                bot.y += (bot.targetY - bot.y) * speed;
+                
+                // Tilt bot based on horizontal velocity
+                const vx = (bot.targetX - bot.x) * speed;
+                const botTilt = Math.max(-15, Math.min(15, vx * 2));
+                
+                botEl.style.transform = `translate3d(${bot.x}px, ${bot.y}px, 0) rotate(${botTilt}deg)`;
+
+                requestAnimationFrame(gameLoop);
+            }
+
+            // Start loop after short delay to ensure DOM is ready
+            setTimeout(() => { requestAnimationFrame(gameLoop); }, 1000);
+
+        });
+    </script>
 </body>
 </html>
+
