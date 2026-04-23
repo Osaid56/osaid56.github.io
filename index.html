@@ -22,13 +22,13 @@
         :root {
             /* Premium Dark Cosmos Palette */
             --bg-base: #000000;
-            --bg-surface: rgba(5, 5, 5, 0.85); /* Deep dark opaque for text readability */
+            --bg-surface: rgba(5, 5, 5, 0.85); 
             --bg-surface-solid: #000000;
             --bg-surface-glass: rgba(0, 0, 0, 0.9);
             
             /* Text Colors */
-            --text-primary: #fafafa; /* Softer white for premium feel */
-            --text-secondary: #a1a1aa; /* Zinc 400 for balanced contrast */
+            --text-primary: #fafafa; 
+            --text-secondary: #a1a1aa; 
             --text-tertiary: #71717a;
             --text-inverse: #000000;
             
@@ -64,496 +64,105 @@
         /* ==========================================================================
            02. BASE RESET & TYPOGRAPHY SCALES
            ========================================================================== */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         ::selection { background-color: var(--accent-cyan); color: var(--text-inverse); }
-
-        html {
-            font-size: 16px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-        }
-
-        body {
-            background-color: var(--bg-base);
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            width: 100%;
-            position: relative;
-            line-height: 1.7;
-        }
-
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+        body { background-color: var(--bg-base); color: var(--text-primary); font-family: 'Inter', sans-serif; overflow-x: hidden; width: 100%; position: relative; line-height: 1.7; }
         h1, h2, h3, h4, h5, h6, .font-display { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; }
         .font-mono-custom { font-family: 'JetBrains Mono', monospace; }
 
         /* ==========================================================================
-           03. CUSTOM PHYSICS-BASED CURSOR (REFINED FOR PREMIUM FEEL)
+           03. CUSTOM PHYSICS-BASED CURSOR
            ========================================================================== */
-        @media (pointer: fine) {
-            body, a, button, input, textarea, select { cursor: none !important; }
-        }
-
-        .cursor-dot, .cursor-outline {
-            position: fixed;
-            top: 0; left: 0;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            z-index: 99999;
-            pointer-events: none;
-            will-change: transform, width, height, background-color, border-color, backdrop-filter;
-        }
-
-        /* The inner dot */
-        .cursor-dot {
-            width: 6px; height: 6px;
-            background-color: var(--accent-cyan);
-            box-shadow: 0 0 10px var(--accent-cyan);
-            transition: opacity 0.2s ease;
-        }
-
-        /* The Outer Outline */
-        .cursor-outline {
-            width: 32px; height: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background-color: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            transition: width 0.3s var(--ease-out-expo), 
-                        height 0.3s var(--ease-out-expo), 
-                        background-color 0.3s ease,
-                        border-color 0.3s ease,
-                        backdrop-filter 0.3s ease;
-        }
-
-        /* Hover State: Transparent, sharp border, slightly larger */
-        body.hovering .cursor-outline {
-            width: 48px; height: 48px;
-            background-color: transparent;
-            backdrop-filter: blur(0px);
-            -webkit-backdrop-filter: blur(0px);
-            border-color: rgba(255, 255, 255, 0.8);
-            border-width: 1.5px;
-        }
-
-        /* Hide dot on hover for minimalist feel */
+        @media (pointer: fine) { body, a, button, input, textarea, select { cursor: none !important; } }
+        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99999; pointer-events: none; will-change: transform; }
+        .cursor-dot { width: 6px; height: 6px; background-color: var(--accent-cyan); box-shadow: 0 0 10px var(--accent-cyan); transition: opacity 0.2s ease; }
+        .cursor-outline { width: 32px; height: 32px; border: 1px solid rgba(255, 255, 255, 0.1); background-color: rgba(255, 255, 255, 0.05); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: width 0.3s var(--ease-out-expo), height 0.3s var(--ease-out-expo), background-color 0.3s ease, border-color 0.3s ease; }
+        body.hovering .cursor-outline { width: 48px; height: 48px; background-color: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; border-color: rgba(255, 255, 255, 0.8); border-width: 1.5px; }
         body.hovering .cursor-dot { opacity: 0; }
-
-        body.clicking .cursor-outline {
-            width: 28px; height: 28px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-color: var(--accent-cyan);
-        }
+        body.clicking .cursor-outline { width: 28px; height: 28px; background-color: rgba(255, 255, 255, 0.1); border-color: var(--accent-cyan); }
 
         /* ==========================================================================
-           04. PERPLEXITY COMET COSMOS ENGINE (PLANETS & STARS)
+           04. PERPLEXITY COMET COSMOS ENGINE
            ========================================================================== */
-        #cosmos-container {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -3;
-            overflow: hidden;
-            background: #000000;
-        }
+        #cosmos-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3; overflow: hidden; background: #000000; pointer-events: none; }
+        .planet-noise { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E"); mix-blend-mode: overlay; border-radius: 50%; pointer-events: none; }
+        .planet-orbit { position: absolute; top: 50%; left: 50%; will-change: transform; }
+        .planet { position: absolute; border-radius: 50%; transform: translate3d(-50%, -50%, 0); /* Core 3D shading */ box-shadow: inset -30px -30px 60px rgba(0,0,0,0.9), inset 10px 10px 40px rgba(255,255,255,0.3), 0 0 100px rgba(0,0,0,0.5); }
 
-        /* SVG Noise Filter for Planets */
-        .planet-noise {
-            position: absolute; inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
-            mix-blend-mode: overlay;
-            border-radius: 50%;
-            pointer-events: none;
-        }
+        @keyframes spin-cw { 0% { transform: translate3d(-50%, -50%, 0) rotate(0deg); } 100% { transform: translate3d(-50%, -50%, 0) rotate(360deg); } }
+        @keyframes spin-ccw { 0% { transform: translate3d(-50%, -50%, 0) rotate(0deg); } 100% { transform: translate3d(-50%, -50%, 0) rotate(-360deg); } }
 
-        /* Planet Wrappers for Revolution (Orbit) */
-        .planet-orbit {
-            position: absolute;
-            top: 50%; left: 50%;
-            will-change: transform;
-        }
+        .p1 { width: 400px; height: 400px; background: radial-gradient(circle at 30% 30%, #24a19c, #ff0844 80%); left: -20vw; top: 15vh; animation: spin-cw 120s linear infinite; }
+        .p2 { width: 200px; height: 200px; background: radial-gradient(circle at 40% 20%, #f6d365, #203a43 90%); left: 35vw; top: 10vh; animation: spin-ccw 100s linear infinite; }
+        .p3 { width: 120px; height: 120px; background: radial-gradient(circle at 20% 30%, #bc13fe, #000000 70%); left: -15vw; top: 50vh; box-shadow: inset -15px -15px 30px rgba(0,0,0,0.9), inset 5px 5px 20px rgba(255,255,255,0.4); animation: spin-cw 150s linear infinite; }
+        .p5 { width: 70px; height: 70px; background: radial-gradient(circle at 30% 30%, #ffffff, #f6d365 50%, #000000 100%); left: -25vw; top: 130vh; animation: spin-cw 90s linear infinite; }
+        .p6 { width: 160px; height: 160px; background: radial-gradient(circle at 30% 30%, #ff4b1f, #1f1c2c 80%); left: 20vw; top: 200vh; box-shadow: inset -20px -20px 40px rgba(0,0,0,0.9), inset 5px 5px 20px rgba(255,255,255,0.3); animation: spin-ccw 140s linear infinite; }
+        .p7 { width: 90px; height: 90px; background: radial-gradient(circle at 40% 40%, #a1c4fd, #000000 80%); left: -10vw; top: 250vh; box-shadow: inset -10px -10px 20px rgba(0,0,0,0.9), inset 5px 5px 15px rgba(255,255,255,0.4); animation: spin-cw 110s linear infinite; }
+        .p8 { width: 250px; height: 250px; background: radial-gradient(circle at 70% 30%, #ff00cc, #330033 80%); left: -10vw; top: 170vh; box-shadow: inset -25px -25px 50px rgba(0,0,0,0.9), inset 10px 10px 30px rgba(255,255,255,0.2); animation: spin-ccw 180s linear infinite; }
+        .p9 { width: 450px; height: 450px; background: radial-gradient(circle at 20% 50%, #00b09b, #96c93d 50%, #000000 90%); left: 60vw; top: 280vh; box-shadow: inset -40px -40px 80px rgba(0,0,0,0.9), inset 10px 10px 40px rgba(255,255,255,0.2); animation: spin-cw 200s linear infinite; }
+        .p10 { width: 100px; height: 100px; background: radial-gradient(circle at 40% 40%, #ff9966, #ff5e62 70%, #000 100%); left: 85vw; top: 50vh; box-shadow: inset -10px -10px 20px rgba(0,0,0,0.9), inset 5px 5px 15px rgba(255,255,255,0.4); animation: spin-ccw 80s linear infinite; }
+        .p12 { width: 80px; height: 80px; background: radial-gradient(circle at 35% 35%, #e0ffff, #4682b4 70%, #000 100%); box-shadow: inset -8px -8px 15px rgba(0,0,0,0.9), inset 4px 4px 10px rgba(255,255,255,0.4); animation: spin-ccw 95s linear infinite; }
+        .p13 { width: 220px; height: 220px; background: radial-gradient(circle at 30% 40%, #ffd700, #ff4500 60%, #8b0000 90%); box-shadow: inset -20px -20px 40px rgba(0,0,0,0.9), inset 5px 5px 20px rgba(255,255,255,0.3); animation: spin-cw 140s linear infinite; }
+        .p14 { width: 140px; height: 140px; background: radial-gradient(circle at 40% 30%, #da70d6, #4b0082 70%, #000 100%); box-shadow: inset -15px -15px 30px rgba(0,0,0,0.9), inset 5px 5px 15px rgba(255,255,255,0.3); animation: spin-ccw 125s linear infinite; }
+        .p15 { width: 110px; height: 110px; background: radial-gradient(circle at 30% 30%, #8fbc8f, #2f4f4f 80%); box-shadow: inset -12px -12px 25px rgba(0,0,0,0.9), inset 4px 4px 12px rgba(255,255,255,0.2); animation: spin-cw 105s linear infinite; }
+        .p16 { width: 350px; height: 350px; background: radial-gradient(circle at 25% 25%, #00ced1, #00008b 60%, #000 90%); box-shadow: inset -30px -30px 60px rgba(0,0,0,0.9), inset 8px 8px 30px rgba(255,255,255,0.2); animation: spin-ccw 190s linear infinite; }
 
-        /* Base Planet Sphere */
-        .planet {
-            position: absolute;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            will-change: transform;
-            /* Core 3D shading */
-            box-shadow: inset -30px -30px 60px rgba(0,0,0,0.9), 
-                        inset 10px 10px 40px rgba(255,255,255,0.3),
-                        0 0 100px rgba(0,0,0,0.5);
-        }
+        /* ==========================================================================
+           04.1 BEAUTIFUL SATURN
+           ========================================================================== */
+        .beautiful-saturn-wrapper { position: absolute; width: 600px; height: 600px; transform: translate(-50%, -50%); pointer-events: none; }
+        .bs-core { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #d1bc94, #c99200 40%, #8c681b 70%, #0d0802 95%); box-shadow: inset -30px -30px 45px rgba(0,0,0,0.95), inset 10px 10px 30px rgba(255,255,255,0.15), 0 0 40px rgba(248, 181, 0, 0.1); z-index: 5; overflow: hidden; }
+        .bs-core::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 4%, transparent 4%, transparent 12%, rgba(0, 0, 0, 0.15) 12%, rgba(0, 0, 0, 0.15) 16%); mix-blend-mode: overlay; transform: rotate(-15deg) scale(1.2); }
+        .bs-core-shadow { position: absolute; width: 120%; height: 8px; top: 52%; left: -10%; background: rgba(0, 0, 0, 0.6); transform: rotate(-18deg); filter: blur(3px); z-index: 6; }
+        .bs-ring { position: absolute; top: 50%; left: 50%; width: 540px; height: 540px; border-radius: 50%; background: radial-gradient(circle, transparent 35%, rgba(180, 160, 120, 0.8) 35.2%, rgba(180, 160, 120, 0.8) 38%, rgba(200, 180, 140, 0.9) 38.2%, rgba(200, 180, 140, 0.9) 43%, rgba(140, 120, 90, 0.7) 43.2%, rgba(140, 120, 90, 0.7) 46%, transparent 46.2%, transparent 48%, rgba(170, 150, 110, 0.85) 48.2%, rgba(170, 150, 110, 0.85) 53%, rgba(120, 130, 150, 0.5) 53.2%, rgba(120, 130, 150, 0.5) 57%, transparent 57.2%); transform: translate(-50%, -50%) rotateX(76deg) rotateY(-18deg); }
+        .bs-ring-back { clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%); z-index: 2; }
+        .bs-ring-front { clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%); z-index: 10; }
+        .bs-shadow-caster { position: absolute; top: 50%; left: 50%; width: 540px; height: 540px; border-radius: 50%; background: conic-gradient(from 0deg, transparent 0deg, transparent 80deg, rgba(0,0,0,0.8) 100deg, rgba(0,0,0,0.8) 140deg, transparent 160deg, transparent 360deg); z-index: 3; clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%); transform: translate(-50%, -50%) rotateX(76deg) rotateY(-18deg); filter: blur(8px); }
 
-        /* Continuous Rotation Animations */
-        @keyframes spin-cw {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-        @keyframes spin-ccw {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(-360deg); }
-        }
-
-        /* Planet 1: Copper/Cyan (Hero) */
-        .p1 {
-            width: 400px; height: 400px; /* Scaled down */
-            background: radial-gradient(circle at 30% 30%, #24a19c, #ff0844 80%);
-            left: -20vw; top: 15vh;
-            animation: spin-cw 120s linear infinite;
-        }
+        #stars-1 { position: absolute; top: 0; left: 0; width: 1px; height: 1px; background: transparent; will-change: transform; pointer-events: none; }
+        #stars-2 { position: absolute; top: 0; left: 0; width: 2px; height: 2px; background: transparent; will-change: transform; pointer-events: none; }
+        #stars-3 { position: absolute; top: 0; left: 0; width: 3px; height: 3px; background: transparent; will-change: transform; pointer-events: none; box-shadow: 0 0 8px rgba(255,255,255,0.8); }
         
-        /* Planet 2: Golden/Blue (Between Hero & Exp) */
-        .p2 {
-            width: 200px; height: 200px; /* Scaled down */
-            background: radial-gradient(circle at 40% 20%, #f6d365, #203a43 90%);
-            left: 35vw; top: 10vh;
-            animation: spin-ccw 100s linear infinite;
-        }
-
-        /* Planet 3: Obsidian/Purple (Experience) */
-        .p3 {
-            width: 120px; height: 120px; /* Scaled down */
-            background: radial-gradient(circle at 20% 30%, #bc13fe, #000000 70%);
-            left: -15vw; top: 50vh;
-            box-shadow: inset -15px -15px 30px rgba(0,0,0,0.9), inset 5px 5px 20px rgba(255,255,255,0.4);
-            animation: spin-cw 150s linear infinite;
-        }
-
-        /* Planet 5: Bright Star/Moon (Expertise/Contact) */
-        .p5 {
-            width: 70px; height: 70px; /* Scaled down */
-            background: radial-gradient(circle at 30% 30%, #ffffff, #f6d365 50%, #000000 100%);
-            left: -25vw; top: 130vh;
-            animation: spin-cw 90s linear infinite;
-        }
-
-        /* Planet 6: Red/Orange (Deep Scroll) */
-        .p6 {
-            width: 160px; height: 160px;
-            background: radial-gradient(circle at 30% 30%, #ff4b1f, #1f1c2c 80%);
-            left: 20vw; top: 200vh;
-            box-shadow: inset -20px -20px 40px rgba(0,0,0,0.9), inset 5px 5px 20px rgba(255,255,255,0.3);
-            animation: spin-ccw 140s linear infinite;
-        }
-
-        /* Planet 7: Ice Blue (Deep Scroll) */
-        .p7 {
-            width: 90px; height: 90px;
-            background: radial-gradient(circle at 40% 40%, #a1c4fd, #000000 80%);
-            left: -10vw; top: 250vh;
-            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.9), inset 5px 5px 15px rgba(255,255,255,0.4);
-            animation: spin-cw 110s linear infinite;
-        }
-
-        /* Planet 8: Deep Magenta/Void (Mid-scroll) */
-        .p8 {
-            width: 250px; height: 250px;
-            background: radial-gradient(circle at 70% 30%, #ff00cc, #330033 80%);
-            left: -10vw; top: 170vh;
-            box-shadow: inset -25px -25px 50px rgba(0,0,0,0.9), inset 10px 10px 30px rgba(255,255,255,0.2);
-            animation: spin-ccw 180s linear infinite;
-        }
-
-        /* Planet 9: Emerald/Teal Gas Giant (Deep-scroll) */
-        .p9 {
-            width: 450px; height: 450px;
-            background: radial-gradient(circle at 20% 50%, #00b09b, #96c93d 50%, #000000 90%);
-            left: 60vw; top: 280vh;
-            box-shadow: inset -40px -40px 80px rgba(0,0,0,0.9), inset 10px 10px 40px rgba(255,255,255,0.2);
-            animation: spin-cw 200s linear infinite;
-        }
-
-        /* Planet 10: Neon Pink/Orange small moon (Top/Mid-scroll) */
-        .p10 {
-            width: 100px; height: 100px;
-            background: radial-gradient(circle at 40% 40%, #ff9966, #ff5e62 70%, #000 100%);
-            left: 85vw; top: 50vh;
-            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.9), inset 5px 5px 15px rgba(255,255,255,0.4);
-            animation: spin-ccw 80s linear infinite;
-        }
-
-        /* Planet 12: Icy Blue Moon */
-        .p12 {
-            width: 80px; height: 80px;
-            background: radial-gradient(circle at 35% 35%, #e0ffff, #4682b4 70%, #000 100%);
-            box-shadow: inset -8px -8px 15px rgba(0,0,0,0.9), inset 4px 4px 10px rgba(255,255,255,0.4);
-            animation: spin-ccw 95s linear infinite;
-        }
-
-        /* Planet 13: Fiery Red/Yellow Giant */
-        .p13 {
-            width: 220px; height: 220px;
-            background: radial-gradient(circle at 30% 40%, #ffd700, #ff4500 60%, #8b0000 90%);
-            box-shadow: inset -20px -20px 40px rgba(0,0,0,0.9), inset 5px 5px 20px rgba(255,255,255,0.3);
-            animation: spin-cw 140s linear infinite;
-        }
-
-        /* Planet 14: Deep Purple Anomaly */
-        .p14 {
-            width: 140px; height: 140px;
-            background: radial-gradient(circle at 40% 30%, #da70d6, #4b0082 70%, #000 100%);
-            box-shadow: inset -15px -15px 30px rgba(0,0,0,0.9), inset 5px 5px 15px rgba(255,255,255,0.3);
-            animation: spin-ccw 125s linear infinite;
-        }
-
-        /* Planet 15: Pale Green/Grey Rocky */
-        .p15 {
-            width: 110px; height: 110px;
-            background: radial-gradient(circle at 30% 30%, #8fbc8f, #2f4f4f 80%);
-            box-shadow: inset -12px -12px 25px rgba(0,0,0,0.9), inset 4px 4px 12px rgba(255,255,255,0.2);
-            animation: spin-cw 105s linear infinite;
-        }
-
-        /* Planet 16: Dark Ocean Giant */
-        .p16 {
-            width: 350px; height: 350px;
-            background: radial-gradient(circle at 25% 25%, #00ced1, #00008b 60%, #000 90%);
-            box-shadow: inset -30px -30px 60px rgba(0,0,0,0.9), inset 8px 8px 30px rgba(255,255,255,0.2);
-            animation: spin-ccw 190s linear infinite;
-        }
+        #physics-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none; opacity: 0.7; }
 
         /* ==========================================================================
-           04.1 BEAUTIFUL SATURN REPLACEMENT (HIGH FIDELITY RINGS)
-           ========================================================================== */
-        .beautiful-saturn-wrapper {
-            position: absolute;
-            width: 600px; height: 600px;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-        }
-
-        .bs-core {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 180px; height: 180px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 35% 35%, #d1bc94, #c99200 40%, #8c681b 70%, #0d0802 95%);
-            box-shadow:
-                inset -30px -30px 45px rgba(0,0,0,0.95),
-                inset 10px 10px 30px rgba(255,255,255,0.15),
-                0 0 40px rgba(248, 181, 0, 0.1);
-            z-index: 5;
-            overflow: hidden;
-        }
-
-        /* Core atmosphere bands */
-        .bs-core::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            background: repeating-linear-gradient(
-                to bottom,
-                rgba(255, 255, 255, 0.05) 0%,
-                rgba(255, 255, 255, 0.05) 4%,
-                transparent 4%,
-                transparent 12%,
-                rgba(0, 0, 0, 0.15) 12%,
-                rgba(0, 0, 0, 0.15) 16%
-            );
-            mix-blend-mode: overlay;
-            transform: rotate(-15deg) scale(1.2);
-        }
-
-        .bs-core-shadow {
-            position: absolute;
-            width: 120%; height: 8px;
-            top: 52%; left: -10%;
-            background: rgba(0, 0, 0, 0.6);
-            transform: rotate(-18deg);
-            filter: blur(3px);
-            z-index: 6;
-        }
-
-        .bs-ring {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 540px; height: 540px;
-            border-radius: 50%;
-            background: radial-gradient(
-                circle,
-                transparent 35%,
-                rgba(180, 160, 120, 0.8) 35.2%,
-                rgba(180, 160, 120, 0.8) 38%,
-                rgba(200, 180, 140, 0.9) 38.2%,
-                rgba(200, 180, 140, 0.9) 43%,
-                rgba(140, 120, 90, 0.7) 43.2%,
-                rgba(140, 120, 90, 0.7) 46%,
-                transparent 46.2%, /* Cassini Division */
-                transparent 48%,
-                rgba(170, 150, 110, 0.85) 48.2%,
-                rgba(170, 150, 110, 0.85) 53%,
-                rgba(120, 130, 150, 0.5) 53.2%,
-                rgba(120, 130, 150, 0.5) 57%,
-                transparent 57.2%
-            );
-            transform: translate(-50%, -50%) rotateX(76deg) rotateY(-18deg);
-        }
-
-        .bs-ring-back {
-            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
-            z-index: 2;
-        }
-
-        .bs-ring-front {
-            clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
-            z-index: 10;
-        }
-
-        .bs-shadow-caster {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 540px; height: 540px;
-            border-radius: 50%;
-            background: conic-gradient(
-                from 0deg,
-                transparent 0deg,
-                transparent 80deg,
-                rgba(0,0,0,0.8) 100deg,
-                rgba(0,0,0,0.8) 140deg,
-                transparent 160deg,
-                transparent 360deg
-            );
-            z-index: 3;
-            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
-            transform: translate(-50%, -50%) rotateX(76deg) rotateY(-18deg);
-            filter: blur(8px);
-        }
-
-        /* Starfield Layers */
-        #stars-1, #stars-2, #stars-3 {
-            position: absolute; top: 0; left: 0; width: 1px; height: 1px;
-            background: transparent;
-            will-change: transform;
-        }
-
-        #physics-canvas {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2;
-            pointer-events: none;
-            opacity: 0.7;
-        }
-
-        /* ==========================================================================
-           06. PERPLEXITY COMET SPOTLIGHT CARDS & DEEP BLUR
+           06. PERPLEXITY COMET SPOTLIGHT CARDS
            ========================================================================== */
         .comet-cards-wrapper { position: relative; }
-
         .comet-card {
-            position: relative;
-            background-color: var(--bg-surface);
-            backdrop-filter: blur(40px); 
-            -webkit-backdrop-filter: blur(40px);
-            border-radius: var(--card-radius);
-            padding: 2.5rem;
-            box-shadow: var(--shadow-lg);
-            z-index: 1;
-            transform-style: preserve-3d;
+            position: relative; background-color: var(--bg-surface);
+            backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+            border-radius: var(--card-radius); padding: 2.5rem;
+            box-shadow: var(--shadow-lg); z-index: 1;
             transition: transform 0.6s var(--ease-out-expo), box-shadow 0.6s var(--ease-out-expo);
-            height: 100%;
-            display: flex; flex-direction: column;
+            height: 100%; display: flex; flex-direction: column;
             border: 1px solid var(--border-light);
         }
-
-        .comet-cards-wrapper::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: calc(var(--card-radius) + 2px);
-            background: radial-gradient(
-                600px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px), 
-                var(--accent-cyan),
-                transparent 40%
-            );
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
+        .comet-cards-wrapper::before { content: ''; position: absolute; inset: -2px; border-radius: calc(var(--card-radius) + 2px); background: radial-gradient(600px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px), var(--accent-cyan), transparent 40%); z-index: -1; opacity: 0; transition: opacity 0.4s ease; pointer-events: none; }
         .comet-cards-wrapper:hover::before { opacity: 1; }
-
-        .comet-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: var(--shadow-xl), 0 0 30px rgba(0, 225, 255, 0.1);
-        }
+        .comet-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--shadow-xl), 0 0 30px rgba(0, 225, 255, 0.1); }
 
         /* ==========================================================================
-           07. PREMIUM COMPONENTS (BUTTONS, TAGS)
+           07. PREMIUM COMPONENTS
            ========================================================================== */
         .magnetic-btn-wrapper { position: relative; display: inline-block; padding: 20px; margin: -20px; }
-
-        .btn-premium {
-            position: relative; display: inline-flex; align-items: center; justify-content: center;
-            padding: 1.25rem 2.75rem;
-            background-color: var(--accent-primary); color: var(--text-inverse);
-            font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 1.5px;
-            border-radius: var(--button-radius); text-decoration: none;
-            overflow: hidden;
-            transition: color 0.4s ease, box-shadow 0.4s ease;
-            z-index: 1; border: none;
-            box-shadow: 0 10px 30px rgba(255,255,255,0.1);
-            will-change: transform;
-        }
-
-        .btn-premium::before {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 0%;
-            background-color: var(--accent-cyan);
-            transition: all 0.4s var(--ease-out-expo); z-index: -1;
-        }
-
+        .btn-premium { position: relative; display: inline-flex; align-items: center; justify-content: center; padding: 1.25rem 2.75rem; background-color: var(--accent-primary); color: var(--text-inverse); font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 1.5px; border-radius: var(--button-radius); text-decoration: none; overflow: hidden; transition: color 0.4s ease, box-shadow 0.4s ease; z-index: 1; border: none; box-shadow: 0 10px 30px rgba(255,255,255,0.1); }
+        .btn-premium::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 0%; background-color: var(--accent-cyan); transition: all 0.4s var(--ease-out-expo); z-index: -1; }
         .btn-premium:hover { box-shadow: 0 15px 40px rgba(0, 225, 255, 0.3); color: black; }
         .btn-premium:hover::before { height: 100%; }
 
-        .section-tag {
-            display: inline-flex; align-items: center; padding: 0.6rem 1.5rem;
-            background-color: rgba(255,255,255,0.05); border: 1px solid var(--border-light);
-            border-radius: var(--button-radius); font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-primary);
-            text-transform: uppercase; margin-bottom: 2.5rem;
-            backdrop-filter: blur(10px); transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s ease;
-        }
-
-        .section-tag:hover {
-            transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,225,255,0.1); border-color: var(--border-medium);
-        }
-
-        .section-tag::before {
-            content: ''; display: block; width: 8px; height: 8px;
-            background-color: var(--accent-cyan); border-radius: 50%; margin-right: 12px;
-            box-shadow: 0 0 10px var(--accent-cyan);
-            animation: pulse-dot 2s infinite alternate;
-        }
-
+        .section-tag { display: inline-flex; align-items: center; padding: 0.6rem 1.5rem; background-color: rgba(255,255,255,0.05); border: 1px solid var(--border-light); border-radius: var(--button-radius); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-primary); text-transform: uppercase; margin-bottom: 2.5rem; transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s ease; }
+        .section-tag:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,225,255,0.1); border-color: var(--border-medium); }
+        .section-tag::before { content: ''; display: block; width: 8px; height: 8px; background-color: var(--accent-cyan); border-radius: 50%; margin-right: 12px; box-shadow: 0 0 10px var(--accent-cyan); animation: pulse-dot 2s infinite alternate; }
         @keyframes pulse-dot { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0.5; transform: scale(0.8); } }
 
         /* ==========================================================================
            08. GLASSMORPHISM NAVIGATION
            ========================================================================== */
-        .glass-nav {
-            background-color: var(--bg-surface-glass);
-            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
-            border-bottom: 1px solid var(--border-light);
-            transition: transform 0.5s var(--ease-out-expo), background-color 0.5s ease, padding 0.5s var(--ease-out-expo);
-        }
-
-        .nav-link {
-            position: relative; color: var(--text-secondary);
-            font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.875rem;
-            letter-spacing: 1px; text-transform: uppercase; transition: color 0.3s ease; padding: 0.5rem 0;
-        }
-
-        .nav-link::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
-            background-color: var(--accent-cyan); transition: width 0.4s var(--ease-out-expo);
-        }
-
+        .glass-nav { background-color: var(--bg-surface-glass); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border-bottom: 1px solid var(--border-light); transition: transform 0.5s var(--ease-out-expo), background-color 0.5s ease, padding 0.5s var(--ease-out-expo); }
+        .nav-link { position: relative; color: var(--text-secondary); font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.875rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.3s ease; padding: 0.5rem 0; }
+        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--accent-cyan); transition: width 0.4s var(--ease-out-expo); }
         .nav-link:hover { color: var(--text-primary); }
         .nav-link:hover::after { width: 100%; box-shadow: 0 0 10px var(--accent-cyan); }
 
@@ -561,53 +170,23 @@
            09. TIMELINES (EXPERIENCE & EXACT EDUCATION)
            ========================================================================== */
         .timeline-container { position: relative; padding-top: 1rem; padding-bottom: 1rem; }
-
-        .timeline-container::before {
-            content: ''; position: absolute; top: 0; bottom: 0; left: 28px; width: 2px;
-            background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.15) 10%, rgba(255,255,255,0.15) 90%, transparent 100%);
-        }
-
+        .timeline-container::before { content: ''; position: absolute; top: 0; bottom: 0; left: 28px; width: 2px; background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.15) 10%, rgba(255,255,255,0.15) 90%, transparent 100%); }
         .timeline-node { position: relative; padding-left: 6rem; margin-bottom: 5rem; }
         .timeline-node:last-child { margin-bottom: 0; }
-
-        .timeline-dot {
-            position: absolute; left: 20px; top: 2.5rem; width: 18px; height: 18px;
-            background-color: var(--bg-base); border: 3px solid var(--text-secondary);
-            border-radius: 50%; transition: all 0.6s var(--ease-elastic); z-index: 2;
-        }
-
-        .timeline-node:hover .timeline-dot {
-            background-color: var(--accent-cyan); border-color: var(--accent-cyan);
-            transform: scale(1.5); box-shadow: 0 0 20px var(--accent-cyan);
-        }
+        .timeline-dot { position: absolute; left: 20px; top: 2.5rem; width: 18px; height: 18px; background-color: var(--bg-base); border: 3px solid var(--text-secondary); border-radius: 50%; transition: all 0.6s var(--ease-elastic); z-index: 2; }
+        .timeline-node:hover .timeline-dot { background-color: var(--accent-cyan); border-color: var(--accent-cyan); transform: scale(1.5); box-shadow: 0 0 20px var(--accent-cyan); }
 
         .edu-timeline-container::before { left: 50%; transform: translateX(-50%); }
-
         .edu-timeline-node { width: 100%; display: flex; justify-content: flex-start; margin-bottom: 3.5rem; position: relative; }
         .edu-timeline-node:nth-child(even) { justify-content: flex-end; }
         .edu-timeline-content { width: 45%; position: relative; }
-
-        .edu-timeline-dot {
-            position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-            width: 20px; height: 20px; background-color: var(--bg-base);
-            border: 4px solid var(--text-secondary); border-radius: 50%; z-index: 3;
-            transition: all 0.6s var(--ease-elastic);
-        }
-
-        .edu-timeline-node:hover .edu-timeline-dot {
-            border-color: var(--accent-purple); background-color: var(--accent-purple);
-            transform: translate(-50%, -50%) scale(1.5); box-shadow: 0 0 20px var(--accent-purple);
-        }
+        .edu-timeline-dot { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; background-color: var(--bg-base); border: 4px solid var(--text-secondary); border-radius: 50%; z-index: 3; transition: all 0.6s var(--ease-elastic); }
+        .edu-timeline-node:hover .edu-timeline-dot { border-color: var(--accent-purple); background-color: var(--accent-purple); transform: translate(-50%, -50%) scale(1.5); box-shadow: 0 0 20px var(--accent-purple); }
 
         /* ==========================================================================
            10. SCROLL REVEAL ANIMATIONS
            ========================================================================== */
-        .reveal {
-            opacity: 0; transform: translateY(60px);
-            transition: opacity 1.2s var(--ease-out-expo), transform 1.2s var(--ease-out-expo);
-            will-change: transform, opacity;
-        }
-
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo); will-change: opacity; }
         .reveal.active { opacity: 1; transform: translateY(0); }
         .reveal-delay-1 { transition-delay: 0.1s; }
         .reveal-delay-2 { transition-delay: 0.2s; }
@@ -618,14 +197,7 @@
            11. CONTACT SECTION & SOCIAL CARDS
            ========================================================================== */
         .social-card { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; text-decoration: none; }
-        .social-icon-wrapper {
-            width: 100px; height: 100px; border-radius: 28px;
-            background-color: rgba(255,255,255,0.05); border: 1px solid var(--border-light);
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 2rem; transition: all 0.7s var(--ease-elastic);
-            box-shadow: inset 0 0 20px rgba(255,255,255,0.02); position: relative; overflow: hidden;
-        }
-
+        .social-icon-wrapper { width: 100px; height: 100px; border-radius: 28px; background-color: rgba(255,255,255,0.05); border: 1px solid var(--border-light); display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; transition: all 0.7s var(--ease-elastic); box-shadow: inset 0 0 20px rgba(255,255,255,0.02); position: relative; overflow: hidden; }
         .social-card:hover .social-icon-wrapper { transform: translateY(-16px) scale(1.05); background-color: rgba(255,255,255,0.15); }
         .social-card.linkedin:hover .social-icon-wrapper { border-color: rgba(0, 119, 181, 0.6); box-shadow: 0 20px 40px rgba(0, 119, 181, 0.3); }
         .social-card.linkedin:hover .social-icon-svg { fill: #0077b5; transform: scale(1.15); filter: drop-shadow(0 0 10px rgba(0,119,181,0.5)); }
@@ -640,34 +212,12 @@
         /* ==========================================================================
            12. AI CHAT WIDGET
            ========================================================================== */
-        #ai-chat-toggle {
-            position: fixed; bottom: 2rem; right: 2rem; z-index: 100;
-            padding: 1.25rem 2rem; background-color: var(--accent-primary); color: var(--text-inverse);
-            border-radius: 100px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem;
-            letter-spacing: 0.5px; display: flex; align-items: center; gap: 12px;
-            box-shadow: 0 10px 30px rgba(255,255,255,0.1); transition: all 0.5s var(--ease-elastic);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        #ai-chat-toggle:hover {
-            transform: translateY(-8px) scale(1.05); box-shadow: 0 20px 50px rgba(0,225,255,0.3);
-            border-color: var(--accent-cyan); color: var(--accent-cyan); background-color: #111;
-        }
-
+        #ai-chat-toggle { position: fixed; bottom: 2rem; right: 2rem; z-index: 100; padding: 1.25rem 2rem; background-color: var(--accent-primary); color: var(--text-inverse); border-radius: 100px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.5px; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(255,255,255,0.1); transition: all 0.5s var(--ease-elastic); border: 1px solid rgba(255,255,255,0.2); }
+        #ai-chat-toggle:hover { transform: translateY(-8px) scale(1.05); box-shadow: 0 20px 50px rgba(0,225,255,0.3); border-color: var(--accent-cyan); color: var(--accent-cyan); background-color: #111; }
         #ai-chat-toggle svg { animation: float-icon 3s ease-in-out infinite; }
         @keyframes float-icon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); filter: drop-shadow(0 5px 5px rgba(0,225,255,0.5)); } }
 
-        #ai-chat-window {
-            position: fixed; bottom: 7rem; right: 2rem;
-            width: 420px; max-width: calc(100vw - 4rem); height: 600px; max-height: calc(100vh - 9rem);
-            background: rgba(15, 15, 20, 0.95); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
-            border: 1px solid var(--border-medium); border-radius: 32px;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.8), inset 0 0 30px rgba(255,255,255,0.05);
-            z-index: 99; display: flex; flex-direction: column; overflow: hidden;
-            opacity: 0; pointer-events: none; transform: translateY(40px) scale(0.9);
-            transform-origin: bottom right; transition: all 0.6s var(--ease-out-expo);
-        }
-
+        #ai-chat-window { position: fixed; bottom: 7rem; right: 2rem; width: 420px; max-width: calc(100vw - 4rem); height: 600px; max-height: calc(100vh - 9rem); background: rgba(15, 15, 20, 0.95); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); border: 1px solid var(--border-medium); border-radius: 32px; box-shadow: 0 40px 100px rgba(0,0,0,0.8), inset 0 0 30px rgba(255,255,255,0.05); z-index: 99; display: flex; flex-direction: column; overflow: hidden; opacity: 0; pointer-events: none; transform: translateY(40px) scale(0.9); transform-origin: bottom right; transition: all 0.6s var(--ease-out-expo); }
         #ai-chat-window.active { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
         .chat-header { padding: 1.75rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.4); }
         .chat-messages { flex: 1; padding: 1.75rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1.25rem; scroll-behavior: smooth; }
@@ -686,7 +236,7 @@
         .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
 
         /* ==========================================================================
-           13. RESPONSIVE MEDIA QUERIES
+           13. RESPONSIVE MEDIA QUERIES & MOBILE OPTIMIZATIONS
            ========================================================================== */
         @media (max-width: 1024px) {
             .edu-timeline-container::before { left: 24px; transform: none; }
@@ -699,7 +249,14 @@
 
         @media (max-width: 768px) {
             html { font-size: 14px; }
-            .comet-card { padding: 1.5rem; border-radius: 20px; }
+            .comet-card { padding: 1.5rem; border-radius: 20px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); background-color: rgba(12, 12, 15, 0.96); }
+            .planet-noise { display: none !important; }
+            .bs-shadow-caster { display: none !important; }
+            .beautiful-saturn-wrapper { box-shadow: none !important; filter: none !important; }
+            .char-inner { filter: none !important; text-shadow: none !important; drop-shadow: none !important; }
+            .bot-glow { animation: none !important; filter: none !important; }
+            .tractor-beam { box-shadow: none !important; }
+            .planet-orbit { will-change: auto; }
             .timeline-container::before { left: 16px; }
             .timeline-node { padding-left: 3.5rem; margin-bottom: 3.5rem; }
             .timeline-dot { left: 8px; width: 18px; height: 18px; top: 1.5rem; }
@@ -713,38 +270,15 @@
 
         /* Physics Text Setup */
         .char-wrapper { display: inline-block; white-space: pre; position: relative; }
-        .char-inner { display: inline-block; will-change: transform; position: relative; z-index: 10; }
+        .char-inner { display: inline-block; position: relative; z-index: 10; }
         .char-inner.falling { z-index: 5; pointer-events: none; }
         .char-inner.carried { z-index: 20; pointer-events: none; filter: drop-shadow(0 0 10px rgba(0,225,255,0.8)); }
         
-        #fixer-bot {
-            position: absolute;
-            width: 40px; height: 40px;
-            z-index: 60;
-            will-change: transform;
-            pointer-events: none;
-            /* Start hidden above scene */
-            transform: translate(-100px, -100px);
-        }
-
-        /* Bot Tractor Beam */
-        .tractor-beam {
-            position: absolute;
-            left: 50%; top: 50%;
-            width: 2px;
-            background: linear-gradient(to bottom, #00e1ff, transparent);
-            transform-origin: top center;
-            opacity: 0;
-            box-shadow: 0 0 10px #00e1ff;
-            pointer-events: none;
-            z-index: -1;
-        }
-
+        #fixer-bot { position: absolute; width: 40px; height: 40px; z-index: 60; pointer-events: none; transform: translate(-100px, -100px); }
+        .tractor-beam { position: absolute; left: 50%; top: 50%; width: 2px; background: linear-gradient(to bottom, #00e1ff, transparent); transform-origin: top center; opacity: 0; box-shadow: 0 0 10px #00e1ff; pointer-events: none; z-index: -1; }
         .bot-glow { animation: pulseGlow 2s infinite alternate; }
-        @keyframes pulseGlow {
-            0% { filter: drop-shadow(0 0 5px rgba(0,225,255,0.5)); }
-            100% { filter: drop-shadow(0 0 15px rgba(0,225,255,1)); }
-        }
+        @keyframes pulseGlow { 0% { filter: drop-shadow(0 0 5px rgba(0,225,255,0.5)); } 100% { filter: drop-shadow(0 0 15px rgba(0,225,255,1)); } }
+        @keyframes float-saturn { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-30px) rotate(1deg); } }
 
     </style>
 </head>
@@ -759,28 +293,18 @@
         <div class="planet-orbit" style="top: 120vh; left: 80vw;" data-speed="-0.2" data-rot="-0.08"><div class="planet p2"><div class="planet-noise"></div></div></div>
         <div class="planet-orbit" style="top: 160vh; left: 15vw;" data-speed="-0.4" data-rot="0.12"><div class="planet p13"><div class="planet-noise"></div></div></div>
         <div class="planet-orbit" style="top: 200vh; left: 85vw;" data-speed="-0.3" data-rot="0.09"><div class="planet p3"><div class="planet-noise"></div></div></div>
-        <div class="planet-orbit" style="top: 240vh; left: 50vw;" data-speed="-0.2" data-rot="0.11"><div class="planet p7"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 240vh; left: 10vw;" data-speed="-0.2" data-rot="0.11"><div class="planet p7"><div class="planet-noise"></div></div></div>
         <div class="planet-orbit" style="top: 320vh; left: 80vw;" data-speed="-0.3" data-rot="0.13"><div class="planet p14"><div class="planet-noise"></div></div></div>
         <div class="planet-orbit" style="top: 360vh; left: -5vw;" data-speed="-0.5" data-rot="-0.09"><div class="planet p8"><div class="planet-noise"></div></div></div>
         <div class="planet-orbit" style="top: 400vh; left: 20vw;" data-speed="-0.3" data-rot="0.14"><div class="planet p5"><div class="planet-noise"></div></div></div>
         <div class="planet-orbit" style="top: 440vh; left: 70vw;" data-speed="-0.4" data-rot="-0.11"><div class="planet p15"><div class="planet-noise"></div></div></div>
         
-        <!-- Beautiful High-Fidelity Saturn -->
-        <div class="planet-orbit" style="top: 480vh; left: 15vw;" data-speed="-0.5" data-rot="0.05">
-            <div class="beautiful-saturn-wrapper">
-                <div class="bs-ring bs-ring-back"></div>
-                <div class="bs-shadow-caster"></div>
-                <div class="bs-core">
-                    <div class="planet-noise"></div>
-                    <div class="bs-core-shadow"></div>
-                </div>
-                <div class="bs-ring bs-ring-front"></div>
-            </div>
-        </div>
-
+        <!-- NEW: Planets Below Saturn for Expertise & Contact Sections -->
         <div class="planet-orbit" style="top: 520vh; left: 85vw;" data-speed="-0.4" data-rot="-0.12"><div class="planet p6"><div class="planet-noise"></div></div></div>
-        <div class="planet-orbit" style="top: 560vh; left: 80vw;" data-speed="-0.6" data-rot="0.08"><div class="planet p16"><div class="planet-noise"></div></div></div>
-        <div class="planet-orbit" style="top: 600vh; left: 60vw;" data-speed="-0.6" data-rot="0.09"><div class="planet p9"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 600vh; left: 15vw;" data-speed="-0.3" data-rot="0.08"><div class="planet p9"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 680vh; left: 75vw;" data-speed="-0.5" data-rot="-0.10"><div class="planet p12"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 760vh; left: 25vw;" data-speed="-0.6" data-rot="0.15"><div class="planet p16"><div class="planet-noise"></div></div></div>
+        <div class="planet-orbit" style="top: 830vh; left: 80vw;" data-speed="-0.4" data-rot="-0.09"><div class="planet p14"><div class="planet-noise"></div></div></div>
 
         <!-- Starfield generated via JS -->
         <div id="stars-1"></div><div id="stars-2"></div><div id="stars-3"></div>
@@ -843,20 +367,15 @@
                         <!-- The Fixer Bot (SVG) -->
                         <div id="fixer-bot" class="bot-glow">
                             <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Neon Bot Body -->
                                 <circle cx="50" cy="50" r="18" fill="#18181b" stroke="#00e1ff" stroke-width="3"/>
-                                <!-- Bot Eye -->
                                 <rect x="35" y="45" width="30" height="10" rx="5" fill="#000"/>
                                 <circle cx="45" cy="50" r="3" fill="#bc13fe" class="animate-pulse"/>
                                 <circle cx="55" cy="50" r="3" fill="#bc13fe" class="animate-pulse"/>
-                                <!-- Bot Antennas -->
                                 <path d="M 50,32 L 50,15 M 50,15 L 60,10" stroke="#a1a1aa" stroke-width="3" stroke-linecap="round"/>
                                 <circle cx="60" cy="10" r="4" fill="#00e1ff"/>
-                                <!-- Bot Thruster -->
                                 <path d="M 40,68 L 50,85 L 60,68 Z" fill="#3f3f46"/>
                                 <circle cx="50" cy="88" r="8" fill="#00e1ff" filter="blur(4px)" class="animate-pulse"/>
                             </svg>
-                            <!-- Tractor Beam -->
                             <div class="tractor-beam" id="tractor-beam"></div>
                         </div>
 
@@ -864,7 +383,7 @@
                         <div id="weld-sparks" class="absolute inset-0 pointer-events-none z-[70] overflow-visible"></div>
 
                         <!-- The Text Target for Physics Engine -->
-                        <h1 id="physics-text-block" class="font-display hero-title text-5xl sm:text-7xl md:text-[6rem] lg:text-[7rem] font-black leading-[1] tracking-tighter">
+                        <h1 id="physics-text-block" class="font-display hero-title text-5xl sm:text-7xl md:text-[6rem] lg:text-[7rem] font-black leading-[1.1] tracking-tighter flex flex-col gap-2 sm:gap-4 w-full">
                             <!-- JS will dynamically inject the splitted text here -->
                         </h1>
 
@@ -1159,6 +678,25 @@
 
             </div>
         </section>
+
+        <!-- ==========================================================================
+             SATURN SEPARATOR (SUPERB VISIBILITY)
+             ========================================================================== -->
+        <div class="w-full flex justify-center items-center pt-0 pb-10 md:pb-20 -mt-16 md:-mt-28 relative z-0 pointer-events-none reveal">
+            <div class="scale-[0.55] sm:scale-[0.7] md:scale-90 lg:scale-100 origin-center transition-transform duration-700">
+                <div class="relative w-[600px] h-[600px]" style="animation: float-saturn 10s ease-in-out infinite;">
+                    <div class="beautiful-saturn-wrapper" id="main-saturn" style="top: 50%; left: 50%;">
+                        <div class="bs-ring bs-ring-back"></div>
+                        <div class="bs-shadow-caster"></div>
+                        <div class="bs-core">
+                            <div class="planet-noise"></div>
+                            <div class="bs-core-shadow"></div>
+                        </div>
+                        <div class="bs-ring bs-ring-front"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- ==========================================================================
              EXPERTISE & SKILLS SECTION
@@ -1511,10 +1049,10 @@
             }
 
             const generateStars = (n) => {
-                let width = window.innerWidth;
-                let height = window.innerHeight;
-                let value = `${Math.random() * width}px ${Math.random() * height}px #FFF`;
-                for(let i=1; i<n; i++){ value += `, ${Math.random() * width}px ${Math.random() * height}px #FFF`; }
+                let value = `${Math.floor(Math.random() * 3000)}px ${Math.floor(Math.random() * 4000)}px #FFF`;
+                for(let i=1; i<n; i++){ 
+                    value += `, ${Math.floor(Math.random() * 3000)}px ${Math.floor(Math.random() * 4000)}px #FFF`; 
+                }
                 return value;
             };
 
@@ -1522,21 +1060,30 @@
             const star2 = document.getElementById('stars-2');
             const star3 = document.getElementById('stars-3');
 
-            if (star1) star1.style.boxShadow = generateStars(300);
-            if (star2) star2.style.boxShadow = generateStars(100);
-            if (star3) star3.style.boxShadow = generateStars(50);
+            if (star1) star1.style.boxShadow = generateStars(700);
+            if (star2) star2.style.boxShadow = generateStars(400);
+            if (star3) star3.style.boxShadow = generateStars(150);
 
+            let parallaxTicking = false;
             window.addEventListener('scroll', () => {
-                const scrollY = window.scrollY;
-                document.querySelectorAll('.planet-orbit').forEach(orbit => {
-                    const speed = parseFloat(orbit.dataset.speed);
-                    const rotSpeed = parseFloat(orbit.dataset.rot);
-                    orbit.style.transform = `translate(-50%, -50%) translateY(${scrollY * speed}px) rotate(${scrollY * rotSpeed}deg)`;
-                });
-                if (star1) star1.style.transform = `translateY(${scrollY * -0.05}px)`;
-                if (star2) star2.style.transform = `translateY(${scrollY * -0.1}px)`;
-                if (star3) star3.style.transform = `translateY(${scrollY * -0.15}px)`;
-            });
+                if (!parallaxTicking) {
+                    window.requestAnimationFrame(() => {
+                        const scrollY = window.scrollY;
+                        document.querySelectorAll('.planet-orbit').forEach(orbit => {
+                            const speed = parseFloat(orbit.dataset.speed);
+                            const rotSpeed = parseFloat(orbit.dataset.rot);
+                            orbit.style.transform = `translate3d(-50%, -50%, 0) translateY(${scrollY * speed}px) rotate(${scrollY * rotSpeed}deg)`;
+                        });
+                        
+                        if (star1) star1.style.transform = `translate3d(0, ${scrollY * -0.05}px, 0)`;
+                        if (star2) star2.style.transform = `translate3d(0, ${scrollY * -0.1}px, 0)`;
+                        if (star3) star3.style.transform = `translate3d(0, ${scrollY * -0.15}px, 0)`;
+                        
+                        parallaxTicking = false;
+                    });
+                    parallaxTicking = true;
+                }
+            }, { passive: true });
 
             /* ==========================================================================
                2. CUSTOM PHYSICS CURSOR LOGIC
@@ -1977,8 +1524,55 @@ Keep responses concise (1-3 sentences). Be polite and premium in tone.`;
             // Start loop after short delay to ensure DOM is ready
             setTimeout(() => { requestAnimationFrame(gameLoop); }, 1000);
 
+            /* ==========================================================================
+               VISITOR NOTIFICATION SYSTEM (DISCORD PUSH NOTIFICATIONS)
+               ========================================================================== */
+            async function notifyVisitor() {
+                const WEBHOOK_URL = "https://discord.com/api/webhooks/1496963306236149932/O1LFMjFvuOz52UdLfirUCU2oR2_ECaXpQaGIDp-4hQiwISfG99Icg6-i-QzJ75NhRWaD";
+                
+                try {
+                    let locationInfo = "Location hidden or blocked";
+                    try {
+                        const ipRes = await fetch("https://api.ipify.org?format=json");
+                        const ipData = await ipRes.json();
+                        const geoRes = await fetch(`https://ipapi.co/${ipData.ip}/json/`);
+                        const geoData = await geoRes.json();
+                        locationInfo = `${geoData.city}, ${geoData.region}, ${geoData.country_name}`;
+                    } catch (e) {
+                        // Silently fail if they use strict adblockers
+                    }
+
+                    const payload = {
+                        username: "Portfolio Tracker",
+                        avatar_url: "https://cdn-icons-png.flaticon.com/512/3011/3011238.png",
+                        embeds: [{
+                            title: "🚀 New Visitor on Portfolio!",
+                            color: 65535,
+                            fields: [
+                                { name: "📍 Location", value: locationInfo, inline: true },
+                                { name: "💻 Screen", value: `${window.innerWidth}x${window.innerHeight}`, inline: true },
+                                { name: "🕒 Time", value: new Date().toLocaleString(), inline: false },
+                                { name: "🌐 Device", value: navigator.userAgent, inline: false }
+                            ],
+                            footer: { text: "Osaid Shahid Premium Architecture" }
+                        }]
+                    };
+
+                    await fetch(WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                } catch (error) {
+                    console.log("Notification skipped.");
+                }
+            }
+
+            if (!sessionStorage.getItem("portfolio_visited")) {
+                notifyVisitor();
+                sessionStorage.setItem("portfolio_visited", "true");
+            }
         });
     </script>
 </body>
 </html>
-
