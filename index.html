@@ -25,12 +25,12 @@
             --bg-surface-solid: #000000;
             --bg-surface-glass: rgba(0, 0, 0, 0.9);
             
-            --text-primary: #fafafa; 
-            --text-secondary: #a1a1aa; 
+            --text-primary: #d4d4d8; /* Softer primary text for eye comfort (zinc-300) */
+            --text-secondary: #a1a1aa; /* Softer secondary text (zinc-400) */
             --text-tertiary: #71717a;
             --text-inverse: #000000;
             
-            --accent-primary: #ffffff;
+            --accent-primary: #e4e4e7; /* Softer bright accent */
             --accent-indigo: #4f46e5;
             --accent-emerald: #10b981;
             --accent-cyan: #00e1ff;
@@ -64,6 +64,7 @@
         body { background-color: var(--bg-base); color: var(--text-primary); font-family: 'Inter', sans-serif; overflow-x: hidden; width: 100%; position: relative; line-height: 1.7; }
         h1, h2, h3, h4, h5, h6, .font-display { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; }
         .font-mono-custom { font-family: 'JetBrains Mono', monospace; }
+        .text-primary { color: var(--text-primary) !important; }
 
         /* ==========================================================================
            03. CUSTOM PHYSICS-BASED CURSOR
@@ -206,8 +207,8 @@
         /* ==========================================================================
            12. AI CHAT WIDGET
            ========================================================================== */
-        #ai-chat-toggle { position: fixed; bottom: 2rem; right: 2rem; z-index: 100; padding: 1.25rem 2rem; background-color: var(--accent-primary); color: var(--text-inverse); border-radius: 100px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.5px; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(255,255,255,0.1); transition: all 0.5s var(--ease-elastic); border: 1px solid rgba(255,255,255,0.2); }
-        #ai-chat-toggle:hover { transform: translateY(-8px) scale(1.05); box-shadow: 0 20px 50px rgba(0,225,255,0.3); border-color: var(--accent-cyan); color: var(--accent-cyan); background-color: #111; }
+        #ai-chat-toggle { position: fixed; bottom: 2rem; right: 2rem; z-index: 100; padding: 0.875rem 1.5rem; background-color: var(--accent-primary); color: var(--text-inverse); border-radius: 100px; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px; box-shadow: 0 8px 25px rgba(255,255,255,0.1); transition: all 0.5s var(--ease-elastic); border: 1px solid rgba(255,255,255,0.2); }
+        #ai-chat-toggle:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 15px 40px rgba(0,225,255,0.2); border-color: var(--accent-cyan); color: var(--accent-cyan); background-color: #111; }
         #ai-chat-toggle svg { animation: float-icon 3s ease-in-out infinite; }
         @keyframes float-icon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); filter: drop-shadow(0 5px 5px rgba(0,225,255,0.5)); } }
 
@@ -228,6 +229,9 @@
         .typing-dots span { width: 8px; height: 8px; background-color: var(--accent-cyan); border-radius: 50%; animation: typing 1.4s infinite ease-in-out both; }
         .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
         .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+        
+        .chat-quick-actions::-webkit-scrollbar { display: none; }
+        .chat-quick-actions { -ms-overflow-style: none; scrollbar-width: none; }
 
         /* ==========================================================================
            13. RESPONSIVE MEDIA QUERIES & MOBILE OPTIMIZATIONS
@@ -259,7 +263,7 @@
             body { cursor: auto; }
             .btn-premium, .hover-trigger, a, button { cursor: pointer; }
             #ai-chat-window { bottom: 0; right: 0; width: 100vw; height: 85vh; max-width: none; max-height: none; border-radius: 32px 32px 0 0; transform: translateY(100%); }
-            #ai-chat-toggle { bottom: 1.5rem; right: 1.5rem; padding: 1rem 1.5rem; font-size: 0.9rem; }
+            #ai-chat-toggle { bottom: 1.5rem; right: 1.5rem; padding: 0.75rem 1.25rem; font-size: 0.85rem; }
         }
 
         /* Physics Text Setup */
@@ -324,19 +328,19 @@
                 <a href="#contact" class="nav-link hover-trigger">Contact</a>
             </div>
             <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 focus:outline-none z-50 relative hover-trigger" aria-label="Toggle Menu">
-                <span class="block w-6 h-[2px] bg-white transition-transform duration-400 origin-center" id="bar1"></span>
-                <span class="block w-6 h-[2px] bg-white transition-opacity duration-400" id="bar2"></span>
-                <span class="block w-6 h-[2px] bg-white transition-transform duration-400 origin-center" id="bar3"></span>
+                <span class="block w-6 h-[2px] bg-gray-300 transition-transform duration-400 origin-center" id="bar1"></span>
+                <span class="block w-6 h-[2px] bg-gray-300 transition-opacity duration-400" id="bar2"></span>
+                <span class="block w-6 h-[2px] bg-gray-300 transition-transform duration-400 origin-center" id="bar3"></span>
             </button>
         </div>
     </nav>
 
     <div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-3xl z-40 flex flex-col justify-center items-center gap-10 opacity-0 pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]">
-        <a href="#about" class="font-display text-5xl font-bold text-white mobile-link hover-trigger">Identity</a>
-        <a href="#experience" class="font-display text-5xl font-bold text-white mobile-link hover-trigger">Experience</a>
-        <a href="#education" class="font-display text-5xl font-bold text-white mobile-link hover-trigger">Education</a>
-        <a href="#expertise" class="font-display text-5xl font-bold text-white mobile-link hover-trigger">Skills</a>
-        <a href="#contact" class="font-display text-5xl font-bold text-white mobile-link hover-trigger">Contact</a>
+        <a href="#about" class="font-display text-5xl font-bold text-gray-300 mobile-link hover-trigger">Identity</a>
+        <a href="#experience" class="font-display text-5xl font-bold text-gray-300 mobile-link hover-trigger">Experience</a>
+        <a href="#education" class="font-display text-5xl font-bold text-gray-300 mobile-link hover-trigger">Education</a>
+        <a href="#expertise" class="font-display text-5xl font-bold text-gray-300 mobile-link hover-trigger">Skills</a>
+        <a href="#contact" class="font-display text-5xl font-bold text-gray-300 mobile-link hover-trigger">Contact</a>
     </div>
 
     <!-- ==========================================================================
@@ -399,17 +403,21 @@
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center reveal reveal-delay-3">
                     <div class="md:col-span-7 comet-cards-wrapper">
                         <div class="comet-card p-6 md:p-8 lg:p-10 border-white/10 hover-trigger">
-                            <p class="text-xl md:text-2xl text-gray-400 leading-relaxed font-light">
+                            <p class="text-xl md:text-2xl text-gray-300 leading-relaxed font-light">
                                 Dynamic and results-oriented professional with a proven track record as an App/cloud technical support-german language expert. Passionate about delivering outstanding service and contributing to an inclusive work environment.
                             </p>
                         </div>
                     </div>
                     <div class="md:col-span-5 flex justify-start md:justify-end">
-                        <div class="magnetic-btn-wrapper hover-trigger" id="magnetic-btn">
-                            <a href="#experience" class="btn-premium">
+                        <div class="magnetic-btn-wrapper hover-trigger w-full sm:w-auto" id="magnetic-btn">
+                            <a href="#experience" class="btn-premium w-full">
                                 Explore Experience 
                                 <svg class="w-6 h-6 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                             </a>
+                            <button id="tts-intro-btn" class="mt-4 w-full flex items-center justify-center gap-2 py-3 px-6 rounded-full border border-[var(--accent-cyan)] text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)] hover:text-black transition-all font-mono-custom font-bold text-xs uppercase tracking-widest cursor-pointer">
+                                AI Audio Intro ✨
+                                <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5 10v4a2 2 0 002 2h3l4 4V4l-4 4H7a2 2 0 00-2 2z"></path></svg>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -418,19 +426,19 @@
                 <div class="comet-cards-wrapper grid grid-cols-2 md:grid-cols-4 gap-6 mt-28 reveal reveal-delay-4">
                     <div class="comet-card card-tilt !p-8 flex flex-col justify-center items-center text-center hover-trigger border-white/10">
                         <h2 class="font-display text-5xl md:text-6xl font-black text-primary tracking-tighter mb-3">4.0</h2>
-                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">Years Exp.</p>
+                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-300 uppercase tracking-widest font-bold">Years Exp.</p>
                     </div>
                     <div class="comet-card card-tilt !p-8 flex flex-col justify-center items-center text-center hover-trigger border-white/10">
                         <h2 class="font-display text-5xl md:text-6xl font-black text-primary tracking-tighter mb-3">3+</h2>
-                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">Enterprises</p>
+                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-300 uppercase tracking-widest font-bold">Enterprises</p>
                     </div>
                     <div class="comet-card card-tilt !p-8 flex flex-col justify-center items-center text-center hover-trigger border-white/10">
                         <h2 class="font-display text-5xl md:text-6xl font-black text-primary tracking-tighter mb-3">C1</h2>
-                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">German Level</p>
+                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-300 uppercase tracking-widest font-bold">German Level</p>
                     </div>
                     <div class="comet-card card-tilt !p-8 flex flex-col justify-center items-center text-center hover-trigger border-white/10">
                         <h2 class="font-display text-5xl md:text-6xl font-black text-primary tracking-tighter mb-3">5</h2>
-                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">Certifications</p>
+                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-300 uppercase tracking-widest font-bold">Certifications</p>
                     </div>
                 </div>
 
@@ -467,33 +475,33 @@
                                     11/2024 — Present
                                 </span>
                             </div>
-                            <ul class="space-y-5 text-gray-400 leading-relaxed font-light text-base md:text-lg">
+                            <ul class="space-y-5 text-gray-300 leading-relaxed text-base md:text-lg font-light">
                                 <li class="flex items-start">
                                     <svg class="w-6 h-6 mr-4 text-accent-cyan mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span class="font-semibold text-white">Delivered end-to-end technical solutions to end-users from Germany, Austria, and Switzerland.</span>
+                                    <span class="font-medium text-gray-300">Delivered end-to-end technical solutions to end-users from Germany, Austria, and Switzerland.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Added and configured new devices within the corporate network.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Managed DHCP servers for network related issues.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Troubleshot printer issues, including connectivity, installation, and driver errors.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Managed user accounts, permissions, and security groups using Azure Active Directory.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Worked on all kind of Windows related Issues.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Delivered end-to-end technical support to end users, ensuring minimal disruption to daily operations.</span>
                                 </li>
                             </ul>
@@ -515,33 +523,33 @@
                                     04/2024 — 11/2024
                                 </span>
                             </div>
-                            <ul class="space-y-5 text-gray-400 leading-relaxed font-light text-base md:text-lg">
+                            <ul class="space-y-5 text-gray-300 leading-relaxed text-base md:text-lg font-light">
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Administer Windows, Office, Active Directory, and network infrastructure. Manage DHCP and resolve network issues.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Working as L1-L1.5 support and communicating with German-speaking users to resolve inquiries and issues.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Added and configured new devices in the company network. Assigned static and dynamic IP addresses to devices.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Troubleshot printer issues (installation, connectivity, driver problems).</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Managed user access and permissions through Azure AD.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Resolved all types of Windows issues.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Using tools like Azure, Microsoft Admin center, ARS, AD, Intune, Bomgar, Servicenow, Confluence.</span>
                                 </li>
                             </ul>
@@ -563,29 +571,29 @@
                                     12/2021 — 09/2023
                                 </span>
                             </div>
-                            <ul class="space-y-5 text-gray-400 leading-relaxed font-light text-base md:text-lg">
+                            <ul class="space-y-5 text-gray-300 leading-relaxed text-base md:text-lg font-light">
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Worked for Wipro Technologies as Google T1 accessibility technical support (German).</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Proactively identified solution to common user issues.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Provided technical support to user's on Accessibility technologies.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Job profile involes speaking, chatting and writing. Resolving users issues via call chat or email.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Dealing with Google platforms that have Android support in it.</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     <span>Adhered to quality and service standards to support operational goals.</span>
                                 </li>
                             </ul>
@@ -670,6 +678,54 @@
                     </div>
                 </div>
 
+                <!-- Senior Diploma -->
+                <div class="edu-timeline-node reveal">
+                    <div class="edu-timeline-dot"></div>
+                    <div class="edu-timeline-content comet-cards-wrapper">
+                        <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
+                            <span class="inline-block px-4 py-2 bg-purple-500/10 text-purple-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-purple-500/20 shadow-[0_0_15px_rgba(188,19,254,0.3)]">11/2021</span>
+                            <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Senior Diploma: German Language (B2)</h3>
+                            <p class="text-gray-200 mt-1">Osmania University</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Junior Diploma -->
+                <div class="edu-timeline-node reveal">
+                    <div class="edu-timeline-dot"></div>
+                    <div class="edu-timeline-content comet-cards-wrapper">
+                        <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
+                            <span class="inline-block px-4 py-2 bg-purple-500/10 text-purple-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-purple-500/20 shadow-[0_0_15px_rgba(188,19,254,0.3)]">04/2021</span>
+                            <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Junior Diploma: German Language (A2)</h3>
+                            <p class="text-gray-200 mt-1">Osmania University</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bachelor of Arts -->
+                <div class="edu-timeline-node reveal">
+                    <div class="edu-timeline-dot"></div>
+                    <div class="edu-timeline-content comet-cards-wrapper">
+                        <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
+                            <span class="inline-block px-4 py-2 bg-cyan-500/10 text-cyan-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-cyan-500/20 shadow-[0_0_15px_rgba(0,242,255,0.3)]">05/2020</span>
+                            <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Bachelor of Arts (Hons): English</h3>
+                            <p class="text-gray-200 mt-1">University of Delhi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Intermediate -->
+                <div class="edu-timeline-node reveal">
+                    <div class="edu-timeline-dot"></div>
+                    <div class="edu-timeline-content comet-cards-wrapper">
+                        <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
+                            <span class="inline-block px-4 py-2 bg-emerald-500/10 text-emerald-400 font-mono-custom text-[10px] font-bold uppercase tracking-widest rounded-md mb-5 border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.3)]">05/2016</span>
+                            <h3 class="font-display text-2xl font-bold text-primary mb-2 leading-tight">Intermediate</h3>
+                            <p class="text-gray-200 mt-1 leading-snug">Board of High School & Intermediate Education</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -744,22 +800,22 @@
                 <div class="comet-cards-wrapper reveal reveal-delay-2">
                     <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
                         <h3 class="font-display text-3xl font-bold text-primary tracking-tight mb-8 border-b border-white/10 pb-6">Technical Skills</h3>
-                        <ul class="space-y-5 text-gray-300 font-medium text-lg">
+                        <ul class="space-y-5 text-gray-300 font-light text-lg">
                             <li class="flex items-center justify-between border-b border-white/5 pb-3">
                                 <span>IT Fundamentals</span>
                                 <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             </li>
                             <li class="flex items-center justify-between border-b border-white/5 pb-3">
                                 <span>Networking Basics</span>
-                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             </li>
                             <li class="flex items-center justify-between border-b border-white/5 pb-3">
                                 <span>Linux Administration</span>
-                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             </li>
                             <li class="flex items-center justify-between">
                                 <span>WCAG, NVDA, BeMyEyes</span>
-                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             </li>
                         </ul>
                     </div>
@@ -776,7 +832,7 @@
                                     <div class="w-14 h-14 rounded-2xl bg-blue-500/20 flex items-center justify-center flex-shrink-0 text-blue-400 font-black font-display text-xl">MS</div>
                                     <div>
                                         <p class="font-bold text-primary text-lg">Azure Fundamentals (AZ-900)</p>
-                                        <p class="text-xs text-gray-400 font-mono-custom mt-1 tracking-widest uppercase">Microsoft</p>
+                                        <p class="text-xs text-gray-300 font-mono-custom mt-1 tracking-widest uppercase">Microsoft</p>
                                     </div>
                                 </div>
                             </div>
@@ -786,7 +842,7 @@
                                     <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center flex-shrink-0 text-red-400 font-black font-display text-xl">G</div>
                                     <div>
                                         <p class="font-bold text-primary text-lg">Technical Support Fundamentals</p>
-                                        <p class="text-xs text-gray-400 font-mono-custom mt-1 tracking-widest uppercase">Google</p>
+                                        <p class="text-xs text-gray-300 font-mono-custom mt-1 tracking-widest uppercase">Google</p>
                                     </div>
                                 </div>
                             </div>
@@ -796,7 +852,7 @@
                                     <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center flex-shrink-0 text-red-400 font-black font-display text-xl">G</div>
                                     <div>
                                         <p class="font-bold text-primary text-lg leading-tight">The Bits and Bytes of Computer Networking</p>
-                                        <p class="text-xs text-gray-400 font-mono-custom mt-1 tracking-widest uppercase">Google</p>
+                                        <p class="text-xs text-gray-300 font-mono-custom mt-1 tracking-widest uppercase">Google</p>
                                     </div>
                                 </div>
                             </div>
@@ -806,7 +862,7 @@
                                     <div class="w-14 h-14 rounded-2xl bg-purple-500/20 flex items-center justify-center flex-shrink-0 text-purple-400 font-black font-display text-xl">A</div>
                                     <div>
                                         <p class="font-bold text-primary text-lg leading-tight">Testing for Web Accessibility With Accessibility Insights</p>
-                                        <p class="text-xs text-gray-400 font-mono-custom mt-1 tracking-widest uppercase">Accessibility</p>
+                                        <p class="text-xs text-gray-300 font-mono-custom mt-1 tracking-widest uppercase">Accessibility</p>
                                     </div>
                                 </div>
                             </div>
@@ -816,7 +872,7 @@
                                     <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center flex-shrink-0 text-red-400 font-black font-display text-xl">G</div>
                                     <div>
                                         <p class="font-bold text-primary text-lg">Google IT Professional Certification</p>
-                                        <p class="text-xs text-gray-400 font-mono-custom mt-1 tracking-widest uppercase">Google</p>
+                                        <p class="text-xs text-gray-300 font-mono-custom mt-1 tracking-widest uppercase">Google</p>
                                     </div>
                                 </div>
                             </div>
@@ -855,7 +911,7 @@
                                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                             </svg>
                         </div>
-                        <h3 class="font-display text-3xl font-black mb-3">LinkedIn</h3>
+                        <h3 class="font-display text-3xl font-black mb-3 text-primary">LinkedIn</h3>
                         <p class="text-gray-400 text-base font-light mb-8 text-center">Professional Network</p>
                         <span class="text-xs font-mono-custom text-blue-400 font-bold uppercase tracking-widest bg-blue-500/10 px-4 py-2 rounded-full border border-blue-500/20">Connect &rarr;</span>
                     </a>
@@ -872,7 +928,7 @@
                                 <path d="M2 18V6L12 13L22 6V18" stroke="#4285f4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="gmail-blue transition-colors duration-300"/>
                             </svg>
                         </div>
-                        <h3 class="font-display text-3xl font-black mb-3">Email</h3>
+                        <h3 class="font-display text-3xl font-black mb-3 text-primary">Email</h3>
                         <p class="text-gray-400 text-sm font-light mb-8 text-center break-all px-4">osaidtheshahid@gmail.com</p>
                         <span class="text-xs font-mono-custom text-red-400 font-bold uppercase tracking-widest bg-red-500/10 px-4 py-2 rounded-full border border-red-500/20">Send Message &rarr;</span>
                     </a>
@@ -888,7 +944,7 @@
                                 <path d="M21.05 16.94L18.43 14.32C17.9 13.79 17.06 13.71 16.48 14.13L14.71 15.42C14.28 15.73 13.7 15.75 13.2 15.5C11.58 14.68 9.32 12.42 8.5 10.8C8.25 10.3 8.27 9.72 8.58 9.29L9.87 7.52C10.29 6.94 10.21 6.1 9.68 5.57L7.06 2.95C6.48 2.37 5.55 2.43 5.06 3.06L4.03 4.38C2.96 5.75 2.59 7.58 3.01 9.28C4.15 13.88 8.04 18.25 12.83 19.98C14.6 20.61 16.51 20.31 17.93 19.26L19.29 18.26C19.92 17.78 19.97 16.85 19.39 16.27" stroke="#34a853" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="phone-outline transition-colors duration-300"/>
                             </svg>
                         </div>
-                        <h3 class="font-display text-3xl font-black mb-3">Direct Line</h3>
+                        <h3 class="font-display text-3xl font-black mb-3 text-primary">Direct Line</h3>
                         <p class="text-gray-400 text-base font-light mb-8 text-center">+91 8448527162</p>
                         <span class="text-xs font-mono-custom text-emerald-400 font-bold uppercase tracking-widest bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/20">Call Now &rarr;</span>
                     </a>
@@ -904,9 +960,9 @@
          ========================================================================== -->
     <div class="w-full flex flex-col items-center justify-center pt-12 pb-24 relative z-10 reveal">
         <div class="w-[1px] h-24 bg-gradient-to-b from-transparent via-white/30 to-transparent mb-8"></div>
-        <p class="font-mono-custom text-[10px] md:text-xs text-gray-500 tracking-[0.4em] uppercase text-center px-4 transition-all duration-700 hover:tracking-[0.5em] hover:text-gray-300">
+        <p class="font-mono-custom text-[10px] md:text-xs text-gray-500 tracking-[0.4em] uppercase text-center px-4 transition-all duration-700 hover:tracking-[0.5em] hover:text-gray-400">
             You have reached the end of the <br class="sm:hidden"> 
-            <span class="text-white font-bold drop-shadow-[0_0_12px_rgba(255,255,255,0.6)]">Observable Universe.</span>
+            <span class="text-gray-300 font-bold drop-shadow-[0_0_12px_rgba(255,255,255,0.2)]">Observable Universe.</span>
         </p>
     </div>
 
@@ -926,7 +982,7 @@
          AI CHAT WIDGET (ENQUIRE WITH AI)
          ========================================================================== -->
     <button id="ai-chat-toggle" class="hover-trigger">
-        <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
         <span class="text-black">Enquire with AI ✨</span>
     </button>
 
@@ -936,7 +992,7 @@
                 <h3 class="font-display font-bold text-primary text-xl">Enquire with AI ✨</h3>
                 <p class="text-xs text-gray-400 font-mono-custom mt-1">Powered by Gemini Engine</p>
             </div>
-            <button id="ai-chat-close" class="text-gray-400 hover:text-white transition hover-trigger bg-white/10 p-2 rounded-full">
+            <button id="ai-chat-close" class="text-gray-400 hover:text-gray-300 transition hover-trigger bg-white/10 p-2 rounded-full">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
@@ -944,6 +1000,11 @@
             <div class="chat-message message-ai">
                 Hello! I am Osaid's AI clone. You can ask me anything about his exact resume experience, his AZ-900 certification, or his work as an App/Cloud Technical Support expert. How can I help you?
             </div>
+        </div>
+        <div class="chat-quick-actions flex gap-2 p-3 overflow-x-auto border-t border-[var(--border-medium)] bg-black/60">
+            <button class="quick-action-btn flex-shrink-0 text-xs bg-white/10 hover:bg-[var(--accent-cyan)] hover:text-black text-gray-300 px-4 py-1.5 rounded-full whitespace-nowrap transition-colors border border-white/5 cursor-pointer">Summarize Experience ✨</button>
+            <button class="quick-action-btn flex-shrink-0 text-xs bg-white/10 hover:bg-[var(--accent-cyan)] hover:text-black text-gray-300 px-4 py-1.5 rounded-full whitespace-nowrap transition-colors border border-white/5 cursor-pointer">Why hire Osaid? ✨</button>
+            <button class="quick-action-btn flex-shrink-0 text-xs bg-white/10 hover:bg-[var(--accent-cyan)] hover:text-black text-gray-300 px-4 py-1.5 rounded-full whitespace-nowrap transition-colors border border-white/5 cursor-pointer">Speak German ✨</button>
         </div>
         <div class="chat-input-area">
             <input type="text" id="chat-input" class="chat-input hover-trigger" placeholder="Ask about his skills..." autocomplete="off">
@@ -1216,9 +1277,15 @@
             chatClose.addEventListener('click', () => chatWindow.classList.remove('active'));
 
             const apiKey = "";
-            const systemPrompt = `You are the personal AI assistant for Osaid Shahid, an App/Cloud Technical Support Expert. 
-Your goal is to answer questions about his professional background accurately and professionally.
-Keep responses concise (1-3 sentences). Be polite and premium in tone.`;
+            const systemPrompt = `You are the personal AI assistant and digital clone for Osaid Shahid, a Cloud Infrastructure Architect and App/Cloud Technical Support Expert.
+Here is his resume context:
+- 4.0 Years Exp, 3+ Enterprises, German C1 Level.
+- Currently App/cloud Technical Support Analyst at Accenture (Gurugram) since 11/2024. Manages DHCP, AD, Intune, DACH region support.
+- Formerly Sr Systems Admin at ITC Infotech (04/2024-11/2024) doing AD, DHCP, German support.
+- Formerly Sr Associate at Wipro (12/2021-09/2023) for Google T1 accessibility (German).
+- Education: BA English (Delhi Univ), C1 German (Osmania Univ).
+- Certs: AZ-104 (Azure Admin), MD-102 (Intune), AZ-900 (Fundamentals), Google IT Pro.
+Keep responses concise (1-3 sentences max). Be polite, professional, and slightly cyberpunk-themed to match the website. If asked to speak German, respond fully in German.`;
 
             async function fetchWithRetry(url, options, retries = 5) {
                 const delays = [1000, 2000, 4000, 8000, 16000];
@@ -1267,6 +1334,82 @@ Keep responses concise (1-3 sentences). Be polite and premium in tone.`;
             chatSendBtn.addEventListener('click', handleUserMessage);
             chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
 
+            // Quick Actions Logic
+            document.querySelectorAll('.quick-action-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    chatInput.value = btn.innerText;
+                    handleUserMessage();
+                });
+            });
+
+            // TTS Intro Logic
+            const ttsBtn = document.getElementById('tts-intro-btn');
+            if(ttsBtn) {
+                ttsBtn.addEventListener('click', async () => {
+                    if(!apiKey) { 
+                        const originalHtml = ttsBtn.innerHTML;
+                        ttsBtn.innerHTML = "Add API Key First ❌";
+                        setTimeout(() => { ttsBtn.innerHTML = originalHtml; }, 3000);
+                        return; 
+                    }
+                    ttsBtn.innerHTML = "Generating Audio... ⏳";
+                    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+                    const text = "System initialized. Guten Tag! I am the digital construct of Osaid Shahid, Cloud Infrastructure Architect and German language specialist. Explore my portfolio to see my certifications in Azure Administration and Endpoint Management. Let's connect.";
+                    const payload = {
+                        contents: [{ parts: [{ text: text }] }],
+                        generationConfig: {
+                            responseModalities: ["AUDIO"],
+                            speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Zephyr" } } }
+                        }
+                    };
+                    
+                    try {
+                        const res = await fetchWithRetry(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                        const inlineData = res.candidates[0].content.parts[0].inlineData;
+                        
+                        let sampleRate = 24000;
+                        const rateMatch = inlineData.mimeType.match(/rate=(\d+)/);
+                        if (rateMatch) sampleRate = parseInt(rateMatch[1], 10);
+                        
+                        const binaryString = atob(inlineData.data);
+                        const bytes = new Uint8Array(binaryString.length);
+                        for (let i = 0; i < binaryString.length; i++) bytes[i] = binaryString.charCodeAt(i);
+                        
+                        // Create WAV Header for browser playback of raw PCM
+                        const buffer = new ArrayBuffer(44);
+                        const view = new DataView(buffer);
+                        const writeStr = (v, offset, str) => { for (let i = 0; i < str.length; i++) v.setUint8(offset + i, str.charCodeAt(i)); };
+                        writeStr(view, 0, 'RIFF');
+                        view.setUint32(4, 36 + bytes.length, true);
+                        writeStr(view, 8, 'WAVE');
+                        writeStr(view, 12, 'fmt ');
+                        view.setUint32(16, 16, true);
+                        view.setUint16(20, 1, true); // PCM Format
+                        view.setUint16(22, 1, true); // Mono channel
+                        view.setUint32(24, sampleRate, true);
+                        view.setUint32(28, sampleRate * 2, true); // Byte rate
+                        view.setUint16(32, 2, true); // Block align
+                        view.setUint16(34, 16, true); // Bits per sample
+                        writeStr(view, 36, 'data');
+                        view.setUint32(40, bytes.length, true);
+                        
+                        const blob = new Blob([buffer, bytes], { type: 'audio/wav' });
+                        const audio = new Audio(URL.createObjectURL(blob));
+                        audio.play();
+                        
+                        ttsBtn.innerHTML = "Playing Intro... 🔊";
+                        audio.onended = () => { 
+                            ttsBtn.innerHTML = `AI Audio Intro ✨ <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5 10v4a2 2 0 002 2h3l4 4V4l-4 4H7a2 2 0 00-2 2z"></path></svg>`; 
+                        };
+                    } catch (err) {
+                        console.error(err);
+                        const originalHtml = `AI Audio Intro ✨ <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5 10v4a2 2 0 002 2h3l4 4V4l-4 4H7a2 2 0 00-2 2z"></path></svg>`;
+                        ttsBtn.innerHTML = "Audio Failed ❌";
+                        setTimeout(() => { ttsBtn.innerHTML = originalHtml; }, 3000);
+                    }
+                });
+            }
+
             /* ==========================================================================
                8. GEMINI LEVEL: INFINITE FALLING LETTERS & REPAIR BOT PHYSICS
                ========================================================================== */
@@ -1300,8 +1443,8 @@ Keep responses concise (1-3 sentences). Be polite and premium in tone.`;
                         
                         const inner = document.createElement('span');
                         inner.className = isGradient 
-                            ? 'char-inner text-gray-300 drop-shadow-[0_0_12px_rgba(255,255,255,0.2)]'
-                            : 'char-inner text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]';
+                            ? 'char-inner text-gray-400 drop-shadow-[0_0_12px_rgba(255,255,255,0.1)]'
+                            : 'char-inner text-gray-300 drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]';
                         inner.innerText = char;
                         
                         wrapper.appendChild(inner);
