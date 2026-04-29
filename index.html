@@ -25,12 +25,12 @@
             --bg-surface-solid: #000000;
             --bg-surface-glass: rgba(0, 0, 0, 0.9);
             
-            --text-primary: #d4d4d8; /* Softer primary text for eye comfort (zinc-300) */
-            --text-secondary: #a1a1aa; /* Softer secondary text (zinc-400) */
+            --text-primary: #d4d4d8; 
+            --text-secondary: #a1a1aa; 
             --text-tertiary: #71717a;
             --text-inverse: #000000;
             
-            --accent-primary: #e4e4e7; /* Softer bright accent */
+            --accent-primary: #e4e4e7; 
             --accent-indigo: #4f46e5;
             --accent-emerald: #10b981;
             --accent-cyan: #00e1ff;
@@ -205,35 +205,6 @@
         .social-icon-svg { width: 40px; height: 40px; fill: var(--text-primary); }
 
         /* ==========================================================================
-           12. AI CHAT WIDGET
-           ========================================================================== */
-        #ai-chat-toggle { position: fixed; bottom: 2rem; right: 2rem; z-index: 100; padding: 0.875rem 1.5rem; background-color: var(--accent-primary); color: var(--text-inverse); border-radius: 100px; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px; box-shadow: 0 8px 25px rgba(255,255,255,0.1); transition: all 0.5s var(--ease-elastic); border: 1px solid rgba(255,255,255,0.2); }
-        #ai-chat-toggle:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 15px 40px rgba(0,225,255,0.2); border-color: var(--accent-cyan); color: var(--accent-cyan); background-color: #111; }
-        #ai-chat-toggle svg { animation: float-icon 3s ease-in-out infinite; }
-        @keyframes float-icon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); filter: drop-shadow(0 5px 5px rgba(0,225,255,0.5)); } }
-
-        #ai-chat-window { position: fixed; bottom: 7rem; right: 2rem; width: 420px; max-width: calc(100vw - 4rem); height: 600px; max-height: calc(100vh - 9rem); background: rgba(15, 15, 20, 0.95); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); border: 1px solid var(--border-medium); border-radius: 32px; box-shadow: 0 40px 100px rgba(0,0,0,0.8), inset 0 0 30px rgba(255,255,255,0.05); z-index: 99; display: flex; flex-direction: column; overflow: hidden; opacity: 0; pointer-events: none; transform: translateY(40px) scale(0.9); transform-origin: bottom right; transition: all 0.6s var(--ease-out-expo); }
-        #ai-chat-window.active { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
-        .chat-header { padding: 1.75rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.4); }
-        .chat-messages { flex: 1; padding: 1.75rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1.25rem; scroll-behavior: smooth; }
-        .chat-message { max-width: 85%; padding: 1.1rem 1.4rem; border-radius: 20px; font-size: 0.95rem; line-height: 1.6; animation: messageSlide 0.5s var(--ease-out-expo) forwards; opacity: 0; transform: translateY(15px); }
-        @keyframes messageSlide { to { opacity: 1; transform: translateY(0); } }
-        .message-ai { background-color: rgba(255,255,255,0.08); border: 1px solid var(--border-light); color: var(--text-primary); align-self: flex-start; border-bottom-left-radius: 6px; }
-        .message-user { background-color: var(--accent-cyan); color: #000; align-self: flex-end; border-bottom-right-radius: 6px; font-weight: 600; }
-        .chat-input-area { padding: 1.5rem; border-top: 1px solid var(--border-light); background: rgba(0, 0, 0, 0.4); display: flex; gap: 1rem; }
-        .chat-input { flex: 1; padding: 1rem 1.5rem; border: 1px solid var(--border-medium); border-radius: 100px; background: rgba(0,0,0,0.5); color: white; font-family: 'Inter', sans-serif; font-size: 0.95rem; outline: none; transition: all 0.3s ease; }
-        .chat-input:focus { border-color: var(--accent-cyan); box-shadow: 0 0 0 4px rgba(0, 225, 255, 0.15); }
-        .chat-send-btn { width: 52px; height: 52px; border-radius: 50%; background-color: var(--accent-cyan); color: #000; border: none; display: flex; align-items: center; justify-content: center; transition: transform 0.3s var(--ease-elastic), box-shadow 0.2s ease; }
-        .chat-send-btn:hover { transform: scale(1.15); box-shadow: 0 0 20px var(--accent-cyan); }
-        .typing-dots { display: flex; gap: 6px; padding: 0.5rem; }
-        .typing-dots span { width: 8px; height: 8px; background-color: var(--accent-cyan); border-radius: 50%; animation: typing 1.4s infinite ease-in-out both; }
-        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
-        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
-        
-        .chat-quick-actions::-webkit-scrollbar { display: none; }
-        .chat-quick-actions { -ms-overflow-style: none; scrollbar-width: none; }
-
-        /* ==========================================================================
            13. RESPONSIVE MEDIA QUERIES & MOBILE OPTIMIZATIONS
            ========================================================================== */
         @media (max-width: 1024px) {
@@ -262,8 +233,6 @@
             .cursor-dot, .cursor-outline { display: none; }
             body { cursor: auto; }
             .btn-premium, .hover-trigger, a, button { cursor: pointer; }
-            #ai-chat-window { bottom: 0; right: 0; width: 100vw; height: 85vh; max-width: none; max-height: none; border-radius: 32px 32px 0 0; transform: translateY(100%); }
-            #ai-chat-toggle { bottom: 1.5rem; right: 1.5rem; padding: 0.75rem 1.25rem; font-size: 0.85rem; }
         }
 
         /* Physics Text Setup */
@@ -414,9 +383,13 @@
                                 Explore Experience 
                                 <svg class="w-6 h-6 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                             </a>
-                            <button id="tts-intro-btn" class="mt-4 w-full flex items-center justify-center gap-2 py-3 px-6 rounded-full border border-[var(--accent-cyan)] text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)] hover:text-black transition-all font-mono-custom font-bold text-xs uppercase tracking-widest cursor-pointer">
-                                AI Audio Intro ✨
-                                <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5 10v4a2 2 0 002 2h3l4 4V4l-4 4H7a2 2 0 00-2 2z"></path></svg>
+                            <!-- AI Audio Intro Button with Progress Bar -->
+                            <button id="tts-intro-btn" class="mt-4 w-full relative overflow-hidden flex items-center justify-center py-3 px-6 rounded-full border border-[var(--accent-cyan)] text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)] hover:text-black transition-all font-mono-custom font-bold text-xs uppercase tracking-widest cursor-pointer group">
+                                <div id="tts-progress" class="absolute left-0 top-0 bottom-0 bg-[var(--accent-cyan)] w-0 transition-all duration-200 pointer-events-none group-hover:bg-black opacity-30 group-hover:opacity-20"></div>
+                                <span id="tts-text" class="relative z-10 flex items-center justify-center gap-2 w-full pointer-events-none">
+                                    AI Audio Intro ✨
+                                    <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5 10v4a2 2 0 002 2h3l4 4V4l-4 4H7a2 2 0 00-2 2z"></path></svg>
+                                </span>
                             </button>
                         </div>
                     </div>
@@ -931,43 +904,7 @@
     </footer>
 
     <!-- ==========================================================================
-         AI CHAT WIDGET (ENQUIRE WITH AI)
-         ========================================================================== -->
-    <button id="ai-chat-toggle" class="hover-trigger">
-        <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-        <span class="text-black">Enquire with AI ✨</span>
-    </button>
-
-    <div id="ai-chat-window">
-        <div class="chat-header">
-            <div>
-                <h3 class="font-display font-bold text-primary text-xl">Enquire with AI ✨</h3>
-                <p class="text-xs text-gray-400 font-mono-custom mt-1">Powered by Gemini Engine</p>
-            </div>
-            <button id="ai-chat-close" class="text-gray-400 hover:text-gray-300 transition hover-trigger bg-white/10 p-2 rounded-full">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-        </div>
-        <div class="chat-messages" id="chat-messages">
-            <div class="chat-message message-ai">
-                Hello! I am Osaid's AI clone. You can ask me anything about his exact resume experience, his AZ-900 certification, or his work as an App/Cloud Technical Support expert. How can I help you?
-            </div>
-        </div>
-        <div class="chat-quick-actions flex gap-2 p-3 overflow-x-auto border-t border-[var(--border-medium)] bg-black/60">
-            <button class="quick-action-btn flex-shrink-0 text-xs bg-white/10 hover:bg-[var(--accent-cyan)] hover:text-black text-gray-300 px-4 py-1.5 rounded-full whitespace-nowrap transition-colors border border-white/5 cursor-pointer">Summarize Experience ✨</button>
-            <button class="quick-action-btn flex-shrink-0 text-xs bg-white/10 hover:bg-[var(--accent-cyan)] hover:text-black text-gray-300 px-4 py-1.5 rounded-full whitespace-nowrap transition-colors border border-white/5 cursor-pointer">Why hire Osaid? ✨</button>
-            <button class="quick-action-btn flex-shrink-0 text-xs bg-white/10 hover:bg-[var(--accent-cyan)] hover:text-black text-gray-300 px-4 py-1.5 rounded-full whitespace-nowrap transition-colors border border-white/5 cursor-pointer">Speak German ✨</button>
-        </div>
-        <div class="chat-input-area">
-            <input type="text" id="chat-input" class="chat-input hover-trigger" placeholder="Ask about his skills..." autocomplete="off">
-            <button id="chat-send" class="chat-send-btn hover-trigger">
-                <svg class="w-5 h-5 ml-1 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
-            </button>
-        </div>
-    </div>
-
-    <!-- ==========================================================================
-         JAVASCRIPT LOGIC (Physics Canvas Engine, Custom Cursor, Reveals, Nav, Chat, Comet Spotlight)
+         JAVASCRIPT LOGIC (Physics Canvas Engine, Custom Cursor, Reveals, Nav, Comet Spotlight)
          ========================================================================== -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -980,6 +917,133 @@
                     isHeroVisible = entries[0].isIntersecting;
                 }, { rootMargin: "200px" });
                 observer.observe(heroSection);
+            }
+
+            /* ==========================================================================
+               AI AUDIO INTRO LOGIC (GEMINI TTS WITH PROGRESS BAR)
+               ========================================================================== */
+            const ttsBtn = document.getElementById('tts-intro-btn');
+            const ttsProgress = document.getElementById('tts-progress');
+            const ttsText = document.getElementById('tts-text');
+            let isGenerating = false;
+
+            if(ttsBtn && ttsProgress && ttsText) {
+                ttsBtn.addEventListener('click', async () => {
+                    if (isGenerating) return; 
+
+                    const apiKey = "AIzaSyC23-VOXTuW2RZ9R4rSVdpux4rzvqqXFsU"; 
+                    if(!apiKey) { 
+                        const originalHtml = ttsText.innerHTML;
+                        ttsText.innerHTML = "Add API Key First ❌";
+                        setTimeout(() => { ttsText.innerHTML = originalHtml; }, 3000);
+                        return; 
+                    }
+
+                    // Lock button state and reset progress
+                    isGenerating = true;
+                    ttsBtn.classList.remove('hover:bg-[var(--accent-cyan)]', 'hover:text-black', 'cursor-pointer');
+                    ttsBtn.classList.add('cursor-wait');
+                    ttsProgress.style.width = '0%';
+                    let progressValue = 0;
+
+                    // Start the simulated progress bar (Goes up to ~90% while waiting for API)
+                    ttsText.innerHTML = `Generating... 0%`;
+                    const progressInterval = setInterval(() => {
+                        if (progressValue < 90) {
+                            progressValue += Math.random() * (12 - progressValue / 10);
+                            if (progressValue > 90) progressValue = 90;
+                            ttsProgress.style.width = `${progressValue}%`;
+                            ttsText.innerHTML = `Generating... ${Math.floor(progressValue)}%`;
+                        }
+                    }, 150);
+
+                    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+                    
+                    const text = "System initialized. Hi, I'm Osaid Shahid. I'm an Application and Cloud Technical Support Analyst with over four years of experience in L1 and L1.5 support. I specialize in Azure AD, Windows environments, and enterprise user management, with a strong focus on German-language support at a C1 level for users across Europe. I enjoy troubleshooting and resolving issues quickly while maintaining a great user experience.";
+                    
+                    const payload = {
+                        contents: [{ parts: [{ text: text }] }],
+                        generationConfig: {
+                            responseModalities: ["AUDIO"],
+                            speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Zephyr" } } }
+                        }
+                    };
+                    
+                    try {
+                        const fetchWithRetryTTS = async (url, options, retries = 3) => {
+                            for (let i = 0; i < retries; i++) {
+                                const response = await fetch(url, options);
+                                if (response.ok) return await response.json();
+                                await new Promise(res => setTimeout(res, 1000 * (i + 1)));
+                            }
+                            throw new Error('API request failed');
+                        };
+
+                        const res = await fetchWithRetryTTS(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                        
+                        // Stop fake progress, push to 100%
+                        clearInterval(progressInterval);
+                        ttsProgress.style.width = '100%';
+                        ttsText.innerHTML = `Generating... 100%`;
+
+                        const inlineData = res.candidates[0].content.parts[0].inlineData;
+                        
+                        let sampleRate = 24000;
+                        const rateMatch = inlineData.mimeType.match(/rate=(\d+)/);
+                        if (rateMatch) sampleRate = parseInt(rateMatch[1], 10);
+                        
+                        const binaryString = atob(inlineData.data);
+                        const bytes = new Uint8Array(binaryString.length);
+                        for (let i = 0; i < binaryString.length; i++) bytes[i] = binaryString.charCodeAt(i);
+                        
+                        // Create WAV Header for browser playback of raw PCM
+                        const buffer = new ArrayBuffer(44);
+                        const view = new DataView(buffer);
+                        const writeStr = (v, offset, str) => { for (let i = 0; i < str.length; i++) v.setUint8(offset + i, str.charCodeAt(i)); };
+                        writeStr(view, 0, 'RIFF');
+                        view.setUint32(4, 36 + bytes.length, true);
+                        writeStr(view, 8, 'WAVE');
+                        writeStr(view, 12, 'fmt ');
+                        view.setUint32(16, 16, true);
+                        view.setUint16(20, 1, true); // PCM Format
+                        view.setUint16(22, 1, true); // Mono channel
+                        view.setUint32(24, sampleRate, true);
+                        view.setUint32(28, sampleRate * 2, true); // Byte rate
+                        view.setUint16(32, 2, true); // Block align
+                        view.setUint16(34, 16, true); // Bits per sample
+                        writeStr(view, 36, 'data');
+                        view.setUint32(40, bytes.length, true);
+                        
+                        const blob = new Blob([buffer, bytes], { type: 'audio/wav' });
+                        const audio = new Audio(URL.createObjectURL(blob));
+                        
+                        // Small delay so the user clearly sees the 100% completion before audio begins
+                        setTimeout(() => {
+                            audio.play();
+                            ttsText.innerHTML = "Playing Intro... 🔊";
+                            ttsBtn.classList.remove('cursor-wait');
+                            
+                            audio.onended = () => { 
+                                isGenerating = false;
+                                ttsProgress.style.width = '0%';
+                                ttsBtn.classList.add('hover:bg-[var(--accent-cyan)]', 'hover:text-black', 'cursor-pointer');
+                                ttsText.innerHTML = `AI Audio Intro ✨ <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5 10v4a2 2 0 002 2h3l4 4V4l-4 4H7a2 2 0 00-2 2z"></path></svg>`; 
+                            };
+                        }, 500);
+
+                    } catch (err) {
+                        console.error(err);
+                        clearInterval(progressInterval);
+                        ttsProgress.style.width = '0%';
+                        ttsText.innerHTML = "Audio Failed ❌";
+                        setTimeout(() => { 
+                            isGenerating = false;
+                            ttsBtn.classList.add('hover:bg-[var(--accent-cyan)]', 'hover:text-black', 'cursor-pointer');
+                            ttsBtn.classList.remove('cursor-wait');
+                            ttsText.innerHTML = `AI Audio Intro ✨ <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5 10v4a2 2 0 002 2h3l4 4V4l-4 4H7a2 2 0 00-2 2z"></path></svg>`; 
+                        }, 3000);
+                    }
+                });
             }
 
             /* ==========================================================================
@@ -1196,174 +1260,8 @@
             mobileBtn.addEventListener('click', toggleMenu);
             mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
-            const navbar = document.getElementById('navbar');
-            let navTicking = false;
-            window.addEventListener('scroll', () => {
-                if (!navTicking) {
-                    window.requestAnimationFrame(() => {
-                        if(window.scrollY > 50) {
-                            navbar.style.paddingTop = '1.25rem'; navbar.style.paddingBottom = '1.25rem';
-                            navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.8)'; navbar.style.boxShadow = '0 10px 40px -10px rgba(0,0,0,0.5)';
-                        } else {
-                            navbar.style.paddingTop = '1.5rem'; navbar.style.paddingBottom = '1.5rem';
-                            navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.4)'; navbar.style.boxShadow = 'none';
-                        }
-                        navTicking = false;
-                    });
-                    navTicking = true;
-                }
-            }, { passive: true });
-            window.dispatchEvent(new Event('scroll'));
-
             /* ==========================================================================
-               7. GEMINI AI LOGIC (ENQUIRE WITH AI)
-               ========================================================================== */
-            const chatToggle = document.getElementById('ai-chat-toggle');
-            const chatClose = document.getElementById('ai-chat-close');
-            const chatWindow = document.getElementById('ai-chat-window');
-            const chatInput = document.getElementById('chat-input');
-            const chatSendBtn = document.getElementById('chat-send');
-            const chatMessagesContainer = document.getElementById('chat-messages');
-
-            chatToggle.addEventListener('click', () => { chatWindow.classList.add('active'); chatInput.focus(); });
-            chatClose.addEventListener('click', () => chatWindow.classList.remove('active'));
-
-            const apiKey = "AIzaSyC23-VOXTuW2RZ9R4rSVdpux4rzvqqXFsU";
-            const systemPrompt = `You are the personal AI assistant and digital clone for Osaid Shahid, a Cloud Infrastructure Architect and App/Cloud Technical Support Expert.
-Here is his resume context:
-- 4.0 Years Exp, 3+ Enterprises, German C1 Level.
-- Currently App/cloud Technical Support Analyst at Accenture (Gurugram) since 11/2024. Manages DHCP, AD, Intune, DACH region support.
-- Formerly Sr Systems Admin at ITC Infotech (04/2024-11/2024) doing AD, DHCP, German support.
-- Formerly Sr Associate at Wipro (12/2021-09/2023) for Google T1 accessibility (German).
-- Education: BA English (Delhi Univ), C1 German (Osmania Univ).
-- Certs: AZ-104 (Azure Admin), MD-102 (Intune), AZ-900 (Fundamentals), Google IT Pro.
-Keep responses concise (1-3 sentences max). Be polite, professional, and slightly cyberpunk-themed to match the website. If asked to speak German, respond fully in German.`;
-
-            async function fetchWithRetry(url, options, retries = 5) {
-                const delays = [1000, 2000, 4000, 8000, 16000];
-                for (let i = 0; i < retries; i++) {
-                    try {
-                        const response = await fetch(url, options);
-                        if (!response.ok) throw new Error('API request failed');
-                        return await response.json();
-                    } catch (err) {
-                        if (i === retries - 1) throw err;
-                        await new Promise(res => setTimeout(res, delays[i]));
-                    }
-                }
-            }
-
-            async function handleUserMessage() {
-                const userText = chatInput.value.trim();
-                if (!userText) return;
-                addMessage(userText, 'user'); chatInput.value = '';
-                const typingId = 'typing-' + Date.now();
-                addMessage(`<div class="typing-dots"><span></span><span></span><span></span></div>`, 'ai', typingId);
-
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-                const payload = { contents: [{ parts: [{ text: userText }] }], systemInstruction: { parts: [{ text: systemPrompt }] } };
-
-                try {
-                    const result = await fetchWithRetry(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                    const aiText = result.candidates?.[0]?.content?.parts?.[0]?.text || "I'm having trouble connecting to my database right now. Please try again later.";
-                    const typingEl = document.getElementById(typingId);
-                    if (typingEl) { typingEl.innerHTML = aiText; typingEl.removeAttribute('id'); } else { addMessage(aiText, 'ai'); }
-                } catch (error) {
-                    const typingEl = document.getElementById(typingId);
-                    if (typingEl) { typingEl.innerHTML = "Apologies, the secure connection to Osaid's database timed out. Please email him directly!"; typingEl.removeAttribute('id'); }
-                }
-            }
-
-            function addMessage(text, sender, id = null) {
-                const msgDiv = document.createElement('div');
-                msgDiv.className = `chat-message message-${sender}`;
-                if (id) msgDiv.id = id;
-                msgDiv.innerHTML = text;
-                chatMessagesContainer.appendChild(msgDiv);
-                chatMessagesContainer.scrollTo({ top: chatMessagesContainer.scrollHeight, behavior: 'smooth' });
-            }
-
-            chatSendBtn.addEventListener('click', handleUserMessage);
-            chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
-
-            // Quick Actions Logic
-            document.querySelectorAll('.quick-action-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    chatInput.value = btn.innerText;
-                    handleUserMessage();
-                });
-            });
-
-            // TTS Intro Logic
-            const ttsBtn = document.getElementById('tts-intro-btn');
-            if(ttsBtn) {
-                ttsBtn.addEventListener('click', async () => {
-                    if(!apiKey) { 
-                        const originalHtml = ttsBtn.innerHTML;
-                        ttsBtn.innerHTML = "Add API Key First ❌";
-                        setTimeout(() => { ttsBtn.innerHTML = originalHtml; }, 3000);
-                        return; 
-                    }
-                    ttsBtn.innerHTML = "Generating Audio... ⏳";
-                    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
-                    const text = "System initialized. Guten Tag! I am the digital construct of Osaid Shahid, Cloud Infrastructure Architect and German language specialist. Explore my portfolio to see my certifications in Azure Administration and Endpoint Management. Let's connect.";
-                    const payload = {
-                        contents: [{ parts: [{ text: text }] }],
-                        generationConfig: {
-                            responseModalities: ["AUDIO"],
-                            speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Zephyr" } } }
-                        }
-                    };
-                    
-                    try {
-                        const res = await fetchWithRetry(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                        const inlineData = res.candidates[0].content.parts[0].inlineData;
-                        
-                        let sampleRate = 24000;
-                        const rateMatch = inlineData.mimeType.match(/rate=(\d+)/);
-                        if (rateMatch) sampleRate = parseInt(rateMatch[1], 10);
-                        
-                        const binaryString = atob(inlineData.data);
-                        const bytes = new Uint8Array(binaryString.length);
-                        for (let i = 0; i < binaryString.length; i++) bytes[i] = binaryString.charCodeAt(i);
-                        
-                        // Create WAV Header for browser playback of raw PCM
-                        const buffer = new ArrayBuffer(44);
-                        const view = new DataView(buffer);
-                        const writeStr = (v, offset, str) => { for (let i = 0; i < str.length; i++) v.setUint8(offset + i, str.charCodeAt(i)); };
-                        writeStr(view, 0, 'RIFF');
-                        view.setUint32(4, 36 + bytes.length, true);
-                        writeStr(view, 8, 'WAVE');
-                        writeStr(view, 12, 'fmt ');
-                        view.setUint32(16, 16, true);
-                        view.setUint16(20, 1, true); // PCM Format
-                        view.setUint16(22, 1, true); // Mono channel
-                        view.setUint32(24, sampleRate, true);
-                        view.setUint32(28, sampleRate * 2, true); // Byte rate
-                        view.setUint16(32, 2, true); // Block align
-                        view.setUint16(34, 16, true); // Bits per sample
-                        writeStr(view, 36, 'data');
-                        view.setUint32(40, bytes.length, true);
-                        
-                        const blob = new Blob([buffer, bytes], { type: 'audio/wav' });
-                        const audio = new Audio(URL.createObjectURL(blob));
-                        audio.play();
-                        
-                        ttsBtn.innerHTML = "Playing Intro... 🔊";
-                        audio.onended = () => { 
-                            ttsBtn.innerHTML = `AI Audio Intro ✨ <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5 10v4a2 2 0 002 2h3l4 4V4l-4 4H7a2 2 0 00-2 2z"></path></svg>`; 
-                        };
-                    } catch (err) {
-                        console.error(err);
-                        const originalHtml = `AI Audio Intro ✨ <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5 10v4a2 2 0 002 2h3l4 4V4l-4 4H7a2 2 0 00-2 2z"></path></svg>`;
-                        ttsBtn.innerHTML = "Audio Failed ❌";
-                        setTimeout(() => { ttsBtn.innerHTML = originalHtml; }, 3000);
-                    }
-                });
-            }
-
-            /* ==========================================================================
-               8. GEMINI LEVEL: INFINITE FALLING LETTERS & REPAIR BOT PHYSICS
+               8. INFINITE FALLING LETTERS & REPAIR BOT PHYSICS
                ========================================================================== */
             
             const textBlock = document.getElementById('physics-text-block');
@@ -1446,13 +1344,28 @@ Keep responses concise (1-3 sentences max). Be polite, professional, and slightl
                 const sceneRect = sceneContainer.getBoundingClientRect();
                 lettersData.forEach(l => {
                     const rect = l.wrapper.getBoundingClientRect();
-                    l.origSceneX = rect.left - sceneRect.left;
-                    l.origSceneY = rect.top - sceneRect.top;
+                    if (rect.width > 0 && rect.height > 0) { // Only update if visible
+                        l.origSceneX = rect.left - sceneRect.left;
+                        l.origSceneY = rect.top - sceneRect.top;
+                    }
                 });
             }
             
             setTimeout(updateOrigins, 500); 
-            window.addEventListener('resize', updateOrigins);
+            
+            window.addEventListener('resize', () => {
+                updateOrigins();
+                // Emergency reset on resize to prevent broken coordinates
+                lettersData.forEach(l => {
+                    l.state = 'normal';
+                    l.x = 0; l.y = 0; l.vx = 0; l.vy = 0; l.rot = 0; l.vRot = 0;
+                    l.el.classList.remove('falling', 'carried');
+                    l.el.style.transform = '';
+                });
+                bot.state = 'patrol';
+                bot.targetLetter = null;
+                if(tractorBeam) tractorBeam.style.opacity = '0';
+            });
 
             function emitWeldSparks(x, y) {
                 const numSparks = window.innerWidth < 768 ? 1 : 3;
@@ -1508,6 +1421,22 @@ Keep responses concise (1-3 sentences max). Be polite, professional, and slightl
                 }
 
                 lettersData.forEach(l => {
+                    // Emergency bounds checking to fix invisible letters
+                    if (isNaN(l.x) || isNaN(l.y) || isNaN(l.vx) || isNaN(l.vy) || l.y > 3000 || l.x > 3000 || l.x < -3000 || l.y < -3000) {
+                        l.state = 'normal';
+                        l.x = 0; l.y = 0;
+                        l.vx = 0; l.vy = 0;
+                        l.rot = 0; l.vRot = 0;
+                        l.el.classList.remove('falling', 'carried');
+                        l.el.style.transform = '';
+                        if (bot.targetLetter === l) {
+                            bot.targetLetter = null;
+                            bot.state = 'patrol';
+                            if (tractorBeam) tractorBeam.style.opacity = '0';
+                        }
+                        return;
+                    }
+
                     if (l.state === 'falling') {
                         l.vy += GRAVITY; l.x += l.vx; l.y += l.vy; l.rot += l.vRot;
                         const absoluteY = l.origSceneY + l.y;
@@ -1530,6 +1459,12 @@ Keep responses concise (1-3 sentences max). Be polite, professional, and slightl
                     }
                 });
 
+                if (isNaN(bot.x) || isNaN(bot.y) || isNaN(bot.targetX) || isNaN(bot.targetY)) {
+                    bot.x = 100; bot.y = -100; bot.targetX = 100; bot.targetY = -100;
+                    bot.state = 'patrol';
+                    bot.targetLetter = null;
+                }
+
                 if (bot.state === 'patrol') {
                     const fallen = lettersData.filter(l => l.state === 'floor');
                     if (fallen.length > 0) {
@@ -1539,15 +1474,15 @@ Keep responses concise (1-3 sentences max). Be polite, professional, and slightl
                         bot.patrolAngle += 0.02;
                         bot.targetX = (sceneContainer.offsetWidth / 2) + Math.cos(bot.patrolAngle) * 150 - 20;
                         bot.targetY = 40 + Math.sin(bot.patrolAngle * 0.5) * 20;
-                        tractorBeam.style.opacity = '0';
+                        if (tractorBeam) tractorBeam.style.opacity = '0';
                     }
                 } 
                 else if (bot.state === 'fetching') {
-                    if (!bot.targetLetter) { bot.state = 'patrol'; return; }
+                    if (!bot.targetLetter || bot.targetLetter.state !== 'floor') { bot.state = 'patrol'; return; }
                     bot.targetX = bot.targetLetter.origSceneX + bot.targetLetter.x - 20; bot.targetY = bot.targetLetter.origSceneY + bot.targetLetter.y - 45;
                     const dx = bot.targetX - bot.x; const dy = bot.targetY - bot.y; const dist = Math.sqrt(dx*dx + dy*dy);
                     if (dist < 15) { 
-                        bot.targetLetter.state = 'carried'; bot.targetLetter.el.classList.remove('falling'); bot.targetLetter.el.classList.add('carried'); bot.state = 'returning'; tractorBeam.style.opacity = '1'; tractorBeam.style.height = '15px';
+                        bot.targetLetter.state = 'carried'; bot.targetLetter.el.classList.remove('falling'); bot.targetLetter.el.classList.add('carried'); bot.state = 'returning'; if (tractorBeam) tractorBeam.style.opacity = '1'; if (tractorBeam) tractorBeam.style.height = '15px';
                     }
                 }
                 else if (bot.state === 'returning') {
@@ -1561,8 +1496,8 @@ Keep responses concise (1-3 sentences max). Be polite, professional, and slightl
                     bot.targetLetter.x = (Math.random() - 0.5) * 4; bot.targetLetter.y = (Math.random() - 0.5) * 4; bot.targetLetter.el.style.transform = `translate3d(${bot.targetLetter.x}px, ${bot.targetLetter.y}px, 0)`;
                     if (bot.weldTimer <= 0) {
                         bot.targetLetter.state = 'normal'; bot.targetLetter.x = 0; bot.targetLetter.y = 0; bot.targetLetter.rot = 0;
-                        bot.targetLetter.el.style.transform = `translate3d(0,0,0) rotate(0deg)`; bot.targetLetter.el.classList.remove('carried');
-                        bot.targetLetter = null; bot.state = 'patrol'; tractorBeam.style.opacity = '0';
+                        bot.targetLetter.el.style.transform = ''; bot.targetLetter.el.classList.remove('carried');
+                        bot.targetLetter = null; bot.state = 'patrol'; if (tractorBeam) tractorBeam.style.opacity = '0';
                         lastDropTime = timestamp;
                     }
                 }
