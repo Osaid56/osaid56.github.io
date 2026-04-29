@@ -920,12 +920,17 @@
             }
 
             /* ==========================================================================
-               AI AUDIO INTRO LOGIC (GEMINI TTS WITH PROGRESS BAR)
+               AI AUDIO INTRO LOGIC (GEMINI TTS WITH PROGRESS BAR & FALLBACK)
                ========================================================================== */
             const ttsBtn = document.getElementById('tts-intro-btn');
             const ttsProgress = document.getElementById('tts-progress');
             const ttsText = document.getElementById('tts-text');
             let isGenerating = false;
+
+            // Preload voices for fallback
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+            }
 
             if(ttsBtn && ttsProgress && ttsText) {
                 ttsBtn.addEventListener('click', async () => {
@@ -939,6 +944,10 @@
                         return; 
                     }
 
+                    // Unlock audio engine for mobile browsers immediately on click
+                    const audio = new Audio();
+                    audio.play().catch(() => {});
+
                     // Lock button state and reset progress
                     isGenerating = true;
                     ttsBtn.classList.remove('hover:bg-[var(--accent-cyan)]', 'hover:text-black', 'cursor-pointer');
@@ -946,7 +955,7 @@
                     ttsProgress.style.width = '0%';
                     let progressValue = 0;
 
-                    // Start the simulated progress bar (Goes up to ~90% while waiting for API)
+                    // Start the simulated progress bar
                     ttsText.innerHTML = `Generating... 0%`;
                     const progressInterval = setInterval(() => {
                         if (progressValue < 90) {
@@ -966,14 +975,31 @@
                         generationConfig: {
                             responseModalities: ["AUDIO"],
                             speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Zephyr" } } }
-                        }
+                        },
+                        model: "gemini-2.5-flash-preview-tts"
                     };
                     
+                    const resetUI = () => {
+                        isGenerating = false;
+                        ttsProgress.style.width = '0%';
+                        ttsBtn.classList.add('hover:bg-[var(--accent-cyan)]', 'hover:text-black', 'cursor-pointer');
+                        ttsBtn.classList.remove('cursor-wait');
+                        ttsText.innerHTML = `AI Audio Intro ✨ <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5 10v4a2 2 0 002 2h3l4 4V4l-4 4H7a2 2 0 00-2 2z"></path></svg>`; 
+                    };
+
+                    const showError = () => {
+                        clearInterval(progressInterval);
+                        ttsProgress.style.width = '0%';
+                        ttsText.innerHTML = "Audio Failed ❌";
+                        setTimeout(resetUI, 3000);
+                    };
+
                     try {
                         const fetchWithRetryTTS = async (url, options, retries = 3) => {
                             for (let i = 0; i < retries; i++) {
                                 const response = await fetch(url, options);
                                 if (response.ok) return await response.json();
+                                console.error('TTS API Error:', await response.text());
                                 await new Promise(res => setTimeout(res, 1000 * (i + 1)));
                             }
                             throw new Error('API request failed');
@@ -981,7 +1007,6 @@
 
                         const res = await fetchWithRetryTTS(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                         
-                        // Stop fake progress, push to 100%
                         clearInterval(progressInterval);
                         ttsProgress.style.width = '100%';
                         ttsText.innerHTML = `Generating... 100%`;
@@ -996,7 +1021,6 @@
                         const bytes = new Uint8Array(binaryString.length);
                         for (let i = 0; i < binaryString.length; i++) bytes[i] = binaryString.charCodeAt(i);
                         
-                        // Create WAV Header for browser playback of raw PCM
                         const buffer = new ArrayBuffer(44);
                         const view = new DataView(buffer);
                         const writeStr = (v, offset, str) => { for (let i = 0; i < str.length; i++) v.setUint8(offset + i, str.charCodeAt(i)); };
@@ -1005,43 +1029,64 @@
                         writeStr(view, 8, 'WAVE');
                         writeStr(view, 12, 'fmt ');
                         view.setUint32(16, 16, true);
-                        view.setUint16(20, 1, true); // PCM Format
-                        view.setUint16(22, 1, true); // Mono channel
+                        view.setUint16(20, 1, true);
+                        view.setUint16(22, 1, true);
                         view.setUint32(24, sampleRate, true);
-                        view.setUint32(28, sampleRate * 2, true); // Byte rate
-                        view.setUint16(32, 2, true); // Block align
-                        view.setUint16(34, 16, true); // Bits per sample
+                        view.setUint32(28, sampleRate * 2, true);
+                        view.setUint16(32, 2, true);
+                        view.setUint16(34, 16, true);
                         writeStr(view, 36, 'data');
                         view.setUint32(40, bytes.length, true);
                         
                         const blob = new Blob([buffer, bytes], { type: 'audio/wav' });
-                        const audio = new Audio(URL.createObjectURL(blob));
                         
-                        // Small delay so the user clearly sees the 100% completion before audio begins
                         setTimeout(() => {
-                            audio.play();
-                            ttsText.innerHTML = "Playing Intro... 🔊";
-                            ttsBtn.classList.remove('cursor-wait');
+                            audio.src = URL.createObjectURL(blob);
+                            audio.play().then(() => {
+                                ttsText.innerHTML = "Playing Intro... 🔊";
+                                ttsBtn.classList.remove('cursor-wait');
+                            }).catch(err => {
+                                console.error('Play blocked:', err);
+                                showError();
+                            });
                             
-                            audio.onended = () => { 
-                                isGenerating = false;
-                                ttsProgress.style.width = '0%';
-                                ttsBtn.classList.add('hover:bg-[var(--accent-cyan)]', 'hover:text-black', 'cursor-pointer');
-                                ttsText.innerHTML = `AI Audio Intro ✨ <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5 10v4a2 2 0 002 2h3l4 4V4l-4 4H7a2 2 0 00-2 2z"></path></svg>`; 
-                            };
-                        }, 500);
+                            audio.onended = resetUI;
+                        }, 200);
 
                     } catch (err) {
-                        console.error(err);
-                        clearInterval(progressInterval);
-                        ttsProgress.style.width = '0%';
-                        ttsText.innerHTML = "Audio Failed ❌";
-                        setTimeout(() => { 
-                            isGenerating = false;
-                            ttsBtn.classList.add('hover:bg-[var(--accent-cyan)]', 'hover:text-black', 'cursor-pointer');
-                            ttsBtn.classList.remove('cursor-wait');
-                            ttsText.innerHTML = `AI Audio Intro ✨ <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5 10v4a2 2 0 002 2h3l4 4V4l-4 4H7a2 2 0 00-2 2z"></path></svg>`; 
-                        }, 3000);
+                        console.warn("Gemini API Failed. Falling back to native browser TTS.", err);
+                        
+                        // NATIVE BROWSER FALLBACK
+                        if ('speechSynthesis' in window) {
+                            clearInterval(progressInterval);
+                            ttsProgress.style.width = '100%';
+                            ttsText.innerHTML = `Generating... 100%`;
+                            
+                            setTimeout(() => {
+                                const utterance = new SpeechSynthesisUtterance(text.replace("System initialized. ", "")); 
+                                utterance.lang = 'en-US';
+                                utterance.rate = 1.0;
+                                
+                                let voices = window.speechSynthesis.getVoices();
+                                if (voices.length > 0) {
+                                    let preferredVoice = voices.find(v => v.name.includes('Google UK English Male') || v.name.includes('Microsoft Mark') || v.name.includes('Samantha') || v.name.includes('Daniel'));
+                                    if (!preferredVoice) preferredVoice = voices.find(v => v.lang.startsWith('en-'));
+                                    if (preferredVoice) utterance.voice = preferredVoice;
+                                }
+                                
+                                utterance.onstart = () => {
+                                    ttsText.innerHTML = "Playing Intro... 🔊";
+                                    ttsBtn.classList.remove('cursor-wait');
+                                };
+                                
+                                utterance.onend = resetUI;
+                                utterance.onerror = showError;
+                                
+                                window.speechSynthesis.speak(utterance);
+                            }, 500);
+                        } else {
+                            showError();
+                        }
                     }
                 });
             }
