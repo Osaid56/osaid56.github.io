@@ -20,26 +20,26 @@
            01. ENTERPRISE DESIGN SYSTEM & CSS VARIABLES
            ========================================================================== */
         :root {
-            --bg-base: #000000;
-            --bg-surface: rgba(5, 5, 5, 0.85); 
-            --bg-surface-solid: #000000;
-            --bg-surface-glass: rgba(0, 0, 0, 0.9);
+            --bg-base: #050508;
+            --bg-surface: rgba(10, 10, 18, 0.75); 
+            --bg-surface-solid: #08080c;
+            --bg-surface-glass: rgba(5, 5, 12, 0.88);
             
-            --text-primary: #d4d4d8; 
-            --text-secondary: #a1a1aa; 
+            --text-primary: #e4e4e7; 
+            --text-secondary: #a8a8b3; 
             --text-tertiary: #71717a;
             --text-inverse: #000000;
             
             --accent-primary: #e4e4e7; 
-            --accent-indigo: #4f46e5;
+            --accent-indigo: #6366f1;
             --accent-emerald: #10b981;
-            --accent-cyan: #00e1ff;
-            --accent-purple: #bc13fe;
+            --accent-cyan: #22d3ee;
+            --accent-purple: #a855f7;
             --accent-neon-green: #39FF14;
             
-            --border-light: rgba(255, 255, 255, 0.1);
-            --border-medium: rgba(255, 255, 255, 0.2);
-            --border-glow: rgba(0, 225, 255, 0.3);
+            --border-light: rgba(255, 255, 255, 0.08);
+            --border-medium: rgba(255, 255, 255, 0.15);
+            --border-glow: rgba(34, 211, 238, 0.3);
             
             --shadow-xs: 0 2px 10px rgba(0, 0, 0, 0.3);
             --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.6);
@@ -60,11 +60,15 @@
            ========================================================================== */
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         ::selection { background-color: var(--accent-cyan); color: var(--text-inverse); }
-        html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
-        body { background-color: var(--bg-base); color: var(--text-primary); font-family: 'Inter', sans-serif; overflow-x: hidden; width: 100%; position: relative; line-height: 1.7; }
-        h1, h2, h3, h4, h5, h6, .font-display { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; }
+        html { font-size: 17px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+        body { background-color: var(--bg-base); color: var(--text-primary); font-family: 'Inter', sans-serif; font-feature-settings: 'liga' 1, 'calt' 1, 'tnum' 1; overflow-x: hidden; width: 100%; position: relative; line-height: 1.8; }
+        h1, h2, h3, h4, h5, h6, .font-display { font-family: 'Outfit', sans-serif; letter-spacing: -0.03em; line-height: 1.15; }
         .font-mono-custom { font-family: 'JetBrains Mono', monospace; }
         .text-primary { color: var(--text-primary) !important; }
+
+        /* Gradient text utility for premium headings */
+        .gradient-text { background: linear-gradient(135deg, #e4e4e7 0%, #a8a8b3 50%, #e4e4e7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .gradient-text-cyan { background: linear-gradient(135deg, #22d3ee 0%, #a855f7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
         /* ==========================================================================
            03. CUSTOM PHYSICS-BASED CURSOR
@@ -80,7 +84,7 @@
         /* ==========================================================================
            04. PERPLEXITY COMET COSMOS ENGINE
            ========================================================================== */
-        #cosmos-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3; overflow: hidden; background: #000000; pointer-events: none; }
+        #cosmos-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3; overflow: hidden; background: radial-gradient(ellipse at 50% 0%, #0a0a1a 0%, #050508 70%); pointer-events: none; }
         .planet-noise { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E"); mix-blend-mode: overlay; border-radius: 50%; pointer-events: none; }
         .planet-orbit { position: absolute; top: 50%; left: 50%; will-change: transform; }
         .planet { position: absolute; border-radius: 50%; transform: translate3d(-50%, -50%, 0); box-shadow: inset -30px -30px 60px rgba(0,0,0,0.9), inset 10px 10px 40px rgba(255,255,255,0.3), 0 0 100px rgba(0,0,0,0.5); }
@@ -130,13 +134,14 @@
             backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
             border-radius: var(--card-radius); padding: 2.5rem;
             box-shadow: var(--shadow-lg); z-index: 1;
-            transition: transform 0.6s var(--ease-out-expo), box-shadow 0.6s var(--ease-out-expo);
+            transition: transform 0.6s var(--ease-out-expo), box-shadow 0.6s var(--ease-out-expo), border-color 0.4s ease;
             height: 100%; display: flex; flex-direction: column;
             border: 1px solid var(--border-light);
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
         }
         .comet-cards-wrapper::before { content: ''; position: absolute; inset: -2px; border-radius: calc(var(--card-radius) + 2px); background: radial-gradient(600px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px), var(--accent-cyan), transparent 40%); z-index: -1; opacity: 0; transition: opacity 0.4s ease; pointer-events: none; }
         .comet-cards-wrapper:hover::before { opacity: 1; }
-        .comet-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--shadow-xl), 0 0 30px rgba(0, 225, 255, 0.1); }
+        .comet-card:hover { transform: translateY(-6px) scale(1.01); box-shadow: var(--shadow-lg), 0 0 40px rgba(34, 211, 238, 0.06), inset 0 1px 0 rgba(255,255,255,0.1); border-color: rgba(255, 255, 255, 0.15); }
 
         /* ==========================================================================
            07. PREMIUM COMPONENTS
@@ -147,10 +152,14 @@
         .btn-premium:hover { box-shadow: 0 15px 40px rgba(0, 225, 255, 0.3); color: black; }
         .btn-premium:hover::before { height: 100%; }
 
-        .section-tag { display: inline-flex; align-items: center; padding: 0.6rem 1.5rem; background-color: rgba(255,255,255,0.05); border: 1px solid var(--border-light); border-radius: var(--button-radius); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-primary); text-transform: uppercase; margin-bottom: 2.5rem; transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s ease; }
-        .section-tag:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,225,255,0.1); border-color: var(--border-medium); }
-        .section-tag::before { content: ''; display: block; width: 8px; height: 8px; background-color: var(--accent-cyan); border-radius: 50%; margin-right: 12px; box-shadow: 0 0 10px var(--accent-cyan); animation: pulse-dot 2s infinite alternate; }
-        @keyframes pulse-dot { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0.5; transform: scale(0.8); } }
+        .section-tag { display: inline-flex; align-items: center; padding: 0.6rem 1.5rem; background-color: rgba(255,255,255,0.03); border: 1px solid var(--border-light); border-radius: var(--button-radius); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 2rem; transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s ease; }
+        .section-tag:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(34,211,238,0.08); border-color: var(--border-medium); }
+        .section-tag::before { content: ''; display: block; width: 6px; height: 6px; background-color: var(--accent-cyan); border-radius: 50%; margin-right: 12px; box-shadow: 0 0 8px var(--accent-cyan); animation: breathe-dot 3s ease-in-out infinite; }
+        @keyframes breathe-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.7); } }
+
+        /* Section title gradient underline */
+        .section-title-underline { position: relative; display: inline-block; }
+        .section-title-underline::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 60px; height: 3px; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple)); border-radius: 2px; }
 
         /* ==========================================================================
            08. GLASSMORPHISM NAVIGATION
@@ -165,11 +174,11 @@
            09. TIMELINES (EXPERIENCE & EXACT EDUCATION)
            ========================================================================== */
         .timeline-container { position: relative; padding-top: 1rem; padding-bottom: 1rem; }
-        .timeline-container::before { content: ''; position: absolute; top: 0; bottom: 0; left: 28px; width: 2px; background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.15) 10%, rgba(255,255,255,0.15) 90%, transparent 100%); }
+        .timeline-container::before { content: ''; position: absolute; top: 0; bottom: 0; left: 28px; width: 2px; background: linear-gradient(to bottom, transparent 0%, rgba(34, 211, 238, 0.15) 10%, rgba(34, 211, 238, 0.08) 50%, rgba(168, 85, 247, 0.15) 90%, transparent 100%); }
         .timeline-node { position: relative; padding-left: 6rem; margin-bottom: 5rem; }
         .timeline-node:last-child { margin-bottom: 0; }
-        .timeline-dot { position: absolute; left: 20px; top: 2.5rem; width: 18px; height: 18px; background-color: var(--bg-base); border: 3px solid var(--text-secondary); border-radius: 50%; transition: all 0.6s var(--ease-elastic); z-index: 2; }
-        .timeline-node:hover .timeline-dot { background-color: var(--accent-cyan); border-color: var(--accent-cyan); transform: scale(1.5); box-shadow: 0 0 20px var(--accent-cyan); }
+        .timeline-dot { position: absolute; left: 20px; top: 2.5rem; width: 16px; height: 16px; background-color: var(--bg-base); border: 2px solid var(--text-tertiary); border-radius: 50%; transition: all 0.6s var(--ease-elastic); z-index: 2; }
+        .timeline-node:hover .timeline-dot { background-color: var(--accent-cyan); border-color: var(--accent-cyan); transform: scale(1.5); box-shadow: 0 0 20px rgba(34, 211, 238, 0.4); }
 
         .edu-timeline-container::before { left: 50%; transform: translateX(-50%); }
         .edu-timeline-node { width: 100%; display: flex; justify-content: flex-start; margin-bottom: 3.5rem; position: relative; }
@@ -181,12 +190,27 @@
         /* ==========================================================================
            10. SCROLL REVEAL ANIMATIONS
            ========================================================================== */
-        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo); will-change: opacity; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
         .reveal.active { opacity: 1; transform: translateY(0); }
         .reveal-delay-1 { transition-delay: 0.1s; }
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
         .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
+        .reveal-delay-6 { transition-delay: 0.6s; }
+
+        /* Active nav indicator */
+        .nav-link.active { color: var(--text-primary); }
+        .nav-link.active::after { width: 100%; background-color: var(--accent-cyan); box-shadow: 0 0 8px var(--accent-cyan); }
+
+        /* Tech badge utility */
+        .tech-badge { display: inline-flex; align-items: center; padding: 0.35rem 0.85rem; background-color: rgba(34, 211, 238, 0.06); border: 1px solid rgba(34, 211, 238, 0.15); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.5px; color: var(--accent-cyan); text-transform: uppercase; transition: all 0.3s ease; }
+        .tech-badge:hover { background-color: rgba(34, 211, 238, 0.12); border-color: rgba(34, 211, 238, 0.3); }
+
+        /* Bullet point styling for experience */
+        .exp-bullet { display: flex; align-items: flex-start; gap: 1rem; padding: 0.5rem 0; }
+        .exp-bullet-icon { flex-shrink: 0; width: 20px; height: 20px; margin-top: 4px; color: var(--text-tertiary); }
+        .exp-bullet span { color: var(--text-secondary); font-weight: 400; line-height: 1.7; }
 
         /* ==========================================================================
            11. CONTACT SECTION & SOCIAL CARDS
@@ -218,11 +242,38 @@
 
         @media (max-width: 768px) {
             html { font-size: 14px; }
-            .comet-card { padding: 1.5rem; border-radius: 20px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); background-color: rgba(12, 12, 15, 0.96); }
+
+            /* CRITICAL: Remove ALL backdrop-filter on mobile — biggest GPU killer */
+            .comet-card { 
+                padding: 1.5rem; 
+                border-radius: 20px; 
+                backdrop-filter: none !important; 
+                -webkit-backdrop-filter: none !important; 
+                background-color: rgba(12, 12, 15, 0.97); 
+            }
+            .glass-nav {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                background-color: rgba(0, 0, 0, 0.96);
+            }
+
+            /* Hide canvas particle system on mobile — invisible anyway */
+            #physics-canvas { display: none !important; }
+
+            /* Hide excess planets — keep only first 7 */
+            .planet-orbit:nth-child(n+8) { display: none !important; }
+            
+            /* Pause planet spin animations on mobile */
+            .planet { animation-play-state: paused !important; }
+
+            /* Remove will-change GPU layer promotion on mobile */
+            #stars-1, #stars-2, #stars-3, .planet-orbit { will-change: auto !important; }
+
+            /* Existing mobile overrides */
             .planet-noise { display: none !important; }
             .bs-shadow-caster { display: none !important; }
             .beautiful-saturn-wrapper { box-shadow: none !important; filter: none !important; }
-            .char-inner { filter: none !important; text-shadow: none !important; drop-shadow: none !important; }
+            .char-inner { filter: none !important; text-shadow: none !important; }
             .bot-glow { animation: none !important; filter: none !important; }
             .tractor-beam { box-shadow: none !important; }
             .planet-orbit { will-change: auto; }
@@ -233,6 +284,11 @@
             .cursor-dot, .cursor-outline { display: none; }
             body { cursor: auto; }
             .btn-premium, .hover-trigger, a, button { cursor: pointer; }
+        }
+
+        /* CSS containment — helps browser skip rendering off-screen sections */
+        section {
+            contain: layout style;
         }
 
         /* Physics Text Setup */
@@ -247,9 +303,490 @@
         @keyframes pulseGlow { 0% { filter: drop-shadow(0 0 5px rgba(0,225,255,0.5)); } 100% { filter: drop-shadow(0 0 15px rgba(0,225,255,1)); } }
         @keyframes float-saturn { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-30px) rotate(1deg); } }
 
+        /* ==========================================================================
+           20. PREMIUM PRELOADER
+           ========================================================================== */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            background-color: var(--bg-base);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        .preloader.loaded {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .preloader-logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #e4e4e7, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: preloader-pulse 1.5s ease-in-out infinite;
+            margin-bottom: 2rem;
+        }
+        .preloader-bar-track {
+            width: 200px;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .preloader-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        .preloader-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            margin-top: 1.5rem;
+        }
+        @keyframes preloader-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.98); }
+        }
+
+        /* ==========================================================================
+           21. SCROLL PROGRESS INDICATOR
+           ========================================================================== */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple), var(--accent-cyan));
+            background-size: 200% 100%;
+            animation: gradient-shift 3s ease infinite;
+            z-index: 100000;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
+        }
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ==========================================================================
+           22. FILM GRAIN OVERLAY
+           ========================================================================== */
+        .film-grain {
+            position: fixed;
+            inset: 0;
+            z-index: 99998;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            mix-blend-mode: overlay;
+        }
+
+        /* ==========================================================================
+           23. BACK TO TOP BUTTON
+           ========================================================================== */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: rgba(10, 10, 18, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s var(--ease-out-expo);
+            cursor: pointer;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .back-to-top:hover {
+            background-color: rgba(34, 211, 238, 0.15);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.2);
+            transform: translateY(-4px);
+        }
+        .back-to-top svg {
+            width: 20px;
+            height: 20px;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+        .back-to-top:hover svg {
+            color: var(--accent-cyan);
+        }
+
+        /* ==========================================================================
+           24. PROJECT SHOWCASE CARDS
+           ========================================================================== */
+        .project-card {
+            position: relative;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-light);
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            transition: all 0.6s var(--ease-out-expo);
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(34, 211, 238, 0.05);
+        }
+        .project-card-image {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.08), rgba(168, 85, 247, 0.08));
+        }
+        .project-card-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--bg-surface) 0%, transparent 60%);
+        }
+        .project-card-image .project-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            opacity: 0.4;
+            z-index: 1;
+        }
+        .project-card-body {
+            padding: 2rem 2rem 2.5rem;
+        }
+        .project-card-tag {
+            display: inline-flex;
+            padding: 0.25rem 0.65rem;
+            background-color: rgba(34, 211, 238, 0.08);
+            border: 1px solid rgba(34, 211, 238, 0.12);
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .project-card-tag.live { color: var(--accent-emerald); background-color: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.15); }
+        .project-card-tag.wip { color: #f59e0b; background-color: rgba(245, 158, 11, 0.08); border-color: rgba(245, 158, 11, 0.15); }
+        .project-card-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .project-link:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            background-color: rgba(34, 211, 238, 0.06);
+        }
+
+        /* ==========================================================================
+           25. LANGUAGE PROFICIENCY BARS
+           ========================================================================== */
+        .lang-bar-container {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        .lang-bar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .lang-bar-name {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+        .lang-bar-level {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+        }
+        .lang-bar-track {
+            width: 100%;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .lang-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            width: 0%;
+            transition: width 1.5s var(--ease-out-expo);
+        }
+        .lang-bar-fill.german { background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple)); }
+        .lang-bar-fill.english { background: linear-gradient(90deg, var(--accent-emerald), var(--accent-cyan)); }
+        .lang-bar-fill.hindi { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+        .lang-bar-fill.urdu { background: linear-gradient(90deg, var(--accent-indigo), var(--accent-purple)); }
+
+        /* ==========================================================================
+           26. SKILL PROGRESS BARS
+           ========================================================================== */
+        .skill-progress {
+            margin-bottom: 1.5rem;
+        }
+        .skill-progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .skill-progress-name {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+        }
+        .skill-progress-pct {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+        }
+        .skill-progress-track {
+            width: 100%;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.04);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .skill-progress-fill {
+            height: 100%;
+            border-radius: 2px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            transition: width 1.2s var(--ease-out-expo);
+            box-shadow: 0 0 8px rgba(34, 211, 238, 0.3);
+        }
+
+        /* ==========================================================================
+           27. ENHANCED KEYFRAME ANIMATIONS
+           ========================================================================== */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(34, 211, 238, 0.1); }
+            50% { box-shadow: 0 0 40px rgba(34, 211, 238, 0.25); }
+        }
+        @keyframes rotate-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slide-in-right {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scale-in {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes border-glow {
+            0%, 100% { border-color: rgba(34, 211, 238, 0.1); }
+            50% { border-color: rgba(34, 211, 238, 0.3); }
+        }
+
+        /* ==========================================================================
+           28. SECTION GRADIENT DIVIDERS
+           ========================================================================== */
+        .section-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.15) 20%, rgba(168, 85, 247, 0.15) 80%, transparent 100%);
+            margin: 0;
+        }
+
+        /* ==========================================================================
+           29. FLOATING DECORATIVE ORBS
+           ========================================================================== */
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(60px);
+            opacity: 0.15;
+            animation: float-gentle 8s ease-in-out infinite;
+        }
+        .floating-orb.cyan { background: var(--accent-cyan); }
+        .floating-orb.purple { background: var(--accent-purple); }
+        .floating-orb.emerald { background: var(--accent-emerald); }
+
+        /* ==========================================================================
+           30. ENHANCED FOOTER
+           ========================================================================== */
+        .footer-link {
+            color: var(--text-tertiary);
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.25rem 0;
+        }
+        .footer-link:hover {
+            color: var(--accent-cyan);
+        }
+        .footer-divider {
+            width: 1px;
+            height: 16px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ==========================================================================
+           31. PRINT STYLESHEET
+           ========================================================================== */
+        @media print {
+            .preloader, .scroll-progress, .film-grain, .back-to-top,
+            .cursor-dot, .cursor-outline, #cosmos-container, #physics-canvas,
+            .glass-nav, .planet-orbit, .beautiful-saturn-wrapper,
+            #fixer-bot, .tractor-beam, .bot-glow { display: none !important; }
+            body { background: white !important; color: #111 !important; font-size: 12pt !important; }
+            section { contain: unset !important; border-color: #ddd !important; }
+            .comet-card { background: white !important; border: 1px solid #ddd !important; box-shadow: none !important; backdrop-filter: none !important; }
+            .text-primary, h1, h2, h3, h4 { color: #111 !important; -webkit-text-fill-color: #111 !important; }
+            .section-tag { border-color: #ccc !important; background: #f5f5f5 !important; color: #333 !important; }
+            .tech-badge { border-color: #ccc !important; background: #f0f0f0 !important; color: #333 !important; }
+            a { color: #0066cc !important; }
+        }
+
+        /* ==========================================================================
+           32. ACCESSIBILITY FOCUS STYLES
+           ========================================================================== */
+        *:focus-visible {
+            outline: 2px solid var(--accent-cyan);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+        .skip-link {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999999;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--accent-cyan);
+            color: var(--text-inverse);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 0 0 12px 12px;
+            transition: top 0.3s ease;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* ==========================================================================
+           33. ENHANCED TABLET BREAKPOINT
+           ========================================================================== */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .hero-title { font-size: 4.5rem !important; }
+            .comet-card { padding: 2rem; }
+            .project-card-image { height: 180px; }
+        }
+
+        /* ==========================================================================
+           34. LARGE DESKTOP ENHANCEMENTS
+           ========================================================================== */
+        @media (min-width: 1600px) {
+            html { font-size: 18px; }
+            .hero-title { font-size: 9rem !important; }
+            .comet-card { padding: 3rem; }
+        }
+
     </style>
 </head>
 <body>
+
+    <!-- ==========================================================================
+         ACCESSIBILITY: SKIP TO MAIN CONTENT LINK
+         ========================================================================== -->
+    <a href="#about" class="skip-link">Skip to Main Content</a>
+
+    <!-- ==========================================================================
+         PREMIUM PRELOADER
+         ========================================================================== -->
+    <div class="preloader" id="preloader" role="status" aria-label="Loading">
+        <div class="preloader-logo">OS</div>
+        <div class="preloader-bar-track">
+            <div class="preloader-bar-fill" id="preloader-fill"></div>
+        </div>
+        <p class="preloader-text">Initializing Universe</p>
+    </div>
+
+    <!-- ==========================================================================
+         SCROLL PROGRESS INDICATOR
+         ========================================================================== -->
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- ==========================================================================
+         CINEMATIC FILM GRAIN OVERLAY
+         ========================================================================== -->
+    <div class="film-grain" aria-hidden="true"></div>
 
     <!-- Premium Backgrounds (Cosmos) -->
     <div id="cosmos-container">
@@ -293,7 +830,7 @@
                 <a href="#about" class="nav-link hover-trigger">Identity</a>
                 <a href="#experience" class="nav-link hover-trigger">Experience</a>
                 <a href="#education" class="nav-link hover-trigger">Education</a>
-                <a href="#expertise" class="nav-link hover-trigger">Skills</a>
+                <a href="#skills" class="nav-link hover-trigger">Skills</a>
                 <a href="#contact" class="nav-link hover-trigger">Contact</a>
             </div>
             <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 focus:outline-none z-50 relative hover-trigger" aria-label="Toggle Menu">
@@ -308,7 +845,7 @@
         <a href="#about" class="font-display text-5xl font-bold text-gray-300 mobile-link hover-trigger">Identity</a>
         <a href="#experience" class="font-display text-5xl font-bold text-gray-300 mobile-link hover-trigger">Experience</a>
         <a href="#education" class="font-display text-5xl font-bold text-gray-300 mobile-link hover-trigger">Education</a>
-        <a href="#expertise" class="font-display text-5xl font-bold text-gray-300 mobile-link hover-trigger">Skills</a>
+        <a href="#skills" class="font-display text-5xl font-bold text-gray-300 mobile-link hover-trigger">Skills</a>
         <a href="#contact" class="font-display text-5xl font-bold text-gray-300 mobile-link hover-trigger">Contact</a>
     </div>
 
@@ -419,14 +956,148 @@
         </section>
 
         <!-- ==========================================================================
+             KEY HIGHLIGHTS — ANIMATED STAT COUNTERS
+             ========================================================================== -->
+        <section class="px-6 max-w-[1400px] mx-auto py-24 border-t border-white/5">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 reveal">
+                
+                <!-- Stat 1: Experience -->
+                <div class="text-center group">
+                    <div class="comet-cards-wrapper hover-trigger">
+                        <div class="comet-card py-10 px-6 flex flex-col items-center">
+                            <p class="font-display text-5xl md:text-6xl font-black text-primary mb-2">
+                                <span data-count-to="2" class="tabular-nums">0</span><span class="text-cyan-400">+</span>
+                            </p>
+                            <p class="font-mono-custom text-[10px] tracking-[0.3em] uppercase" style="color: var(--text-tertiary);">Years Experience</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stat 2: Languages -->
+                <div class="text-center group">
+                    <div class="comet-cards-wrapper hover-trigger">
+                        <div class="comet-card py-10 px-6 flex flex-col items-center">
+                            <p class="font-display text-5xl md:text-6xl font-black text-primary mb-2">
+                                <span data-count-to="3" class="tabular-nums">0</span>
+                            </p>
+                            <p class="font-mono-custom text-[10px] tracking-[0.3em] uppercase" style="color: var(--text-tertiary);">Languages Spoken</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stat 3: Certifications -->
+                <div class="text-center group">
+                    <div class="comet-cards-wrapper hover-trigger">
+                        <div class="comet-card py-10 px-6 flex flex-col items-center">
+                            <p class="font-display text-5xl md:text-6xl font-black text-primary mb-2">
+                                <span data-count-to="4" class="tabular-nums">0</span>
+                            </p>
+                            <p class="font-mono-custom text-[10px] tracking-[0.3em] uppercase" style="color: var(--text-tertiary);">Certifications</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stat 4: Tickets -->
+                <div class="text-center group">
+                    <div class="comet-cards-wrapper hover-trigger">
+                        <div class="comet-card py-10 px-6 flex flex-col items-center">
+                            <p class="font-display text-5xl md:text-6xl font-black text-primary mb-2">
+                                <span data-count-to="1000" class="tabular-nums">0</span><span class="text-cyan-400">+</span>
+                            </p>
+                            <p class="font-mono-custom text-[10px] tracking-[0.3em] uppercase" style="color: var(--text-tertiary);">Tickets Resolved</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             WHAT I BRING — VALUE PROPOSITION SECTION
+             ========================================================================== -->
+        <section class="px-6 max-w-[1400px] mx-auto py-32 border-t border-white/5 relative">
+            <div class="floating-orb cyan" style="width: 180px; height: 180px; top: 5%; right: -5%; animation-delay: 1s;"></div>
+            
+            <div class="reveal mb-20">
+                <div class="section-tag hover-trigger">Core Strengths</div>
+                <h2 class="font-display text-5xl md:text-[5rem] font-black tracking-tighter text-primary leading-tight mt-4 section-title-underline">
+                    What I Bring.
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 reveal reveal-delay-2">
+                
+                <!-- Strength 1: DACH Region Support -->
+                <div class="comet-cards-wrapper hover-trigger">
+                    <div class="comet-card p-10 flex flex-col h-full">
+                        <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center mb-6">
+                            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="text-cyan-400">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-primary tracking-tight mb-3">DACH Region Specialist</h3>
+                        <p class="text-sm leading-relaxed flex-grow" style="color: var(--text-secondary);">
+                            C1-level German fluency paired with deep technical expertise. Deliver end-to-end support to enterprise clients across Germany, Austria, and Switzerland — bridging language and technology gaps with precision.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-6">
+                            <span class="tech-badge">German C1</span>
+                            <span class="tech-badge">DACH</span>
+                            <span class="tech-badge">Enterprise</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strength 2: Cloud & Identity -->
+                <div class="comet-cards-wrapper hover-trigger">
+                    <div class="comet-card p-10 flex flex-col h-full">
+                        <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-6">
+                            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="text-purple-400">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-primary tracking-tight mb-3">Cloud & Identity Management</h3>
+                        <p class="text-sm leading-relaxed flex-grow" style="color: var(--text-secondary);">
+                            Azure AD certified professional managing user lifecycle, conditional access policies, SSO configurations, and hybrid identity setups. Microsoft ecosystem mastery from endpoint to cloud.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-6">
+                            <span class="tech-badge">Azure AD</span>
+                            <span class="tech-badge">Intune</span>
+                            <span class="tech-badge">AZ-900</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strength 3: Problem Resolution -->
+                <div class="comet-cards-wrapper hover-trigger">
+                    <div class="comet-card p-10 flex flex-col h-full">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-6">
+                            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="text-emerald-400">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-primary tracking-tight mb-3">Rapid Problem Resolution</h3>
+                        <p class="text-sm leading-relaxed flex-grow" style="color: var(--text-secondary);">
+                            1000+ tickets resolved across L1/L2 support tiers. Expertise in systematic root-cause analysis, network diagnostics, and cross-functional escalation — minimizing downtime and maximizing client satisfaction.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mt-6">
+                            <span class="tech-badge">ServiceNow</span>
+                            <span class="tech-badge">ITIL</span>
+                            <span class="tech-badge">L1/L2</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==========================================================================
              EXPERIENCE SECTION (CV EXACT)
              ========================================================================== -->
-        <section id="experience" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-white/10">
+        <section id="experience" class="py-40 px-6 max-w-[1400px] mx-auto border-t border-white/5">
             
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 reveal">
                 <div>
                     <div class="section-tag hover-trigger">Career Trajectory</div>
-                    <h2 class="font-display text-5xl md:text-[4.5rem] font-black tracking-tighter text-primary leading-tight mt-4">
+                    <h2 class="font-display text-5xl md:text-[5rem] font-black tracking-tighter text-primary leading-tight mt-4 section-title-underline">
                         Professional <br> History.
                     </h2>
                 </div>
@@ -439,45 +1110,49 @@
                     <div class="timeline-dot"></div>
                     <div class="comet-cards-wrapper">
                         <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/10 pb-6">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/5 pb-6">
                                 <div>
-                                    <h3 class="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">App/cloud Technical Support Analyst</h3>
-                                    <p class="font-mono-custom text-sm text-accent-cyan mt-2 tracking-widest uppercase font-bold">Accenture &middot; Gurugram, Haryana</p>
+                                    <h3 class="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">App/Cloud Technical Support Analyst</h3>
+                                    <p class="font-mono-custom text-sm mt-2 tracking-wide uppercase font-bold" style="color: var(--accent-cyan)">Accenture &middot; Gurugram, Haryana</p>
                                 </div>
-                                <span class="inline-block px-5 py-2.5 bg-white/10 border border-white/20 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap shadow-sm">
+                                <span class="inline-block px-5 py-2.5 bg-white/5 border border-white/10 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap">
                                     11/2024 — Present
                                 </span>
                             </div>
-                            <ul class="space-y-5 text-gray-300 leading-relaxed text-base md:text-lg font-light">
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-accent-cyan mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span class="font-medium text-gray-300">Delivered end-to-end technical solutions to end-users from Germany, Austria, and Switzerland.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Added and configured new devices within the corporate network.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Managed DHCP servers for network related issues.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Troubleshot printer issues, including connectivity, installation, and driver errors.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <div class="space-y-4 mb-8">
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    <span>Delivered end-to-end technical solutions to end-users from Germany, Austria, and Switzerland.</span>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                                     <span>Managed user accounts, permissions, and security groups using Azure Active Directory.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Worked on all kind of Windows related Issues.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Delivered end-to-end technical support to end users, ensuring minimal disruption to daily operations.</span>
-                                </li>
-                            </ul>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    <span>Added and configured new devices within the corporate network.</span>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    <span>Managed DHCP servers for network related issues.</span>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    <span>Troubleshot printer issues, including connectivity, installation, and driver errors.</span>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    <span>Worked on all kinds of Windows related issues.</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 pt-2 border-t border-white/5">
+                                <span class="tech-badge">Azure AD</span>
+                                <span class="tech-badge">DHCP</span>
+                                <span class="tech-badge">Windows</span>
+                                <span class="tech-badge">Intune</span>
+                                <span class="tech-badge">ServiceNow</span>
+                                <span class="tech-badge">German C1</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -487,45 +1162,45 @@
                     <div class="timeline-dot"></div>
                     <div class="comet-cards-wrapper">
                         <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/10 pb-6">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/5 pb-6">
                                 <div>
                                     <h3 class="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">Senior Systems Administrator</h3>
-                                    <p class="font-mono-custom text-sm text-accent-cyan mt-2 tracking-wide uppercase font-bold">ITC Infotech &middot; Bengaluru, Karnataka</p>
+                                    <p class="font-mono-custom text-sm mt-2 tracking-wide uppercase font-bold" style="color: var(--accent-cyan)">ITC Infotech &middot; Bengaluru, Karnataka</p>
                                 </div>
-                                <span class="inline-block px-5 py-2.5 bg-white/10 border border-white/20 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap shadow-sm">
+                                <span class="inline-block px-5 py-2.5 bg-white/5 border border-white/10 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap">
                                     04/2024 — 11/2024
                                 </span>
                             </div>
-                            <ul class="space-y-5 text-gray-300 leading-relaxed text-base md:text-lg font-light">
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <div class="space-y-4 mb-8">
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                                     <span>Administer Windows, Office, Active Directory, and network infrastructure. Manage DHCP and resolve network issues.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                                     <span>Working as L1-L1.5 support and communicating with German-speaking users to resolve inquiries and issues.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                                     <span>Added and configured new devices in the company network. Assigned static and dynamic IP addresses to devices.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Troubleshot printer issues (installation, connectivity, driver problems).</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                                     <span>Managed user access and permissions through Azure AD.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                                     <span>Resolved all types of Windows issues.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Using tools like Azure, Microsoft Admin center, ARS, AD, Intune, Bomgar, Servicenow, Confluence.</span>
-                                </li>
-                            </ul>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 pt-2 border-t border-white/5">
+                                <span class="tech-badge">Azure AD</span>
+                                <span class="tech-badge">ARS</span>
+                                <span class="tech-badge">Intune</span>
+                                <span class="tech-badge">Bomgar</span>
+                                <span class="tech-badge">ServiceNow</span>
+                                <span class="tech-badge">Confluence</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -535,61 +1210,151 @@
                     <div class="timeline-dot"></div>
                     <div class="comet-cards-wrapper">
                         <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/10 pb-6">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/5 pb-6">
                                 <div>
-                                    <h3 class="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">Senior associate/German language technical support</h3>
-                                    <p class="font-mono-custom text-sm text-accent-cyan mt-2 tracking-wide uppercase font-bold">Wipro Limited &middot; Hyderabad</p>
+                                    <h3 class="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">Senior Associate / German Language Technical Support</h3>
+                                    <p class="font-mono-custom text-sm mt-2 tracking-wide uppercase font-bold" style="color: var(--accent-cyan)">Wipro Limited &middot; Hyderabad</p>
                                 </div>
-                                <span class="inline-block px-5 py-2.5 bg-white/10 border border-white/20 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap shadow-sm">
+                                <span class="inline-block px-5 py-2.5 bg-white/5 border border-white/10 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap">
                                     12/2021 — 09/2023
                                 </span>
                             </div>
-                            <ul class="space-y-5 text-gray-300 leading-relaxed text-base md:text-lg font-light">
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <div class="space-y-4 mb-8">
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                                     <span>Worked for Wipro Technologies as Google T1 accessibility technical support (German).</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Proactively identified solution to common user issues.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Provided technical support to user's on Accessibility technologies.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Job profile involes speaking, chatting and writing. Resolving users issues via call chat or email.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Dealing with Google platforms that have Android support in it.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    <span>Proactively identified solutions to common user issues.</span>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    <span>Provided technical support to users on Accessibility technologies.</span>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    <span>Resolving user issues via call, chat or email across Google platforms with Android support.</span>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                                     <span>Adhered to quality and service standards to support operational goals.</span>
-                                </li>
-                            </ul>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 pt-2 border-t border-white/5">
+                                <span class="tech-badge">Google Workspace</span>
+                                <span class="tech-badge">Android</span>
+                                <span class="tech-badge">WCAG</span>
+                                <span class="tech-badge">NVDA</span>
+                                <span class="tech-badge">German B2-C1</span>
+                            </div>
                         </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             LANGUAGES SECTION
+             ========================================================================== -->
+        <section id="languages" class="py-40 px-6 max-w-[1400px] mx-auto border-t border-white/5 relative">
+            <div class="floating-orb emerald" style="width: 120px; height: 120px; top: 20%; right: 10%; animation-delay: 2s;"></div>
+
+            <div class="reveal mb-24">
+                <div class="section-tag hover-trigger">Multilingual</div>
+                <h2 class="font-display text-5xl md:text-[5rem] font-black tracking-tighter text-primary leading-tight mt-4 section-title-underline">
+                    Languages.
+                </h2>
+                <p class="text-lg mt-6 max-w-2xl" style="color: var(--text-secondary); line-height: 1.8;">
+                    Fluent communication across 3 languages — enabling seamless support for international clients across Europe and South Asia.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 reveal reveal-delay-2">
+
+                <!-- German Card -->
+                <div class="comet-cards-wrapper hover-trigger">
+                    <div class="comet-card p-10 flex flex-col items-center text-center">
+                        <div class="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-4xl">
+                            🇩🇪
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-primary tracking-tight mb-2">German</h3>
+                        <p class="font-mono-custom text-xs tracking-widest uppercase mb-6" style="color: var(--accent-cyan);">C1 · Advanced</p>
+                        
+                        <div class="w-full lang-bar-container" data-lang-fill="85">
+                            <div class="lang-bar-track">
+                                <div class="lang-bar-fill german"></div>
+                            </div>
+                        </div>
+
+                        <p class="text-xs mt-5 leading-relaxed" style="color: var(--text-tertiary);">
+                            Professional fluency for end-to-end technical support in the DACH region (Germany, Austria, Switzerland).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- English Card -->
+                <div class="comet-cards-wrapper hover-trigger">
+                    <div class="comet-card p-10 flex flex-col items-center text-center">
+                        <div class="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-4xl">
+                            🇬🇧
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-primary tracking-tight mb-2">English</h3>
+                        <p class="font-mono-custom text-xs tracking-widest uppercase mb-6" style="color: var(--accent-cyan);">C1 · Advanced</p>
+                        
+                        <div class="w-full lang-bar-container" data-lang-fill="90">
+                            <div class="lang-bar-track">
+                                <div class="lang-bar-fill english"></div>
+                            </div>
+                        </div>
+
+                        <p class="text-xs mt-5 leading-relaxed" style="color: var(--text-tertiary);">
+                            Full professional proficiency — technical documentation, client communication, and cross-team collaboration.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Hindi Card -->
+                <div class="comet-cards-wrapper hover-trigger">
+                    <div class="comet-card p-10 flex flex-col items-center text-center">
+                        <div class="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-4xl">
+                            🇮🇳
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-primary tracking-tight mb-2">Hindi</h3>
+                        <p class="font-mono-custom text-xs tracking-widest uppercase mb-6" style="color: var(--accent-emerald);">Native Speaker</p>
+                        
+                        <div class="w-full lang-bar-container" data-lang-fill="100">
+                            <div class="lang-bar-track">
+                                <div class="lang-bar-fill hindi"></div>
+                            </div>
+                        </div>
+
+                        <p class="text-xs mt-5 leading-relaxed" style="color: var(--text-tertiary);">
+                            Mother tongue — natural fluency for local client engagement and regional team coordination.
+                        </p>
                     </div>
                 </div>
 
             </div>
         </section>
 
+
         <!-- ==========================================================================
              EDUCATION TIMELINE SECTION (CV EXACT)
              ========================================================================== -->
-        <section id="education" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-white/10 relative">
+        <section id="education" class="py-40 px-6 max-w-[1400px] mx-auto border-t border-white/5 relative">
             <div class="reveal mb-24 text-center">
                 <div class="section-tag mx-auto hover-trigger">Academic Foundation</div>
-                <h2 class="font-display text-5xl md:text-[4.5rem] font-black tracking-tighter text-primary leading-tight mt-4">
+                <h2 class="font-display text-5xl md:text-[5rem] font-black tracking-tighter text-primary leading-tight mt-4">
                     Education.
                 </h2>
             </div>
 
             <!-- Custom Vertical Split Timeline -->
-            <div class="edu-timeline-container relative max-w-5xl mx-auto before:absolute before:top-0 before:bottom-0 before:w-[2px] before:bg-gradient-to-b before:from-transparent before:via-white/20 before:to-transparent">
+            <div class="edu-timeline-container relative max-w-5xl mx-auto before:absolute before:top-0 before:bottom-0 before:w-[2px] before:bg-gradient-to-b before:from-transparent before:via-[rgba(34,211,238,0.15)] before:to-transparent">
                 
                 <!-- Advanced Diploma -->
                 <div class="edu-timeline-node reveal">
@@ -676,12 +1441,12 @@
         <!-- ==========================================================================
              EXPERTISE & SKILLS SECTION
              ========================================================================== -->
-        <section id="expertise" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-white/10">
+        <section id="skills" class="py-40 px-6 max-w-[1400px] mx-auto border-t border-white/5">
             
             <div class="reveal mb-24">
                 <div class="section-tag hover-trigger">Core Competencies</div>
-                <h2 class="font-display text-5xl md:text-[4.5rem] font-black tracking-tighter text-primary leading-tight mt-4">
-                    Expertise & <br> Credentials.
+                <h2 class="font-display text-5xl md:text-[5rem] font-black tracking-tighter text-primary leading-tight mt-4 section-title-underline">
+                    Expertise &<br> Credentials.
                 </h2>
             </div>
 
@@ -810,17 +1575,114 @@
         </section>
 
         <!-- ==========================================================================
+             SKILL PROFICIENCY BARS
+             ========================================================================== -->
+        <section class="px-6 max-w-[1400px] mx-auto pb-40 relative">
+            <div class="reveal">
+                <h3 class="font-display text-3xl md:text-4xl font-bold text-primary tracking-tight mb-12">Proficiency Levels</h3>
+                
+                <div class="grid md:grid-cols-2 gap-x-16 gap-y-2">
+                    <!-- Column 1 -->
+                    <div>
+                        <div class="skill-progress" data-skill-fill="92">
+                            <div class="skill-progress-header">
+                                <span class="skill-progress-name">Azure Active Directory</span>
+                                <span class="skill-progress-pct">92%</span>
+                            </div>
+                            <div class="skill-progress-track">
+                                <div class="skill-progress-fill"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-progress" data-skill-fill="88">
+                            <div class="skill-progress-header">
+                                <span class="skill-progress-name">Active Directory & Group Policy</span>
+                                <span class="skill-progress-pct">88%</span>
+                            </div>
+                            <div class="skill-progress-track">
+                                <div class="skill-progress-fill"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-progress" data-skill-fill="95">
+                            <div class="skill-progress-header">
+                                <span class="skill-progress-name">Windows Server & Desktop</span>
+                                <span class="skill-progress-pct">95%</span>
+                            </div>
+                            <div class="skill-progress-track">
+                                <div class="skill-progress-fill"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-progress" data-skill-fill="85">
+                            <div class="skill-progress-header">
+                                <span class="skill-progress-name">Intune / SCCM Management</span>
+                                <span class="skill-progress-pct">85%</span>
+                            </div>
+                            <div class="skill-progress-track">
+                                <div class="skill-progress-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div>
+                        <div class="skill-progress" data-skill-fill="90">
+                            <div class="skill-progress-header">
+                                <span class="skill-progress-name">ServiceNow / ITSM</span>
+                                <span class="skill-progress-pct">90%</span>
+                            </div>
+                            <div class="skill-progress-track">
+                                <div class="skill-progress-fill"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-progress" data-skill-fill="82">
+                            <div class="skill-progress-header">
+                                <span class="skill-progress-name">Network Admin (DHCP/DNS/TCP)</span>
+                                <span class="skill-progress-pct">82%</span>
+                            </div>
+                            <div class="skill-progress-track">
+                                <div class="skill-progress-fill"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-progress" data-skill-fill="78">
+                            <div class="skill-progress-header">
+                                <span class="skill-progress-name">PowerShell Automation</span>
+                                <span class="skill-progress-pct">78%</span>
+                            </div>
+                            <div class="skill-progress-track">
+                                <div class="skill-progress-fill"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-progress" data-skill-fill="90">
+                            <div class="skill-progress-header">
+                                <span class="skill-progress-name">German Technical Support</span>
+                                <span class="skill-progress-pct">90%</span>
+                            </div>
+                            <div class="skill-progress-track">
+                                <div class="skill-progress-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
              CONTACT SECTION (CRED STYLE PREMIUM CARDS W/ CUSTOM ICONS)
              ========================================================================== -->
-        <section id="contact" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-white/10">
+        <section id="contact" class="py-40 px-6 max-w-[1400px] mx-auto border-t border-white/5">
             
             <div class="text-center max-w-2xl mx-auto mb-24 reveal">
                 <div class="section-tag mx-auto hover-trigger">Initiate Handshake</div>
-                <h2 class="font-display text-5xl md:text-[4.5rem] font-black tracking-tighter text-primary leading-tight mt-4 mb-6">
+                <h2 class="font-display text-5xl md:text-[5rem] font-black tracking-tighter text-primary leading-tight mt-4 mb-6">
                     Let's Connect.
                 </h2>
-                <p class="text-xl text-gray-400 font-light">
-                    Available for technical support, systems administration, and high-level operations consulting.
+                <p class="text-xl leading-relaxed" style="color: var(--text-secondary)">
+                    Open to opportunities in technical support, systems administration, and IT operations. Let's build something great together.
                 </p>
             </div>
             
@@ -859,9 +1721,9 @@
                     </a>
                 </div>
 
-                <!-- Phone Premium Card with Custom Premium Phone SVG -->
+                <!-- Phone + WhatsApp Premium Card -->
                 <div class="comet-cards-wrapper hover-trigger">
-                    <a href="tel:+918448527162" class="comet-card social-card phone p-10 block border-white/10">
+                    <div class="comet-card social-card phone p-10 border-white/10" style="text-decoration: none; cursor: default;">
                         <div class="social-icon-wrapper mx-auto bg-white/5 border-white/10">
                             <!-- Custom Premium Phone Receiver Vector -->
                             <svg class="w-12 h-12 transition-all duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -871,8 +1733,31 @@
                         </div>
                         <h3 class="font-display text-3xl font-black mb-3 text-primary">Direct Line</h3>
                         <p class="text-gray-400 text-base font-light mb-8 text-center">+91 8448527162</p>
-                        <span class="text-xs font-mono-custom text-emerald-400 font-bold uppercase tracking-widest bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/20">Call Now &rarr;</span>
-                    </a>
+                        
+                        <!-- Dual Action Buttons: Call & WhatsApp -->
+                        <div class="flex gap-3 justify-center">
+                            <a href="tel:+918448527162" 
+                               class="flex items-center gap-2 px-5 py-2.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 text-xs font-mono-custom font-bold uppercase tracking-widest transition-all duration-300 hover:bg-emerald-500/20 hover:border-emerald-500/40 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)]"
+                               style="text-decoration: none;">
+                                <!-- Phone Icon -->
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                </svg>
+                                Call
+                            </a>
+                            <a href="https://wa.me/918448527162" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               class="flex items-center gap-2 px-5 py-2.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 text-xs font-mono-custom font-bold uppercase tracking-widest transition-all duration-300 hover:bg-emerald-500/20 hover:border-emerald-500/40 hover:shadow-[0_0_20px_rgba(37,211,102,0.2)]"
+                               style="text-decoration: none;">
+                                <!-- WhatsApp Icon -->
+                                <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                                </svg>
+                                WhatsApp
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -894,14 +1779,77 @@
     <!-- ==========================================================================
          FOOTER
          ========================================================================== -->
-    <footer class="border-t border-white/10 py-16 text-center flex flex-col items-center bg-black relative z-10">
-        <p class="text-xs text-gray-500 font-mono-custom tracking-[0.2em] uppercase mb-4">
-            Based in Maunath Bhanjan, Mau, India 275101
-        </p>
-        <p class="text-[10px] text-gray-600 font-mono-custom tracking-widest uppercase font-bold">
-            Premium Architecture · Designed & Built by Osaid Shahid · © 2026
-        </p>
+    <footer class="border-t border-white/5 relative z-10 px-6" style="background-color: var(--bg-base)">
+        <div class="max-w-[1400px] mx-auto py-20">
+            
+            <!-- Top: Gradient Divider -->
+            <div class="w-full h-[1px] mb-16" style="background: linear-gradient(90deg, transparent, var(--accent-cyan), var(--accent-purple), transparent)"></div>
+
+            <!-- Middle: 3-Column Layout -->
+            <div class="grid md:grid-cols-3 gap-12 mb-16">
+                <!-- Brand -->
+                <div>
+                    <h3 class="font-display text-2xl font-bold text-primary tracking-tight mb-4">Osaid Shahid</h3>
+                    <p class="text-sm leading-relaxed" style="color: var(--text-tertiary);">
+                        App/Cloud Technical Support Analyst with expertise in Azure AD, Active Directory, and enterprise systems administration. Based in India, serving global clients.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-mono-custom text-[10px] tracking-[0.3em] uppercase font-bold mb-6" style="color: var(--text-tertiary);">Navigate</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="#about" class="footer-link hover-trigger">Identity</a>
+                        <a href="#experience" class="footer-link hover-trigger">Experience</a>
+                        <a href="#languages" class="footer-link hover-trigger">Languages</a>
+                        <a href="#education" class="footer-link hover-trigger">Education</a>
+                        <a href="#skills" class="footer-link hover-trigger">Skills</a>
+                        <a href="#contact" class="footer-link hover-trigger">Contact</a>
+                    </div>
+                </div>
+
+                <!-- Connect -->
+                <div>
+                    <h4 class="font-mono-custom text-[10px] tracking-[0.3em] uppercase font-bold mb-6" style="color: var(--text-tertiary);">Connect</h4>
+                    <div class="flex flex-col gap-3">
+                        <a href="https://www.linkedin.com/in/osaid-shahid-442599223/" target="_blank" rel="noopener noreferrer" class="footer-link hover-trigger flex items-center gap-2">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            LinkedIn
+                        </a>
+                        <a href="mailto:osaidtheshahid@gmail.com" class="footer-link hover-trigger flex items-center gap-2">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            Email
+                        </a>
+                        <a href="tel:+918448527162" class="footer-link hover-trigger flex items-center gap-2">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            +91 8448527162
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom: Copyright -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-white/5">
+                <p class="text-xs font-mono-custom tracking-[0.2em] uppercase" style="color: var(--text-tertiary)">
+                    Based in Maunath Bhanjan, Mau, India 275101
+                </p>
+                <div class="flex items-center gap-3">
+                    <div class="footer-divider"></div>
+                    <p class="text-[10px] font-mono-custom tracking-widest uppercase font-bold" style="color: var(--text-tertiary); opacity: 0.6">
+                        Designed & Built by Osaid Shahid · © 2026
+                    </p>
+                </div>
+            </div>
+        </div>
     </footer>
+
+    <!-- ==========================================================================
+         BACK TO TOP BUTTON
+         ========================================================================== -->
+    <button class="back-to-top" id="back-to-top" aria-label="Scroll to top" title="Back to top">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+    </button>
+
 
     <!-- ==========================================================================
          JAVASCRIPT LOGIC (Physics Canvas Engine, Custom Cursor, Reveals, Nav, Comet Spotlight)
@@ -1166,11 +2114,11 @@
                             const dy = particles[i].y - particles[j].y;
                             const distSq = dx * dx + dy * dy;
                             if (distSq < 16900) {
-                                const dist = Math.sqrt(distSq);
                                 ctx.beginPath();
                                 ctx.moveTo(particles[i].x, particles[i].y);
                                 ctx.lineTo(particles[j].x, particles[j].y);
-                                ctx.strokeStyle = `rgba(255, 255, 255, ${0.03 * (1 - dist / 130)})`;
+                                // Use squared distance approximation — no sqrt needed
+                                ctx.strokeStyle = `rgba(255, 255, 255, ${0.03 * (1 - distSq / 16900)})`;
                                 ctx.lineWidth = 0.5;
                                 ctx.stroke();
                             }
@@ -1195,32 +2143,49 @@
             const star3 = document.getElementById('stars-3');
             const mainSaturn = document.getElementById('main-saturn');
 
-            // Set stars with solid math floors to avoid render corruption
-            if (star1) star1.style.boxShadow = generateStars(1000);
-            if (star2) star2.style.boxShadow = generateStars(500);
-            if (star3) star3.style.boxShadow = generateStars(200);
+            // Restore full star density — desktop gets full 1700 stars, mobile stays reduced for performance
+            const isMobile = window.innerWidth < 768;
+            if (star1) star1.style.boxShadow = generateStars(isMobile ? 150 : 700);
+            if (star2) star2.style.boxShadow = generateStars(isMobile ? 60 : 200);
+            if (star3) star3.style.boxShadow = generateStars(isMobile ? 20 : 800);
+
+            // FIX: Cache planet refs ONCE at init — no querySelectorAll inside rAF
+            const planetOrbits = [...document.querySelectorAll('.planet-orbit')].map(orbit => ({
+                el: orbit,
+                speed: parseFloat(orbit.dataset.speed),
+                rot: parseFloat(orbit.dataset.rot)
+            }));
 
             let parallaxTicking = false;
             window.addEventListener('scroll', () => {
                 if (!parallaxTicking) {
                     window.requestAnimationFrame(() => {
                         const scrollY = window.scrollY;
-                        document.querySelectorAll('.planet-orbit').forEach(orbit => {
-                            const speed = parseFloat(orbit.dataset.speed);
-                            const rotSpeed = parseFloat(orbit.dataset.rot);
-                            orbit.style.transform = `translate3d(-50%, -50%, 0) translateY(${scrollY * speed}px) rotate(${scrollY * rotSpeed}deg)`;
-                        });
-                        
-                        if (star1) star1.style.transform = `translate3d(0, ${scrollY * -0.05}px, 0)`;
-                        if (star2) star2.style.transform = `translate3d(0, ${scrollY * -0.1}px, 0)`;
-                        if (star3) star3.style.transform = `translate3d(0, ${scrollY * -0.15}px, 0)`;
-                        if (mainSaturn) mainSaturn.style.transform = `translate3d(-50%, -50%, 0) rotate(${scrollY * 0.03}deg)`;
-                        
+                        for (let i = 0; i < planetOrbits.length; i++) {
+                            const { el, speed, rot } = planetOrbits[i];
+                            el.style.transform = `translate3d(-50%,-50%,0) translateY(${scrollY * speed}px) rotate(${scrollY * rot}deg)`;
+                        }
+                        if (star1) star1.style.transform = `translate3d(0,${scrollY * -0.05}px,0)`;
+                        if (star2) star2.style.transform = `translate3d(0,${scrollY * -0.1}px,0)`;
+                        if (star3) star3.style.transform = `translate3d(0,${scrollY * -0.15}px,0)`;
+                        if (mainSaturn) mainSaturn.style.transform = `translate3d(-50%,-50%,0) rotate(${scrollY * 0.03}deg)`;
                         parallaxTicking = false;
                     });
                     parallaxTicking = true;
                 }
             }, { passive: true });
+
+            // FIX: Pause off-screen planet animations on desktop via IntersectionObserver
+            if (window.innerWidth >= 768) {
+                document.querySelectorAll('.planet-orbit').forEach(orbit => {
+                    const planet = orbit.querySelector('.planet');
+                    if (!planet) return;
+                    const obs = new IntersectionObserver(([e]) => {
+                        planet.style.animationPlayState = e.isIntersecting ? 'running' : 'paused';
+                    }, { rootMargin: '300px' });
+                    obs.observe(orbit);
+                });
+            }
 
             /* ==========================================================================
                2. CUSTOM PHYSICS CURSOR LOGIC
@@ -1280,6 +2245,20 @@
                 });
             }, revealOptions);
             revealElements.forEach(el => revealOnScroll.observe(el));
+
+            /* Active nav link tracking */
+            const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+            const sections = document.querySelectorAll('section[id]');
+            const navObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+                        });
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '-80px 0px -50% 0px' });
+            sections.forEach(s => navObserver.observe(s));
 
             /* ==========================================================================
                6. MOBILE MENU & NAVBAR LOGIC
@@ -1412,30 +2391,54 @@
                 if(tractorBeam) tractorBeam.style.opacity = '0';
             });
 
+            // FIX: Pre-created spark pool — no DOM creation in animation loops
+            const MAX_SPARKS = 15;
+            const sparkPool = [];
+            for (let i = 0; i < MAX_SPARKS; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'absolute rounded-full pointer-events-none';
+                spark.style.backgroundColor = 'var(--accent-cyan)';
+                spark.style.display = 'none';
+                sparkContainer.appendChild(spark);
+                sparkPool.push({ el: spark, active: false, vx: 0, vy: 0, op: 0, x: 0, y: 0 });
+            }
+
             function emitWeldSparks(x, y) {
-                const numSparks = window.innerWidth < 768 ? 1 : 3;
-                for(let i=0; i<numSparks; i++) {
-                    const spark = document.createElement('div');
-                    spark.className = 'absolute rounded-full pointer-events-none bg-accent-cyan';
+                const count = isMobile ? 1 : 2;
+                for (let i = 0; i < count; i++) {
+                    const spark = sparkPool.find(s => !s.active);
+                    if (!spark) return;
+                    spark.active = true;
+                    spark.x = x;
+                    spark.y = y;
+                    spark.vx = (Math.random() - 0.5) * 8;
+                    spark.vy = (Math.random() - 0.5) * 8 - 2;
+                    spark.op = 1;
                     const size = Math.random() * 3 + 2;
-                    spark.style.width = size + 'px'; spark.style.height = size + 'px';
-                    spark.style.left = x + 'px'; spark.style.top = y + 'px';
-                    spark.style.boxShadow = `0 0 ${size*2}px #00e1ff`;
-                    sparkContainer.appendChild(spark);
+                    spark.el.style.width = size + 'px';
+                    spark.el.style.height = size + 'px';
+                    spark.el.style.boxShadow = `0 0 ${size * 2}px #00e1ff`;
+                    spark.el.style.display = 'block';
+                }
+            }
 
-                    let vx = (Math.random() - 0.5) * 8;
-                    let vy = (Math.random() - 0.5) * 8 - 2;
-                    let op = 1;
-
-                    function anim() {
-                        if (op <= 0) { spark.remove(); return; }
-                        vy += GRAVITY;
-                        const cl = parseFloat(spark.style.left); const ct = parseFloat(spark.style.top);
-                        spark.style.left = (cl + vx) + 'px'; spark.style.top = (ct + vy) + 'px';
-                        op -= 0.05; spark.style.opacity = op;
-                        requestAnimationFrame(anim);
+            // Single update loop for all spark pool particles (called from gameLoop)
+            function updateSparkPool() {
+                for (let i = 0; i < sparkPool.length; i++) {
+                    const s = sparkPool[i];
+                    if (!s.active) continue;
+                    s.vy += 0.4;
+                    s.x += s.vx;
+                    s.y += s.vy;
+                    s.op -= 0.06;
+                    if (s.op <= 0) {
+                        s.active = false;
+                        s.el.style.display = 'none';
+                    } else {
+                        s.el.style.left = s.x + 'px';
+                        s.el.style.top = s.y + 'px';
+                        s.el.style.opacity = s.op;
                     }
-                    requestAnimationFrame(anim);
                 }
             }
 
@@ -1551,6 +2554,9 @@
                 bot.x += (bot.targetX - bot.x) * speed; bot.y += (bot.targetY - bot.y) * speed;
                 const vx = (bot.targetX - bot.x) * speed; const botTilt = Math.max(-15, Math.min(15, vx * 2));
                 botEl.style.transform = `translate3d(${bot.x}px, ${bot.y}px, 0) rotate(${botTilt}deg)`;
+
+                // Update pooled spark particles
+                updateSparkPool();
 
                 requestAnimationFrame(gameLoop);
             }
@@ -1709,9 +2715,488 @@
                 notifyVisitor();
                 sessionStorage.setItem("portfolio_visited", "true");
             }
+
+            /* ==========================================================================
+               10. PREMIUM PRELOADER
+               ========================================================================== */
+            const preloader = document.getElementById('preloader');
+            const preloaderFill = document.getElementById('preloader-fill');
+            
+            if (preloader && preloaderFill) {
+                const loadingStages = [
+                    { pct: 15, delay: 100 },
+                    { pct: 35, delay: 200 },
+                    { pct: 60, delay: 300 },
+                    { pct: 80, delay: 400 },
+                    { pct: 95, delay: 500 },
+                    { pct: 100, delay: 600 }
+                ];
+                
+                loadingStages.forEach(stage => {
+                    setTimeout(() => {
+                        preloaderFill.style.width = stage.pct + '%';
+                    }, stage.delay);
+                });
+
+                setTimeout(() => {
+                    preloader.classList.add('loaded');
+                    // Remove from DOM after transition
+                    setTimeout(() => {
+                        preloader.remove();
+                    }, 800);
+                }, 900);
+            }
+
+            /* ==========================================================================
+               11. SCROLL PROGRESS INDICATOR
+               ========================================================================== */
+            const scrollProgress = document.getElementById('scroll-progress');
+            
+            if (scrollProgress) {
+                const updateScrollProgress = () => {
+                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = (winScroll / height) * 100;
+                    scrollProgress.style.width = scrolled + '%';
+                };
+                
+                // Throttled scroll handler
+                let scrollProgressTicking = false;
+                window.addEventListener('scroll', () => {
+                    if (!scrollProgressTicking) {
+                        requestAnimationFrame(() => {
+                            updateScrollProgress();
+                            scrollProgressTicking = false;
+                        });
+                        scrollProgressTicking = true;
+                    }
+                }, { passive: true });
+            }
+
+            /* ==========================================================================
+               12. BACK TO TOP BUTTON
+               ========================================================================== */
+            const backToTopBtn = document.getElementById('back-to-top');
+            
+            if (backToTopBtn) {
+                // Show/hide based on scroll position
+                const toggleBackToTop = () => {
+                    const scrollY = window.scrollY || document.documentElement.scrollTop;
+                    if (scrollY > 600) {
+                        backToTopBtn.classList.add('visible');
+                    } else {
+                        backToTopBtn.classList.remove('visible');
+                    }
+                };
+
+                let backToTopTicking = false;
+                window.addEventListener('scroll', () => {
+                    if (!backToTopTicking) {
+                        requestAnimationFrame(() => {
+                            toggleBackToTop();
+                            backToTopTicking = false;
+                        });
+                        backToTopTicking = true;
+                    }
+                }, { passive: true });
+
+                backToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            /* ==========================================================================
+               13. LANGUAGE PROFICIENCY BAR ANIMATION
+               ========================================================================== */
+            const langBars = document.querySelectorAll('.lang-bar-container');
+            
+            if (langBars.length > 0) {
+                const langObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const fill = entry.target.querySelector('.lang-bar-fill');
+                            const targetWidth = entry.target.dataset.langFill;
+                            if (fill && targetWidth) {
+                                // Staggered animation
+                                const index = [...langBars].indexOf(entry.target);
+                                setTimeout(() => {
+                                    fill.style.width = targetWidth + '%';
+                                }, index * 150);
+                            }
+                            langObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.3 });
+
+                langBars.forEach(bar => langObserver.observe(bar));
+            }
+
+            /* ==========================================================================
+               14. SKILL PROGRESS BAR ANIMATION
+               ========================================================================== */
+            const skillBars = document.querySelectorAll('.skill-progress');
+            
+            if (skillBars.length > 0) {
+                const skillObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const fill = entry.target.querySelector('.skill-progress-fill');
+                            const targetWidth = entry.target.dataset.skillFill;
+                            if (fill && targetWidth) {
+                                const index = [...skillBars].indexOf(entry.target);
+                                setTimeout(() => {
+                                    fill.style.width = targetWidth + '%';
+                                }, index * 100);
+                            }
+                            skillObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.2 });
+
+                skillBars.forEach(bar => skillObserver.observe(bar));
+            }
+
+            /* ==========================================================================
+               15. KEYBOARD NAVIGATION
+               ========================================================================== */
+            const allSections = document.querySelectorAll('section[id]');
+            const sectionIds = [...allSections].map(s => s.id);
+            
+            document.addEventListener('keydown', (e) => {
+                // Don't intercept if user is typing in an input
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+                
+                switch(e.key) {
+                    case 'j':
+                    case 'ArrowDown':
+                        if (e.key === 'ArrowDown' && !e.altKey) return; // Only Alt+Arrow
+                        e.preventDefault();
+                        navigateSection(1);
+                        break;
+                    case 'k':
+                    case 'ArrowUp':
+                        if (e.key === 'ArrowUp' && !e.altKey) return;
+                        e.preventDefault();
+                        navigateSection(-1);
+                        break;
+                    case 'Home':
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        break;
+                    case 'End':
+                        e.preventDefault();
+                        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                        break;
+                    case 'Escape':
+                        // Close mobile menu if open
+                        if (typeof isMenuOpen !== 'undefined' && isMenuOpen) {
+                            toggleMenu();
+                        }
+                        break;
+                }
+            });
+
+            function navigateSection(direction) {
+                const scrollY = window.scrollY + 200;
+                let currentIndex = -1;
+                
+                allSections.forEach((section, i) => {
+                    if (section.offsetTop <= scrollY) {
+                        currentIndex = i;
+                    }
+                });
+
+                const nextIndex = Math.max(0, Math.min(allSections.length - 1, currentIndex + direction));
+                const targetSection = allSections[nextIndex];
+                
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+
+            /* ==========================================================================
+               16. ANIMATED STATS COUNTER
+               ========================================================================== */
+            function animateCounter(element, target, duration = 2000) {
+                let start = 0;
+                const startTime = performance.now();
+                
+                function update(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    // Ease-out cubic
+                    const easedProgress = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.floor(easedProgress * target);
+                    
+                    element.textContent = current;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    } else {
+                        element.textContent = target;
+                    }
+                }
+                
+                requestAnimationFrame(update);
+            }
+
+            // Find and animate any stat counters on the page
+            const statCounters = document.querySelectorAll('[data-count-to]');
+            if (statCounters.length > 0) {
+                const counterObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const target = parseInt(entry.target.dataset.countTo, 10);
+                            animateCounter(entry.target, target);
+                            counterObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                statCounters.forEach(el => counterObserver.observe(el));
+            }
+
+            /* ==========================================================================
+               17. ENHANCED PARALLAX FOR FLOATING ORBS
+               ========================================================================== */
+            const floatingOrbs = document.querySelectorAll('.floating-orb');
+            
+            if (floatingOrbs.length > 0 && !isMobile) {
+                let orbTicking = false;
+                
+                window.addEventListener('scroll', () => {
+                    if (!orbTicking) {
+                        requestAnimationFrame(() => {
+                            const scrollY = window.scrollY;
+                            floatingOrbs.forEach((orb, i) => {
+                                const speed = (i + 1) * 0.02;
+                                const yOffset = scrollY * speed;
+                                orb.style.transform = `translateY(${-yOffset}px)`;
+                            });
+                            orbTicking = false;
+                        });
+                        orbTicking = true;
+                    }
+                }, { passive: true });
+            }
+
+            /* ==========================================================================
+               18. PROJECT CARD HOVER TILT EFFECT
+               ========================================================================== */
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            if (projectCards.length > 0 && !isMobile) {
+                projectCards.forEach(card => {
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        const rotateX = (y - centerY) / centerY * -3;
+                        const rotateY = (x - centerX) / centerX * 3;
+                        
+                        card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = '';
+                    });
+                });
+            }
+
+            /* ==========================================================================
+               19. SMOOTH SECTION TRANSITION BORDERS
+               ========================================================================== */
+            const sectionBorders = document.querySelectorAll('section');
+            const borderObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                        entry.target.style.transition = 'border-color 1s ease';
+                    } else {
+                        entry.target.style.borderColor = 'rgba(255, 255, 255, 0.03)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            sectionBorders.forEach(s => borderObserver.observe(s));
+
+            /* ==========================================================================
+               20. PERFORMANCE MONITORING (DEV ONLY)
+               ========================================================================== */
+            if (window.location.hostname === 'localhost' || window.location.protocol === 'file:') {
+                const perfData = {
+                    domContentLoaded: 0,
+                    fullyLoaded: 0,
+                    stars: 1700,
+                    planets: document.querySelectorAll('.planet-orbit').length,
+                    sections: document.querySelectorAll('section[id]').length,
+                    totalElements: document.querySelectorAll('*').length
+                };
+                
+                window.addEventListener('load', () => {
+                    const timing = performance.timing;
+                    perfData.domContentLoaded = timing.domContentLoadedEventEnd - timing.navigationStart;
+                    perfData.fullyLoaded = timing.loadEventEnd - timing.navigationStart;
+                    
+                    console.log(
+                        '%c✦ Portfolio Performance Report ✦',
+                        'background: linear-gradient(90deg, #22d3ee, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 14px; font-weight: bold;'
+                    );
+                    console.table(perfData);
+                });
+            }
+
+            /* ==========================================================================
+               21. EASTER EGG: KONAMI CODE
+               ========================================================================== */
+            const konamiCode = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+            let konamiIndex = 0;
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === konamiCode[konamiIndex]) {
+                    konamiIndex++;
+                    if (konamiIndex === konamiCode.length) {
+                        konamiIndex = 0;
+                        activateEasterEgg();
+                    }
+                } else {
+                    konamiIndex = 0;
+                }
+            });
+
+            function activateEasterEgg() {
+                // Rainbow mode for 5 seconds
+                document.body.style.transition = 'filter 1s ease';
+                document.body.style.filter = 'hue-rotate(0deg)';
+                
+                let hue = 0;
+                const rainbow = setInterval(() => {
+                    hue += 5;
+                    document.body.style.filter = `hue-rotate(${hue}deg)`;
+                    if (hue >= 360) {
+                        clearInterval(rainbow);
+                        document.body.style.filter = '';
+                        document.body.style.transition = '';
+                    }
+                }, 30);
+                
+                console.log(
+                    '%c🎮 KONAMI CODE ACTIVATED! 🌈',
+                    'color: #22d3ee; font-size: 20px; font-weight: bold; text-shadow: 0 0 10px #22d3ee;'
+                );
+            }
+
+            /* ==========================================================================
+               22. LAZY IMAGE LOADING (future-proofing)
+               ========================================================================== */
+            if ('IntersectionObserver' in window) {
+                const lazyImages = document.querySelectorAll('img[data-src]');
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                            img.classList.add('loaded');
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                }, { rootMargin: '50px' });
+                
+                lazyImages.forEach(img => imageObserver.observe(img));
+            }
+
+            /* ==========================================================================
+               23. SMOOTH SCROLL FOR ALL ANCHOR LINKS
+               ========================================================================== */
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        const navHeight = 80;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            /* ==========================================================================
+               24. DYNAMIC COPYRIGHT YEAR
+               ========================================================================== */
+            const copyrightElements = document.querySelectorAll('[data-year]');
+            const currentYear = new Date().getFullYear();
+            copyrightElements.forEach(el => {
+                el.textContent = el.textContent.replace(/© \d{4}/, `© ${currentYear}`);
+            });
+
+            /* ==========================================================================
+               25. REDUCED MOTION PREFERENCE
+               ========================================================================== */
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            
+            if (prefersReducedMotion.matches) {
+                // Disable all animations for accessibility
+                document.documentElement.style.setProperty('--ease-out-expo', 'linear');
+                document.documentElement.style.setProperty('--ease-elastic', 'linear');
+                
+                // Skip preloader
+                if (preloader) preloader.remove();
+                
+                // Make all reveals instant
+                document.querySelectorAll('.reveal').forEach(el => {
+                    el.classList.add('active');
+                    el.style.transition = 'none';
+                });
+                
+                console.log('♿ Reduced motion mode enabled — animations disabled.');
+            }
+
+            /* ==========================================================================
+               26. VIEWPORT HEIGHT FIX FOR MOBILE
+               ========================================================================== */
+            function setViewportHeight() {
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }
+            setViewportHeight();
+            window.addEventListener('resize', setViewportHeight);
+
+            /* ==========================================================================
+               27. CONSOLE BRANDING
+               ========================================================================== */
+            console.log(
+                '%c\n' +
+                '  ╔═══════════════════════════════════════════╗\n' +
+                '  ║                                           ║\n' +
+                '  ║   OSAID SHAHID · PREMIUM PORTFOLIO v3.0   ║\n' +
+                '  ║   App/Cloud Technical Support Analyst      ║\n' +
+                '  ║                                           ║\n' +
+                '  ║   🌐 osaid56.github.io                    ║\n' +
+                '  ║   📧 osaidtheshahid@gmail.com             ║\n' +
+                '  ║   🔗 linkedin.com/in/osaid-shahid          ║\n' +
+                '  ║                                           ║\n' +
+                '  ║   Built with HTML · CSS · Vanilla JS      ║\n' +
+                '  ║   Canvas Physics · Parallax Stars         ║\n' +
+                '  ║   Custom Cursor · Fixer Bot Animation     ║\n' +
+                '  ║                                           ║\n' +
+                '  ╚═══════════════════════════════════════════╝\n',
+                'color: #22d3ee; font-family: monospace; font-size: 11px;'
+            );
+
         });
     </script>
 </body>
 </html>
-
-
