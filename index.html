@@ -758,7 +758,429 @@
             .comet-card { padding: 3rem; }
         }
 
+        /* ==========================================================================
+           35. SCROLL-SYNCED PLANET ORBIT SYSTEM
+           ========================================================================== */
+        .scroll-planet {
+            transition: transform 0.1s linear;
+            will-change: transform;
+        }
+        .scroll-planet .planet {
+            animation: scroll-planet-spin 30s linear infinite;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
+        }
+        @keyframes scroll-planet-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Planet Orbit Ring Effect — subtle circular guide */
+        .scroll-planet::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200%;
+            height: 200%;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            pointer-events: none;
+            animation: orbit-ring-pulse 8s ease-in-out infinite alternate;
+        }
+        @keyframes orbit-ring-pulse {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        /* Planet Glow Trail — left behind on scroll */
+        .scroll-planet::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(34, 211, 238, 0.08) 0%, transparent 70%);
+            filter: blur(20px);
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        /* ==========================================================================
+           36. NEBULA CLOUD OVERLAYS
+           Atmospheric depth between sections
+           ========================================================================== */
+        .nebula-cloud {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 0;
+            will-change: transform;
+        }
+        .nebula-cloud.type-a {
+            background: radial-gradient(ellipse, rgba(34, 211, 238, 0.3) 0%, transparent 70%);
+            animation: nebula-drift-a 25s ease-in-out infinite alternate;
+        }
+        .nebula-cloud.type-b {
+            background: radial-gradient(ellipse, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+            animation: nebula-drift-b 30s ease-in-out infinite alternate;
+        }
+        .nebula-cloud.type-c {
+            background: radial-gradient(ellipse, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
+            animation: nebula-drift-c 20s ease-in-out infinite alternate;
+        }
+        @keyframes nebula-drift-a {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.03; }
+            50% { transform: translate(30px, -20px) scale(1.1); opacity: 0.06; }
+            100% { transform: translate(-20px, 15px) scale(0.95); opacity: 0.03; }
+        }
+        @keyframes nebula-drift-b {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.03; }
+            50% { transform: translate(-25px, 25px) scale(1.15); opacity: 0.05; }
+            100% { transform: translate(15px, -10px) scale(0.9); opacity: 0.03; }
+        }
+        @keyframes nebula-drift-c {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.02; }
+            50% { transform: translate(20px, 10px) scale(1.05); opacity: 0.05; }
+            100% { transform: translate(-10px, -20px) scale(1); opacity: 0.02; }
+        }
+
+        /* ==========================================================================
+           37. COMET STREAKS — Shooting stars
+           ========================================================================== */
+        .comet-streak {
+            position: fixed;
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(34, 211, 238, 0.6), transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0;
+            animation: comet-fly 4s ease-in-out infinite;
+        }
+        .comet-streak:nth-child(1) { left: 20%; animation-delay: 0s; animation-duration: 3.5s; }
+        .comet-streak:nth-child(2) { left: 50%; animation-delay: 2s; animation-duration: 4s; }
+        .comet-streak:nth-child(3) { left: 80%; animation-delay: 4s; animation-duration: 3s; }
+        .comet-streak:nth-child(4) { left: 35%; animation-delay: 6s; animation-duration: 4.5s; }
+        .comet-streak:nth-child(5) { left: 65%; animation-delay: 8s; animation-duration: 3.2s; }
+
+        @keyframes comet-fly {
+            0% {
+                transform: translateY(-100vh) rotate(25deg);
+                opacity: 0;
+            }
+            5% { opacity: 0.8; }
+            30% { opacity: 0.6; }
+            50% {
+                transform: translateY(50vh) rotate(25deg);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(50vh) rotate(25deg);
+                opacity: 0;
+            }
+        }
+
+        /* ==========================================================================
+           38. SECTION DIVIDER — CONSTELLATION DOTS
+           ========================================================================== */
+        .constellation-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 40px 0;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .constellation-divider .dot {
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            animation: constellation-twinkle 3s ease-in-out infinite alternate;
+        }
+        .constellation-divider .dot:nth-child(2) { animation-delay: 0.3s; width: 4px; height: 4px; background: rgba(34, 211, 238, 0.5); }
+        .constellation-divider .dot:nth-child(3) { animation-delay: 0.6s; }
+        .constellation-divider .dot:nth-child(4) { animation-delay: 0.9s; width: 5px; height: 5px; background: rgba(168, 85, 247, 0.5); }
+        .constellation-divider .dot:nth-child(5) { animation-delay: 1.2s; }
+        .constellation-divider .line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        }
+        @keyframes constellation-twinkle {
+            0% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+            100% { opacity: 0.3; transform: scale(1); }
+        }
+
+        /* ==========================================================================
+           39. ENHANCED SCROLL-TRIGGERED SECTION TRANSITIONS
+           ========================================================================== */
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+        }
+        .section-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .section-slide-left {
+            opacity: 0;
+            transform: translateX(-80px);
+            transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+        }
+        .section-slide-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .section-slide-right {
+            opacity: 0;
+            transform: translateX(80px);
+            transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+        }
+        .section-slide-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ==========================================================================
+           40. GLASSMORPHISM DEPTH LAYERS
+           ========================================================================== */
+        .glass-depth-1 {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+        }
+        .glass-depth-2 {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+        }
+        .glass-depth-3 {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 28px;
+        }
+
+        /* ==========================================================================
+           41. ENHANCED TEXT GRADIENT UTILITIES
+           ========================================================================== */
+        .text-gradient-cyan {
+            background: linear-gradient(135deg, #22d3ee, #67e8f9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .text-gradient-purple {
+            background: linear-gradient(135deg, #a855f7, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .text-gradient-emerald {
+            background: linear-gradient(135deg, #10b981, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .text-gradient-sunset {
+            background: linear-gradient(135deg, #f59e0b, #ef4444, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ==========================================================================
+           42. EXPERIENCE TIMELINE CONNECTOR STYLING
+           ========================================================================== */
+        .timeline-connector {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline-connector::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, 
+                rgba(34, 211, 238, 0.4), 
+                rgba(168, 85, 247, 0.3), 
+                rgba(16, 185, 129, 0.2),
+                transparent
+            );
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -5px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            border: 2px solid var(--bg-base);
+            box-shadow: 0 0 12px rgba(34, 211, 238, 0.4);
+        }
+
+        /* ==========================================================================
+           43. CONTACT CARD HOVER ENHANCEMENTS
+           ========================================================================== */
+        .social-card.phone:hover .phone-outline {
+            stroke: #25d366 !important;
+            filter: drop-shadow(0 0 8px rgba(37, 211, 102, 0.4));
+        }
+        .social-card.phone:hover .phone-bg {
+            fill: rgba(37, 211, 102, 0.15) !important;
+        }
+
+        /* WhatsApp button special hover */
+        .social-card.phone .flex a:last-child:hover {
+            background: rgba(37, 211, 102, 0.15) !important;
+            border-color: rgba(37, 211, 102, 0.4) !important;
+            color: #25d366 !important;
+        }
+
+        /* ==========================================================================
+           44. MOBILE SCROLL PERFORMANCE — PLANET OPTIMIZATION
+           ========================================================================== */
+        @media (max-width: 768px) {
+            .scroll-planet { display: none !important; }
+            .nebula-cloud { display: none !important; }
+            .comet-streak { display: none !important; }
+            .constellation-divider { gap: 8px; }
+            .glass-depth-2, .glass-depth-3 {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+            }
+        }
+
+        /* ==========================================================================
+           45. SECTION TAG SHIMMER VARIANT
+           ========================================================================== */
+        .section-tag.shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        .section-tag.shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: tag-shimmer 3s ease-in-out infinite;
+        }
+        @keyframes tag-shimmer {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        /* ==========================================================================
+           46. FOOTER LINK STYLES
+           ========================================================================== */
+        .footer-link {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+        .footer-link:hover {
+            color: var(--accent-cyan);
+            transform: translateX(4px);
+        }
+        .footer-divider {
+            width: 1px;
+            height: 16px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ==========================================================================
+           47. ULTRA-WIDE MONITOR SUPPORT (2K+)
+           ========================================================================== */
+        @media (min-width: 2560px) {
+            html { font-size: 20px; }
+            .hero-title { font-size: 11rem !important; letter-spacing: -0.06em; }
+            .comet-card { padding: 3.5rem; border-radius: 28px; }
+            .max-w-\[1400px\] { max-width: 1800px !important; }
+            .section-tag { font-size: 0.7rem; padding: 0.5rem 1.2rem; }
+        }
+
+        /* ==========================================================================
+           48. DARK MODE SCROLLBAR STYLING
+           ========================================================================== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-base);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-purple));
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #67e8f9, #c084fc);
+        }
+
+        /* Firefox scrollbar */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-cyan) var(--bg-base);
+        }
+
+        /* ==========================================================================
+           49. SELECTION HIGHLIGHT STYLING
+           ========================================================================== */
+        ::selection {
+            background: rgba(34, 211, 238, 0.25);
+            color: #fff;
+        }
+        ::-moz-selection {
+            background: rgba(34, 211, 238, 0.25);
+            color: #fff;
+        }
+
+        /* ==========================================================================
+           50. REDUCED MOTION — COMPREHENSIVE OVERRIDES
+           ========================================================================== */
+        @media (prefers-reduced-motion: reduce) {
+            .scroll-planet .planet { animation: none; }
+            .scroll-planet::before { animation: none; }
+            .nebula-cloud { animation: none; }
+            .comet-streak { animation: none; display: none; }
+            .constellation-divider .dot { animation: none; }
+            .floating-orb { animation: none; }
+            .section-fade-in, .section-slide-left, .section-slide-right {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
     </style>
+
 </head>
 <body>
 
@@ -809,6 +1231,88 @@
         <div class="planet-orbit" style="top: 680vh; left: 75vw;" data-speed="-0.5" data-rot="-0.10"><div class="planet p12"><div class="planet-noise"></div></div></div>
         <div class="planet-orbit" style="top: 760vh; left: 25vw;" data-speed="-0.6" data-rot="0.15"><div class="planet p16"><div class="planet-noise"></div></div></div>
         <div class="planet-orbit" style="top: 830vh; left: 80vw;" data-speed="-0.4" data-rot="-0.09"><div class="planet p14"><div class="planet-noise"></div></div></div>
+
+        <!-- ==========================================================================
+             DEEP SPACE PLANETS — Scroll-Synced Revolution
+             Experience → Languages → Education → Skills (stops before Contact)
+             ========================================================================== -->
+        
+        <!-- Experience Zone (900vh - 1050vh) -->
+        <div class="planet-orbit scroll-planet" style="top: 900vh; left: 10vw;" data-speed="-0.35" data-rot="0.11">
+            <div class="planet p1" style="width: 100px; height: 100px;"><div class="planet-noise"></div></div>
+        </div>
+        <div class="planet-orbit scroll-planet" style="top: 950vh; left: 88vw;" data-speed="-0.25" data-rot="-0.14">
+            <div class="planet p4" style="width: 70px; height: 70px;"><div class="planet-noise"></div></div>
+        </div>
+        <div class="planet-orbit scroll-planet" style="top: 1020vh; left: 5vw;" data-speed="-0.45" data-rot="0.09">
+            <div class="planet p11" style="width: 130px; height: 130px;"><div class="planet-noise"></div></div>
+        </div>
+
+        <!-- What I Bring / Key Highlights Zone (1050vh - 1200vh) -->
+        <div class="planet-orbit scroll-planet" style="top: 1050vh; left: 75vw;" data-speed="-0.3" data-rot="-0.13">
+            <div class="planet p2" style="width: 85px; height: 85px;"><div class="planet-noise"></div></div>
+        </div>
+        <div class="planet-orbit scroll-planet" style="top: 1120vh; left: 20vw;" data-speed="-0.5" data-rot="0.16">
+            <div class="planet p7" style="width: 110px; height: 110px;"><div class="planet-noise"></div></div>
+        </div>
+        <div class="planet-orbit scroll-planet" style="top: 1180vh; left: 90vw;" data-speed="-0.35" data-rot="-0.08">
+            <div class="planet p15" style="width: 60px; height: 60px;"><div class="planet-noise"></div></div>
+        </div>
+
+        <!-- Languages Zone (1200vh - 1350vh) -->
+        <div class="planet-orbit scroll-planet" style="top: 1220vh; left: 8vw;" data-speed="-0.4" data-rot="0.12">
+            <div class="planet p3" style="width: 95px; height: 95px;"><div class="planet-noise"></div></div>
+        </div>
+        <div class="planet-orbit scroll-planet" style="top: 1280vh; left: 82vw;" data-speed="-0.28" data-rot="-0.15">
+            <div class="planet p10" style="width: 140px; height: 140px;"><div class="planet-noise"></div></div>
+        </div>
+        <div class="planet-orbit scroll-planet" style="top: 1340vh; left: 15vw;" data-speed="-0.45" data-rot="0.10">
+            <div class="planet p6" style="width: 75px; height: 75px;"><div class="planet-noise"></div></div>
+        </div>
+
+        <!-- Education Zone (1350vh - 1500vh) -->
+        <div class="planet-orbit scroll-planet" style="top: 1380vh; left: 85vw;" data-speed="-0.32" data-rot="-0.11">
+            <div class="planet p8" style="width: 120px; height: 120px;"><div class="planet-noise"></div></div>
+        </div>
+        <div class="planet-orbit scroll-planet" style="top: 1420vh; left: 12vw;" data-speed="-0.5" data-rot="0.14">
+            <div class="planet p13" style="width: 65px; height: 65px;"><div class="planet-noise"></div></div>
+        </div>
+        <div class="planet-orbit scroll-planet" style="top: 1480vh; left: 78vw;" data-speed="-0.38" data-rot="-0.09">
+            <div class="planet p5" style="width: 90px; height: 90px;"><div class="planet-noise"></div></div>
+        </div>
+
+        <!-- Skills Zone (1500vh - 1650vh) — final planets before Contact -->
+        <div class="planet-orbit scroll-planet" style="top: 1520vh; left: 5vw;" data-speed="-0.42" data-rot="0.13">
+            <div class="planet p9" style="width: 105px; height: 105px;"><div class="planet-noise"></div></div>
+        </div>
+        <div class="planet-orbit scroll-planet" style="top: 1580vh; left: 88vw;" data-speed="-0.3" data-rot="-0.16">
+            <div class="planet p12" style="width: 80px; height: 80px;"><div class="planet-noise"></div></div>
+        </div>
+        <div class="planet-orbit scroll-planet" style="top: 1640vh; left: 22vw;" data-speed="-0.48" data-rot="0.11">
+            <div class="planet p16" style="width: 150px; height: 150px;"><div class="planet-noise"></div></div>
+        </div>
+        <div class="planet-orbit scroll-planet" style="top: 1700vh; left: 70vw;" data-speed="-0.35" data-rot="-0.12">
+            <div class="planet p1" style="width: 55px; height: 55px;"><div class="planet-noise"></div></div>
+        </div>
+
+        <!-- ==========================================================================
+             COMET STREAKS — Shooting Stars
+             ========================================================================== -->
+        <div class="comet-streak" aria-hidden="true"></div>
+        <div class="comet-streak" aria-hidden="true"></div>
+        <div class="comet-streak" aria-hidden="true"></div>
+        <div class="comet-streak" aria-hidden="true"></div>
+        <div class="comet-streak" aria-hidden="true"></div>
+
+        <!-- ==========================================================================
+             NEBULA CLOUDS — Atmospheric Depth Overlays
+             ========================================================================== -->
+        <div class="nebula-cloud type-a" style="width: 600px; height: 400px; top: 350vh; left: -10vw;" aria-hidden="true"></div>
+        <div class="nebula-cloud type-b" style="width: 500px; height: 350px; top: 550vh; right: -5vw;" aria-hidden="true"></div>
+        <div class="nebula-cloud type-c" style="width: 450px; height: 300px; top: 750vh; left: 5vw;" aria-hidden="true"></div>
+        <div class="nebula-cloud type-a" style="width: 550px; height: 380px; top: 1000vh; right: 0vw;" aria-hidden="true"></div>
+        <div class="nebula-cloud type-b" style="width: 400px; height: 280px; top: 1200vh; left: -5vw;" aria-hidden="true"></div>
+        <div class="nebula-cloud type-c" style="width: 500px; height: 350px; top: 1450vh; right: -8vw;" aria-hidden="true"></div>
 
         <!-- Starfield generated via JS -->
         <div id="stars-1"></div><div id="stars-2"></div><div id="stars-3"></div>
@@ -932,26 +1436,6 @@
                     </div>
                 </div>
 
-                <!-- Bento Grid Stats -->
-                <div class="comet-cards-wrapper grid grid-cols-2 md:grid-cols-4 gap-6 mt-28 reveal reveal-delay-4">
-                    <div class="comet-card card-tilt !p-8 flex flex-col justify-center items-center text-center hover-trigger border-white/10">
-                        <h2 class="font-display text-5xl md:text-6xl font-black text-primary tracking-tighter mb-3">4.0</h2>
-                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-300 uppercase tracking-widest font-bold">Years Exp.</p>
-                    </div>
-                    <div class="comet-card card-tilt !p-8 flex flex-col justify-center items-center text-center hover-trigger border-white/10">
-                        <h2 class="font-display text-5xl md:text-6xl font-black text-primary tracking-tighter mb-3">3+</h2>
-                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-300 uppercase tracking-widest font-bold">Enterprises</p>
-                    </div>
-                    <div class="comet-card card-tilt !p-8 flex flex-col justify-center items-center text-center hover-trigger border-white/10">
-                        <h2 class="font-display text-5xl md:text-6xl font-black text-primary tracking-tighter mb-3">C1</h2>
-                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-300 uppercase tracking-widest font-bold">German Level</p>
-                    </div>
-                    <div class="comet-card card-tilt !p-8 flex flex-col justify-center items-center text-center hover-trigger border-white/10">
-                        <h2 class="font-display text-5xl md:text-6xl font-black text-primary tracking-tighter mb-3">5</h2>
-                        <p class="font-mono-custom text-[10px] md:text-xs text-gray-300 uppercase tracking-widest font-bold">Certifications</p>
-                    </div>
-                </div>
-
             </div>
         </section>
 
@@ -966,14 +1450,26 @@
                     <div class="comet-cards-wrapper hover-trigger">
                         <div class="comet-card py-10 px-6 flex flex-col items-center">
                             <p class="font-display text-5xl md:text-6xl font-black text-primary mb-2">
-                                <span data-count-to="2" class="tabular-nums">0</span><span class="text-cyan-400">+</span>
+                                <span data-count-to="4" class="tabular-nums">0</span><span class="text-cyan-400">+</span>
                             </p>
                             <p class="font-mono-custom text-[10px] tracking-[0.3em] uppercase" style="color: var(--text-tertiary);">Years Experience</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Stat 2: Languages -->
+                <!-- Stat 2: Enterprises -->
+                <div class="text-center group">
+                    <div class="comet-cards-wrapper hover-trigger">
+                        <div class="comet-card py-10 px-6 flex flex-col items-center">
+                            <p class="font-display text-5xl md:text-6xl font-black text-primary mb-2">
+                                <span data-count-to="3" class="tabular-nums">0</span>
+                            </p>
+                            <p class="font-mono-custom text-[10px] tracking-[0.3em] uppercase" style="color: var(--text-tertiary);">Enterprises</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stat 3: Languages -->
                 <div class="text-center group">
                     <div class="comet-cards-wrapper hover-trigger">
                         <div class="comet-card py-10 px-6 flex flex-col items-center">
@@ -985,26 +1481,14 @@
                     </div>
                 </div>
 
-                <!-- Stat 3: Certifications -->
+                <!-- Stat 4: Certifications -->
                 <div class="text-center group">
                     <div class="comet-cards-wrapper hover-trigger">
                         <div class="comet-card py-10 px-6 flex flex-col items-center">
                             <p class="font-display text-5xl md:text-6xl font-black text-primary mb-2">
-                                <span data-count-to="4" class="tabular-nums">0</span>
+                                <span data-count-to="5" class="tabular-nums">0</span>
                             </p>
                             <p class="font-mono-custom text-[10px] tracking-[0.3em] uppercase" style="color: var(--text-tertiary);">Certifications</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Stat 4: Tickets -->
-                <div class="text-center group">
-                    <div class="comet-cards-wrapper hover-trigger">
-                        <div class="comet-card py-10 px-6 flex flex-col items-center">
-                            <p class="font-display text-5xl md:text-6xl font-black text-primary mb-2">
-                                <span data-count-to="1000" class="tabular-nums">0</span><span class="text-cyan-400">+</span>
-                            </p>
-                            <p class="font-mono-custom text-[10px] tracking-[0.3em] uppercase" style="color: var(--text-tertiary);">Tickets Resolved</p>
                         </div>
                     </div>
                 </div>
@@ -3181,7 +3665,7 @@
                 '%c\n' +
                 '  ╔═══════════════════════════════════════════╗\n' +
                 '  ║                                           ║\n' +
-                '  ║   OSAID SHAHID · PREMIUM PORTFOLIO v3.0   ║\n' +
+                '  ║   OSAID SHAHID · PREMIUM PORTFOLIO v4.0   ║\n' +
                 '  ║   App/Cloud Technical Support Analyst      ║\n' +
                 '  ║                                           ║\n' +
                 '  ║   🌐 osaid56.github.io                    ║\n' +
@@ -3190,11 +3674,360 @@
                 '  ║                                           ║\n' +
                 '  ║   Built with HTML · CSS · Vanilla JS      ║\n' +
                 '  ║   Canvas Physics · Parallax Stars         ║\n' +
+                '  ║   Scroll-Synced Planets · Nebula Clouds   ║\n' +
                 '  ║   Custom Cursor · Fixer Bot Animation     ║\n' +
                 '  ║                                           ║\n' +
                 '  ╚═══════════════════════════════════════════╝\n',
                 'color: #22d3ee; font-family: monospace; font-size: 11px;'
             );
+
+            /* ==========================================================================
+               28. SCROLL-SYNCED PLANET REVOLUTION ENGINE
+               Planets rotate based on scroll position. Revolution stops
+               before the "Let's Connect" (Contact) section.
+               ========================================================================== */
+            const scrollPlanets = document.querySelectorAll('.scroll-planet');
+            const contactSection = document.getElementById('contact');
+            
+            if (scrollPlanets.length > 0 && !isMobile) {
+                // Calculate the scroll boundary (just before Contact)
+                const getContactTop = () => {
+                    return contactSection ? contactSection.offsetTop - window.innerHeight : document.body.scrollHeight;
+                };
+
+                let planetTicking = false;
+                
+                const updateScrollPlanets = () => {
+                    const scrollY = window.scrollY;
+                    const contactTop = getContactTop();
+                    
+                    // Normalize scroll progress (0 to 1) up to Contact section
+                    const scrollProgress = Math.min(scrollY / contactTop, 1);
+                    
+                    scrollPlanets.forEach((orbit, index) => {
+                        const planet = orbit.querySelector('.planet');
+                        if (!planet) return;
+                        
+                        const speed = parseFloat(orbit.dataset.speed) || -0.3;
+                        const rotSpeed = parseFloat(orbit.dataset.rot) || 0.1;
+                        
+                        // Scroll-synced vertical parallax
+                        const yOffset = scrollY * speed;
+                        
+                        // Scroll-synced horizontal sway (sinusoidal)
+                        const xSway = Math.sin(scrollY * 0.001 + index * 1.5) * 30;
+                        
+                        // Scroll-synced rotation — proportional to scroll
+                        const rotation = scrollY * rotSpeed;
+                        
+                        // Apply transforms
+                        orbit.style.transform = `translate(${xSway}px, ${yOffset}px)`;
+                        planet.style.transform = `rotate(${rotation}deg)`;
+                        
+                        // Fade out as user approaches Contact section
+                        if (scrollProgress > 0.85) {
+                            const fadeProgress = (scrollProgress - 0.85) / 0.15;
+                            orbit.style.opacity = Math.max(0, 1 - fadeProgress);
+                        } else {
+                            orbit.style.opacity = 1;
+                        }
+                    });
+                };
+
+                window.addEventListener('scroll', () => {
+                    if (!planetTicking) {
+                        requestAnimationFrame(() => {
+                            updateScrollPlanets();
+                            planetTicking = false;
+                        });
+                        planetTicking = true;
+                    }
+                }, { passive: true });
+                
+                // Initial position
+                updateScrollPlanets();
+            }
+
+            /* ==========================================================================
+               29. NEBULA CLOUD SCROLL PARALLAX
+               Nebula clouds move slower than scroll for depth effect
+               ========================================================================== */
+            const nebulaClouds = document.querySelectorAll('.nebula-cloud');
+            
+            if (nebulaClouds.length > 0 && !isMobile) {
+                let nebulaTicking = false;
+                
+                window.addEventListener('scroll', () => {
+                    if (!nebulaTicking) {
+                        requestAnimationFrame(() => {
+                            const scrollY = window.scrollY;
+                            nebulaClouds.forEach((cloud, i) => {
+                                const speed = 0.05 + (i * 0.01);
+                                const yOffset = scrollY * speed;
+                                const scale = 1 + Math.sin(scrollY * 0.0005 + i) * 0.1;
+                                const opacity = 0.03 + Math.sin(scrollY * 0.001 + i * 2) * 0.02;
+                                cloud.style.transform = `translateY(${-yOffset}px) scale(${scale})`;
+                                cloud.style.opacity = Math.max(0.01, opacity);
+                            });
+                            nebulaTicking = false;
+                        });
+                        nebulaTicking = true;
+                    }
+                }, { passive: true });
+            }
+
+            /* ==========================================================================
+               30. SHOOTING STAR SPAWN SYSTEM
+               Periodically creates additional shooting stars
+               ========================================================================== */
+            function spawnShootingStar() {
+                if (isMobile) return;
+                
+                const star = document.createElement('div');
+                star.className = 'comet-streak';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.animationDuration = (2 + Math.random() * 3) + 's';
+                star.style.opacity = '0';
+                star.setAttribute('aria-hidden', 'true');
+                
+                const cosmosContainer = document.getElementById('cosmos-container');
+                if (cosmosContainer) {
+                    cosmosContainer.appendChild(star);
+                    
+                    // Clean up after animation completes
+                    setTimeout(() => {
+                        star.remove();
+                    }, 6000);
+                }
+            }
+            
+            // Spawn a shooting star every 8-15 seconds
+            if (!isMobile) {
+                setInterval(() => {
+                    if (Math.random() > 0.4) {
+                        spawnShootingStar();
+                    }
+                }, 8000 + Math.random() * 7000);
+            }
+
+            /* ==========================================================================
+               31. SECTION TRANSITION OBSERVER
+               Adds slide/fade animations to sections on scroll
+               ========================================================================== */
+            const transitionElements = document.querySelectorAll('.section-fade-in, .section-slide-left, .section-slide-right');
+            
+            if (transitionElements.length > 0) {
+                const transitionObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            transitionObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+                transitionElements.forEach(el => transitionObserver.observe(el));
+            }
+
+            /* ==========================================================================
+               32. MAGNETIC TEXT EFFECT ON HOVER
+               Hero title words slightly attract toward cursor
+               ========================================================================== */
+            const heroTitle = document.querySelector('.hero-title');
+            
+            if (heroTitle && !isMobile) {
+                heroTitle.addEventListener('mousemove', (e) => {
+                    const rect = heroTitle.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    
+                    // Subtle magnetic pull (max 5px movement)
+                    const moveX = x * 0.02;
+                    const moveY = y * 0.02;
+                    
+                    heroTitle.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                    heroTitle.style.transition = 'transform 0.15s ease-out';
+                });
+                
+                heroTitle.addEventListener('mouseleave', () => {
+                    heroTitle.style.transform = '';
+                    heroTitle.style.transition = 'transform 0.5s ease-out';
+                });
+            }
+
+            /* ==========================================================================
+               33. SMOOTH NUMBER FORMATTING FOR COUNTERS
+               Formats large numbers with commas (1000 → 1,000)
+               ========================================================================== */
+            function formatNumber(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            }
+
+            // Update counter animation to use formatted numbers
+            const formattedCounters = document.querySelectorAll('[data-count-to]');
+            formattedCounters.forEach(el => {
+                const target = parseInt(el.dataset.countTo, 10);
+                if (target >= 1000) {
+                    // Override the counter observer to format output
+                    const formatObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const duration = 2000;
+                                const startTime = performance.now();
+                                
+                                function updateFormatted(currentTime) {
+                                    const elapsed = currentTime - startTime;
+                                    const progress = Math.min(elapsed / duration, 1);
+                                    const easedProgress = 1 - Math.pow(1 - progress, 3);
+                                    const current = Math.floor(easedProgress * target);
+                                    entry.target.textContent = formatNumber(current);
+                                    
+                                    if (progress < 1) {
+                                        requestAnimationFrame(updateFormatted);
+                                    } else {
+                                        entry.target.textContent = formatNumber(target);
+                                    }
+                                }
+                                
+                                requestAnimationFrame(updateFormatted);
+                                formatObserver.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.5 });
+                    
+                    formatObserver.observe(el);
+                }
+            });
+
+            /* ==========================================================================
+               34. TOUCH GESTURE SUPPORT FOR MOBILE NAV
+               Swipe down from top to open menu, swipe up to close
+               ========================================================================== */
+            if (isMobile) {
+                let touchStartY = 0;
+                let touchEndY = 0;
+                
+                document.addEventListener('touchstart', (e) => {
+                    touchStartY = e.changedTouches[0].screenY;
+                }, { passive: true });
+                
+                document.addEventListener('touchend', (e) => {
+                    touchEndY = e.changedTouches[0].screenY;
+                    handleSwipe();
+                }, { passive: true });
+                
+                function handleSwipe() {
+                    const swipeDistance = touchEndY - touchStartY;
+                    const minSwipeDistance = 80;
+                    
+                    // Only trigger near top of page
+                    if (window.scrollY < 100) {
+                        if (swipeDistance > minSwipeDistance && typeof isMenuOpen !== 'undefined' && !isMenuOpen) {
+                            // Swipe down — could trigger menu or other action
+                        }
+                    }
+                    
+                    // Swipe up to close mobile menu if open
+                    if (swipeDistance < -minSwipeDistance && typeof isMenuOpen !== 'undefined' && isMenuOpen) {
+                        toggleMenu();
+                    }
+                }
+            }
+
+            /* ==========================================================================
+               35. NETWORK SPEED DETECTION — ADAPTIVE RENDERING
+               Reduces visual complexity on slow connections
+               ========================================================================== */
+            if ('connection' in navigator) {
+                const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+                
+                if (connection) {
+                    const effectiveType = connection.effectiveType;
+                    
+                    // On 2G/slow-3g, disable heavy effects
+                    if (effectiveType === '2g' || effectiveType === 'slow-2g') {
+                        document.querySelectorAll('.scroll-planet, .nebula-cloud, .comet-streak, .floating-orb').forEach(el => {
+                            el.style.display = 'none';
+                        });
+                        document.querySelectorAll('.planet-orbit').forEach(el => {
+                            el.style.display = 'none';
+                        });
+                        console.log('🌐 Slow connection detected — reduced visual effects for performance.');
+                    }
+                    
+                    // On 3G, reduce planet count
+                    if (effectiveType === '3g') {
+                        document.querySelectorAll('.scroll-planet:nth-child(even)').forEach(el => {
+                            el.style.display = 'none';
+                        });
+                        console.log('🌐 3G connection — reduced planet density.');
+                    }
+                }
+            }
+
+            /* ==========================================================================
+               36. PAGE VISIBILITY API — PAUSE ANIMATIONS WHEN TAB IS HIDDEN
+               ========================================================================== */
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    // Pause all CSS animations
+                    document.documentElement.style.setProperty('--animation-play-state', 'paused');
+                    document.querySelectorAll('.scroll-planet .planet, .nebula-cloud, .floating-orb, .comet-streak').forEach(el => {
+                        el.style.animationPlayState = 'paused';
+                    });
+                } else {
+                    // Resume animations
+                    document.documentElement.style.setProperty('--animation-play-state', 'running');
+                    document.querySelectorAll('.scroll-planet .planet, .nebula-cloud, .floating-orb, .comet-streak').forEach(el => {
+                        el.style.animationPlayState = 'running';
+                    });
+                }
+            });
+
+            /* ==========================================================================
+               37. INTERSECTION-BASED LAZY RENDERING FOR PLANETS
+               Only animate planets visible in viewport
+               ========================================================================== */
+            if (!isMobile) {
+                const allPlanetOrbits = document.querySelectorAll('.planet-orbit');
+                
+                const planetVisibilityObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        const planet = entry.target.querySelector('.planet');
+                        if (planet) {
+                            if (entry.isIntersecting) {
+                                planet.style.animationPlayState = 'running';
+                                entry.target.style.willChange = 'transform';
+                            } else {
+                                planet.style.animationPlayState = 'paused';
+                                entry.target.style.willChange = 'auto';
+                            }
+                        }
+                    });
+                }, { rootMargin: '200px' });
+
+                allPlanetOrbits.forEach(orbit => planetVisibilityObserver.observe(orbit));
+            }
+
+            /* ==========================================================================
+               38. SCROLL DEPTH TRACKING
+               Tracks how far user scrolled for analytics
+               ========================================================================== */
+            const scrollMilestones = [25, 50, 75, 100];
+            const reachedMilestones = new Set();
+            
+            window.addEventListener('scroll', () => {
+                const scrollPercent = Math.round(
+                    (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
+                );
+                
+                scrollMilestones.forEach(milestone => {
+                    if (scrollPercent >= milestone && !reachedMilestones.has(milestone)) {
+                        reachedMilestones.add(milestone);
+                        console.log(`📊 Scroll depth: ${milestone}% reached`);
+                    }
+                });
+            }, { passive: true });
 
         });
     </script>
