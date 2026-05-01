@@ -20,26 +20,26 @@
            01. ENTERPRISE DESIGN SYSTEM & CSS VARIABLES
            ========================================================================== */
         :root {
-            --bg-base: #000000;
-            --bg-surface: rgba(5, 5, 5, 0.85); 
-            --bg-surface-solid: #000000;
-            --bg-surface-glass: rgba(0, 0, 0, 0.9);
+            --bg-base: #050508;
+            --bg-surface: rgba(10, 10, 18, 0.75); 
+            --bg-surface-solid: #08080c;
+            --bg-surface-glass: rgba(5, 5, 12, 0.88);
             
-            --text-primary: #d4d4d8; 
-            --text-secondary: #a1a1aa; 
+            --text-primary: #e4e4e7; 
+            --text-secondary: #a8a8b3; 
             --text-tertiary: #71717a;
             --text-inverse: #000000;
             
             --accent-primary: #e4e4e7; 
-            --accent-indigo: #4f46e5;
+            --accent-indigo: #6366f1;
             --accent-emerald: #10b981;
-            --accent-cyan: #00e1ff;
-            --accent-purple: #bc13fe;
+            --accent-cyan: #22d3ee;
+            --accent-purple: #a855f7;
             --accent-neon-green: #39FF14;
             
-            --border-light: rgba(255, 255, 255, 0.1);
-            --border-medium: rgba(255, 255, 255, 0.2);
-            --border-glow: rgba(0, 225, 255, 0.3);
+            --border-light: rgba(255, 255, 255, 0.08);
+            --border-medium: rgba(255, 255, 255, 0.15);
+            --border-glow: rgba(34, 211, 238, 0.3);
             
             --shadow-xs: 0 2px 10px rgba(0, 0, 0, 0.3);
             --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.6);
@@ -60,11 +60,15 @@
            ========================================================================== */
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         ::selection { background-color: var(--accent-cyan); color: var(--text-inverse); }
-        html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
-        body { background-color: var(--bg-base); color: var(--text-primary); font-family: 'Inter', sans-serif; overflow-x: hidden; width: 100%; position: relative; line-height: 1.7; }
-        h1, h2, h3, h4, h5, h6, .font-display { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; }
+        html { font-size: 17px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+        body { background-color: var(--bg-base); color: var(--text-primary); font-family: 'Inter', sans-serif; font-feature-settings: 'liga' 1, 'calt' 1, 'tnum' 1; overflow-x: hidden; width: 100%; position: relative; line-height: 1.8; }
+        h1, h2, h3, h4, h5, h6, .font-display { font-family: 'Outfit', sans-serif; letter-spacing: -0.03em; line-height: 1.15; }
         .font-mono-custom { font-family: 'JetBrains Mono', monospace; }
         .text-primary { color: var(--text-primary) !important; }
+
+        /* Gradient text utility for premium headings */
+        .gradient-text { background: linear-gradient(135deg, #e4e4e7 0%, #a8a8b3 50%, #e4e4e7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .gradient-text-cyan { background: linear-gradient(135deg, #22d3ee 0%, #a855f7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
         /* ==========================================================================
            03. CUSTOM PHYSICS-BASED CURSOR
@@ -80,7 +84,7 @@
         /* ==========================================================================
            04. PERPLEXITY COMET COSMOS ENGINE
            ========================================================================== */
-        #cosmos-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3; overflow: hidden; background: #000000; pointer-events: none; }
+        #cosmos-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3; overflow: hidden; background: radial-gradient(ellipse at 50% 0%, #0a0a1a 0%, #050508 70%); pointer-events: none; }
         .planet-noise { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E"); mix-blend-mode: overlay; border-radius: 50%; pointer-events: none; }
         .planet-orbit { position: absolute; top: 50%; left: 50%; will-change: transform; }
         .planet { position: absolute; border-radius: 50%; transform: translate3d(-50%, -50%, 0); box-shadow: inset -30px -30px 60px rgba(0,0,0,0.9), inset 10px 10px 40px rgba(255,255,255,0.3), 0 0 100px rgba(0,0,0,0.5); }
@@ -130,13 +134,14 @@
             backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
             border-radius: var(--card-radius); padding: 2.5rem;
             box-shadow: var(--shadow-lg); z-index: 1;
-            transition: transform 0.6s var(--ease-out-expo), box-shadow 0.6s var(--ease-out-expo);
+            transition: transform 0.6s var(--ease-out-expo), box-shadow 0.6s var(--ease-out-expo), border-color 0.4s ease;
             height: 100%; display: flex; flex-direction: column;
             border: 1px solid var(--border-light);
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
         }
         .comet-cards-wrapper::before { content: ''; position: absolute; inset: -2px; border-radius: calc(var(--card-radius) + 2px); background: radial-gradient(600px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px), var(--accent-cyan), transparent 40%); z-index: -1; opacity: 0; transition: opacity 0.4s ease; pointer-events: none; }
         .comet-cards-wrapper:hover::before { opacity: 1; }
-        .comet-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--shadow-xl), 0 0 30px rgba(0, 225, 255, 0.1); }
+        .comet-card:hover { transform: translateY(-6px) scale(1.01); box-shadow: var(--shadow-lg), 0 0 40px rgba(34, 211, 238, 0.06), inset 0 1px 0 rgba(255,255,255,0.1); border-color: rgba(255, 255, 255, 0.15); }
 
         /* ==========================================================================
            07. PREMIUM COMPONENTS
@@ -147,10 +152,14 @@
         .btn-premium:hover { box-shadow: 0 15px 40px rgba(0, 225, 255, 0.3); color: black; }
         .btn-premium:hover::before { height: 100%; }
 
-        .section-tag { display: inline-flex; align-items: center; padding: 0.6rem 1.5rem; background-color: rgba(255,255,255,0.05); border: 1px solid var(--border-light); border-radius: var(--button-radius); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-primary); text-transform: uppercase; margin-bottom: 2.5rem; transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s ease; }
-        .section-tag:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,225,255,0.1); border-color: var(--border-medium); }
-        .section-tag::before { content: ''; display: block; width: 8px; height: 8px; background-color: var(--accent-cyan); border-radius: 50%; margin-right: 12px; box-shadow: 0 0 10px var(--accent-cyan); animation: pulse-dot 2s infinite alternate; }
-        @keyframes pulse-dot { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0.5; transform: scale(0.8); } }
+        .section-tag { display: inline-flex; align-items: center; padding: 0.6rem 1.5rem; background-color: rgba(255,255,255,0.03); border: 1px solid var(--border-light); border-radius: var(--button-radius); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 2rem; transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s ease; }
+        .section-tag:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(34,211,238,0.08); border-color: var(--border-medium); }
+        .section-tag::before { content: ''; display: block; width: 6px; height: 6px; background-color: var(--accent-cyan); border-radius: 50%; margin-right: 12px; box-shadow: 0 0 8px var(--accent-cyan); animation: breathe-dot 3s ease-in-out infinite; }
+        @keyframes breathe-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.7); } }
+
+        /* Section title gradient underline */
+        .section-title-underline { position: relative; display: inline-block; }
+        .section-title-underline::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 60px; height: 3px; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple)); border-radius: 2px; }
 
         /* ==========================================================================
            08. GLASSMORPHISM NAVIGATION
@@ -165,11 +174,11 @@
            09. TIMELINES (EXPERIENCE & EXACT EDUCATION)
            ========================================================================== */
         .timeline-container { position: relative; padding-top: 1rem; padding-bottom: 1rem; }
-        .timeline-container::before { content: ''; position: absolute; top: 0; bottom: 0; left: 28px; width: 2px; background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.15) 10%, rgba(255,255,255,0.15) 90%, transparent 100%); }
+        .timeline-container::before { content: ''; position: absolute; top: 0; bottom: 0; left: 28px; width: 2px; background: linear-gradient(to bottom, transparent 0%, rgba(34, 211, 238, 0.15) 10%, rgba(34, 211, 238, 0.08) 50%, rgba(168, 85, 247, 0.15) 90%, transparent 100%); }
         .timeline-node { position: relative; padding-left: 6rem; margin-bottom: 5rem; }
         .timeline-node:last-child { margin-bottom: 0; }
-        .timeline-dot { position: absolute; left: 20px; top: 2.5rem; width: 18px; height: 18px; background-color: var(--bg-base); border: 3px solid var(--text-secondary); border-radius: 50%; transition: all 0.6s var(--ease-elastic); z-index: 2; }
-        .timeline-node:hover .timeline-dot { background-color: var(--accent-cyan); border-color: var(--accent-cyan); transform: scale(1.5); box-shadow: 0 0 20px var(--accent-cyan); }
+        .timeline-dot { position: absolute; left: 20px; top: 2.5rem; width: 16px; height: 16px; background-color: var(--bg-base); border: 2px solid var(--text-tertiary); border-radius: 50%; transition: all 0.6s var(--ease-elastic); z-index: 2; }
+        .timeline-node:hover .timeline-dot { background-color: var(--accent-cyan); border-color: var(--accent-cyan); transform: scale(1.5); box-shadow: 0 0 20px rgba(34, 211, 238, 0.4); }
 
         .edu-timeline-container::before { left: 50%; transform: translateX(-50%); }
         .edu-timeline-node { width: 100%; display: flex; justify-content: flex-start; margin-bottom: 3.5rem; position: relative; }
@@ -181,12 +190,27 @@
         /* ==========================================================================
            10. SCROLL REVEAL ANIMATIONS
            ========================================================================== */
-        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo); will-change: opacity; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
         .reveal.active { opacity: 1; transform: translateY(0); }
         .reveal-delay-1 { transition-delay: 0.1s; }
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
         .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
+        .reveal-delay-6 { transition-delay: 0.6s; }
+
+        /* Active nav indicator */
+        .nav-link.active { color: var(--text-primary); }
+        .nav-link.active::after { width: 100%; background-color: var(--accent-cyan); box-shadow: 0 0 8px var(--accent-cyan); }
+
+        /* Tech badge utility */
+        .tech-badge { display: inline-flex; align-items: center; padding: 0.35rem 0.85rem; background-color: rgba(34, 211, 238, 0.06); border: 1px solid rgba(34, 211, 238, 0.15); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.5px; color: var(--accent-cyan); text-transform: uppercase; transition: all 0.3s ease; }
+        .tech-badge:hover { background-color: rgba(34, 211, 238, 0.12); border-color: rgba(34, 211, 238, 0.3); }
+
+        /* Bullet point styling for experience */
+        .exp-bullet { display: flex; align-items: flex-start; gap: 1rem; padding: 0.5rem 0; }
+        .exp-bullet-icon { flex-shrink: 0; width: 20px; height: 20px; margin-top: 4px; color: var(--text-tertiary); }
+        .exp-bullet span { color: var(--text-secondary); font-weight: 400; line-height: 1.7; }
 
         /* ==========================================================================
            11. CONTACT SECTION & SOCIAL CARDS
@@ -218,11 +242,38 @@
 
         @media (max-width: 768px) {
             html { font-size: 14px; }
-            .comet-card { padding: 1.5rem; border-radius: 20px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); background-color: rgba(12, 12, 15, 0.96); }
+
+            /* CRITICAL: Remove ALL backdrop-filter on mobile — biggest GPU killer */
+            .comet-card { 
+                padding: 1.5rem; 
+                border-radius: 20px; 
+                backdrop-filter: none !important; 
+                -webkit-backdrop-filter: none !important; 
+                background-color: rgba(12, 12, 15, 0.97); 
+            }
+            .glass-nav {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                background-color: rgba(0, 0, 0, 0.96);
+            }
+
+            /* Hide canvas particle system on mobile — invisible anyway */
+            #physics-canvas { display: none !important; }
+
+            /* Hide excess planets — keep only first 7 */
+            .planet-orbit:nth-child(n+8) { display: none !important; }
+            
+            /* Pause planet spin animations on mobile */
+            .planet { animation-play-state: paused !important; }
+
+            /* Remove will-change GPU layer promotion on mobile */
+            #stars-1, #stars-2, #stars-3, .planet-orbit { will-change: auto !important; }
+
+            /* Existing mobile overrides */
             .planet-noise { display: none !important; }
             .bs-shadow-caster { display: none !important; }
             .beautiful-saturn-wrapper { box-shadow: none !important; filter: none !important; }
-            .char-inner { filter: none !important; text-shadow: none !important; drop-shadow: none !important; }
+            .char-inner { filter: none !important; text-shadow: none !important; }
             .bot-glow { animation: none !important; filter: none !important; }
             .tractor-beam { box-shadow: none !important; }
             .planet-orbit { will-change: auto; }
@@ -233,6 +284,11 @@
             .cursor-dot, .cursor-outline { display: none; }
             body { cursor: auto; }
             .btn-premium, .hover-trigger, a, button { cursor: pointer; }
+        }
+
+        /* CSS containment — helps browser skip rendering off-screen sections */
+        section {
+            contain: layout style;
         }
 
         /* Physics Text Setup */
@@ -293,7 +349,7 @@
                 <a href="#about" class="nav-link hover-trigger">Identity</a>
                 <a href="#experience" class="nav-link hover-trigger">Experience</a>
                 <a href="#education" class="nav-link hover-trigger">Education</a>
-                <a href="#expertise" class="nav-link hover-trigger">Skills</a>
+                <a href="#skills" class="nav-link hover-trigger">Skills</a>
                 <a href="#contact" class="nav-link hover-trigger">Contact</a>
             </div>
             <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 focus:outline-none z-50 relative hover-trigger" aria-label="Toggle Menu">
@@ -308,7 +364,7 @@
         <a href="#about" class="font-display text-5xl font-bold text-gray-300 mobile-link hover-trigger">Identity</a>
         <a href="#experience" class="font-display text-5xl font-bold text-gray-300 mobile-link hover-trigger">Experience</a>
         <a href="#education" class="font-display text-5xl font-bold text-gray-300 mobile-link hover-trigger">Education</a>
-        <a href="#expertise" class="font-display text-5xl font-bold text-gray-300 mobile-link hover-trigger">Skills</a>
+        <a href="#skills" class="font-display text-5xl font-bold text-gray-300 mobile-link hover-trigger">Skills</a>
         <a href="#contact" class="font-display text-5xl font-bold text-gray-300 mobile-link hover-trigger">Contact</a>
     </div>
 
@@ -421,12 +477,12 @@
         <!-- ==========================================================================
              EXPERIENCE SECTION (CV EXACT)
              ========================================================================== -->
-        <section id="experience" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-white/10">
+        <section id="experience" class="py-40 px-6 max-w-[1400px] mx-auto border-t border-white/5">
             
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 reveal">
                 <div>
                     <div class="section-tag hover-trigger">Career Trajectory</div>
-                    <h2 class="font-display text-5xl md:text-[4.5rem] font-black tracking-tighter text-primary leading-tight mt-4">
+                    <h2 class="font-display text-5xl md:text-[5rem] font-black tracking-tighter text-primary leading-tight mt-4 section-title-underline">
                         Professional <br> History.
                     </h2>
                 </div>
@@ -439,45 +495,49 @@
                     <div class="timeline-dot"></div>
                     <div class="comet-cards-wrapper">
                         <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/10 pb-6">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/5 pb-6">
                                 <div>
-                                    <h3 class="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">App/cloud Technical Support Analyst</h3>
-                                    <p class="font-mono-custom text-sm text-accent-cyan mt-2 tracking-widest uppercase font-bold">Accenture &middot; Gurugram, Haryana</p>
+                                    <h3 class="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">App/Cloud Technical Support Analyst</h3>
+                                    <p class="font-mono-custom text-sm mt-2 tracking-wide uppercase font-bold" style="color: var(--accent-cyan)">Accenture &middot; Gurugram, Haryana</p>
                                 </div>
-                                <span class="inline-block px-5 py-2.5 bg-white/10 border border-white/20 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap shadow-sm">
+                                <span class="inline-block px-5 py-2.5 bg-white/5 border border-white/10 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap">
                                     11/2024 — Present
                                 </span>
                             </div>
-                            <ul class="space-y-5 text-gray-300 leading-relaxed text-base md:text-lg font-light">
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-accent-cyan mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span class="font-medium text-gray-300">Delivered end-to-end technical solutions to end-users from Germany, Austria, and Switzerland.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Added and configured new devices within the corporate network.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Managed DHCP servers for network related issues.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Troubleshot printer issues, including connectivity, installation, and driver errors.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <div class="space-y-4 mb-8">
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    <span>Delivered end-to-end technical solutions to end-users from Germany, Austria, and Switzerland.</span>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                                     <span>Managed user accounts, permissions, and security groups using Azure Active Directory.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Worked on all kind of Windows related Issues.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Delivered end-to-end technical support to end users, ensuring minimal disruption to daily operations.</span>
-                                </li>
-                            </ul>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    <span>Added and configured new devices within the corporate network.</span>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    <span>Managed DHCP servers for network related issues.</span>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    <span>Troubleshot printer issues, including connectivity, installation, and driver errors.</span>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    <span>Worked on all kinds of Windows related issues.</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 pt-2 border-t border-white/5">
+                                <span class="tech-badge">Azure AD</span>
+                                <span class="tech-badge">DHCP</span>
+                                <span class="tech-badge">Windows</span>
+                                <span class="tech-badge">Intune</span>
+                                <span class="tech-badge">ServiceNow</span>
+                                <span class="tech-badge">German C1</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -487,45 +547,45 @@
                     <div class="timeline-dot"></div>
                     <div class="comet-cards-wrapper">
                         <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/10 pb-6">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/5 pb-6">
                                 <div>
                                     <h3 class="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">Senior Systems Administrator</h3>
-                                    <p class="font-mono-custom text-sm text-accent-cyan mt-2 tracking-wide uppercase font-bold">ITC Infotech &middot; Bengaluru, Karnataka</p>
+                                    <p class="font-mono-custom text-sm mt-2 tracking-wide uppercase font-bold" style="color: var(--accent-cyan)">ITC Infotech &middot; Bengaluru, Karnataka</p>
                                 </div>
-                                <span class="inline-block px-5 py-2.5 bg-white/10 border border-white/20 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap shadow-sm">
+                                <span class="inline-block px-5 py-2.5 bg-white/5 border border-white/10 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap">
                                     04/2024 — 11/2024
                                 </span>
                             </div>
-                            <ul class="space-y-5 text-gray-300 leading-relaxed text-base md:text-lg font-light">
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <div class="space-y-4 mb-8">
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                                     <span>Administer Windows, Office, Active Directory, and network infrastructure. Manage DHCP and resolve network issues.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                                     <span>Working as L1-L1.5 support and communicating with German-speaking users to resolve inquiries and issues.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                                     <span>Added and configured new devices in the company network. Assigned static and dynamic IP addresses to devices.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Troubleshot printer issues (installation, connectivity, driver problems).</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                                     <span>Managed user access and permissions through Azure AD.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                                     <span>Resolved all types of Windows issues.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Using tools like Azure, Microsoft Admin center, ARS, AD, Intune, Bomgar, Servicenow, Confluence.</span>
-                                </li>
-                            </ul>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 pt-2 border-t border-white/5">
+                                <span class="tech-badge">Azure AD</span>
+                                <span class="tech-badge">ARS</span>
+                                <span class="tech-badge">Intune</span>
+                                <span class="tech-badge">Bomgar</span>
+                                <span class="tech-badge">ServiceNow</span>
+                                <span class="tech-badge">Confluence</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -535,44 +595,49 @@
                     <div class="timeline-dot"></div>
                     <div class="comet-cards-wrapper">
                         <div class="comet-card hover-trigger p-8 md:p-12 border-white/10">
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/10 pb-6">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-white/5 pb-6">
                                 <div>
-                                    <h3 class="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">Senior associate/German language technical support</h3>
-                                    <p class="font-mono-custom text-sm text-accent-cyan mt-2 tracking-wide uppercase font-bold">Wipro Limited &middot; Hyderabad</p>
+                                    <h3 class="font-display text-2xl md:text-3xl font-bold text-primary tracking-tight">Senior Associate / German Language Technical Support</h3>
+                                    <p class="font-mono-custom text-sm mt-2 tracking-wide uppercase font-bold" style="color: var(--accent-cyan)">Wipro Limited &middot; Hyderabad</p>
                                 </div>
-                                <span class="inline-block px-5 py-2.5 bg-white/10 border border-white/20 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap shadow-sm">
+                                <span class="inline-block px-5 py-2.5 bg-white/5 border border-white/10 rounded-full font-mono-custom text-[10px] sm:text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap">
                                     12/2021 — 09/2023
                                 </span>
                             </div>
-                            <ul class="space-y-5 text-gray-300 leading-relaxed text-base md:text-lg font-light">
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <div class="space-y-4 mb-8">
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                                     <span>Worked for Wipro Technologies as Google T1 accessibility technical support (German).</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Proactively identified solution to common user issues.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Provided technical support to user's on Accessibility technologies.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Job profile involes speaking, chatting and writing. Resolving users issues via call chat or email.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Dealing with Google platforms that have Android support in it.</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-6 h-6 mr-4 text-gray-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    <span>Proactively identified solutions to common user issues.</span>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    <span>Provided technical support to users on Accessibility technologies.</span>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    <span>Resolving user issues via call, chat or email across Google platforms with Android support.</span>
+                                </div>
+                                <div class="exp-bullet">
+                                    <svg class="exp-bullet-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                                     <span>Adhered to quality and service standards to support operational goals.</span>
-                                </li>
-                            </ul>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 pt-2 border-t border-white/5">
+                                <span class="tech-badge">Google Workspace</span>
+                                <span class="tech-badge">Android</span>
+                                <span class="tech-badge">WCAG</span>
+                                <span class="tech-badge">NVDA</span>
+                                <span class="tech-badge">German B2-C1</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+
 
             </div>
         </section>
@@ -580,16 +645,16 @@
         <!-- ==========================================================================
              EDUCATION TIMELINE SECTION (CV EXACT)
              ========================================================================== -->
-        <section id="education" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-white/10 relative">
+        <section id="education" class="py-40 px-6 max-w-[1400px] mx-auto border-t border-white/5 relative">
             <div class="reveal mb-24 text-center">
                 <div class="section-tag mx-auto hover-trigger">Academic Foundation</div>
-                <h2 class="font-display text-5xl md:text-[4.5rem] font-black tracking-tighter text-primary leading-tight mt-4">
+                <h2 class="font-display text-5xl md:text-[5rem] font-black tracking-tighter text-primary leading-tight mt-4">
                     Education.
                 </h2>
             </div>
 
             <!-- Custom Vertical Split Timeline -->
-            <div class="edu-timeline-container relative max-w-5xl mx-auto before:absolute before:top-0 before:bottom-0 before:w-[2px] before:bg-gradient-to-b before:from-transparent before:via-white/20 before:to-transparent">
+            <div class="edu-timeline-container relative max-w-5xl mx-auto before:absolute before:top-0 before:bottom-0 before:w-[2px] before:bg-gradient-to-b before:from-transparent before:via-[rgba(34,211,238,0.15)] before:to-transparent">
                 
                 <!-- Advanced Diploma -->
                 <div class="edu-timeline-node reveal">
@@ -676,12 +741,12 @@
         <!-- ==========================================================================
              EXPERTISE & SKILLS SECTION
              ========================================================================== -->
-        <section id="expertise" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-white/10">
+        <section id="skills" class="py-40 px-6 max-w-[1400px] mx-auto border-t border-white/5">
             
             <div class="reveal mb-24">
                 <div class="section-tag hover-trigger">Core Competencies</div>
-                <h2 class="font-display text-5xl md:text-[4.5rem] font-black tracking-tighter text-primary leading-tight mt-4">
-                    Expertise & <br> Credentials.
+                <h2 class="font-display text-5xl md:text-[5rem] font-black tracking-tighter text-primary leading-tight mt-4 section-title-underline">
+                    Expertise &<br> Credentials.
                 </h2>
             </div>
 
@@ -812,15 +877,15 @@
         <!-- ==========================================================================
              CONTACT SECTION (CRED STYLE PREMIUM CARDS W/ CUSTOM ICONS)
              ========================================================================== -->
-        <section id="contact" class="py-32 px-6 max-w-[1400px] mx-auto border-t border-white/10">
+        <section id="contact" class="py-40 px-6 max-w-[1400px] mx-auto border-t border-white/5">
             
             <div class="text-center max-w-2xl mx-auto mb-24 reveal">
                 <div class="section-tag mx-auto hover-trigger">Initiate Handshake</div>
-                <h2 class="font-display text-5xl md:text-[4.5rem] font-black tracking-tighter text-primary leading-tight mt-4 mb-6">
+                <h2 class="font-display text-5xl md:text-[5rem] font-black tracking-tighter text-primary leading-tight mt-4 mb-6">
                     Let's Connect.
                 </h2>
-                <p class="text-xl text-gray-400 font-light">
-                    Available for technical support, systems administration, and high-level operations consulting.
+                <p class="text-xl leading-relaxed" style="color: var(--text-secondary)">
+                    Open to opportunities in technical support, systems administration, and IT operations. Let's build something great together.
                 </p>
             </div>
             
@@ -894,12 +959,13 @@
     <!-- ==========================================================================
          FOOTER
          ========================================================================== -->
-    <footer class="border-t border-white/10 py-16 text-center flex flex-col items-center bg-black relative z-10">
-        <p class="text-xs text-gray-500 font-mono-custom tracking-[0.2em] uppercase mb-4">
+    <footer class="border-t border-white/5 py-16 text-center flex flex-col items-center relative z-10" style="background-color: var(--bg-base)">
+        <div class="w-24 h-[1px] mb-8" style="background: linear-gradient(90deg, transparent, var(--accent-cyan), var(--accent-purple), transparent)"></div>
+        <p class="text-xs font-mono-custom tracking-[0.2em] uppercase mb-4" style="color: var(--text-tertiary)">
             Based in Maunath Bhanjan, Mau, India 275101
         </p>
-        <p class="text-[10px] text-gray-600 font-mono-custom tracking-widest uppercase font-bold">
-            Premium Architecture · Designed & Built by Osaid Shahid · © 2026
+        <p class="text-[10px] font-mono-custom tracking-widest uppercase font-bold" style="color: var(--text-tertiary); opacity: 0.6">
+            Designed & Built by Osaid Shahid · © 2026
         </p>
     </footer>
 
@@ -1166,11 +1232,11 @@
                             const dy = particles[i].y - particles[j].y;
                             const distSq = dx * dx + dy * dy;
                             if (distSq < 16900) {
-                                const dist = Math.sqrt(distSq);
                                 ctx.beginPath();
                                 ctx.moveTo(particles[i].x, particles[i].y);
                                 ctx.lineTo(particles[j].x, particles[j].y);
-                                ctx.strokeStyle = `rgba(255, 255, 255, ${0.03 * (1 - dist / 130)})`;
+                                // Use squared distance approximation — no sqrt needed
+                                ctx.strokeStyle = `rgba(255, 255, 255, ${0.03 * (1 - distSq / 16900)})`;
                                 ctx.lineWidth = 0.5;
                                 ctx.stroke();
                             }
@@ -1195,32 +1261,49 @@
             const star3 = document.getElementById('stars-3');
             const mainSaturn = document.getElementById('main-saturn');
 
-            // Set stars with solid math floors to avoid render corruption
-            if (star1) star1.style.boxShadow = generateStars(1000);
-            if (star2) star2.style.boxShadow = generateStars(500);
-            if (star3) star3.style.boxShadow = generateStars(200);
+            // FIX: Reduce star counts dramatically on mobile (1700 -> 230 box-shadows)
+            const isMobile = window.innerWidth < 768;
+            if (star1) star1.style.boxShadow = generateStars(isMobile ? 150 : 700);
+            if (star2) star2.style.boxShadow = generateStars(isMobile ? 60 : 300);
+            if (star3) star3.style.boxShadow = generateStars(isMobile ? 20 : 100);
+
+            // FIX: Cache planet refs ONCE at init — no querySelectorAll inside rAF
+            const planetOrbits = [...document.querySelectorAll('.planet-orbit')].map(orbit => ({
+                el: orbit,
+                speed: parseFloat(orbit.dataset.speed),
+                rot: parseFloat(orbit.dataset.rot)
+            }));
 
             let parallaxTicking = false;
             window.addEventListener('scroll', () => {
                 if (!parallaxTicking) {
                     window.requestAnimationFrame(() => {
                         const scrollY = window.scrollY;
-                        document.querySelectorAll('.planet-orbit').forEach(orbit => {
-                            const speed = parseFloat(orbit.dataset.speed);
-                            const rotSpeed = parseFloat(orbit.dataset.rot);
-                            orbit.style.transform = `translate3d(-50%, -50%, 0) translateY(${scrollY * speed}px) rotate(${scrollY * rotSpeed}deg)`;
-                        });
-                        
-                        if (star1) star1.style.transform = `translate3d(0, ${scrollY * -0.05}px, 0)`;
-                        if (star2) star2.style.transform = `translate3d(0, ${scrollY * -0.1}px, 0)`;
-                        if (star3) star3.style.transform = `translate3d(0, ${scrollY * -0.15}px, 0)`;
-                        if (mainSaturn) mainSaturn.style.transform = `translate3d(-50%, -50%, 0) rotate(${scrollY * 0.03}deg)`;
-                        
+                        for (let i = 0; i < planetOrbits.length; i++) {
+                            const { el, speed, rot } = planetOrbits[i];
+                            el.style.transform = `translate3d(-50%,-50%,0) translateY(${scrollY * speed}px) rotate(${scrollY * rot}deg)`;
+                        }
+                        if (star1) star1.style.transform = `translate3d(0,${scrollY * -0.05}px,0)`;
+                        if (star2) star2.style.transform = `translate3d(0,${scrollY * -0.1}px,0)`;
+                        if (star3) star3.style.transform = `translate3d(0,${scrollY * -0.15}px,0)`;
+                        if (mainSaturn) mainSaturn.style.transform = `translate3d(-50%,-50%,0) rotate(${scrollY * 0.03}deg)`;
                         parallaxTicking = false;
                     });
                     parallaxTicking = true;
                 }
             }, { passive: true });
+
+            // FIX: Pause off-screen planet animations on desktop via IntersectionObserver
+            if (window.innerWidth >= 768) {
+                document.querySelectorAll('.planet-orbit').forEach(orbit => {
+                    const planet = orbit.querySelector('.planet');
+                    if (!planet) return;
+                    const obs = new IntersectionObserver(([e]) => {
+                        planet.style.animationPlayState = e.isIntersecting ? 'running' : 'paused';
+                    }, { rootMargin: '300px' });
+                    obs.observe(orbit);
+                });
+            }
 
             /* ==========================================================================
                2. CUSTOM PHYSICS CURSOR LOGIC
@@ -1280,6 +1363,20 @@
                 });
             }, revealOptions);
             revealElements.forEach(el => revealOnScroll.observe(el));
+
+            /* Active nav link tracking */
+            const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+            const sections = document.querySelectorAll('section[id]');
+            const navObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+                        });
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '-80px 0px -50% 0px' });
+            sections.forEach(s => navObserver.observe(s));
 
             /* ==========================================================================
                6. MOBILE MENU & NAVBAR LOGIC
@@ -1412,30 +1509,54 @@
                 if(tractorBeam) tractorBeam.style.opacity = '0';
             });
 
+            // FIX: Pre-created spark pool — no DOM creation in animation loops
+            const MAX_SPARKS = 15;
+            const sparkPool = [];
+            for (let i = 0; i < MAX_SPARKS; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'absolute rounded-full pointer-events-none';
+                spark.style.backgroundColor = 'var(--accent-cyan)';
+                spark.style.display = 'none';
+                sparkContainer.appendChild(spark);
+                sparkPool.push({ el: spark, active: false, vx: 0, vy: 0, op: 0, x: 0, y: 0 });
+            }
+
             function emitWeldSparks(x, y) {
-                const numSparks = window.innerWidth < 768 ? 1 : 3;
-                for(let i=0; i<numSparks; i++) {
-                    const spark = document.createElement('div');
-                    spark.className = 'absolute rounded-full pointer-events-none bg-accent-cyan';
+                const count = isMobile ? 1 : 2;
+                for (let i = 0; i < count; i++) {
+                    const spark = sparkPool.find(s => !s.active);
+                    if (!spark) return;
+                    spark.active = true;
+                    spark.x = x;
+                    spark.y = y;
+                    spark.vx = (Math.random() - 0.5) * 8;
+                    spark.vy = (Math.random() - 0.5) * 8 - 2;
+                    spark.op = 1;
                     const size = Math.random() * 3 + 2;
-                    spark.style.width = size + 'px'; spark.style.height = size + 'px';
-                    spark.style.left = x + 'px'; spark.style.top = y + 'px';
-                    spark.style.boxShadow = `0 0 ${size*2}px #00e1ff`;
-                    sparkContainer.appendChild(spark);
+                    spark.el.style.width = size + 'px';
+                    spark.el.style.height = size + 'px';
+                    spark.el.style.boxShadow = `0 0 ${size * 2}px #00e1ff`;
+                    spark.el.style.display = 'block';
+                }
+            }
 
-                    let vx = (Math.random() - 0.5) * 8;
-                    let vy = (Math.random() - 0.5) * 8 - 2;
-                    let op = 1;
-
-                    function anim() {
-                        if (op <= 0) { spark.remove(); return; }
-                        vy += GRAVITY;
-                        const cl = parseFloat(spark.style.left); const ct = parseFloat(spark.style.top);
-                        spark.style.left = (cl + vx) + 'px'; spark.style.top = (ct + vy) + 'px';
-                        op -= 0.05; spark.style.opacity = op;
-                        requestAnimationFrame(anim);
+            // Single update loop for all spark pool particles (called from gameLoop)
+            function updateSparkPool() {
+                for (let i = 0; i < sparkPool.length; i++) {
+                    const s = sparkPool[i];
+                    if (!s.active) continue;
+                    s.vy += 0.4;
+                    s.x += s.vx;
+                    s.y += s.vy;
+                    s.op -= 0.06;
+                    if (s.op <= 0) {
+                        s.active = false;
+                        s.el.style.display = 'none';
+                    } else {
+                        s.el.style.left = s.x + 'px';
+                        s.el.style.top = s.y + 'px';
+                        s.el.style.opacity = s.op;
                     }
-                    requestAnimationFrame(anim);
                 }
             }
 
@@ -1551,6 +1672,9 @@
                 bot.x += (bot.targetX - bot.x) * speed; bot.y += (bot.targetY - bot.y) * speed;
                 const vx = (bot.targetX - bot.x) * speed; const botTilt = Math.max(-15, Math.min(15, vx * 2));
                 botEl.style.transform = `translate3d(${bot.x}px, ${bot.y}px, 0) rotate(${botTilt}deg)`;
+
+                // Update pooled spark particles
+                updateSparkPool();
 
                 requestAnimationFrame(gameLoop);
             }
