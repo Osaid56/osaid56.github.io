@@ -183,7 +183,7 @@ section {
     text-align: center;
 }
 
-/* 3. FLOATING GLASS ISLAND NAVIGATION BAR */
+/* 3. FLOATING SMART AUTO-HIDING NAVIGATION BAR */
 .navbar {
     position: fixed;
     top: 1rem;
@@ -199,7 +199,11 @@ section {
     border-radius: var(--radius-full);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 12px 36px rgba(0, 0, 0, 0.05);
     z-index: 100;
-    transition: var(--transition);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.navbar.nav-hidden {
+    transform: translateY(-140%);
 }
 
 .nav-container {
@@ -1760,31 +1764,222 @@ section {
     will-change: auto;
 }
 
-/* RESPONSIVE MEDIA QUERIES */
+/* ==========================================================================
+   16. 100% MOBILE & TABLET RESPONSIVE ENGINE (320px - 1024px)
+   ========================================================================== */
+
+/* Navbar Scrolled State */
+.navbar.nav-scrolled {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 16px 40px rgba(0, 0, 0, 0.12), 0 0 20px rgba(208, 84, 46, 0.15);
+    background: var(--bg-card);
+}
+
 @media (max-width: 1024px) {
-    .hero-container {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
+    .container {
+        padding: 0 1.25rem;
     }
-    .hero-title { font-size: 2.8rem; }
+    .hero-container.hero-centered {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+    .hero-title {
+        font-size: clamp(2.4rem, 6vw, 3.5rem);
+    }
     .about-grid, .education-grid, .contact-grid, .footer-top-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-    .sim-workspace {
         grid-template-columns: 1fr;
+        gap: 2rem;
     }
-    .sim-ticket-pane { border-right: none; border-bottom: 1px solid var(--border-color); }
 }
 
 @media (max-width: 768px) {
-    .footer-top-grid { grid-template-columns: 1fr; gap: 2rem; }
+    /* Navbar & Header on Mobile */
+    .navbar {
+        top: 0.75rem;
+        left: 0.75rem;
+        right: 0.75rem;
+        height: 62px;
+        padding: 0 0.5rem;
+    }
+    .logo-mark {
+        width: 34px;
+        height: 34px;
+        font-size: 0.88rem;
+    }
+    .brand-name {
+        font-size: 0.95rem;
+    }
+    .brand-sub {
+        font-size: 0.7rem;
+    }
     .nav-links { display: none; }
-    .mobile-menu-toggle { display: block; }
-    .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    .hero-title { font-size: 2.2rem; }
-    .timeline::before { left: 10px; }
-    .timeline-item { padding-left: 35px; }
-    .timeline-dot { left: 1px; }
+    .mobile-menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+        cursor: pointer;
+    }
+
+    .mobile-drawer {
+        top: 75px;
+        left: 0.75rem;
+        right: 0.75rem;
+        padding: 1.25rem;
+    }
+
+    /* Hero Section Mobile */
+    .hero-section {
+        padding-top: 7.5rem;
+        padding-bottom: 3.5rem;
+        min-height: auto;
+    }
+    .hero-title {
+        font-size: clamp(2rem, 8vw, 2.8rem);
+        line-height: 1.15;
+    }
+    .hero-subtitle {
+        font-size: 0.98rem;
+    }
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.8rem;
+    }
+    .hero-buttons .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Stats Banner Mobile */
+    .stats-banner {
+        padding: 2rem 0;
+        margin-bottom: 2.5rem;
+    }
+    .stats-grid, .stats-grid-3 {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+    .stat-card {
+        padding: 0.75rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .stat-card:last-child {
+        border-bottom: none;
+    }
+    .stat-number {
+        font-size: 2.2rem;
+    }
+
+    /* Section Headings */
+    .section {
+        padding: 4rem 0;
+    }
+    .section-title {
+        font-size: 1.85rem;
+    }
+    .section-subtitle {
+        font-size: 0.95rem;
+    }
+
+    /* Experience Timeline Mobile */
+    .timeline::before {
+        left: 14px;
+    }
+    .timeline-item {
+        padding-left: 38px;
+    }
+    .timeline-dot {
+        left: 4px;
+        top: 20px;
+        width: 18px;
+        height: 18px;
+    }
+    .timeline-card {
+        padding: 1.5rem;
+    }
+    .role-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .role-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+    }
+    .role-title {
+        font-size: 1.2rem;
+    }
+    .role-bullets li {
+        font-size: 0.9rem;
+    }
+
+    /* Skills Mobile Filter Tabs & Grid */
+    .skills-filter-tabs {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 0.75rem;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+    .filter-btn {
+        flex-shrink: 0;
+        padding: 0.5rem 1rem;
+        font-size: 0.82rem;
+    }
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+    .skill-card {
+        padding: 1.4rem;
+    }
+    .skill-tag-list li {
+        padding: 0.55rem 0.75rem;
+        font-size: 0.88rem;
+    }
+
+    /* Contact Form & Cards */
+    .contact-card {
+        padding: 1.5rem;
+    }
+    .contact-title {
+        font-size: 1.75rem;
+    }
+
+    /* Footer Mobile */
+    .footer-top-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+    .hero-badge {
+        font-size: 0.78rem;
+        padding: 0.4rem 0.8rem;
+    }
+    .hero-title {
+        font-size: 1.85rem;
+    }
+    .section-title {
+        font-size: 1.6rem;
+    }
+    .about-card, .edu-card, .cert-card {
+        padding: 1.25rem;
+    }
 }
 
 /* LENIS SMOOTH SCROLL OVERRIDES */
