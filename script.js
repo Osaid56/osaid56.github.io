@@ -305,8 +305,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeResumeBtn = document.getElementById('closeResumeModal');
     const closeResumeBtn2 = document.getElementById('closeResumeModalBtn');
 
-    if (openResumeBtn && resumeModal) {
-        openResumeBtn.addEventListener('click', () => resumeModal.classList.add('active'));
+    const mobileResumeBtn = document.getElementById('mobileResumeBtn');
+    if (mobileResumeBtn && resumeModal) {
+        mobileResumeBtn.addEventListener('click', () => {
+            resumeModal.classList.add('active');
+            if (mobileDrawer) mobileDrawer.classList.remove('active');
+        });
     }
     if (closeResumeBtn) closeResumeBtn.addEventListener('click', () => resumeModal.classList.remove('active'));
     if (closeResumeBtn2) closeResumeBtn2.addEventListener('click', () => resumeModal.classList.remove('active'));
