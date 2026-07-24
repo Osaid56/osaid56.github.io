@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osaid Shahid | App & Cloud Technical Support Analyst | Systems Engineer</title>
+    <meta name="description" content="Portfolio of Osaid Shahid - App & Cloud Technical Support Analyst, Senior Systems Administrator & German-Language IT Specialist with 4+ years enterprise experience.">
+    <meta name="keywords" content="Osaid Shahid, Cloud Technical Support Analyst, Systems Administrator, Microsoft Entra ID, Azure, ServiceNow, German IT Support, ITIL, Active Directory">
+    
+    <!-- Google Fonts: Instrument Serif, Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Canvas Background for Ambient Node Particles -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navigation Header -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="brand-logo">
+                <span class="logo-mark">OS</span>
+                <div class="logo-text">
+                    <span class="brand-name">Osaid Shahid</span>
+                    <span class="brand-sub">Cloud & Systems Specialist</span>
+                </div>
+            </a>
+
+            <nav class="nav-links">
+                <a href="#about" class="nav-link" data-de="Über mich">About</a>
+                <a href="#experience" class="nav-link" data-de="Erfahrung">Experience</a>
+                <a href="#skills" class="nav-link" data-de="Kenntnisse">Skills</a>
+                <a href="#education" class="nav-link" data-de="Ausbildung">Education</a>
+                <a href="#certifications" class="nav-link" data-de="Zertifikate">Certifications</a>
+            </nav>
+
+            <div class="nav-actions">
+                <!-- Theme Toggle Button -->
+                <button class="theme-toggle-btn" id="themeToggle" title="Toggle Dark/Light Mode">
+                    <i data-lucide="moon" class="dark-icon"></i>
+                    <i data-lucide="sun" class="light-icon"></i>
+                </button>
+
+                <!-- Resume Download Button -->
+                <button class="btn btn-primary btn-sm" id="openResumeModal">
+                    <i data-lucide="file-text"></i>
+                    <span data-de="CV ansehen">View CV</span>
+                </button>
+
+                <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle Menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="mobile-drawer-content">
+            <a href="#about" class="mobile-nav-link" data-de="Über mich">About</a>
+            <a href="#experience" class="mobile-nav-link" data-de="Erfahrung">Experience</a>
+            <a href="#skills" class="mobile-nav-link" data-de="Kenntnisse">Skills</a>
+            <a href="#education" class="mobile-nav-link" data-de="Ausbildung">Education</a>
+            <a href="#certifications" class="mobile-nav-link" data-de="Zertifikate">Certifications</a>
+            <a href="#contact" class="mobile-nav-link" data-de="Kontakt">Contact</a>
+        </div>
+    </div>
+
+    <main>
+
+        <!-- HERO SECTION -->
+        <section class="hero-section" id="hero">
+            <div class="hero-container hero-centered">
+                <div class="hero-content">
+                    <div class="hero-badge reveal">
+                        <span class="pulse-dot"></span>
+                        <span id="heroStatusText" data-de="Verfügbar für Cloud & Enterprise Support">App/Cloud Technical Support Analyst @ Accenture</span>
+                    </div>
+
+                    <h1 class="hero-title reveal">
+                        App & Cloud Technical <span class="serif-accent">Support Specialist</span>
+                    </h1>
+
+                    <p class="hero-subtitle reveal" data-de="IT-Spezialist mit 4+ Jahren Erfahrung in globalem Cloud-Support, Microsoft Entra ID (Azure AD), ServiceNow ITIL & spezialisierter deutscher Kundenkommunikation (C1).">
+                        IT professional with <strong>4+ years of experience</strong> delivering enterprise-level technical support, Microsoft Entra ID / Azure IAM administration, ServiceNow ITIL workflows, and specialized <strong>German-language (C1)</strong> client operations.
+                    </p>
+
+                    <div class="hero-buttons reveal">
+                        <a href="#contact" class="btn btn-terracotta" data-de="Kontaktieren">
+                            <span>Get in Touch</span>
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                        <a href="#experience" class="btn btn-outline" data-de="Erfahrung ansehen">
+                            <i data-lucide="briefcase"></i>
+                            <span>Explore Experience</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS BANNER -->
+        <section class="stats-banner">
+            <div class="container">
+                <div class="stats-grid stats-grid-3">
+                    <div class="stat-card reveal">
+                        <div class="stat-number" data-target="4">4+ Years</div>
+                        <div class="stat-label" data-de="Enterprise IT & Cloud Support">Enterprise IT & Cloud Support</div>
+                    </div>
+                    <div class="stat-card reveal">
+                        <div class="stat-number">C1 Level</div>
+                        <div class="stat-label" data-de="Deutsch Fließend (Zertifiziert)">German Language Certified</div>
+                    </div>
+                    <div class="stat-card reveal">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label" data-de="ServiceNow Vorfälle Gelöst">Enterprise Incidents Resolved</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT & PROFESSIONAL SUMMARY -->
+        <section class="section about-section" id="about">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag" data-de="HINTERGRUND">BACKGROUND & OBJECTIVE</span>
+                    <h2 class="section-title">Bridging Technical Excellence & <span class="serif-accent">Global Communication</span></h2>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-card main-summary reveal">
+                        <div class="card-icon-header">
+                            <i data-lucide="user-check"></i>
+                            <span class="card-badge" data-de="Zusammenfassung">Summary</span>
+                        </div>
+                        <p class="about-text" data-de="IT-Experte mit mehr als 4 Jahren Erfahrung in der Bereitstellung von technischem Support auf Unternehmensebene in globalen Umgebungen mit spezialisierten Kenntnissen in der deutschsprachigen Kundenkommunikation. Nachgewiesene Fähigkeit zur Verwaltung von Endbenutzer-Vorfällen, Administration von Identitäts- und Zugriffssystemen (Active Directory, Microsoft Entra ID) und Support von Microsoft 365- und Windows-Infrastrukturen in schnellen, SLA-gesteuerten Umgebungen.">
+                            IT professional with <strong>4+ years of experience</strong> delivering enterprise-level technical support across global environments, with specialized expertise in <strong>German-language client communication</strong>.
+                        </p>
+                        <p class="about-text" data-de="Derzeit Verfolgung von Fortschritten im Bereich Cloud Engineering und Cybersecurity, unterstützt durch Google IT-Zertifizierungen und praktische Erfahrung mit Azure, Intune und Enterprise IAM-Frameworks.">
+                            Proven ability to manage end-user incidents, administer identity and access systems (Active Directory, Microsoft Entra ID), and support Microsoft 365 and Windows infrastructures in fast-paced, SLA-driven settings. Currently pursuing advancement in <strong>cloud engineering and cybersecurity</strong>.
+                        </p>
+                        
+                        <div class="about-highlights">
+                            <div class="highlight-item">
+                                <i data-lucide="shield-check" class="hl-icon"></i>
+                                <div>
+                                    <h4 data-de="Identität & Sicherheit">Identity & Access Governance</h4>
+                                    <p data-de="RBAC-Richtlinien, Microsoft Entra ID (Azure AD), Active Directory, ARS">RBAC policies, Microsoft Entra ID, Active Directory user lifecycle management</p>
+                                </div>
+                            </div>
+                            <div class="highlight-item">
+                                <i data-lucide="globe" class="hl-icon"></i>
+                                <div>
+                                    <h4 data-de="Deutschsprachiger Support">German Client Operations (C1)</h4>
+                                    <p data-de="Nahtlose Kommunikation mit deutschen Kunden bei Accenture, ITC Infotech & Wipro">Seamless German communication across Accenture, ITC Infotech & Wipro Google T1</p>
+                                </div>
+                            </div>
+                            <div class="highlight-item">
+                                <i data-lucide="cloud" class="hl-icon"></i>
+                                <div>
+                                    <h4 data-de="Cloud & Geräteverwaltung">Cloud Infrastructure & Endpoint Administration</h4>
+                                    <p data-de="Microsoft Azure, Intune Device Onboarding, M365 Admin Center, VPN/RDP">Microsoft Azure, Intune onboarding, M365 Admin Suite, VPN & RDP access</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Info Card (Without Photo) -->
+                    <div class="about-card profile-card reveal-right">
+                        <div class="profile-header-badge">
+                            <i data-lucide="shield-check" class="badge-icon"></i>
+                            <span>Certified Enterprise Specialist</span>
+                        </div>
+                        <h3 class="profile-name">Osaid Shahid</h3>
+                        <p class="profile-title" data-de="App & Cloud Technical Support Analyst">App/Cloud Technical Support Analyst</p>
+                        
+                        <div class="profile-location">
+                            <i data-lucide="map-pin"></i>
+                            <span>Gurugram, Haryana / Mau, UP, India</span>
+                        </div>
+
+                        <div class="profile-contact-list">
+                            <a href="mailto:osaidtheshahid@gmail.com" class="profile-link">
+                                <i data-lucide="mail"></i>
+                                <span>osaidtheshahid@gmail.com</span>
+                            </a>
+                            <a href="tel:+918448527162" class="profile-link">
+                                <i data-lucide="phone"></i>
+                                <span>+91 8448527162</span>
+                            </a>
+                            <div class="profile-link">
+                                <i data-lucide="languages"></i>
+                                <span>English (Fluent) | German (C1) | Hindi</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-footer-actions">
+                            <button class="btn btn-terracotta btn-full" id="profileContactBtn">
+                                <i data-lucide="send"></i>
+                                <span data-de="Nachricht Senden">Send Direct Message</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WORK EXPERIENCE TIMELINE -->
+        <section class="section experience-section" id="experience">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag" data-de="BERUFSERFAHRUNG">CAREER JOURNEY</span>
+                    <h2 class="section-title">Enterprise Experience <span class="serif-accent">& Roles</span></h2>
+                    <p class="section-subtitle" data-de="Nachgewiesene Erfolgsbilanz bei führenden IT-Dienstleistern weltweit.">
+                        Proven track record across leading global IT service organizations delivering enterprise support and infrastructure solutions.
+                    </p>
+                </div>
+
+                <div class="timeline">
+
+                    <!-- Role 1: Accenture -->
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="role-header">
+                                <div>
+                                    <div class="company-name">Accenture</div>
+                                    <h3 class="role-title">App / Cloud Technical Support Analyst</h3>
+                                </div>
+                                <div class="role-meta">
+                                    <span class="role-date"><i data-lucide="calendar"></i> 11/2024 – Present</span>
+                                    <span class="role-location"><i data-lucide="map-pin"></i> Gurugram, Haryana</span>
+                                </div>
+                            </div>
+                            
+                            <div class="role-highlights-badge" data-de="Hauptschwerpunkte: Enterprise Cloud, Entra ID, German Support, ITIL SLA">
+                                Highlights: Global Enterprise Support • German Client Desk • Entra ID IAM • M365 Suite
+                            </div>
+
+                            <ul class="role-bullets">
+                                <li data-de="Bereitstellung von End-to-End-Support für globale Unternehmensbenutzer, einschließlich deutschsprachiger internationaler Kunden, mit minimaler Betriebsunterbrechung.">
+                                    Delivered end-to-end technical support to enterprise users globally, including <strong>German-speaking international clients</strong>, ensuring timely incident resolution and minimal disruption to business operations.
+                                </li>
+                                <li data-de="Verwaltung des gesamten Incident-Lebenszyklus – Protokollierung, Verfolgung, Priorisierung und Schließen von Tickets in ServiceNow – unter strikter Einhaltung von ITIL Best Practices und SLA-Zusagen.">
+                                    Managed full incident lifecycle — logging, tracking, prioritizing, and closing tickets in <strong>ServiceNow</strong> — in strict adherence to ITIL best practices and SLA commitments.
+                                </li>
+                                <li data-de="Unterstützung der Microsoft 365 Suite (Outlook, Teams, OneDrive, SharePoint) mit praktischer Konfiguration, Zugriffsverwaltung und Problemlösung für tägliche Produktivitäts-Workflows.">
+                                    Supported <strong>Microsoft 365 suite</strong> (Outlook, Teams, OneDrive, SharePoint) with hands-on configuration, access management, and issue resolution for day-to-day productivity workflows.
+                                </li>
+                                <li data-de="Verwaltung von Benutzerbereitstellung, Zugriffsrechten und Sicherheitsgruppen-Zuweisungen über Active Directory und Microsoft Entra ID (Azure AD).">
+                                    Managed user provisioning, access rights, and security group assignments through <strong>Active Directory and Microsoft Entra ID (Azure AD)</strong>, supporting security compliance and governance standards.
+                                </li>
+                                <li data-de="Administration des Lebenszyklus von Benutzerkonten (Erstellung, Änderung und Deaktivierung) gemäß RBAC-Richtlinien.">
+                                    Administered user account lifecycle operations including creation, modification, and deactivation aligned with role-based access control (RBAC) policies.
+                                </li>
+                                <li data-de="Diagnose und Behebung von Windows 10/11-Problemen (Startfehler, Patch-Management, Treiberkonflikte, Profilbeschädigung).">
+                                    Diagnosed and resolved Windows 10/11 issues including startup failures, patch management, driver conflicts, and user profile corruption.
+                                </li>
+                                <li data-de="Konfiguration und Onboarding neuer Unternehmensgeräte im Netzwerk (Hardware-Setup, OS-Konfiguration, Richtliniendurchsetzung).">
+                                    Configured and onboarded new corporate devices into network environment, including hardware setup, OS configuration, and policy enforcement.
+                                </li>
+                                <li data-de="Verwaltung des DHCP-Serverbetriebs zur Behebung von Netzwerkkonnektivitätsproblemen.">
+                                    Managed DHCP server operations to resolve network connectivity issues and maintain stable IP address allocation across enterprise environment.
+                                </li>
+                                <li data-de="Unterstützung von Remote-Mitarbeitern durch VPN-Einrichtung, RDP-Konfiguration und virtuelle Smartcard-Authentifizierung.">
+                                    Supported remote workforce connectivity through VPN setup, RDP configuration, and virtual smart card authentication, ensuring seamless and secure remote access.
+                                </li>
+                                <li data-de="Behebung von Druckerproblemen (Konnektivitätsfehler, Treiberfehler, physische & Netzwerkdrucker).">
+                                    Resolved printer issues spanning connectivity failures, driver errors, and installation problems across physical and network-connected printers.
+                                </li>
+                            </ul>
+
+                            <div class="skill-chips">
+                                <span class="chip">Microsoft Entra ID</span>
+                                <span class="chip">Active Directory</span>
+                                <span class="chip">ServiceNow</span>
+                                <span class="chip">M365 Suite</span>
+                                <span class="chip">German Communication</span>
+                                <span class="chip">RBAC Governance</span>
+                                <span class="chip">DHCP & VPN</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Role 2: ITC Infotech -->
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="role-header">
+                                <div>
+                                    <div class="company-name">ITC Infotech</div>
+                                    <h3 class="role-title">Senior Systems Administrator</h3>
+                                </div>
+                                <div class="role-meta">
+                                    <span class="role-date"><i data-lucide="calendar"></i> 04/2024 – 11/2024</span>
+                                    <span class="role-location"><i data-lucide="map-pin"></i> Bengaluru, Karnataka</span>
+                                </div>
+                            </div>
+
+                            <ul class="role-bullets">
+                                <li data-de="Verwaltung von Windows, Office, Active Directory und Netzwerkinfrastruktur. Verwaltung von DHCP und Behebung von Netzwerkproblemen.">
+                                    Administered Windows, Office, Active Directory, and network infrastructure. Managed DHCP and resolved network connectivity issues.
+                                </li>
+                                <li data-de="Tätigkeit als L1-L1.5 Support und Kommunikation mit deutschsprachigen Benutzern zur Lösung von Anfragen und Problemen.">
+                                    Worked as L1-L1.5 support engineer and communicated with <strong>German-speaking users</strong> to resolve technical inquiries and issues.
+                                </li>
+                                <li data-de="Hinzufügen und Konfigurieren neuer Geräte im Firmennetzwerk. Zuweisung statischer und dynamischer IP-Adressen.">
+                                    Added and configured new devices in company network. Assigned static and dynamic IP addresses to enterprise equipment.
+                                </li>
+                                <li data-de="Verwaltung von Benutzerzugriffen und Berechtigungen über Azure AD sowie Behebung von Drucker- und Windows-Problemen.">
+                                    Managed user access and permissions through Azure AD. Troubleshot printer issues and resolved all types of Windows OS errors.
+                                </li>
+                                <li data-de="Verwendete Tools: Azure, Microsoft 365 Admin Center, ARS, AD, Intune, Bomgar, ServiceNow und Confluence.">
+                                    Leveraged enterprise toolset: <strong>Azure, Microsoft 365 Admin Center, ARS, AD, Intune, Bomgar, ServiceNow, and Confluence</strong>.
+                                </li>
+                            </ul>
+
+                            <div class="skill-chips">
+                                <span class="chip">Azure AD</span>
+                                <span class="chip">Intune</span>
+                                <span class="chip">Bomgar</span>
+                                <span class="chip">ARS (Active Roles Server)</span>
+                                <span class="chip">Network Admin</span>
+                                <span class="chip">Confluence</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Role 3: Wipro Limited -->
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="role-header">
+                                <div>
+                                    <div class="company-name">Wipro Limited</div>
+                                    <h3 class="role-title">Senior Associate / German Language Technical Support</h3>
+                                </div>
+                                <div class="role-meta">
+                                    <span class="role-date"><i data-lucide="calendar"></i> 12/2021 – 09/2023</span>
+                                    <span class="role-location"><i data-lucide="map-pin"></i> Hyderabad</span>
+                                </div>
+                            </div>
+
+                            <ul class="role-bullets">
+                                <li data-de="Tätigkeit für Wipro Technologies im Bereich Google T1 Barrierefreiheits-Support (Deutsch).">
+                                    Worked for Wipro Technologies providing <strong>Google T1 accessibility technical support (German)</strong>.
+                                </li>
+                                <li data-de="Proaktive Identifizierung von Lösungen für häufige Benutzerprobleme und Bereitstellung von technischem Support für Barrierefreiheitstechnologien.">
+                                    Proactively identified solutions to common user issues and delivered technical support on accessibility technologies.
+                                </li>
+                                <li data-de="Kommunikation mit globalen Benutzern über Telefon, Live-Chat und E-Mail zur Diagnose und Lösung technischer Probleme auf Deutsch.">
+                                    Communicated with global users via phone, live chat, and email to diagnose and resolve accessibility and technical inquiries in fluent German.
+                                </li>
+                                <li data-de="Umgang mit Google-Plattformen mit nativer Android-Unterstützung unter Einhaltung von Qualitäts- und Servicestandards.">
+                                    Supported Google platforms featuring native Android integration, adhering strictly to operational quality standards.
+                                </li>
+                            </ul>
+
+                            <div class="skill-chips">
+                                <span class="chip">Google T1 Support</span>
+                                <span class="chip">German Language Operations</span>
+                                <span class="chip">Web Accessibility (WCAG)</span>
+                                <span class="chip">Android Ecosystem</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- TECHNICAL SKILLS MATRIX -->
+        <section class="section skills-section" id="skills">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag" data-de="TECHNISCHES PORTFOLIO">TECHNICAL MATRIX</span>
+                    <h2 class="section-title">Core Competencies & <span class="serif-accent">Tech Stack</span></h2>
+                    <p class="section-subtitle" data-de="Filterbare Übersicht der technischen Fähigkeiten in Cloud, Identitätsmanagement, ITSM und Barrierefreiheit.">
+                        Explore Osaid's key technical proficiencies across Cloud IAM, Enterprise Networks, Operating Systems, and Accessibility testing.
+                    </p>
+                </div>
+
+                <!-- Skill Filter Tabs -->
+                <div class="skills-filter-tabs reveal">
+                    <button class="filter-btn active" data-filter="all" data-de="Alle Fähigkeiten">All Skills</button>
+                    <button class="filter-btn" data-filter="iam" data-de="Identität & Access">Identity & Access</button>
+                    <button class="filter-btn" data-filter="cloud" data-de="Cloud & Infrastruktur">Cloud & Infra</button>
+                    <button class="filter-btn" data-filter="os" data-de="Betriebssysteme & M365">OS & M365</button>
+                    <button class="filter-btn" data-filter="itsm" data-de="ITSM & Tools">ITSM & Tools</button>
+                    <button class="filter-btn" data-filter="accessibility" data-de="Barrierefreiheit">Accessibility</button>
+                </div>
+
+                <div class="skills-grid">
+                    
+                    <!-- IAM Category -->
+                    <div class="skill-card reveal" data-category="iam">
+                        <div class="skill-card-header">
+                            <i data-lucide="shield" class="skill-icon"></i>
+                            <h3>Identity & Access Management</h3>
+                        </div>
+                        <ul class="skill-tag-list">
+                            <li><i data-lucide="check-circle-2"></i> <span>Microsoft Entra ID (Azure AD)</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span>Active Directory (AD DS)</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span>ARS (Active Roles Server)</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span>User Provisioning & RBAC</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span>Security Groups & Governance</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Cloud & Infrastructure -->
+                    <div class="skill-card reveal" data-category="cloud">
+                        <div class="skill-card-header">
+                            <i data-lucide="cloud-lightning" class="skill-icon"></i>
+                            <h3>Cloud & Infrastructure</h3>
+                        </div>
+                        <ul class="skill-tag-list">
+                            <li><i data-lucide="check-circle-2"></i> <span>Microsoft Azure</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span>Microsoft Intune</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span>Microsoft 365 Admin Center</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span>DHCP / VPN / RDP Config</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span>Corporate Device Onboarding</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Operating Systems & M365 -->
+                    <div class="skill-card reveal" data-category="os">
+                        <div class="skill-card-header">
+                            <i data-lucide="monitor" class="skill-icon"></i>
+                            <h3>Operating Systems & M365</h3>
+                        </div>
+                        <ul class="skill-tag-list">
+                            <li><i data-lucide="check-circle-2"></i> <span>Windows 10 / 11 Administration</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span>Windows Server</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span>Linux (Fundamentals)</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span>Outlook / Teams / SharePoint</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- ITSM & Tools -->
+                    <div class="skill-card reveal" data-category="itsm">
+                        <div class="skill-card-header">
+                            <i data-lucide="layers" class="skill-icon"></i>
+                            <h3>ITSM & Service Tools</h3>
+                        </div>
+                        <ul class="skill-tag-list">
+                            <li><i data-lucide="check-circle-2"></i> <span>ServiceNow Incident Triage</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span>Confluence Knowledge Base</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span>Bomgar / LogMeIn Remote Admin</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span>ITIL Framework & Service Operations</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Accessibility & Testing -->
+                    <div class="skill-card reveal" data-category="accessibility">
+                        <div class="skill-card-header">
+                            <i data-lucide="eye" class="skill-icon"></i>
+                            <h3>Accessibility & Testing</h3>
+                        </div>
+                        <ul class="skill-tag-list">
+                            <li><i data-lucide="check-circle-2"></i> <span>WCAG / NVDA / BeMyEyes</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span>Accessibility Insights Tooling</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span>Google Accessibility Platforms</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Languages -->
+                    <div class="skill-card reveal" data-category="all">
+                        <div class="skill-card-header">
+                            <i data-lucide="languages" class="skill-icon"></i>
+                            <h3>Languages & Communication</h3>
+                        </div>
+                        <ul class="skill-tag-list">
+                            <li><i data-lucide="check-circle-2"></i> <span>English (Fluent / Professional)</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span>German (C1 - Advanced Certified)</span></li>
+                            <li><i data-lucide="check-circle-2"></i> <span>Hindi (Native)</span></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION & GERMAN DIPLOMAS -->
+        <section class="section education-section" id="education">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag" data-de="BILDUNG & QUALIFIKATIONEN">ACADEMIC FOUNDATION</span>
+                    <h2 class="section-title">Education & <span class="serif-accent">German Diplomas</span></h2>
+                </div>
+
+                <div class="education-grid">
+                    
+                    <!-- German Language Stream -->
+                    <div class="edu-card german-focus reveal">
+                        <div class="edu-header">
+                            <i data-lucide="award" class="edu-icon"></i>
+                            <div>
+                                <h3>German Language Certifications</h3>
+                                <span class="edu-inst">Osmania University, Hyderabad</span>
+                            </div>
+                        </div>
+                        <div class="edu-diploma-list">
+                            <div class="diploma-item">
+                                <div class="diploma-level">C1</div>
+                                <div class="diploma-details">
+                                    <h4>Advanced Diploma in German Language (C1)</h4>
+                                    <span class="diploma-date">Graduated: 07/2023</span>
+                                </div>
+                            </div>
+                            <div class="diploma-item">
+                                <div class="diploma-level">B2</div>
+                                <div class="diploma-details">
+                                    <h4>Senior Diploma in German Language (B2)</h4>
+                                    <span class="diploma-date">Graduated: 11/2021</span>
+                                </div>
+                            </div>
+                            <div class="diploma-item">
+                                <div class="diploma-level">A2</div>
+                                <div class="diploma-details">
+                                    <h4>Junior Diploma in German Language (A2)</h4>
+                                    <span class="diploma-date">Graduated: 04/2021</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Academic Degree -->
+                    <div class="edu-card degree-focus reveal-right">
+                        <div class="edu-header">
+                            <i data-lucide="graduation-cap" class="edu-icon"></i>
+                            <div>
+                                <h3>University Degree</h3>
+                                <span class="edu-inst">University of Delhi & Board</span>
+                            </div>
+                        </div>
+                        <div class="edu-diploma-list">
+                            <div class="diploma-item">
+                                <div class="diploma-level">BA</div>
+                                <div class="diploma-details">
+                                    <h4>Bachelor of Arts (Hons) in English</h4>
+                                    <span class="diploma-date">University of Delhi • 05/2020</span>
+                                </div>
+                            </div>
+                            <div class="diploma-item">
+                                <div class="diploma-level">12th</div>
+                                <div class="diploma-details">
+                                    <h4>Intermediate</h4>
+                                    <span class="diploma-date">Board of High School & Intermediate Education • 05/2016</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CERTIFICATIONS SHOWCASE -->
+        <section class="section certs-section" id="certifications">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag" data-de="ZERTIFIKATE">CREDENTIALS</span>
+                    <h2 class="section-title">Professional <span class="serif-accent">Certifications</span></h2>
+                </div>
+
+                <div class="certs-grid">
+                    
+                    <div class="cert-card reveal">
+                        <div class="cert-badge-icon"><i data-lucide="check-circle-2"></i></div>
+                        <h3>Google IT Support Professional Certification</h3>
+                        <p class="cert-issuer">Google & Coursera</p>
+                        <p class="cert-desc" data-de="Umfassende Zertifizierung in Systemadministration, Netzwerken, Sicherheit und IT-Kundendienst.">
+                            Comprehensive professional track covering system administration, network protocol diagnostics, security, and IT service operations.
+                        </p>
+                    </div>
+
+                    <div class="cert-card reveal">
+                        <div class="cert-badge-icon"><i data-lucide="network"></i></div>
+                        <h3>The Bits and Bytes of Computer Networking</h3>
+                        <p class="cert-issuer">Google</p>
+                        <p class="cert-desc" data-de="Netzwerkprotokolle (TCP/IP, DNS, DHCP), Subnetting, Routing und Diagnose-Tools.">
+                            In-depth mastery of TCP/IP stack, DNS configuration, DHCP allocation, subnets, and troubleshooting network infrastructure.
+                        </p>
+                    </div>
+
+                    <div class="cert-card reveal">
+                        <div class="cert-badge-icon"><i data-lucide="terminal"></i></div>
+                        <h3>Technical Support Fundamentals</h3>
+                        <p class="cert-issuer">Google</p>
+                        <p class="cert-desc" data-de="Hardware-Einrichtung, Betriebssystem-Troubleshooting, Kundendienst-Workflow und Fehlerbehebung.">
+                            Foundational mastery in hardware setup, operating system triage, incident escalation, and technical customer service.
+                        </p>
+                    </div>
+
+                    <div class="cert-card reveal">
+                        <div class="cert-badge-icon"><i data-lucide="accessibility"></i></div>
+                        <h3>Testing for Web Accessibility</h3>
+                        <p class="cert-issuer">Accessibility Insights</p>
+                        <p class="cert-desc" data-de="WCAG 2.1 Konformitätstests, NVDA Screenreader, BeMyEyes Unterstützung und Barrierefreiheitsprüfungen.">
+                            Hands-on auditing for WCAG 2.1 standards, screen reader compatibility (NVDA), and accessibility testing tools.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section class="section contact-section" id="contact">
+            <div class="container">
+                <div class="contact-card reveal">
+                    <div class="contact-grid">
+                        <div class="contact-info">
+                            <span class="section-tag" data-de="KONTAKT">GET IN TOUCH</span>
+                            <h2 class="contact-title" data-de="Lassen Sie uns zusammenarbeiten.">Let's Connect & <span class="serif-accent">Collaborate</span>.</h2>
+                            <p class="contact-desc" data-de="Suchen Sie einen erfahrenen Cloud Technical Support Analysten oder Systems Administrator mit C1 Deutschkenntnissen? Schreiben Sie mir direkt!">
+                                Seeking an experienced App & Cloud Technical Support Analyst, Senior Systems Administrator, or German-speaking IT Specialist? Reach out directly via phone or message!
+                            </p>
+
+                            <div class="contact-details">
+                                <div class="contact-item" onclick="copyToClipboard('osaidtheshahid@gmail.com', 'Email copied to clipboard!')">
+                                    <div class="item-icon"><i data-lucide="mail"></i></div>
+                                    <div>
+                                        <div class="item-label">Email Address</div>
+                                        <div class="item-value">osaidtheshahid@gmail.com</div>
+                                    </div>
+                                    <i data-lucide="copy" class="copy-icon"></i>
+                                </div>
+
+                                <div class="contact-item" onclick="copyToClipboard('+918448527162', 'Phone number copied to clipboard!')">
+                                    <div class="item-icon"><i data-lucide="phone"></i></div>
+                                    <div>
+                                        <div class="item-label">Phone Number</div>
+                                        <div class="item-value">+91 8448527162</div>
+                                    </div>
+                                    <i data-lucide="copy" class="copy-icon"></i>
+                                </div>
+
+                                <div class="contact-item">
+                                    <div class="item-icon"><i data-lucide="map-pin"></i></div>
+                                    <div>
+                                        <div class="item-label">Location</div>
+                                        <div class="item-value">Gurugram, Haryana / Mau, UP, India</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Direct Message Form -->
+                        <form class="contact-form" id="contactForm">
+                            <h3 class="form-title" data-de="Direkte Nachricht">Send a Quick Message</h3>
+                            
+                            <div class="form-group">
+                                <label for="contactName" data-de="Ihr Name">Your Name</label>
+                                <input type="text" id="contactName" placeholder="e.g. Sarah Jenkins" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contactEmail" data-de="Ihre E-Mail">Your Email</label>
+                                <input type="email" id="contactEmail" placeholder="e.g. sarah@company.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contactMsg" data-de="Nachricht">Message</label>
+                                <textarea id="contactMsg" rows="4" placeholder="How can Osaid assist your cloud or IT operations team?" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-terracotta btn-full">
+                                <i data-lucide="send"></i>
+                                <span data-de="Nachricht Senden">Send Message</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- LUXURY FOOTER & BOTTOM SECTION -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-top-grid">
+                
+                <!-- Brand Column -->
+                <div class="footer-col footer-brand-col">
+                    <a href="#hero" class="brand-logo">
+                        <span class="logo-mark">OS</span>
+                        <div class="logo-text">
+                            <span class="brand-name">Osaid Shahid</span>
+                            <span class="brand-sub">Cloud & Systems Specialist</span>
+                        </div>
+                    </a>
+                    <p class="footer-bio" data-de="App & Cloud Technical Support Analyst mit 4+ Jahren Erfahrung in globaler Enterprise IT, Microsoft Entra ID (Azure AD) und C1 Deutschkommunikation.">
+                        Enterprise IT Support Analyst specializing in Microsoft Entra ID, Azure Cloud IAM, ServiceNow ITIL workflows, and certified C1 German client operations.
+                    </p>
+                    <div class="footer-status-pill">
+                        <span class="pulse-dot"></span>
+                        <span data-de="Verfügbar für Cloud Operations">Available for Cloud Operations</span>
+                    </div>
+                </div>
+
+                <!-- Navigation Links Column -->
+                <div class="footer-col">
+                    <h4 class="footer-col-title" data-de="Navigation">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about" data-de="Über mich">About</a></li>
+                        <li><a href="#experience" data-de="Berufserfahrung">Experience</a></li>
+                        <li><a href="#skills" data-de="Kenntnisse">Skills</a></li>
+                        <li><a href="#education" data-de="Ausbildung">Education</a></li>
+                        <li><a href="#certifications" data-de="Zertifikate">Certifications</a></li>
+                    </ul>
+                </div>
+
+                <!-- Expertise Column -->
+                <div class="footer-col">
+                    <h4 class="footer-col-title" data-de="Fachgebiete">Core Expertise</h4>
+                    <ul class="footer-tags">
+                        <li>Microsoft Entra ID</li>
+                        <li>Azure Cloud Admin</li>
+                        <li>German C1 Support</li>
+                        <li>Active Directory RBAC</li>
+                        <li>ServiceNow ITIL</li>
+                    </ul>
+                </div>
+
+                <!-- Contact & Action Column -->
+                <div class="footer-col">
+                    <h4 class="footer-col-title" data-de="Direkter Kontakt">Direct Inquiry</h4>
+                    <div class="footer-contact-info">
+                        <a href="mailto:osaidtheshahid@gmail.com" class="footer-contact-item">
+                            <i data-lucide="mail"></i>
+                            <span>osaidtheshahid@gmail.com</span>
+                        </a>
+                        <a href="tel:+918448527162" class="footer-contact-item">
+                            <i data-lucide="phone"></i>
+                            <span>+91 8448527162</span>
+                        </a>
+                        <div class="footer-contact-item">
+                            <i data-lucide="map-pin"></i>
+                            <span>Gurugram / Mau, India</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer Bottom Line -->
+            <div class="footer-bottom">
+                <div class="footer-copy">
+                    &copy; <span id="year">2026</span> <strong>Osaid Shahid</strong>. All rights reserved.
+                </div>
+                <a href="#hero" class="back-to-top-btn" title="Back to top">
+                    <span data-de="Nach oben">Back to top</span>
+                    <i data-lucide="arrow-up"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- RESUME MODAL VIEWER -->
+    <div class="modal-backdrop" id="resumeModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title"><i data-lucide="file-text"></i> Curriculum Vitae - Osaid Shahid</div>
+                <button class="modal-close" id="closeResumeModal"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="resume-preview-notice">
+                    <i data-lucide="info"></i>
+                    <span>Official PDF Resume loaded below. You can view, scroll or download directly.</span>
+                </div>
+                <iframe src="assets/resume.pdf" class="resume-iframe" title="CV Osaid Shahid"></iframe>
+            </div>
+            <div class="modal-footer">
+                <a href="assets/resume.pdf" download="CV_Osaid_Shahid.pdf" class="btn btn-terracotta">
+                    <i data-lucide="download"></i>
+                    <span>Download Official PDF</span>
+                </a>
+                <button class="btn btn-outline" id="closeResumeModalBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
