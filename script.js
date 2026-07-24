@@ -86,7 +86,31 @@ document.addEventListener('DOMContentLoaded', () => {
         animateCanvas();
     }
 
-    /* 2. THEME & LANGUAGE TOGGLES */
+    /* 2. DYNAMIC SMART AUTO-HIDING NAVBAR ON SCROLL */
+    const navbar = document.getElementById('navbar');
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+        if (!navbar) return;
+        const currentScrollY = window.scrollY;
+
+        if (currentScrollY <= 20) {
+            // At top of page
+            navbar.classList.remove('nav-hidden');
+            navbar.classList.remove('nav-scrolled');
+        } else if (currentScrollY > lastScrollY && currentScrollY > 70) {
+            // Scrolling DOWN -> Hide Navbar smoothly out of view
+            navbar.classList.add('nav-hidden');
+        } else if (currentScrollY < lastScrollY) {
+            // Scrolling UP -> Reveal Navbar smoothly with glass glow
+            navbar.classList.remove('nav-hidden');
+            navbar.classList.add('nav-scrolled');
+        }
+
+        lastScrollY = currentScrollY;
+    });
+
+    /* 3. THEME TOGGLE */
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
