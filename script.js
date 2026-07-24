@@ -297,11 +297,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileDrawer = document.getElementById('mobileDrawer');
     if (mobileMenuBtn && mobileDrawer) {
-        mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
             mobileDrawer.classList.toggle('active');
         });
+
         document.querySelectorAll('.mobile-nav-link').forEach(l => {
             l.addEventListener('click', () => mobileDrawer.classList.remove('active'));
+        });
+
+        // Close drawer when clicking outside
+        document.addEventListener('click', (e) => {
+            if (mobileDrawer.classList.contains('active')) {
+                if (!mobileDrawer.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    mobileDrawer.classList.remove('active');
+                }
+            }
         });
     }
 
