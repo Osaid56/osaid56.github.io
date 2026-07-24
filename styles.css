@@ -190,10 +190,10 @@ section {
     text-align: center;
 }
 
-/* 3. FLOATING SMART AUTO-HIDING NAVIGATION BAR */
+/* 3. TOP NAVIGATION BAR (Sits at top of page & disappears naturally with scroll) */
 .navbar {
-    position: fixed;
-    top: 1rem;
+    position: absolute;
+    top: 1.2rem;
     left: 1.5rem;
     right: 1.5rem;
     max-width: 1200px;
@@ -206,11 +206,7 @@ section {
     border-radius: var(--radius-full);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 12px 36px rgba(0, 0, 0, 0.05);
     z-index: 100;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-.navbar.nav-hidden {
-    transform: translateY(-140%);
+    transition: var(--transition);
 }
 
 .nav-container {
@@ -1799,15 +1795,18 @@ section {
 }
 
 @media (max-width: 768px) {
-    /* Navbar & Header on Mobile */
+    /* Navbar & Header on Mobile: Sits at the top of page & disappears naturally with scroll */
     .navbar {
-        top: 0.5rem;
-        left: 0.5rem;
-        right: 0.5rem;
-        width: calc(100% - 1rem);
-        height: 56px;
-        padding: 0 0.85rem;
-        border-radius: var(--radius-full);
+        position: absolute !important;
+        top: 0.75rem !important;
+        left: 0.75rem !important;
+        right: 0.75rem !important;
+        width: calc(100% - 1.5rem) !important;
+        height: 56px !important;
+        padding: 0 0.85rem !important;
+        border-radius: var(--radius-full) !important;
+        transform: none !important;
+        z-index: 100;
     }
 
     .brand-logo {
@@ -1815,9 +1814,9 @@ section {
     }
 
     .logo-mark {
-        width: 32px;
-        height: 32px;
-        font-size: 0.85rem;
+        width: 34px;
+        height: 34px;
+        font-size: 0.88rem;
         flex-shrink: 0;
     }
 
@@ -1859,11 +1858,13 @@ section {
     }
 
     .mobile-drawer {
-        top: 68px;
-        left: 0.5rem;
-        right: 0.5rem;
+        position: absolute !important;
+        top: 68px !important;
+        left: 0.75rem !important;
+        right: 0.75rem !important;
         padding: 1.25rem;
         border-radius: var(--radius-lg);
+        z-index: 999;
     }
 
     /* Hero Section Mobile */
