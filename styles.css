@@ -1830,12 +1830,16 @@ section {
         display: none !important;
     }
 
-    .nav-actions #openResumeModal {
-        display: none !important;
+    .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
     }
 
-    .nav-actions {
-        gap: 0.4rem;
+    .nav-cv-btn {
+        padding: 0.35rem 0.65rem;
+        font-size: 0.78rem;
+        border-radius: var(--radius-full);
     }
 
     .theme-toggle-btn {
