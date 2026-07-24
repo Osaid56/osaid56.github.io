@@ -1837,11 +1837,19 @@ section {
     }
 
     .nav-cv-btn {
-        padding: 0.35rem 0.65rem;
-        font-size: 0.76rem;
+        padding: 0.25rem 0.55rem;
+        font-size: 0.72rem;
         font-weight: 700;
         border-radius: var(--radius-full);
         white-space: nowrap;
+        gap: 0.2rem;
+        height: 30px;
+        line-height: 1;
+    }
+
+    .nav-cv-btn i {
+        width: 12px;
+        height: 12px;
     }
 
     .theme-toggle-btn {
